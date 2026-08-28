@@ -1,0 +1,19 @@
+{
+  "id":"modern-minimal",
+  "name":"现代秩序",
+  "version":"1.0.0",
+  "description":"暖灰白画布、炭黑信息骨架、钴蓝单点强调与瑞士网格。依靠比例、留白、对齐和精确运动建立现代感。",
+  "files":{
+    "tokens":"tokens.css",
+    "components":"components.css",
+    "motions":"motions.js",
+    "transitions":"transitions.js"
+  },
+  "palette":{"background":"#F4F5F2","surface":"#FFFFFF","ink":"#111317","muted":"#666C75","line":"#D8DBE0","accent":"#2455FF"},
+  "type":{"display":"Inter, Noto Sans SC, system-ui, sans-serif","body":"Inter, Noto Sans SC, system-ui, sans-serif","numeric":"JetBrains Mono, ui-monospace, monospace"},
+  "safeArea":{"x":96,"top":72,"bottom":72},
+  "motionCharacter":["precise","grid-locked","restrained","directional"],
+  "components":["modern-title","grid-header","surface-panel","number-focus","metric-row","split-compare","ranked-table","process-line","quote-block","media-window","status-pill","section-index","footnote","progress-line","closing-lockup"],
+  "motions":["grid-reveal","precision-rise","number-roll","rule-expand","list-stagger","mask-slide","focus-snap","soft-emphasis","index-shift","closing-compress"],
+  "transitions":["split-slide","axis-rise","clean-cross","frame-pull","blue-line-cut","grid-shift","panel-lock","section-index-swap","aperture-box","precision-zoom","axis-fold","dot-expand"]
+}

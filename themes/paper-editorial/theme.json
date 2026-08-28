@@ -1,0 +1,28 @@
+{
+  "id": "paper-editorial",
+  "name": "宣纸编辑部",
+  "version": "1.3.0",
+  "description": "暖米白宣纸、墨黑骨架、朱砂批注与编辑部档案语言。适合测评、解释、对比、历史、科技与作品展示，不绑定成绩叙事。",
+  "files": {
+    "tokens": "tokens.css",
+    "components": "components.css",
+    "motions": "motions.js",
+    "transitions": "transitions.js",
+    "advancedTransitions": "advanced-transitions.js"
+  },
+  "palette": {
+    "paper": "#EFE5CE",
+    "ink": "#20262C",
+    "vermilion": "#B83B2F",
+    "paperLight": "#F4EAD4",
+    "muted": "#68645B",
+    "rule": "#C9BDA5"
+  },
+  "type": {
+    "display": "Noto Serif SC, Source Han Serif SC, serif",
+    "body": "Inter, Noto Sans SC, Source Han Sans SC, system-ui, sans-serif",
+    "numeric": "JetBrains Mono, ui-monospace, monospace"
+  },
+  "safeArea": { "x": 92, "top": 72, "bottom": 72 },
+  "motionCharacter": ["decisive", "editorial", "restrained", "ink-like"]
+}

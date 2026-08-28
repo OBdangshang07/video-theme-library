@@ -1,0 +1,7 @@
+interface:
+  display_name: "视频主题与动效库"
+  short_description: "复用个人 HyperFrames 主题、组件、动效和转场"
+  default_prompt: "使用 $video-theme-library 读取指定主题、组件、动效或转场，并按库中规范制作 HyperFrames 视频。"
+  brand_color: "#B83B2F"
+policy:
+  allow_implicit_invocation: true

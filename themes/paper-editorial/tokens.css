@@ -1,0 +1,15 @@
+:root {
+  --pe-paper:#efe5ce; --pe-paper-light:#f4ead4; --pe-ink:#20262c;
+  --pe-red:#b83b2f; --pe-muted:#67635a; --pe-rule:#c9bda5;
+--pe-serif:"Noto Serif SC","Source Han Serif SC",serif;
+--pe-sans:"Inter","Noto Sans SC","Source Han Sans SC",system-ui,sans-serif;
+--pe-mono:"JetBrains Mono",ui-monospace,monospace;
+  --pe-safe-x:92px; --pe-top:72px; --pe-bottom:72px;
+  --pe-line:4px; --pe-radius:0px;
+}
+*{box-sizing:border-box;margin:0;padding:0}
+.pe-theme{color:var(--pe-ink);font-family:var(--pe-sans);background:var(--pe-paper)}
+.pe-serif{font-family:var(--pe-serif)} .pe-mono{font-family:var(--pe-mono);font-variant-numeric:tabular-nums}
+.pe-red{color:var(--pe-red)}
+.pe-paper-bg{position:absolute;inset:0;background-color:var(--pe-paper);background-image:radial-gradient(circle at 16% 8%,rgba(184,59,47,.09),transparent 31%),linear-gradient(rgba(66,55,41,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(66,55,41,.045) 2px,transparent 2px);background-size:auto,54px 54px,54px 54px}
+.pe-grain{position:absolute;inset:0;opacity:.14;background-image:url("data:image/svg+xml,%3Csvg viewBox='0 0 180 180' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='n'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='.75' numOctaves='3' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23n)' opacity='.18'/%3E%3C/svg%3E")}

@@ -1,0 +1,68 @@
+{
+  "$schema": "./schemas/library.schema.json",
+  "name": "video-theme-library",
+  "version": "4.0.0",
+  "showroom": {
+    "gallery": "index.html",
+    "timelineDemo": "timeline-demo/index.html",
+    "modernMinimal": "showrooms/modern-minimal.html",
+    "voxelHarness": "showrooms/voxel-harness.html",
+    "signalDesk": "showrooms/signal-desk.html"
+  },
+  "defaultTheme": "paper-editorial",
+  "themes": [
+    {
+      "id": "paper-editorial",
+      "name": "宣纸编辑部",
+      "status": "stable",
+      "path": "themes/paper-editorial/theme.json",
+      "reference": "references/themes/paper-editorial.md",
+      "preview": "assets/paper-editorial/preview.png"
+    },
+    {
+      "id": "modern-minimal",
+      "name": "现代秩序",
+      "status": "stable",
+      "path": "themes/modern-minimal/theme.json",
+      "reference": "references/themes/modern-minimal.md",
+      "showroom": "showrooms/modern-minimal.html"
+    },
+    {
+      "id": "voxel-harness",
+      "name": "方块终端",
+      "status": "stable",
+      "path": "themes/voxel-harness/theme.json",
+      "reference": "references/themes/voxel-harness.md",
+      "showroom": "showrooms/voxel-harness.html"
+    },
+    {
+      "id": "signal-desk",
+      "name": "信号台",
+      "status": "stable",
+      "path": "themes/signal-desk/theme.json",
+      "reference": "references/themes/signal-desk.md",
+      "showroom": "showrooms/signal-desk.html"
+    }
+  ],
+  "components": [
+    "editorial-title", "folio-header", "paper-panel", "stat-block",
+    "metric-triptych", "comparison-split", "ranked-list", "timeline-steps",
+    "quote-pullout", "artifact-frame", "verdict-stamp", "chapter-divider",
+    "source-note", "progress-rail", "end-card"
+  ],
+  "motions": [
+    "ink-slam", "paper-rise", "count-up", "bar-draw", "cascade-list",
+    "editorial-wipe", "stamp-impact", "underline-draw", "folio-swap",
+    "red-result-emphasis"
+  ],
+  "transitions": [
+    "paper-push", "folio-rise", "red-rule-cut", "margin-pull",
+    "ink-dip", "ink-sweep", "tear-wipe", "diagonal-slice",
+    "ink-iris", "focus-press", "paper-fold", "stamp-cover",
+    "archive-shutter", "column-cascade", "paper-stack", "chapter-bridge"
+  ],
+  "advancedTransitions": [
+    "ink-diffusion-field", "fiber-tear-displacement", "editorial-depth-warp",
+    "vermilion-pressure-wave", "calligraphy-stroke-morph"
+  ]
+}

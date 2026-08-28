@@ -1,0 +1,20 @@
+{
+  "name": "video-theme-library",
+  "version": "4.0.0",
+  "private": true,
+  "description": "Reusable themes, components, motion presets, and transitions for HyperFrames.",
+  "license": "MIT",
+  "repository": "github:OBdangshang07/video-theme-library",
+  "type": "module",
+  "scripts": {
+    "validate:catalog": "node scripts/validate-catalog.mjs",
+    "validate:public": "node scripts/validate-public-boundary.mjs",
+    "verify:showrooms": "node scripts/verify-showrooms.mjs",
+    "dev": "npm --prefix timeline-demo run dev",
+    "check": "npm --prefix timeline-demo run check",
+    "snapshot": "npm --prefix timeline-demo run snapshot"
+  },
+  "devDependencies": {
+    "playwright": "^1.55.0"
+  }
+}

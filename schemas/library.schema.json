@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json-schema.org/draft/2020-12/schema",
+  "type": "object",
+  "required": ["name", "version", "defaultTheme", "themes", "components", "motions", "transitions", "advancedTransitions"],
+  "properties": {
+    "name": { "type": "string" },
+    "version": { "type": "string" },
+    "defaultTheme": { "type": "string" },
+    "themes": { "type": "array", "items": { "type": "object", "required": ["id", "path", "reference"] } },
+    "components": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "motions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "transitions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true },
+    "advancedTransitions": { "type": "array", "items": { "type": "string" }, "uniqueItems": true }
+  }
+}

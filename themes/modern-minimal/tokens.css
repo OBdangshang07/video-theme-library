@@ -1,0 +1,26 @@
+:root{
+  --mm-bg:#f4f5f2;
+  --mm-surface:#ffffff;
+  --mm-ink:#111317;
+  --mm-muted:#666c75;
+  --mm-line:#d8dbe0;
+  --mm-accent:#2455ff;
+  --mm-accent-dark:#173cc4;
+  --mm-display:"Inter","Noto Sans SC",system-ui,sans-serif;
+  --mm-sans:"Inter","Noto Sans SC",system-ui,sans-serif;
+  --mm-mono:"JetBrains Mono",ui-monospace,monospace;
+  --mm-radius:4px;
+  --mm-safe-x:96px;
+  --mm-safe-y:72px;
+  --mm-shadow:0 28px 70px rgba(20,27,42,.12);
+}
+
+.mm-canvas{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--mm-bg);color:var(--mm-ink);font-family:var(--mm-sans)}
+.mm-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(17,19,23,.045) 1px,rgba(17,19,23,0) 1px),linear-gradient(90deg,rgba(17,19,23,.045) 1px,rgba(17,19,23,0) 1px);background-size:120px 120px}
+.mm-safe{position:absolute;inset:var(--mm-safe-y) var(--mm-safe-x)}
+.mm-label{font:700 18px/1 var(--mm-mono);letter-spacing:.12em;text-transform:uppercase}
+.mm-title{font:900 104px/.94 var(--mm-display);letter-spacing:-.055em}
+.mm-body{font:400 30px/1.55 var(--mm-sans);color:var(--mm-muted)}
+.mm-number{font:900 132px/.86 var(--mm-display);letter-spacing:-.065em;font-variant-numeric:tabular-nums}
+.mm-rule{height:3px;background:var(--mm-ink);transform-origin:left center}
+.mm-accent-rule{height:8px;background:var(--mm-accent);transform-origin:left center}

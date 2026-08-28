@@ -1,0 +1,10 @@
+:root{
+  --sd-bg:#0B1320;--sd-surface:#141F2E;--sd-surface-2:#1C2A3A;--sd-ink:#F3EFE4;
+  --sd-muted:#AAB2BC;--sd-line:#344254;--sd-accent:#FFB000;--sd-alert:#EF4B3F;
+  --sd-display:"Inter","Noto Sans SC",system-ui,sans-serif;--sd-body:"Inter","Noto Sans SC",system-ui,sans-serif;
+  --sd-mono:"JetBrains Mono",ui-monospace,monospace;--sd-safe-x:96px;--sd-safe-top:72px;--sd-safe-bottom:72px;
+  --sd-rule:2px;--sd-shadow:0 22px 70px rgba(0,0,0,.28)
+}
+.sd-canvas{position:relative;width:1920px;height:1080px;overflow:hidden;background:var(--sd-bg);color:var(--sd-ink);font-family:var(--sd-body)}
+.sd-canvas::before{content:"";position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(170,178,188,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(170,178,188,.055) 1px,transparent 1px);background-size:96px 96px}
+.sd-display{font-family:var(--sd-display);text-transform:uppercase}.sd-mono{font-family:var(--sd-mono);font-variant-numeric:tabular-nums}.sd-accent{color:var(--sd-accent)}.sd-alert{color:var(--sd-alert)}

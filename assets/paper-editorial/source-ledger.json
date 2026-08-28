@@ -1,0 +1,10 @@
+{
+  "theme": "paper-editorial",
+  "sources": [
+    {
+      "type": "internal-reference",
+      "source": "Private internal visual reference (not distributed)",
+      "usage": "Visual language reference only; no production data copied into the reusable components."
+    }
+  ]
+}
