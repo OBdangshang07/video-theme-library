@@ -136,6 +136,15 @@
   .pilot-title-wrap{position:absolute;left:220px;top:330px}
   .pilot-title-wrap .pe-title{margin-top:36px}
   .pilot-scrub{flex:1;accent-color:var(--pe-red)}
+  .pilot-time{min-width:96px;text-align:right;font:700 11px/1 var(--pe-mono);color:var(--pe-muted);font-variant-numeric:tabular-nums}
+  .pilot-note{margin:0;padding:10px 18px;border-bottom:2px solid var(--pe-ink);font:700 13px/1.6 var(--pe-sans);color:var(--pe-ink-soft)}
+  .pilot-note b{font:800 11px/1 var(--pe-mono);letter-spacing:.06em;color:var(--pe-muted);margin-right:4px}
+  .pilot-note b:nth-of-type(2){color:var(--pe-red)}
+  .duration,.tx-duration{white-space:nowrap}
+  .duration s,.tx-duration s{margin-right:6px;opacity:.6}
+  .duration b,.tx-duration b{font-weight:800;color:var(--pe-ink)}
+  .duration.changed b,.tx-duration.changed b{color:var(--pe-red)}
+  .card footer .replay{flex:none;white-space:nowrap}
   .pilot-tx .pe-scene{position:absolute;inset:0}
   .pilot-tx .tx-overlay{position:absolute;inset:0;opacity:0;pointer-events:none}
   footer.site{margin-top:88px;border-top:3px solid var(--pe-ink);padding:34px 0 46px}
@@ -146,7 +155,7 @@
 <nav>
   <div class="wrap">
     <span class="brand">宣纸编辑部</span>
-    <span class="counts">COMPONENTS · 16 + 14&nbsp;&nbsp;MOTIONS · 28&nbsp;&nbsp;TRANSITIONS · 16 + 5</span>
+    <span class="counts">v3.0&nbsp;&nbsp;COMPONENTS · 16 + 17&nbsp;&nbsp;MOTIONS · 31&nbsp;&nbsp;TRANSITIONS · 16 + 5</span>
     <span class="spacer"></span>
     <a href="#pilot">样板</a><a href="#components">组件</a><a href="#motions">动效</a><a href="#transitions">转场</a>
     <a href="./showrooms/modern-minimal.html">现代秩序</a>
@@ -162,7 +171,7 @@
     <div>
       <div class="pe-kicker">PAPER EDITORIAL · SHOWROOM</div>
       <h1>组件、动效与转场，<br>全部来自<span class="pe-red">真实主题模块</span>。</h1>
-      <p class="lede">本页每个演示都由 <span class="pe-mono">themes/paper-editorial/</span> 下的真实 CSS、motion、材料组件与转场模块直接驱动。展厅即契约：所见行为与生产合成一致。</p>
+      <p class="lede">本页每个演示都由 <span class="pe-mono">themes/paper-editorial/</span> 下的真实 CSS、motion、材料组件与转场模块直接驱动。3.0 起全部动效改为材料驱动：种子纸纹、墨渗遮罩与湿墨滤镜在时间线构建时生成，画面只取决于时间线时刻。卡片上的时长即源码默认值。</p>
       <div class="links">
         <a href="#components">16 通用 + 17 专属组件</a><a href="#motions">31 动效</a><a href="#transitions">16 + 5 转场</a>
       </div>
@@ -171,10 +180,11 @@
       <h2>THEME MANIFEST</h2>
       <dl>
         <dt>ID</dt><dd>paper-editorial</dd>
-        <dt>版本</dt><dd>2.0.0</dd>
+        <dt>版本</dt><dd>3.0.0 · classic = v2.3 冻结</dd>
         <dt>画布</dt><dd>1920 × 1080 · 安全区 92 / 72</dd>
         <dt>动效性格</dt><dd>decisive · editorial · restrained · ink-like</dd>
         <dt>转场</dt><dd>4 主 / 4 章节 / 8 点缀 + 5 GPU 旗舰</dd>
+        <dt>确定性</dt><dd>固定种子 · 单一 paused 时间线 · 任意 seek</dd>
         <dt>文档</dt><dd>references/{motions,transitions,components}/paper-editorial.md</dd>
       </dl>
     </aside>
@@ -183,33 +193,36 @@
 
 <section id="pilot">
   <div class="wrap">
-    <h2>样板对照 · classic / 新版</h2>
-    <p class="section-sub">3.0 升级样板：左为 v2.3 classic，右为新版默认。拖动进度条可任意跳帧，两侧同步定位，用于检查可寻帧性与材料细节。</p>
+    <h2>样板对照 · v2.3 classic / 3.0 默认</h2>
+    <p class="section-sub">同一调用、同一签名，左侧是冻结在 <span class="pe-mono">classic/</span> 的 v2.3 实现，右侧是 3.0 默认导出。两侧由各自的 paused 时间线驱动，拖动进度条即同步跳帧——任意位置的画面都与顺序播放一致，可直接检查墨渗、湿边与拓印的材料细节。旧片如需逐帧复现，改用 <span class="pe-mono">paperEditorialMotionsClassic</span> / <span class="pe-mono">paperEditorialTransitionsClassic</span> 即可。</p>
     <div class="pilot-list">
-      <article class="card pilot-card" data-pilot="ink-slam"><header><span><span class="id">ink-slam</span><div class="name">墨定标题 · 墨吸入纸</div></span><span class="duration">.58s → .96s</span></header>
+      <article class="card pilot-card" data-pilot="ink-slam"><header><span><span class="id">ink-slam</span><div class="name">墨定标题 · 墨吸入纸</div></span><span class="duration" data-pilot-duration>—</span></header>
+        <p class="pilot-note"><b>v2.3</b> 缩放 + 模糊淡入。<b>3.0</b> 墨团自中心沿纤维渗开（种子墨渗遮罩），字形由墨团收紧为锐边（湿墨 SVG 滤镜），击打下沉后墨晕吸散入纸。</p>
         <div class="pilot-pair">
-          <figure><figcaption>CLASSIC</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <figure><figcaption>v2.3 · CLASSIC</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
             <div class="pilot-title-wrap"><div class="pe-kicker">栏目 / KICKER</div><div class="pe-title pilot-slam">墨定标题，<span class="pe-red">一击落版。</span></div></div></div></div></div></figure>
-          <figure><figcaption>新版</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <figure><figcaption>3.0 · 默认</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
             <div class="pilot-title-wrap"><div class="pe-kicker">栏目 / KICKER</div><div class="pe-title pilot-slam">墨定标题，<span class="pe-red">一击落版。</span></div></div></div></div></div></figure>
         </div>
-        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><button class="replay" type="button">重播</button></footer></article>
+        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><output class="pilot-time">0.00s</output><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card pilot-card" data-pilot="margin-pull"><header><span><span class="id">margin-pull</span><div class="name">墨边扯页 · 湿边墨版</div></span><span class="duration">.7s → 1.0s</span></header>
+      <article class="card pilot-card" data-pilot="margin-pull"><header><span><span class="id">margin-pull</span><div class="name">墨边扯页 · 湿边墨版</div></span><span class="duration" data-pilot-duration>—</span></header>
+        <p class="pilot-note"><b>v2.3</b> 实心墨块带锯齿边上下扫过。<b>3.0</b> 生成的湿墨版纵向扯过：积墨前缘垂坠墨滴，尾部散成干笔飞白，新页从丝缝里透出。</p>
         <div class="pilot-pair">
-          <figure><figcaption>CLASSIC</figcaption><div class="mini"><div class="mini-inner pilot-tx"></div></div></figure>
-          <figure><figcaption>新版</figcaption><div class="mini"><div class="mini-inner pilot-tx"></div></div></figure>
+          <figure><figcaption>v2.3 · CLASSIC</figcaption><div class="mini"><div class="mini-inner pilot-tx"></div></div></figure>
+          <figure><figcaption>3.0 · 默认</figcaption><div class="mini"><div class="mini-inner pilot-tx"></div></div></figure>
         </div>
-        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><button class="replay" type="button">重播</button></footer></article>
+        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><output class="pilot-time">0.00s</output><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card pilot-card" data-pilot="rubbing-reveal"><header><span><span class="id">rubbing-reveal</span><div class="name">拓印显影 · 覆纸扑拓</div></span><span class="duration">5.4s</span></header>
+      <article class="card pilot-card" data-pilot="rubbing-reveal"><header><span><span class="id">rubbing-reveal</span><div class="name">拓印显影 · 覆纸扑拓</div></span><span class="duration" data-pilot-duration>—</span></header>
+        <p class="pilot-note"><b>v2.3</b> 压力拓包逐遍扫过。<b>3.0</b> 覆纸捶实浮出凸痕 → 拓包三遍扑墨逐次加深（布纹印迹、湿亮、积墨饱和）→ 收拓晾干；此处为阴刻拓 <span class="pe-mono">mode:"intaglio"</span>，默认仍为 marks。</p>
         <div class="pilot-pair">
-          <figure><figcaption>CLASSIC</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <figure><figcaption>v2.3 · CLASSIC</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
             <div class="pe-rubbing-reveal" style="position:absolute;inset:0"><canvas class="pilot-canvas"></canvas></div><div class="pe-folio"><span>RUBBING REVEAL</span><span>CLASSIC</span></div></div></div></div></figure>
-          <figure><figcaption>新版</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <figure><figcaption>3.0 · 默认</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
             <div class="pe-rubbing-reveal" style="position:absolute;inset:0"><canvas class="pilot-canvas"></canvas></div><div class="pe-folio"><span>RUBBING REVEAL</span><span>覆纸 · 扑墨 · 收拓</span></div></div></div></div></figure>
         </div>
-        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><button class="replay" type="button">重播</button></footer></article>
+        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><output class="pilot-time">0.00s</output><button class="replay" type="button">重播</button></footer></article>
     </div>
   </div>
 </section>
@@ -512,7 +525,7 @@
         </div></div></div>
         <footer><span class="use">pe-artifact-mount 细线收边 + 朱红角标 + pe-artifact-caption</span></footer></article>
 
-      <article class="card motion-card" data-motion="ledger-strike" data-duration="0.9"><header><span><span class="id">ledger-strike</span><div class="name">度支谱入账</div></span><span class="duration">0.9s</span></header>
+      <article class="card motion-card" data-motion="ledger-strike" data-duration="1"><header><span><span class="id">ledger-strike</span><div class="name">度支谱入账</div></span><span class="duration">1s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
           <div id="demo-ledger" style="position:absolute;inset:0">
             <div style="position:absolute;left:260px;top:330px;width:1400px"><div class="pe-ticks"><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i></div></div>
@@ -525,17 +538,17 @@
           </div>
         </div></div></div>
         <footer><span class="use">刻度尺逐齿立起 → 账目逐行打出</span><button class="replay" type="button">重播</button></footer></article>
-      <article class="card motion-card" data-motion="bar-pull" data-duration="0.87"><header><span><span class="id">bar-pull</span><div class="name">朱红横带</div></span><span class="duration">0.87s</span></header>
+      <article class="card motion-card" data-motion="bar-pull" data-duration="1.4"><header><span><span class="id">bar-pull</span><div class="name">朱红横带</div></span><span class="duration">1.4s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
           <div id="demo-bar" style="position:absolute;inset:0"><div class="pe-bar" style="position:absolute;left:0;right:0;bottom:0"><b>本期主角 · 十三件前端作品原速放完</b><em>GPT-6 Astra</em></div></div>
         </div></div></div>
         <footer><span class="use">满宽一刀拉开，文字随后入</span><button class="replay" type="button">重播</button></footer></article>
-      <article class="card motion-card" data-motion="mount-seat" data-duration="0.8"><header><span><span class="id">mount-seat</span><div class="name">装裱落框</div></span><span class="duration">0.8s</span></header>
+      <article class="card motion-card" data-motion="mount-seat" data-duration="1.4"><header><span><span class="id">mount-seat</span><div class="name">装裱落框</div></span><span class="duration">1.4s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
           <div id="demo-mount" style="position:absolute;inset:0"><div style="position:absolute;left:520px;top:300px;width:880px"><figure class="pe-artifact-mount" style="margin:0"><div style="height:420px;background:var(--pe-well)"></div></figure><p class="pe-artifact-caption">PLATE 01 · 木刻套版</p></div></div>
         </div></div></div>
         <footer><span class="use">界格自左绘出 → 画面浮定 → 图注落款</span><button class="replay" type="button">重播</button></footer></article>
-      <article class="card motion-card" data-motion="plate-strike" data-duration="0.9"><header><span><span class="id">plate-strike</span><div class="name">分版套印</div></span><span class="duration">0.9s</span></header>
+      <article class="card motion-card" data-motion="plate-strike" data-duration="1.2"><header><span><span class="id">plate-strike</span><div class="name">分版套印</div></span><span class="duration">1.2s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
           <div id="demo-plate" style="position:absolute;inset:0"><div style="position:absolute;left:560px;top:190px;width:800px"><div class="pe-plate"><svg class="pe-plate-forme" viewBox="0 0 1000 1000"><path fill="#b83b2f" d="M0.00 0.00h1000.00v17.86h-1000.00zM0.00 17.86h1000.00v17.86h-1000.00zM0.00 35.71h875.00v17.86h-875.00zM892.86 35.71h107.14v17.86h-107.14zM0.00 53.57h1000.00v17.86h-1000.00zM0.00 71.43h1000.00v17.86h-1000.00zM0.00 89.29h1000.00v17.86h-1000.00zM0.00 107.14h107.14v17.86h-107.14zM125.00 107.14h875.00v17.86h-875.00zM196.43 125.00h803.57v17.86h-803.57zM267.86 142.86h678.57v17.86h-678.57zM964.29 142.86h35.71v17.86h-35.71zM321.43 160.71h678.57v17.86h-678.57zM357.14 178.57h642.86v17.86h-642.86zM392.86 196.43h607.14v17.86h-607.14zM410.71 214.29h589.29v17.86h-589.29zM428.57 232.14h571.43v17.86h-571.43zM464.29 250.00h535.71v17.86h-535.71zM482.14 267.86h517.86v17.86h-517.86zM0.00 285.71h17.86v17.86h-17.86zM517.86 285.71h482.14v17.86h-482.14zM0.00 303.57h89.29v17.86h-89.29zM535.71 303.57h464.29v17.86h-464.29zM0.00 321.43h89.29v17.86h-89.29zM553.57 321.43h410.71v17.86h-410.71zM982.14 321.43h17.86v17.86h-17.86zM35.71 339.29h107.14v17.86h-107.14zM571.43 339.29h428.57v17.86h-428.57zM0.00 357.14h53.57v17.86h-53.57zM89.29 357.14h71.43v17.86h-71.43zM589.29 357.14h410.71v17.86h-410.71zM0.00 375.00h89.29v17.86h-89.29zM107.14 375.00h53.57v17.86h-53.57zM589.29 375.00h410.71v17.86h-410.71zM0.00 392.86h107.14v17.86h-107.14zM125.00 392.86h53.57v17.86h-53.57zM607.14 392.86h392.86v17.86h-392.86zM0.00 410.71h125.00v17.86h-125.00zM142.86 410.71h35.71v17.86h-35.71zM607.14 410.71h392.86v17.86h-392.86zM0.00 428.57h142.86v17.86h-142.86zM160.71 428.57h35.71v17.86h-35.71zM625.00 428.57h375.00v17.86h-375.00zM0.00 446.43h142.86v17.86h-142.86zM160.71 446.43h35.71v17.86h-35.71zM625.00 446.43h375.00v17.86h-375.00zM0.00 464.29h160.71v17.86h-160.71zM178.57 464.29h17.86v17.86h-17.86zM642.86 464.29h357.14v17.86h-357.14zM0.00 482.14h160.71v17.86h-160.71zM178.57 482.14h17.86v17.86h-17.86zM660.71 482.14h339.29v17.86h-339.29zM0.00 500.00h160.71v17.86h-160.71zM178.57 500.00h17.86v17.86h-17.86zM660.71 500.00h339.29v17.86h-339.29zM0.00 517.86h160.71v17.86h-160.71zM660.71 517.86h339.29v17.86h-339.29zM0.00 535.71h160.71v17.86h-160.71zM660.71 535.71h339.29v17.86h-339.29zM0.00 553.57h142.86v17.86h-142.86zM660.71 553.57h339.29v17.86h-339.29zM0.00 571.43h142.86v17.86h-142.86zM660.71 571.43h339.29v17.86h-339.29zM0.00 589.29h125.00v17.86h-125.00zM660.71 589.29h339.29v17.86h-339.29zM0.00 607.14h107.14v17.86h-107.14zM678.57 607.14h321.43v17.86h-321.43zM0.00 625.00h89.29v17.86h-89.29zM678.57 625.00h321.43v17.86h-321.43zM0.00 642.86h53.57v17.86h-53.57zM678.57 642.86h321.43v17.86h-321.43zM696.43 660.71h303.57v17.86h-303.57zM696.43 678.57h303.57v17.86h-303.57zM696.43 696.43h303.57v17.86h-303.57zM696.43 714.29h303.57v17.86h-303.57zM678.57 732.14h321.43v17.86h-321.43zM678.57 750.00h321.43v17.86h-321.43zM660.71 767.86h339.29v17.86h-339.29zM660.71 785.71h339.29v17.86h-339.29zM642.86 803.57h357.14v17.86h-357.14zM607.14 821.43h392.86v17.86h-392.86zM571.43 839.29h428.57v17.86h-428.57zM392.86 857.14h607.14v17.86h-607.14zM0.00 875.00h35.71v17.86h-35.71zM285.71 875.00h53.57v17.86h-53.57zM392.86 875.00h607.14v17.86h-607.14zM0.00 892.86h196.43v17.86h-196.43zM232.14 892.86h125.00v17.86h-125.00zM375.00 892.86h625.00v17.86h-625.00zM0.00 910.71h1000.00v17.86h-1000.00zM0.00 928.57h1000.00v17.86h-1000.00zM0.00 946.43h1000.00v17.86h-1000.00zM0.00 964.29h1000.00v17.86h-1000.00zM0.00 982.14h1000.00v17.86h-1000.00z"/><path fill="#6f7377" d="M107.14 107.14h17.86v17.86h-17.86zM0.00 125.00h196.43v17.86h-196.43zM0.00 142.86h267.86v17.86h-267.86zM946.43 142.86h17.86v17.86h-17.86zM0.00 160.71h17.86v17.86h-17.86zM35.71 160.71h285.71v17.86h-285.71zM178.57 178.57h178.57v17.86h-178.57zM285.71 196.43h107.14v17.86h-107.14zM357.14 214.29h53.57v17.86h-53.57zM410.71 232.14h17.86v17.86h-17.86zM428.57 250.00h35.71v17.86h-35.71zM446.43 267.86h35.71v17.86h-35.71zM17.86 285.71h35.71v17.86h-35.71zM482.14 285.71h35.71v17.86h-35.71zM482.14 303.57h53.57v17.86h-53.57zM89.29 321.43h35.71v17.86h-35.71zM500.00 321.43h53.57v17.86h-53.57zM964.29 321.43h17.86v17.86h-17.86zM0.00 339.29h35.71v17.86h-35.71zM517.86 339.29h53.57v17.86h-53.57zM53.57 357.14h35.71v17.86h-35.71zM535.71 357.14h53.57v17.86h-53.57zM89.29 375.00h17.86v17.86h-17.86zM160.71 375.00h17.86v17.86h-17.86zM553.57 375.00h35.71v17.86h-35.71zM107.14 392.86h17.86v17.86h-17.86zM178.57 392.86h17.86v17.86h-17.86zM553.57 392.86h53.57v17.86h-53.57zM125.00 410.71h17.86v17.86h-17.86zM178.57 410.71h17.86v17.86h-17.86zM571.43 410.71h35.71v17.86h-35.71zM142.86 428.57h17.86v17.86h-17.86zM589.29 428.57h35.71v17.86h-35.71zM142.86 446.43h17.86v17.86h-17.86zM196.43 446.43h17.86v17.86h-17.86zM589.29 446.43h35.71v17.86h-35.71zM160.71 464.29h17.86v17.86h-17.86zM196.43 464.29h17.86v17.86h-17.86zM607.14 464.29h35.71v17.86h-35.71zM196.43 482.14h17.86v17.86h-17.86zM607.14 482.14h53.57v17.86h-53.57zM196.43 500.00h17.86v17.86h-17.86zM607.14 500.00h53.57v17.86h-53.57zM178.57 517.86h35.71v17.86h-35.71zM625.00 517.86h35.71v17.86h-35.71zM178.57 535.71h17.86v17.86h-17.86zM625.00 535.71h35.71v17.86h-35.71zM142.86 553.57h17.86v17.86h-17.86zM178.57 553.57h17.86v17.86h-17.86zM625.00 553.57h35.71v17.86h-35.71zM642.86 571.43h17.86v17.86h-17.86zM125.00 589.29h17.86v17.86h-17.86zM642.86 589.29h17.86v17.86h-17.86zM107.14 607.14h17.86v17.86h-17.86zM660.71 607.14h17.86v17.86h-17.86zM89.29 625.00h17.86v17.86h-17.86zM660.71 625.00h17.86v17.86h-17.86zM53.57 642.86h17.86v17.86h-17.86zM660.71 642.86h17.86v17.86h-17.86zM678.57 660.71h17.86v17.86h-17.86zM660.71 678.57h35.71v17.86h-35.71zM660.71 696.43h35.71v17.86h-35.71zM642.86 714.29h53.57v17.86h-53.57zM642.86 732.14h35.71v17.86h-35.71zM607.14 750.00h71.43v17.86h-71.43zM571.43 767.86h89.29v17.86h-89.29zM553.57 785.71h107.14v17.86h-107.14zM339.29 803.57h17.86v17.86h-17.86zM500.00 803.57h142.86v17.86h-142.86zM303.57 821.43h71.43v17.86h-71.43zM446.43 821.43h17.86v17.86h-17.86zM482.14 821.43h125.00v17.86h-125.00zM0.00 839.29h571.43v17.86h-571.43zM0.00 857.14h392.86v17.86h-392.86zM35.71 875.00h250.00v17.86h-250.00zM339.29 875.00h53.57v17.86h-53.57zM196.43 892.86h35.71v17.86h-35.71zM357.14 892.86h17.86v17.86h-17.86z"/><path fill="#a9a396" d="M875.00 35.71h17.86v17.86h-17.86zM17.86 160.71h17.86v17.86h-17.86zM0.00 178.57h178.57v17.86h-178.57zM0.00 196.43h285.71v17.86h-285.71zM214.29 214.29h142.86v17.86h-142.86zM303.57 232.14h107.14v17.86h-107.14zM357.14 250.00h71.43v17.86h-71.43zM410.71 267.86h35.71v17.86h-35.71zM446.43 285.71h35.71v17.86h-35.71zM89.29 303.57h17.86v17.86h-17.86zM446.43 303.57h35.71v17.86h-35.71zM482.14 321.43h17.86v17.86h-17.86zM142.86 339.29h17.86v17.86h-17.86zM482.14 339.29h35.71v17.86h-35.71zM160.71 357.14h17.86v17.86h-17.86zM500.00 357.14h35.71v17.86h-35.71zM517.86 375.00h35.71v17.86h-35.71zM517.86 392.86h35.71v17.86h-35.71zM535.71 410.71h35.71v17.86h-35.71zM196.43 428.57h17.86v17.86h-17.86zM535.71 428.57h53.57v17.86h-53.57zM535.71 446.43h53.57v17.86h-53.57zM517.86 464.29h89.29v17.86h-89.29zM160.71 482.14h17.86v17.86h-17.86zM535.71 482.14h71.43v17.86h-71.43zM160.71 500.00h17.86v17.86h-17.86zM535.71 500.00h35.71v17.86h-35.71zM589.29 500.00h17.86v17.86h-17.86zM160.71 517.86h17.86v17.86h-17.86zM535.71 517.86h17.86v17.86h-17.86zM589.29 517.86h35.71v17.86h-35.71zM196.43 535.71h17.86v17.86h-17.86zM589.29 535.71h35.71v17.86h-35.71zM589.29 553.57h35.71v17.86h-35.71zM142.86 571.43h17.86v17.86h-17.86zM178.57 571.43h17.86v17.86h-17.86zM589.29 571.43h53.57v17.86h-53.57zM589.29 589.29h53.57v17.86h-53.57zM125.00 607.14h17.86v17.86h-17.86zM607.14 607.14h53.57v17.86h-53.57zM107.14 625.00h17.86v17.86h-17.86zM553.57 625.00h17.86v17.86h-17.86zM589.29 625.00h71.43v17.86h-71.43zM71.43 642.86h17.86v17.86h-17.86zM589.29 642.86h71.43v17.86h-71.43zM589.29 660.71h89.29v17.86h-89.29zM589.29 678.57h71.43v17.86h-71.43zM553.57 696.43h17.86v17.86h-17.86zM589.29 696.43h71.43v17.86h-71.43zM553.57 714.29h89.29v17.86h-89.29zM517.86 732.14h125.00v17.86h-125.00zM357.14 750.00h17.86v17.86h-17.86zM500.00 750.00h107.14v17.86h-107.14zM0.00 767.86h53.57v17.86h-53.57zM321.43 767.86h89.29v17.86h-89.29zM482.14 767.86h89.29v17.86h-89.29zM0.00 785.71h178.57v17.86h-178.57zM196.43 785.71h214.29v17.86h-214.29zM428.57 785.71h125.00v17.86h-125.00zM0.00 803.57h339.29v17.86h-339.29zM357.14 803.57h142.86v17.86h-142.86zM0.00 821.43h303.57v17.86h-303.57zM375.00 821.43h71.43v17.86h-71.43zM464.29 821.43h17.86v17.86h-17.86z"/></svg></div></div></div>
         </div></div></div>
@@ -553,7 +566,7 @@
 <section id="motions">
   <div class="wrap">
     <h2>动效 · 31</h2>
-    <p class="section-sub">点击重播即调用 motions.js 里的真实预设（网页预览用时间线自动播放；生产合成用单一 paused timeline 定位到确定时间）。</p>
+    <p class="section-sub">每张卡调用 motions.js 的 3.0 默认预设，卡脚说明直接取自源码元数据。右上角是源码默认时长，划线为 v2.3 旧值；悬停可见本卡实测时间线（含级联与编排）。网页预览按真实时钟播放，生产合成把同一预设挂在单一 paused 时间线上逐帧 seek。</p>
     <div class="grid" id="motion-grid">
 
       <article class="card motion-card" data-motion="ink-form" data-duration="4.8"><header><span><span class="id">ink-form</span><div class="name">墨迹聚形</div></span><span class="duration">4.8s</span></header>
@@ -584,39 +597,39 @@
         </div></div></div>
         <footer><span class="use">2–4 层同位内容 → 纸页逐层剖开</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="ink-slam" data-duration="0.58"><header><span><span class="id">ink-slam</span><div class="name">墨定标题</div></span><span class="duration">.58s</span></header>
+      <article class="card motion-card" data-motion="ink-slam" data-duration="0.96"><header><span><span class="id">ink-slam</span><div class="name">墨定标题</div></span><span class="duration">.96s</span></header>
         <div class="motion-stage"><div class="sample-title">墨定标题</div></div>
         <footer><span class="use">主标题定版：缩放 + 聚焦 + 下沉</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="paper-rise" data-duration="0.62"><header><span><span class="id">paper-rise</span><div class="name">纸面升起</div></span><span class="duration">.62s</span></header>
+      <article class="card motion-card" data-motion="paper-rise" data-duration="1"><header><span><span class="id">paper-rise</span><div class="name">纸面升起</div></span><span class="duration">1s</span></header>
         <div class="motion-stage"><div class="sample-panel">PANEL A<br>依次</div><div class="sample-panel">PANEL B<br>升起</div><div class="sample-panel">PANEL C<br>落定</div></div>
         <footer><span class="use">面板入场，底部微旋落定，可级联</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="bar-draw" data-duration="0.95"><header><span><span class="id">bar-draw</span><div class="name">证据绘条</div></span><span class="duration">.95s</span></header>
+      <article class="card motion-card" data-motion="bar-draw" data-duration="1.02"><header><span><span class="id">bar-draw</span><div class="name">证据绘条</div></span><span class="duration">1.02s</span></header>
         <div class="motion-stage"><div class="sample-bar"><span></span></div></div>
         <footer><span class="use">条形与规则线自左绘出</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="cascade-list" data-duration="0.71"><header><span><span class="id">cascade-list</span><div class="name">级联清单</div></span><span class="duration">.5s+</span></header>
+      <article class="card motion-card" data-motion="cascade-list" data-duration="0.58"><header><span><span class="id">cascade-list</span><div class="name">级联清单</div></span><span class="duration">.58s</span></header>
         <div class="motion-stage"><div class="sample-rows"><div class="sample-row"><span class="idx">01</span>核心结论<span class="mta">PRIMARY</span></div><div class="sample-row"><span class="idx">02</span>关键证据<span class="mta">EVIDENCE</span></div><div class="sample-row"><span class="idx">03</span>限制条件<span class="mta">BOUNDARY</span></div></div></div>
         <footer><span class="use">有序条目快速依次入场</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="editorial-wipe" data-duration="0.65"><header><span><span class="id">editorial-wipe</span><div class="name">版面拭入</div></span><span class="duration">.65s</span></header>
+      <article class="card motion-card" data-motion="editorial-wipe" data-duration="0.9"><header><span><span class="id">editorial-wipe</span><div class="name">版面拭入</div></span><span class="duration">.9s</span></header>
         <div class="motion-stage"><div class="sample-wipe">印刷式揭示</div></div>
         <footer><span class="use">clip-path 揭示，支持四个方向</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="stamp-impact" data-duration="0.48"><header><span><span class="id">stamp-impact</span><div class="name">落印</div></span><span class="duration">.48s</span></header>
+      <article class="card motion-card" data-motion="stamp-impact" data-duration="1.1"><header><span><span class="id">stamp-impact</span><div class="name">落印</div></span><span class="duration">1.1s</span></header>
         <div class="motion-stage"><div class="sample-stamp">通过</div></div>
         <footer><span class="use">加速砸落 + 压实回弹</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="underline-draw" data-duration="0.5"><header><span><span class="id">underline-draw</span><div class="name">批注下划线</div></span><span class="duration">.5s</span></header>
+      <article class="card motion-card" data-motion="underline-draw" data-duration="0.56"><header><span><span class="id">underline-draw</span><div class="name">批注下划线</div></span><span class="duration">.56s</span></header>
         <div class="motion-stage"><div class="sample-phrase">这句是<span class="sample-uwrap">重点判断<span class="sample-underline"></span></span></div></div>
         <footer><span class="use">朱砂批注自左绘出</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="folio-swap" data-duration="0.32"><header><span><span class="id">folio-swap</span><div class="name">页眉更替</div></span><span class="duration">.32s</span></header>
+      <article class="card motion-card" data-motion="folio-swap" data-duration="0.46"><header><span><span class="id">folio-swap</span><div class="name">页眉更替</div></span><span class="duration">.46s</span></header>
         <div class="motion-stage"><div class="sample-folio">SECTION 02 / 方法 · 2026-02</div></div>
         <footer><span class="use">元数据的克制切换</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="red-result-emphasis" data-duration="0.5"><header><span><span class="id">red-result-emphasis</span><div class="name">朱砂点题</div></span><span class="duration">.5s</span></header>
+      <article class="card motion-card" data-motion="red-result-emphasis" data-duration="0.9"><header><span><span class="id">red-result-emphasis</span><div class="name">朱砂点题</div></span><span class="duration">.9s</span></header>
         <div class="motion-stage"><div class="sample-number">92.4</div></div>
         <footer><span class="use">最终值由墨转朱砂并回弹</span><button class="replay" type="button">重播</button></footer></article>
 
@@ -624,29 +637,29 @@
         <div class="motion-stage"><div class="sample-number" data-end="87">0</div></div>
         <footer><span class="use">参数化滚动，支持自定义格式</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="ghost-settle" data-duration="1.1"><header><span><span class="id">ghost-settle</span><div class="name">背景水印落定</div></span><span class="duration">1.1s</span></header>
+      <article class="card motion-card" data-motion="ghost-settle" data-duration="1.3"><header><span><span class="id">ghost-settle</span><div class="name">背景水印落定</div></span><span class="duration">1.3s</span></header>
         <div class="motion-stage"><div class="sample-ghost">编辑部</div></div>
         <footer><span class="use">大号 ghost 排版安静落定</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="quote-reveal" data-duration="0.93"><header><span><span class="id">quote-reveal</span><div class="name">引文揭示</div></span><span class="duration">.93s</span></header>
+      <article class="card motion-card" data-motion="quote-reveal" data-duration="1.1"><header><span><span class="id">quote-reveal</span><div class="name">引文揭示</div></span><span class="duration">1.1s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
           <div class="pe-quote" id="demo-quote" style="position:absolute;left:280px;right:280px;top:290px"><blockquote>信息设计的价值，<br>在于快速建立阅读重点。</blockquote><cite>EDITORIAL NOTE</cite></div>
         </div></div></div>
         <footer><span class="use">引文滑入 → 正文升起 → 出处淡入</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="chapter-mark" data-duration="1.05"><header><span><span class="id">chapter-mark</span><div class="name">章节落版</div></span><span class="duration">1.05s</span></header>
+      <article class="card motion-card" data-motion="chapter-mark" data-duration="1.2"><header><span><span class="id">chapter-mark</span><div class="name">章节落版</div></span><span class="duration">1.2s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
           <div class="pe-chapter" id="demo-chapter"><div class="pe-chapter-index">02</div><div class="pe-chapter-body"><div class="pe-chapter-kicker">CHAPTER</div><div class="pe-chapter-title">证据与方法</div><div class="pe-chapter-rule"></div></div></div>
         </div></div></div>
         <footer><span class="use">序号定版 → 标题拭入 → 朱线绘出</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="end-lock" data-duration="1.05"><header><span><span class="id">end-lock</span><div class="name">收尾锁定</div></span><span class="duration">1.05s</span></header>
+      <article class="card motion-card" data-motion="end-lock" data-duration="1.42"><header><span><span class="id">end-lock</span><div class="name">收尾锁定</div></span><span class="duration">1.42s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
           <div class="pe-end" id="demo-end"><div class="pe-end-line">一套主题，</div><div class="pe-end-line">覆盖多类内容<span class="pe-end-mark">。</span></div><div class="pe-end-note">PAPER EDITORIAL · 2026</div></div>
         </div></div></div>
         <footer><span class="use">结语升起 → 句读落印 → 落款淡入</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="screening-unveil" data-duration="1.0"><header><span><span class="id">screening-unveil</span><div class="name">放映揭幕</div></span><span class="duration">~1s</span></header>
+      <article class="card motion-card" data-motion="screening-unveil" data-duration="1.1"><header><span><span class="id">screening-unveil</span><div class="name">放映揭幕</div></span><span class="duration">1.1s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
           <div class="pe-screening-media" style="background:var(--pe-well)"></div>
           <section class="pe-screening" id="demo-screening">
@@ -661,7 +674,7 @@
         </div></div></div>
         <footer><span class="use">头部 → 边框 → 裁切标记 → 页脚 → 进度轨</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="line-set" data-duration="0.68"><header><span><span class="id">line-set</span><div class="name">定行</div></span><span class="duration">.68s</span></header>
+      <article class="card motion-card" data-motion="line-set" data-duration="0.72"><header><span><span class="id">line-set</span><div class="name">定行</div></span><span class="duration">.72s</span></header>
         <div class="motion-stage"><div class="sample-lines"><div class="sample-line">一行字，从基线印出来</div><div class="sample-line">第二行按同样的方式定版</div></div></div>
         <footer><span class="use">行遮罩自基线打开 + 上浮 + 虚焦收束，可级联</span><button class="replay" type="button">重播</button></footer></article>
 
@@ -671,27 +684,27 @@
         </div></div></div>
         <footer><span class="use">同一节点从引导页排版飞进作品页页眉</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="window-surface" data-duration="0.8"><header><span><span class="id">window-surface</span><div class="name">作品窗浮出</div></span><span class="duration">.8s</span></header>
+      <article class="card motion-card" data-motion="window-surface" data-duration="0.9"><header><span><span class="id">window-surface</span><div class="name">作品窗浮出</div></span><span class="duration">.9s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
           <div class="sample-surface"></div>
         </div></div></div>
         <footer><span class="use">媒体面浮出：autoAlpha + 缩放 + 虚焦，绝不 clip</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="seal-press" data-duration="0.69"><header><span><span class="id">seal-press</span><div class="name">印面落定</div></span><span class="duration">.69s</span></header>
+      <article class="card motion-card" data-motion="seal-press" data-duration="1.1"><header><span><span class="id">seal-press</span><div class="name">印面落定</div></span><span class="duration">1.1s</span></header>
         <div class="motion-stage"><div class="sample-press"><span class="sample-bleed"></span>印</div></div>
         <footer><span class="use">纵向盖下 → 压实回弹 → 墨晕扩散</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="seal-sheet" data-duration="0.34"><header><span><span class="id">seal-sheet</span><div class="name">印谱累积</div></span><span class="duration">.34s</span></header>
+      <article class="card motion-card" data-motion="seal-sheet" data-duration="1.1"><header><span><span class="id">seal-sheet</span><div class="name">印谱累积</div></span><span class="duration">1.1s</span></header>
         <div class="motion-stage"><div class="sample-sheet"><i class="sample-seal"><span class="sample-seal-in">01</span></i><i class="sample-seal"><span class="sample-seal-in">02</span></i><i class="sample-seal"><span class="sample-seal-in">03</span></i><i class="sample-seal"><span class="sample-seal-in">04</span></i><i class="sample-seal"><span class="sample-seal-in">05</span></i></div></div>
         <footer><span class="use">逐枚落下；缩放走内层，保住每枚的独立倾角</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="compare-pair" data-duration="1.12"><header><span><span class="id">compare-pair</span><div class="name">对照双栏</div></span><span class="duration">1.12s</span></header>
+      <article class="card motion-card" data-motion="compare-pair" data-duration="1.2"><header><span><span class="id">compare-pair</span><div class="name">对照双栏</div></span><span class="duration">1.2s</span></header>
         <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
           <div class="pe-compare" id="demo-compare"><div class="cm-grid"><div class="cm-col"><h3>A 方案</h3><div class="cm-row">条目一</div><div class="cm-row">条目二</div><div class="cm-row">条目三</div></div><div class="cm-col"><h3>B 方案</h3><div class="cm-row">条目一</div><div class="cm-row">条目二</div><div class="cm-row">条目三</div></div></div></div>
         </div></div></div>
         <footer><span class="use">分栏格先绘出，两侧条目再级联</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="handoff-swap" data-duration="3.9"><header><span><span class="id">handoff-swap</span><div class="name">交接换版</div></span><span class="duration">~3.9s</span></header>
+      <article class="card motion-card" data-motion="handoff-swap" data-duration="3.9"><header><span><span class="id">handoff-swap</span><div class="name">交接换版</div></span><span class="duration">3.9s</span></header>
         <div class="motion-stage"><div class="handoff-scale">
           <div class="handoff-frame"></div>
           <p class="handoff-kicker">SAME BRIEF</p>
@@ -707,7 +720,7 @@
         </div></div>
         <footer><span class="use">笔锋吃掉左半 → 朱印砸进右半 → 活字落下 → 整页吃冲击</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card motion-card" data-motion="paper-drift" data-duration="2.4"><header><span><span class="id">paper-drift</span><div class="name">纸面漂移</div></span><span class="duration">整场</span></header>
+      <article class="card motion-card" data-motion="paper-drift" data-duration="0"><header><span><span class="id">paper-drift</span><div class="name">纸面漂移</div></span><span class="duration">整场</span></header>
         <div class="motion-stage"><div class="sample-drift"></div></div>
         <footer><span class="use">由根时间轴驱动的底噪，去掉幻灯片感</span><button class="replay" type="button">重播</button></footer></article>
 
@@ -718,76 +731,76 @@
 <section id="transitions">
   <div class="wrap">
     <h2>转场 · 16 基础 + 5 GPU</h2>
-    <p class="section-sub">基础转场按叙事角色分组（主 / 章节 / 点缀），全部调用 transitions.js 真实预设；GPU 旗舰由 advanced-transitions.js 的 WebGL 引擎逐像素渲染。一支视频选一个主转场 + 一两个点缀。</p>
+    <p class="section-sub">基础转场按叙事角色分组（主 / 章节 / 点缀），全部调用 transitions.js 的 3.0 预设：湿墨版、纤维撕口与墨渗遮罩均在构建时按种子生成。GPU 旗舰由 advanced-transitions.js 的 WebGL 引擎逐像素渲染，生产中由 paused 时间线驱动 <span class="pe-mono">render(progress)</span>，无 WebGL 时自动回退到卡脚标注的基础转场。一支视频选一个主转场 + 一两个点缀；画面角标为源码默认时长，划线为 v2.3 旧值。</p>
     <div class="grid" id="transition-grid">
 
-      <article class="card transition-card" data-role="primary" data-transition="paper-push" data-duration="0.62"><header><span><span class="id">paper-push</span><div class="name">纸页推进</div></span><span class="role-badge primary">主</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.62s</span></div>
+      <article class="card transition-card" data-role="primary" data-transition="paper-push" data-duration="0.8"><header><span><span class="id">paper-push</span><div class="name">纸页推进</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.8s</span></div>
         <footer><span class="use">相邻观点常规前推，新页视差压过旧页</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="primary" data-transition="folio-rise" data-duration="0.66"><header><span><span class="id">folio-rise</span><div class="name">对开升起</div></span><span class="role-badge primary">主</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.66s</span></div>
+      <article class="card transition-card" data-role="primary" data-transition="folio-rise" data-duration="0.82"><header><span><span class="id">folio-rise</span><div class="name">对开升起</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.82s</span></div>
         <footer><span class="use">有序步骤、纵向推进</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="primary" data-transition="focus-press" data-duration="0.72"><header><span><span class="id">focus-press</span><div class="name">焦点压合</div></span><span class="role-badge primary">主</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
+      <article class="card transition-card" data-role="primary" data-transition="focus-press" data-duration="0.86"><header><span><span class="id">focus-press</span><div class="name">焦点压合</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.86s</span></div>
         <footer><span class="use">冷静分析、证据交接的景深交换</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="primary" data-transition="margin-pull" data-duration="0.7"><header><span><span class="id">margin-pull</span><div class="name">墨边扯页</div></span><span class="role-badge primary">主</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.7s</span></div>
+      <article class="card transition-card" data-role="primary" data-transition="margin-pull" data-duration="1"><header><span><span class="id">margin-pull</span><div class="name">墨边扯页</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">1s</span></div>
         <footer><span class="use">果断的编辑切断，墨版带毛边纵向扯过</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="section" data-transition="red-rule-cut" data-duration="0.66"><header><span><span class="id">red-rule-cut</span><div class="name">朱砂规切</div></span><span class="role-badge section">章节</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.66s</span></div>
+      <article class="card transition-card" data-role="section" data-transition="red-rule-cut" data-duration="0.8"><header><span><span class="id">red-rule-cut</span><div class="name">朱砂规切</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.8s</span></div>
         <footer><span class="use">短促有力的章节切：朱线绘出、铺满、收拢</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="section" data-transition="column-cascade" data-duration="0.76"><header><span><span class="id">column-cascade</span><div class="name">栏栅瀑布</div></span><span class="role-badge section">章节</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.76s</span></div>
+      <article class="card transition-card" data-role="section" data-transition="column-cascade" data-duration="0.9"><header><span><span class="id">column-cascade</span><div class="name">栏栅瀑布</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.9s</span></div>
         <footer><span class="use">新信息组，栏片上下交错编织</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="section" data-transition="archive-shutter" data-duration="0.72"><header><span><span class="id">archive-shutter</span><div class="name">档案百叶</div></span><span class="role-badge section">章节</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
+      <article class="card transition-card" data-role="section" data-transition="archive-shutter" data-duration="0.86"><header><span><span class="id">archive-shutter</span><div class="name">档案百叶</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.86s</span></div>
         <footer><span class="use">方法、档案或证据段落，叶片左右交错合拢</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="section" data-transition="chapter-bridge" data-duration="0.82"><header><span><span class="id">chapter-bridge</span><div class="name">章节墨桥</div></span><span class="role-badge section">章节</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.82s</span></div>
+      <article class="card transition-card" data-role="section" data-transition="chapter-bridge" data-duration="1.05"><header><span><span class="id">chapter-bridge</span><div class="name">章节墨桥</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">1.05s</span></div>
         <footer><span class="use">大章节过门，墨版斜切扫过并带景深</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="ink-sweep" data-duration="0.78"><header><span><span class="id">ink-sweep</span><div class="name">墨扫</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.78s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="ink-sweep" data-duration="0.92"><header><span><span class="id">ink-sweep</span><div class="name">墨扫</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.92s</span></div>
         <footer><span class="use">有机编辑揭示，粗纤维前缘</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="tear-wipe" data-duration="0.7"><header><span><span class="id">tear-wipe</span><div class="name">撕页</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.7s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="tear-wipe" data-duration="0.84"><header><span><span class="id">tear-wipe</span><div class="name">撕页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.84s</span></div>
         <footer><span class="use">强对比或纠错，细纤维撕口</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="diagonal-slice" data-duration="0.62"><header><span><span class="id">diagonal-slice</span><div class="name">对角裁切</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.62s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="diagonal-slice" data-duration="0.72"><header><span><span class="id">diagonal-slice</span><div class="name">对角裁切</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
         <footer><span class="use">更快的分析交接，带朱砂裁缝线</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="ink-iris" data-duration="0.76"><header><span><span class="id">ink-iris</span><div class="name">墨圈聚焦</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.76s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="ink-iris" data-duration="0.9"><header><span><span class="id">ink-iris</span><div class="name">墨圈聚焦</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.9s</span></div>
         <footer><span class="use">英雄结果或中心主体的圈入</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="paper-fold" data-duration="0.72"><header><span><span class="id">paper-fold</span><div class="name">纸页折合</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="paper-fold" data-duration="0.84"><header><span><span class="id">paper-fold</span><div class="name">纸页折合</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.84s</span></div>
         <footer><span class="use">文档或版本更替，折入时随折痕变暗</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="stamp-cover" data-duration="0.66"><header><span><span class="id">stamp-cover</span><div class="name">印章盖页</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.66s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="stamp-cover" data-duration="0.92"><header><span><span class="id">stamp-cover</span><div class="name">印章盖页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.92s</span></div>
         <footer><span class="use">判定、通过/否决，盖下后揭起离场</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="paper-stack" data-duration="0.78"><header><span><span class="id">paper-stack</span><div class="name">纸叠飞页</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.78s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="paper-stack" data-duration="0.95"><header><span><span class="id">paper-stack</span><div class="name">纸叠飞页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.95s</span></div>
         <footer><span class="use">多源汇总，纸页自右飞入自左飞出</span><button class="replay" type="button">重播</button></footer></article>
 
-      <article class="card transition-card" data-role="accent" data-transition="ink-dip" data-duration="0.74"><header><span><span class="id">ink-dip</span><div class="name">墨浸</div></span><span class="role-badge accent">点缀</span></header>
-        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.74s</span></div>
+      <article class="card transition-card" data-role="accent" data-transition="ink-dip" data-duration="1"><header><span><span class="id">ink-dip</span><div class="name">墨浸</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">1s</span></div>
         <footer><span class="use">平静收束或调性重置，谷底带一线朱砂</span><button class="replay" type="button">重播</button></footer></article>
 
       <article class="card transition-card" data-role="advanced" data-transition="ink-diffusion-field" data-duration="1.3" data-label="墨场渗化"><header><span><span class="id">ink-diffusion-field</span><div class="name">墨场渗化</div></span><span class="role-badge advanced">GPU</span></header>
         <div class="tx-stage"><div class="transition-stage"></div></div>
-        <footer><span class="use">主结论、作品揭晓 · 回退 focus-press</span><button class="replay" type="button">重播</button></footer></article>
+        <footer><span class="use">主结论、作品揭晓 · 回退 paper-push</span><button class="replay" type="button">重播</button></footer></article>
 
       <article class="card transition-card" data-role="advanced" data-transition="fiber-tear-displacement" data-duration="1.1" data-label="纤维断页"><header><span><span class="id">fiber-tear-displacement</span><div class="name">纤维断页</div></span><span class="role-badge advanced">GPU</span></header>
         <div class="tx-stage"><div class="transition-stage"></div></div>
@@ -811,14 +824,15 @@
 
 <footer class="site">
   <div class="wrap">
-    <span>VIDEO THEME LIBRARY · paper-editorial 2.3.0</span>
+    <span>VIDEO THEME LIBRARY · paper-editorial 3.0.0</span>
     <span>SHOWROOM DRIVEN BY REAL THEME MODULES · NO DRIFT</span>
   </div>
 </footer>
 
 <script type="module">
-import {paperEditorialMotions,paperEditorialMotionsClassic} from "./themes/paper-editorial/motions.js";
-import {paperEditorialTransitionsClassic} from "./themes/paper-editorial/transitions.js";
+import {paperEditorialMotions,paperEditorialMotionsClassic,paperEditorialMotionMeta} from "./themes/paper-editorial/motions.js";
+import {paperEditorialMotionMeta as classicMotionMeta} from "./themes/paper-editorial/classic/motions.js";
+import {paperEditorialTransitionsClassic,paperEditorialTransitionMetaClassic} from "./themes/paper-editorial/transitions.js";
 import {createRubbingReveal as createRubbingRevealClassic} from "./themes/paper-editorial/classic/rubbing-reveal.js";
 import {createInkForm} from "./themes/paper-editorial/ink-form.js";
 import {createMovableType} from "./themes/paper-editorial/movable-type.js";
@@ -828,6 +842,33 @@ import {paperEditorialTransitions,paperEditorialTransitionMeta} from "./themes/p
 import {paperEditorialAdvancedTransitionMeta} from "./themes/paper-editorial/advanced-transitions.js";
 
 const camel=(id)=>id.replace(/-([a-z0-9])/g,(_,letter)=>letter.toUpperCase());
+
+// 时长徽标：一律读源码元数据（3.0 默认 vs 冻结的 v2.3），不手写数字。
+// classic/advanced-transitions.js 导入即挂载展厅，故只抄录其冻结时长。
+const classicAdvancedDuration={"ink-diffusion-field":1.18,"fiber-tear-displacement":1.06,"editorial-depth-warp":1.24,"vermilion-pressure-wave":.94,"calligraphy-stroke-morph":1.14};
+const fmtSeconds=(value)=>`${Number(value.toFixed(2)).toString().replace(/^0(?=\.)/,"")}s`;
+const setDuration=(badge,now,before,note="")=>{
+  if(!badge)return;
+  const changed=before!==undefined&&Math.abs(before-now)>.005;
+  badge.classList.toggle("changed",changed);
+  badge.innerHTML=`${changed?`<s>${fmtSeconds(before)}</s>`:""}<b>${fmtSeconds(now)}</b>`;
+  badge.title=`3.0 默认 ${now}s${before!==undefined?` · v2.3 ${before}s`:""}${note}`;
+};
+const motionBadge=(card,measured)=>{
+  const id=card.dataset.motion,meta=paperEditorialMotionMeta[id],badge=card.querySelector("header .duration");
+  if(!meta||!badge)return;
+  if(!meta.duration){badge.textContent="整场 · 根时间轴";badge.title="随根时间轴全片运行，无固定时长";return}
+  const note=measured&&Math.abs(measured-meta.duration)>.02?` · 本卡实测时间线 ${measured.toFixed(2)}s（含级联/编排）`:"";
+  setDuration(badge,meta.duration,classicMotionMeta[id]?.duration,note);
+};
+document.querySelectorAll(".motion-card").forEach((card)=>{
+  const meta=paperEditorialMotionMeta[card.dataset.motion];
+  if(!meta)return;
+  card.dataset.duration=String(meta.duration);
+  motionBadge(card);
+  const use=card.querySelector("footer .use");
+  if(use)use.textContent=meta.use;
+});
 
 const fitMinis=()=>document.querySelectorAll(".mini").forEach((mini)=>{
   const k=mini.clientWidth/1920;
@@ -915,6 +956,7 @@ document.querySelectorAll(".motion-card").forEach((card)=>{
     current=tl;card.motionTl=tl;
     if(["ink-form","movable-type","rubbing-reveal","paper-cutaway"].includes(id))target.render(0);
     paperEditorialMotions[camel(id)](tl,target,...rest);
+    motionBadge(card,tl.duration());
   };
   card.querySelector(".replay").addEventListener("click",play);
   const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
@@ -923,14 +965,24 @@ document.querySelectorAll(".motion-card").forEach((card)=>{
   observer.observe(card);
 });
 
-const roleName={primary:"主",section:"章节",accent:"点缀"};
-void roleName;
+// GPU 旗舰：时长与 WebGL 回退都读 advanced-transitions.js 元数据。
+document.querySelectorAll('.transition-card[data-role="advanced"]').forEach((card)=>{
+  const id=card.dataset.transition,meta=paperEditorialAdvancedTransitionMeta[id];
+  if(!meta)return;
+  setDuration(card.querySelector(".tx-duration"),meta.duration,classicAdvancedDuration[id]);
+  const use=card.querySelector(".use");
+  use?.setAttribute("title",meta.use);
+  if(use)use.innerHTML=`${use.dataset.use||use.textContent.split(" · ")[0]} · 无 WebGL 回退 <span class="pe-mono">${meta.fallback}</span>`;
+});
 const partSelectors={overlay:".tx-overlay",rule:".tx-rule",flash:".tx-flash",slash:".tx-slash",slats:".tx-slat",columns:".tx-column",sheets:".tx-sheet"};
 document.querySelectorAll('.transition-card[data-role]:not([data-role="advanced"])').forEach((card)=>{
   const id=card.dataset.transition;
   const preset=paperEditorialTransitionMeta.presets[id];
   if(!preset)return;
   const stage=card.querySelector(".tx-stage");
+  card.dataset.duration=String(preset.duration);
+  card.querySelector("footer .use")?.setAttribute("title",preset.use);
+  setDuration(stage.querySelector(".tx-duration"),preset.duration,paperEditorialTransitionMetaClassic.presets[id]?.duration);
   for(const part of preset.parts){
     if(part==="outgoing"||part==="incoming")continue;
     if(part==="slats")for(let i=0;i<8;i++){const el=document.createElement("div");el.className="tx-part tx-slat";el.style.top=`${i*12.5}%`;stage.appendChild(el)}
@@ -980,8 +1032,8 @@ const pilotBuilders={
     const [a,b]=card.querySelectorAll(".pilot-tx");
     const parts=(root)=>({outgoing:root.querySelector(".tx-a-scene"),incoming:root.querySelector(".tx-b-scene"),overlay:root.querySelector(".tx-overlay")});
     const ta=gsap.timeline({paused:true}),tb=gsap.timeline({paused:true});
-    paperEditorialTransitionsClassic.marginPull(ta,parts(a),.2,.7);
-    paperEditorialTransitions.marginPull(tb,parts(b),.2,1);
+    paperEditorialTransitionsClassic.marginPull(ta,parts(a),.2,paperEditorialTransitionMetaClassic.presets["margin-pull"].duration);
+    paperEditorialTransitions.marginPull(tb,parts(b),.2,paperEditorialTransitionMeta.presets["margin-pull"].duration);
     ta.to({},{duration:.4},ta.duration());tb.to({},{duration:.4},tb.duration());
     return [ta,tb];
   },
@@ -997,9 +1049,16 @@ const pilotBuilders={
 };
 document.querySelectorAll(".pilot-card").forEach(async(card)=>{
   const tls=await pilotBuilders[card.dataset.pilot](card);
-  const scrub=card.querySelector(".pilot-scrub");
+  const scrub=card.querySelector(".pilot-scrub"),clock=card.querySelector(".pilot-time");
   const span=Math.max(...tls.map((tl)=>tl.duration()));
-  const seek=(t)=>tls.forEach((tl)=>tl.pause().seek(Math.min(t,tl.duration()),false));
+  const id=card.dataset.pilot;
+  const pilotDurations={
+    "ink-slam":[paperEditorialMotionMeta["ink-slam"].duration,classicMotionMeta["ink-slam"].duration],
+    "margin-pull":[paperEditorialTransitionMeta.presets["margin-pull"].duration,paperEditorialTransitionMetaClassic.presets["margin-pull"].duration],
+    "rubbing-reveal":[paperEditorialMotionMeta["rubbing-reveal"].duration,classicMotionMeta["rubbing-reveal"].duration]
+  }[id];
+  setDuration(card.querySelector("[data-pilot-duration]"),...pilotDurations);
+  const seek=(t)=>{tls.forEach((tl)=>tl.pause().seek(Math.min(t,tl.duration()),false));clock.textContent=`${Math.min(t,span).toFixed(2)}s / ${span.toFixed(2)}s`};
   let raf=0;
   const play=()=>{
     cancelAnimationFrame(raf);const start=performance.now();
@@ -1008,6 +1067,7 @@ document.querySelectorAll(".pilot-card").forEach(async(card)=>{
   };
   scrub.addEventListener("input",()=>{cancelAnimationFrame(raf);seek(Number(scrub.value)/1000*span)});
   card.querySelector(".replay").addEventListener("click",play);
+  clock.textContent=`0.00s / ${span.toFixed(2)}s`;
   card.pilotSeek=(t)=>{cancelAnimationFrame(raf);seek(t)};card.pilotSpan=span;card.dataset.ready="1";
   const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
     if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}

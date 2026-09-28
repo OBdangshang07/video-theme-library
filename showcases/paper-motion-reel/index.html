@@ -1,0 +1,212 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=1920, height=1080">
+  <title>纸墨动效串联 · 宣纸编辑部 3.0</title>
+  <script src="./assets/gsap.min.js"></script>
+  <link rel="stylesheet" href="./assets/theme/tokens.css">
+  <link rel="stylesheet" href="./assets/theme/components.css">
+  <link rel="stylesheet" href="./assets/reel.css">
+</head>
+<body>
+  <main id="root" class="pe-theme" data-composition-id="main" data-start="0" data-duration="37" data-width="1920" data-height="1080">
+
+    <!-- 01 · 墨定标题 -->
+    <section id="s1" class="scene clip" data-start="0" data-duration="5.2" data-track-index="1">
+      <div class="scene-inner">
+        <div class="s-ghost" data-layout-ignore aria-hidden="true">纸 墨</div>
+        <div class="s-kicker">PAPER EDITORIAL · 3.0</div>
+        <div class="s-title">墨落纸上，<br><span class="s-uwrap"><span class="pe-red">自成版面。</span><i class="s-underline"></i></span></div>
+        <p class="s-subtitle">每一个动效都是一次材料事件，只由时间线驱动。</p>
+      </div>
+    </section>
+
+    <!-- 02 · 三联指标 -->
+    <section id="s2" class="scene clip" data-start="4.2" data-duration="5.92" data-track-index="2">
+      <div class="scene-inner">
+        <h2 class="s-head">三组指标，同一把标尺。</h2>
+        <div class="pe-triptych s-triptych">
+          <article class="pe-metric"><div class="pe-stat-label">EFFICIENCY</div><h3>处理效率</h3><div class="value" data-count="72">0</div><div class="pe-bar"><span style="width:72%"></span></div></article>
+          <article class="pe-metric"><div class="pe-stat-label">COVERAGE</div><h3>内容覆盖</h3><div class="value" data-count="94">0</div><div class="pe-bar"><span style="width:94%"></span></div></article>
+          <article class="pe-metric"><div class="pe-stat-label">DECISION</div><h3>结论强度</h3><div class="value" data-count="88">0</div><div class="pe-bar"><span style="width:88%"></span></div></article>
+        </div>
+      </div>
+    </section>
+
+    <!-- 03 · 引文与判定 -->
+    <section id="s3" class="scene clip" data-start="9.2" data-duration="5.4" data-track-index="1">
+      <div class="scene-inner">
+        <div class="pe-quote s-quote"><blockquote>信息设计的价值，<br>在于快速建立阅读重点。</blockquote><cite>EDITORIAL NOTE · 编辑按语</cite></div>
+        <div class="pe-verdict s-verdict">值得推荐</div>
+      </div>
+    </section>
+
+    <!-- 04 · 章节 -->
+    <section id="s4" class="scene clip" data-start="13.8" data-duration="4.64" data-track-index="2">
+      <div class="scene-inner">
+        <div class="pe-chapter"><div class="pe-chapter-index">02</div><div class="pe-chapter-body"><div class="pe-chapter-kicker">CHAPTER / 章节</div><div class="pe-chapter-title">材料与证据</div><div class="pe-chapter-rule"></div></div></div>
+        <p class="s-note">下一章用拓印与活字：画面由 Canvas 材料逐帧绘制，任意时间点都可直接寻帧。</p>
+      </div>
+    </section>
+
+    <!-- 05 · 拓印显影（Canvas，GPU 转场的 from 纹理） -->
+    <section id="s5" class="scene clip" data-start="17.6" data-duration="7.8" data-track-index="1">
+      <div class="scene-inner">
+        <div class="material pe-rubbing-reveal"><canvas id="rubbing" data-layout-allow-overflow="" aria-label="铜镜纹样以阴刻拓显影"></canvas></div>
+      </div>
+    </section>
+
+    <!-- 06 · 活字归版（Canvas，GPU 转场的 to 纹理） -->
+    <section id="s6" class="scene clip" data-start="24.1" data-duration="8.3" data-track-index="2">
+      <div class="scene-inner">
+        <div class="material pe-movable-type"><canvas id="type" data-layout-allow-overflow="" aria-label="木活字归版压印成标题"></canvas></div>
+      </div>
+    </section>
+
+    <!-- 07 · 收尾 -->
+    <section id="s7" class="scene clip" data-start="31.4" data-duration="5.6" data-track-index="1">
+      <div class="scene-inner">
+        <div class="pe-end"><div class="pe-end-line">一套纸墨材料，</div><div class="pe-end-line">贯穿整支影片<span class="pe-end-mark">。</span></div><div class="pe-end-note">PAPER EDITORIAL 3.0 · VIDEO THEME LIBRARY · 2026</div></div>
+        <div class="pe-seal-mark is-vermilion s-end-seal">编</div>
+      </div>
+    </section>
+
+    <!-- 转场部件：盖在所有场景之上 -->
+    <div class="tx-layer" data-layout-ignore>
+      <div id="tx1" class="tx-overlay"></div>
+      <div id="tx3" class="tx-overlay"></div><div id="tx3-rule" class="tx-rule"></div>
+      <div id="tx6" class="tx-overlay"></div><div id="tx6-flash" class="tx-flash"></div>
+    </div>
+    <canvas id="gpu" data-layout-ignore aria-hidden="true"></canvas>
+
+    <!-- 全片常驻：页眉、纸纹、进度轨、说明条 -->
+    <div class="chrome" data-layout-ignore>
+      <div class="pe-grain"></div>
+      <div class="pe-folio" id="folio"><span>宣纸编辑部 · PAPER EDITORIAL</span><span>MOTION REEL · 3.0</span></div>
+      <div class="pe-progress" id="rail"><span></span></div>
+    </div>
+  </main>
+
+  <script type="module">
+    import { paperEditorialMotions as M } from "./assets/theme/motions.js";
+    import { paperEditorialTransitions as T } from "./assets/theme/transitions.js";
+    import { createPaperEditorialAdvancedTransition, driveAdvancedTransition } from "./assets/theme/advanced-transitions.js";
+    import { createRubbingReveal } from "./assets/theme/rubbing-reveal.js";
+    import { createMovableType } from "./assets/theme/movable-type.js";
+
+    const $ = (selector) => document.querySelector(selector);
+    const inner = (n) => `#s${n} .scene-inner`;
+    const DURATION = 37;
+
+    // Motions measure glyph boxes at build time, so every face must be decoded first.
+    await Promise.all(["900 128px 'PE Serif SC'", "700 34px 'PE Sans SC'", "800 22px 'PE Mono'"]
+      .map((font) => document.fonts.load(font, "纸墨版面ABC012")));
+    await document.fonts.ready;
+
+    // Canvas materials: decoded and generated before the timeline exists.
+    const [rubbing, type] = await Promise.all([
+      createRubbingReveal($("#rubbing"), {
+        width: 1920, height: 1080, duration: 5.4, seed: 83, density: 1.4, mode: "intaglio",
+        visual: { src: "./assets/mirror.svg" },
+      }),
+      createMovableType($("#type"), {
+        width: 1920, height: 1080, duration: 5.6, seed: 71, text: "纸墨成章", accentIndex: 3,
+      }),
+    ]);
+
+    // GPU textures: the same paper the scenes use (colour + 54px grid, cf. .scene-inner) with the
+    // material's frame at the cut drawn on top. Captured once, before the timeline is built.
+    const paperTexture = (layer) => {
+      const canvas = document.createElement("canvas");
+      canvas.width = 1920; canvas.height = 1080;
+      const ctx = canvas.getContext("2d");
+      ctx.fillStyle = "#efe5ce"; ctx.fillRect(0, 0, 1920, 1080);
+      ctx.fillStyle = "rgba(66,55,41,.042)"; for (let x = 0; x < 1920; x += 54) ctx.fillRect(x, 0, 2, 1080);
+      ctx.fillStyle = "rgba(66,55,41,.065)"; for (let y = 0; y < 1080; y += 54) ctx.fillRect(0, y, 1920, 2);
+      ctx.drawImage(layer, 0, 0);
+      return canvas;
+    };
+    rubbing.render(rubbing.duration);
+    const fromTexture = paperTexture(rubbing.canvas);
+    type.render(0);
+    const toTexture = paperTexture(type.canvas);
+    // Put both materials back to their first frame: until their tweens start, the canvases must
+    // show t=0, whatever frame a render worker seeks to first.
+    rubbing.render(0);
+    const gpu = $("#gpu");
+    gpu.width = 1920; gpu.height = 1080;
+    let engine = null;
+    try { engine = createPaperEditorialAdvancedTransition(gpu, { from: fromTexture, to: toTexture, effect: "ink-diffusion-field" }); }
+    catch (error) { console.warn(`WebGL unavailable, using paper-push fallback: ${error.message}`); }
+
+    const tl = gsap.timeline({ paused: true });
+
+    // Chrome
+    tl.fromTo("#rail > span", { scaleX: 0 }, { scaleX: 1, duration: DURATION, ease: "none" }, 0);
+    M.folioSwap(tl, "#folio", 0.1);
+
+    // 01 · 墨定标题
+    M.ghostSettle(tl, "#s1 .s-ghost", 0.2);
+    M.lineSet(tl, "#s1 .s-kicker", 0.35);
+    M.inkSlam(tl, "#s1 .s-title", 0.6);
+    M.underlineDraw(tl, "#s1 .s-underline", 1.7);
+    M.lineSet(tl, "#s1 .s-subtitle", 1.95, { rise: 14 });
+
+    // 01 → 02 · 墨边扯页
+    T.marginPull(tl, { outgoing: inner(1), incoming: inner(2), overlay: "#tx1" }, 4.2);
+
+    // 02 · 三联指标
+    M.lineSet(tl, "#s2 .s-head", 4.85, { rise: 18 });
+    M.paperRise(tl, "#s2 .pe-metric", 5.25, 0.12);
+    document.querySelectorAll("#s2 .value").forEach((value, i) =>
+      M.countUp(tl, value, 5.55 + i * 0.12, Number(value.dataset.count)));
+    M.barDraw(tl, "#s2 .pe-bar > span", 6.0);
+    M.redResultEmphasis(tl, "#s2 .pe-metric:last-child .value", 7.3);
+
+    // 02 → 03 · 墨扫
+    T.inkSweep(tl, { outgoing: inner(2), incoming: inner(3) }, 9.2);
+
+    // 03 · 引文与判定
+    M.quoteReveal(tl, "#s3 .pe-quote", 9.9);
+    M.stampImpact(tl, "#s3 .pe-verdict", 11.4);
+
+    // 03 → 04 · 朱砂规切
+    T.redRuleCut(tl, { outgoing: inner(3), incoming: inner(4), overlay: "#tx3", rule: "#tx3-rule" }, 13.8);
+
+    // 04 · 章节
+    M.chapterMark(tl, "#s4 .pe-chapter", 14.45);
+    M.lineSet(tl, "#s4 .s-note", 15.7);
+
+    // 04 → 05 · 撕页
+    T.tearWipe(tl, { outgoing: inner(4), incoming: inner(5) }, 17.6);
+
+    // 05 · 拓印显影（阴刻拓）
+    M.rubbingReveal(tl, rubbing, 18.4);
+
+    // 05 → 06 · GPU 墨场渗化；无 WebGL 时自动回退 paper-push
+    // Swap the scenes underneath while the WebGL canvas covers them (it is still hidden at 24.1 itself).
+    if (engine) tl.set(inner(6), { opacity: 1 }, 24.4);
+    driveAdvancedTransition(tl, engine, 24.1, {
+      effect: "ink-diffusion-field", canvas: gpu,
+      parts: { outgoing: inner(5), incoming: inner(6) },
+    });
+
+    // 06 · 活字归版
+    M.movableType(tl, type, 25.5);
+
+    // 06 → 07 · 墨浸
+    T.inkDip(tl, { outgoing: inner(6), incoming: inner(7), overlay: "#tx6", flash: "#tx6-flash" }, 31.4);
+
+    // 07 · 收尾
+    M.endLock(tl, "#s7 .pe-end", 32.4);
+    M.sealPress(tl, "#s7 .s-end-seal", 34.0);
+
+    tl.set({}, {}, DURATION);
+    window.__timelines = window.__timelines || {};
+    window.__timelines.main = tl;
+    window.__reel = { engine: Boolean(engine), duration: tl.duration() };
+    window.__hfForceTimelineRebind?.();
+  </script>
+</body>
+</html>

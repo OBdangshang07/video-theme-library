@@ -61,9 +61,9 @@
 |---|---|---|
 | `ink-plate` | `.pe-plate` + `.pe-plate-forme` + `.pe-plate-caption` | **木刻谱**：一张图被刻成平版（深墨/中墨/淡墨 + 可选朱红套版），矢量输出。生成器 `tools/ink-plate.mjs`，配 `plate-strike` 逐版套印 |
 | `ink-form` | `.pe-ink-form > canvas.pe-ink-form-canvas` | **墨迹聚形**：数千道墨色短笔触由散到环，再聚成指定文字或图形。配 `ink-form` 动效。 |
-| `movable-type` | `.pe-movable-type > canvas` | **活字归版**：任意文字由木活字归位、压印，留下干刻墨字。配同名动效。 |
-| `rubbing-reveal` | `.pe-rubbing-reveal > canvas` | **拓印显影**：本地图片或 SVG 随压力擦拓路径渐显。配同名动效。 |
-| `paper-cutaway` | `.pe-paper-cutaway > canvas` | **纸层剖视**：2–4 张对位纸层逐层卷开，展示同一位置的不同证据。配同名动效。 |
+| `movable-type` | `.pe-movable-type > canvas` | **活字归版**：拣字（每块木活字自旋落位、阻尼回弹）→ 锁版（四根版框滑入锁紧）→ 上墨（墨辊滚过，字面由木色转湿墨）→ 压印抬版，留下不均匀的凹印墨字。配同名动效。 |
+| `rubbing-reveal` | `.pe-rubbing-reveal > canvas` | **拓印显影**（扑拓）：湿纸覆上、捶实浮出凸痕 → 布纹拓包三遍扑墨（淡扫、交叉、定点加深），墨逐次积累饱和 → 收拓晾干略变浅。`mode:"intaglio"` 为阴刻拓（纹样留白、底面着墨），默认 `marks`。配同名动效。 |
+| `paper-cutaway` | `.pe-paper-cutaway > canvas` | **纸层剖视**：2–4 张对位纸层自右上角沿移动折线卷起，折过去的部分露出纸背（正面反向透出）并投下卷曲阴影，下层随揭开提亮。配同名动效。 |
 
 ### 墨迹聚形：生产用法
 
@@ -136,7 +136,20 @@ M.paperCutaway(tl, cutaway, 12);
 window.__timelines.main = tl;
 ```
 
-`movable-type` 的 `text` 自动按 `box` 缩放；默认使用主题附带的宋体。超出字库的字符应配本地字体并传 `fontFamily`。`rubbing-reveal` 接受本地 SVG/PNG 或内联 SVG，把透明度与明暗转换为墨色颗粒；浅色透明图案若几乎没有暗部，需先改成深墨色。`paper-cutaway` 的各层应使用相同画布比例并自行对位，图片可为本地 SVG/PNG 或内联 SVG。三者均可传比例坐标 `box`、`inkColor`、`duration` 与 `seed`；活字和纸层另可传 `redColor`。完整 19 秒样片见 `showcases/editorial-materials/`。
+`movable-type` 的 `text` 自动按 `box` 缩放；默认使用主题附带的宋体。超出字库的字符应配本地字体并传 `fontFamily` / `fontWeight`。`rubbing-reveal` 接受本地 SVG/PNG 或内联 SVG，按透明度与明暗计算每个像素的吃墨程度；浅色透明图案若几乎没有暗部，需先改成深墨色。`paper-cutaway` 的各层应使用相同画布比例并自行对位，图片可为本地 SVG/PNG 或内联 SVG。三者均可传比例坐标 `box`、`inkColor`、`duration` 与 `seed`；活字和纸层另可传 `redColor`。完整 19 秒样片见 `showcases/editorial-materials/`，3.0 动效与转场串联的成片见 `showcases/paper-motion-reel/`。
+
+| 组件 | 3.0 专有参数 | 说明 |
+|---|---|---|
+| `movable-type` | `accentIndex=-1`、`fontFamily`、`fontWeight=500` | 时长按比例缩放所有阶段（以 5.6s 为基准） |
+| `rubbing-reveal` | `mode="marks"｜"intaglio"`、`density=1`（.2–1.8）、`sheet=true`、`sheetColor="#f6eedb"` | `sheet:false` 去掉覆纸，只留拓印墨迹；时长按比例缩放三遍扑墨（以 5.4s 为基准） |
+| `paper-cutaway` | `paperColor="#efe5ce"`、`layers[].label/.caption` | 时长按比例缩放每层剥离（以 6.6s 为基准） |
+
+**3.0 材料契约**
+
+- 构造函数（`await create…()`）完成全部解码与材料生成：纸纤维、布纹拓包印迹、凸痕、撕口轮廓都在这里按种子生成；`render(t)` 只做合成。
+- `render(t)` 是 `t` 与种子的纯函数。`rubbing-reveal` 顺序播放时增量累积印迹，倒退 seek 时从零按同一顺序重建，两条路径逐像素一致。
+- 验收：`node scripts/verify-paper-materials.mjs` 在 1920×1080 下截关键帧、做顺序/乱序像素哈希比对并报告单帧耗时。Chrome 在多次读回后会把画布从 GPU 挪到 CPU，哈希前先预热读回。
+- v2.3 实现冻结在 `classic/movable-type.js`、`classic/rubbing-reveal.js`、`classic/paper-cutaway.js`，构造参数一致，需要逐帧复现旧片时直接改导入路径。
 
 **配用动效**：账目逐行入账用 `line-set`；刻度尺逐齿立起用 `underline-draw` 的 scaleY 变体；
 横带用 `scaleX` 拉开（`transform-origin: left center`），落印用 `stamp-impact`。

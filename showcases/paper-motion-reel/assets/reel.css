@@ -1,0 +1,51 @@
+/* Vendored faces under private family names (see motion-reel/assets/fonts/fonts.css):
+   tokens.css only declares local() Source Han faces, which a render machine may not have. */
+@font-face{font-family:"PE Serif SC";src:url("theme/fonts/source-han-serif-medium.otf") format("opentype");font-weight:400 900;font-display:block}
+@font-face{font-family:"PE Sans SC";src:url("theme/fonts/source-han-sans-regular.otf") format("opentype");font-weight:400 900;font-display:block}
+@font-face{font-family:"PE Mono";src:url("theme/fonts/cascadia-mono.ttf") format("truetype");font-weight:400 900;font-display:block}
+:root{--pe-serif:"PE Serif SC",serif;--pe-sans:"PE Sans SC",sans-serif;--pe-mono:"PE Mono",monospace}
+
+html,body{margin:0;width:100%;height:100%;overflow:hidden;background:var(--pe-paper)}
+#root{position:relative;width:1920px;height:1080px;overflow:hidden}
+.scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden}
+#s1{z-index:1}#s2{z-index:2}#s3{z-index:3}#s4{z-index:4}#s5{z-index:5}#s6{z-index:6}#s7{z-index:7}
+
+/* Every scene sits on the same paper: colour + 54px grid. The GPU transition draws the identical
+   paper into its textures (see paperTexture in index.html), so the cut into and out of the
+   WebGL canvas is seamless. */
+.scene-inner{position:absolute;inset:0;overflow:hidden;background-color:var(--pe-paper);
+  background-image:linear-gradient(rgba(66,55,41,.065) 2px,transparent 2px),linear-gradient(90deg,rgba(66,55,41,.042) 2px,transparent 2px);
+  background-size:var(--pe-grid) var(--pe-grid),var(--pe-grid) var(--pe-grid)}
+/* Incoming scenes rest hidden; each transition reveals its incoming scene. */
+.scene+.scene .scene-inner{opacity:0}
+.material{position:absolute;inset:0}
+.material canvas{position:absolute;inset:0;width:100%;height:100%}
+
+/* Transition parts live above every scene and below the chrome. */
+.tx-layer{position:absolute;inset:0;z-index:20;pointer-events:none}
+.tx-overlay{position:absolute;inset:0;opacity:0}
+.tx-rule{position:absolute;left:0;right:0;top:50%;height:4px;margin-top:-2px;opacity:0}
+.tx-flash{position:absolute;left:0;right:0;top:50%;height:3px;margin-top:-1.5px;opacity:0}
+#gpu{position:absolute;inset:0;width:1920px;height:1080px;z-index:25;visibility:hidden}
+
+/* Chrome: one folio, one grain, one progress rail for the whole reel. */
+.chrome{position:absolute;inset:0;z-index:40;pointer-events:none}
+.chrome .pe-grain{z-index:0}
+
+/* Scene layouts (1920×1080 scene space). */
+.s-kicker{position:absolute;left:220px;top:262px;font:800 22px/1 var(--pe-mono);letter-spacing:.22em;color:var(--pe-muted)}
+.s-title{position:absolute;left:214px;top:360px;font:900 128px/1.08 var(--pe-serif);letter-spacing:-.05em}
+.s-uwrap{position:relative;display:inline-block}
+.s-underline{position:absolute;left:0;right:0;bottom:-6px;height:9px;background:var(--pe-red);transform-origin:left center}
+.s-subtitle{position:absolute;left:220px;top:690px;font:700 34px/1.5 var(--pe-sans);color:var(--pe-ink-soft)}
+.s-ghost{position:absolute;right:120px;top:500px;font:900 300px/1 var(--pe-serif);color:rgba(32,38,44,.07);white-space:nowrap}
+
+.s-head{position:absolute;left:180px;top:190px;font:900 64px/1.1 var(--pe-serif);letter-spacing:-.03em}
+.s-triptych{position:absolute;left:180px;right:180px;top:330px}
+.s-triptych .pe-metric .value{font-size:120px}
+
+.s-quote{position:absolute;left:240px;right:520px;top:250px}
+.s-verdict{position:absolute;right:190px;top:640px;font-size:78px;padding:28px 42px}
+
+.s-note{position:absolute;left:92px;right:92px;bottom:132px;font:700 26px/1.5 var(--pe-sans);color:var(--pe-muted)}
+.s-end-seal{position:absolute;right:210px;bottom:250px;width:150px;height:150px;font:900 64px/1 var(--pe-serif)}

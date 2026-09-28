@@ -18,13 +18,15 @@ The frame should feel like a carefully typeset editorial dossier laid over warm 
 
 ## Motion grammar
 
-Headlines land with a decisive blur-and-scale slam; panels rise like sheets placed on a desk with a slight rotational settle; rules and bars draw from the left; lists arrive in strict sequence; verdicts slam as physical stamps with a compression rebound; ghost watermarks settle quietly into the background. Easing is quick and decisive, then fully still.
+Since 3.0 every preset is a material event rather than a bare transform. Headlines land as ink: a wet blob soaks outward through the fibres, tightens into crisp glyph edges, strikes down and lets its halo wick into the paper. Panels settle like sheets on an air cushion, tilting flat as their shadow sharpens; rules and bars are single brush strokes with a pressed start and a dry-brush tail; lines of text "take ink" upward from the baseline; verdicts and seals transfer uneven seal paste, compress and bleed vermilion; ghost watermarks spread like diluted ink. Easing stays decisive, then fully still. Transitions follow the same rule: wet ink sheets with beaded leading edges and dry-brush tails, fibrous tear and reveal edges, textured paper strips and seal faces. There are no flat colour blocks or straight geometric wipes.
+
+All textures, masks and SVG filters are generated from fixed seeds when the timeline is built (`paper-kit.js`); rendering only tweens properties, so any frame can be sought directly. The v2.3 presets are frozen under `classic/` with identical signatures for projects that must reproduce older renders.
 
 Composite presets coordinate whole components: `quote-reveal` (pe-quote), `chapter-mark` (pe-chapter), `end-lock` (pe-end), and `screening-unveil` (pe-screening). For long-form footage or screen recordings, use `screening-dossier` with `screening-unveil`: metadata settles first, the frame writes across the page, crop marks and folio details follow, and only the progress rail remains in continuous linear motion.
 
 `ink-form` is the deliberate exception to the quick-impact grammar: a 4.8-second hero moment where seeded ink strokes drift, scatter, circle, and settle into supplied text or an alpha-mask graphic. Use it for a title, emblem, section thesis, or closing mark when the subject deserves the time. Its Canvas painter is driven only by the composition timeline, so a frame can be sought directly or rendered out of order.
 
-Three further scene-level material components extend that idea: `movable-type` lets text physically assemble, press, and leave ink; `rubbing-reveal` uncovers an input image through successive pressure passes; `paper-cutaway` exposes aligned evidence layers through a curled paper seam. Each accepts new content and absolute local time. They are hero moments for a chosen scene, with the rest of the film retaining the theme's quick editorial rhythm.
+Three further scene-level material components extend that idea: `movable-type` sets wood type, locks the forme, rolls ink and presses a debossed impression; `rubbing-reveal` lays a damp sheet over the input image and dabs it up with a cloth pad in three passes (or an intaglio rubbing with `mode: "intaglio"`); `paper-cutaway` peels aligned evidence layers back along a travelling fold, showing the paper's reverse side. Each accepts new content and absolute local time. They are hero moments for a chosen scene, with the rest of the film retaining the theme's quick editorial rhythm.
 
 Per-motion tables live in `../motions/paper-editorial.md`; scene transitions in `../transitions/paper-editorial.md` and `../transitions/advanced-paper-editorial.md`.
 
@@ -42,6 +44,8 @@ Per-motion tables live in `../motions/paper-editorial.md`; scene transitions in 
 - `../../themes/paper-editorial/motions.js`
 - `../../themes/paper-editorial/ink-form.js`
 - `../../themes/paper-editorial/material-utils.js`
+- `../../themes/paper-editorial/paper-kit.js` — shared seeded material generators (noise, soak masks, wet-ink and seal-ink SVG filters, ink sheets)
+- `../../themes/paper-editorial/classic/` — frozen v2.3 implementations
 - `../../themes/paper-editorial/movable-type.js`
 - `../../themes/paper-editorial/rubbing-reveal.js`
 - `../../themes/paper-editorial/paper-cutaway.js`

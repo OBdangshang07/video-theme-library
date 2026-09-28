@@ -1,7 +1,7 @@
 {
   "id": "paper-editorial",
   "name": "宣纸编辑部",
-  "version": "2.3.0",
+  "version": "3.0.0",
   "description": "暖米白宣纸、墨黑骨架、朱砂批注与编辑部档案语言。适合测评、解释、对比、历史、科技与作品展示，不绑定成绩叙事。",
   "files": {
     "tokens": "tokens.css",

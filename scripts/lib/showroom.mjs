@@ -46,6 +46,8 @@ export async function launchPage(viewport={width:1440,height:1000}){
   if(process.env.CHROME_EXECUTABLE)launchOptions.executablePath=process.env.CHROME_EXECUTABLE;
   const browser=await chromium.launch(launchOptions);
   const page=await browser.newPage({viewport,deviceScaleFactor:1});
+  // Serve the pinned CDN GSAP from the vendored, byte-identical copy so verification works offline.
+  await page.route("https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js",route=>route.fulfill({path:path.join(root,"motion-reel/assets/gsap.min.js"),contentType:"text/javascript; charset=utf-8"}));
   const errors=[];
   page.on("console",message=>{if(message.type()==="error"&&!message.text().includes("Failed to load resource"))errors.push(message.text())});
   page.on("pageerror",error=>errors.push(error.message));
