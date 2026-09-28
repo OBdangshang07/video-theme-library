@@ -1,0 +1,38 @@
+/* Vendored font bindings for paper-editorial.
+   This file sits beside the font files, so every url() is a bare filename: no
+   "../" traversal for lint to reject, and the browser resolves it against this
+   stylesheet's own URL.
+
+   The families are deliberately NOT called "Source Han Serif SC" / "Source Han
+   Sans SC". The library's tokens.css declares those same two names with
+   local() lookups, which fail on a machine without the fonts installed and
+   make the snapshot report "Fonts FAILED". Using our own names means the
+   library's local() faces are never requested at all; scene-base.css points
+   the three --pe-* type variables here instead.
+
+   Binding by url() (not local()) keeps the headless render independent of
+   whatever fonts happen to be installed. */
+
+@font-face {
+  font-family: "PE Serif SC";
+  src: url("source-han-serif-medium.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "PE Sans SC";
+  src: url("source-han-sans-regular.otf") format("opentype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}
+
+@font-face {
+  font-family: "PE Mono";
+  src: url("cascadia-mono.ttf") format("truetype");
+  font-weight: 400 900;
+  font-style: normal;
+  font-display: block;
+}

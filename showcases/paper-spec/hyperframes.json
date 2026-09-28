@@ -1,0 +1,6 @@
+{
+  "projectId": "video-theme-library-paper-spec",
+  "entry": "index.html",
+  "compositionId": "paper-spec",
+  "output": "renders/paper-spec.mp4"
+}

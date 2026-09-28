@@ -1,0 +1,118 @@
+/* Chrome for the motion reel. Everything visual below comes from the theme's own
+   tokens.css / components.css — this file only frames the cards and styles the
+   throwaway sample props the motions act on. */
+*{margin:0;padding:0;box-sizing:border-box}
+html,body{width:1920px;height:1080px;overflow:hidden;background:var(--pe-paper)}
+.rv-scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;
+  font-family:var(--pe-sans);color:var(--pe-ink)}
+
+.rv-folio{position:absolute;left:92px;right:92px;top:52px;display:flex;justify-content:space-between;
+  font:700 21px/1 var(--pe-mono);letter-spacing:.14em;color:var(--pe-muted);z-index:40}
+.rv-folio::after{content:"";position:absolute;left:0;right:0;top:34px;height:2px;background:var(--pe-ink)}
+.rv-rail{position:absolute;left:0;right:0;bottom:0;height:6px;background:var(--pe-rule);z-index:40}
+.rv-rail > span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left center}
+
+.rv-card{position:absolute;inset:0}
+.rv-stage{position:absolute;inset:0;overflow:hidden}
+.s-mid{position:absolute;inset:118px 92px 60px;display:grid;place-items:center;text-align:center}
+
+.rv-head{position:absolute;left:92px;top:104px;z-index:30;display:flex;align-items:baseline;gap:20px;
+  padding:14px 22px 15px;background:rgba(244,234,212,.92);border-left:6px solid var(--pe-red)}
+.rv-head b{font:800 26px/1 var(--pe-mono);color:var(--pe-red);letter-spacing:.02em}
+.rv-head span{font:900 30px/1 var(--pe-serif);color:var(--pe-ink)}
+.rv-head em{font:700 19px/1 var(--pe-mono);font-style:normal;color:var(--pe-muted);letter-spacing:.14em}
+.rv-card.full .rv-head{opacity:.94}
+
+.rv-body{position:absolute;left:92px;right:92px;top:50%;transform:translateY(-50%)}
+.rv-big{font:900 168px/1 var(--pe-serif);letter-spacing:-.05em;color:var(--pe-ink)}
+.rv-sub{margin-top:26px;font:700 34px/1.5 var(--pe-sans);color:var(--pe-ink-soft)}
+.rv-note{margin-top:46px;font:700 24px/1 var(--pe-mono);letter-spacing:.2em;color:var(--pe-muted)}
+
+/* ---- sample props ---- */
+.s-title{font:900 128px/1 var(--pe-serif);letter-spacing:-.05em;color:var(--pe-ink)}
+.s-panels{display:flex;gap:30px}
+.s-panel{width:330px;padding:44px 30px;background:var(--pe-paper-light);border:2px solid var(--pe-rule);
+  box-shadow:0 14px 0 -6px rgba(32,38,44,.12);font:900 30px/1 var(--pe-serif);color:var(--pe-ink)}
+.s-bar{width:900px;height:22px;background:var(--pe-rule)}
+.s-bar > span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left center}
+.s-barcap{margin-top:26px;font:700 24px/1 var(--pe-mono);letter-spacing:.18em;color:var(--pe-muted)}
+.s-rows{display:flex;flex-direction:column;gap:20px;width:1000px}
+.s-row{display:flex;gap:26px;align-items:baseline;padding:18px 24px;background:var(--pe-paper-light);
+  border-bottom:2px solid var(--pe-rule);font:700 34px/1 var(--pe-sans);color:var(--pe-ink)}
+.s-row b{font:800 26px/1 var(--pe-mono);color:var(--pe-red)}
+.s-wipe{width:1000px;height:420px;display:grid;place-items:center;background:var(--pe-well);
+  color:var(--pe-paper-light);font:900 46px/1 var(--pe-serif);letter-spacing:.06em}
+.s-stamp{width:240px;height:240px;display:grid;place-items:center;background:var(--pe-red);
+  color:var(--pe-paper-light);font:900 92px/1 var(--pe-serif)}
+.s-ulwrap{position:relative;padding-bottom:26px}
+.s-ultext{font:900 92px/1 var(--pe-serif);letter-spacing:-.03em}
+.s-ul{position:absolute;left:0;bottom:0;display:block;width:100%;height:10px;background:var(--pe-red);
+  transform-origin:left center}
+.s-folio{padding:22px 30px;background:var(--pe-paper-light);border-top:2px solid var(--pe-ink);
+  border-bottom:2px solid var(--pe-ink);font:700 34px/1 var(--pe-mono);letter-spacing:.12em}
+.s-num{font:900 150px/.9 var(--pe-mono);letter-spacing:-.05em}
+.s-count{font:900 190px/.9 var(--pe-mono);letter-spacing:-.05em;color:var(--pe-ink)}
+.s-ghost{font:800 250px/1 var(--pe-serif);color:rgba(32,38,44,.1);white-space:nowrap}
+.s-lines{display:flex;flex-direction:column;gap:22px;text-align:left}
+.s-line{font:900 76px/1.15 var(--pe-serif);letter-spacing:-.03em;color:var(--pe-ink)}
+.s-surface{width:1180px;height:560px;background:var(--pe-well);display:grid;place-items:center;
+  color:rgba(244,234,212,.35);font:900 44px/1 var(--pe-serif)}
+.s-surface::after{content:"16:9 素材面"}
+.s-presswrap{position:relative}
+.s-press{width:260px;height:260px;display:grid;place-items:center;background:var(--pe-red);
+  color:var(--pe-paper-light);font:900 96px/1 var(--pe-serif);transform-origin:top center}
+.s-bleed{position:absolute;left:50%;top:50%;width:520px;height:520px;margin:-260px 0 0 -260px;border-radius:50%;
+  background:radial-gradient(circle,rgba(184,59,47,.45),transparent 68%);opacity:0}
+.s-sheet{display:flex;gap:26px}
+.s-seal{width:150px;height:150px;display:grid;place-items:center;background:var(--pe-red);
+  color:var(--pe-paper-light);font:900 46px/1 var(--pe-mono);
+  clip-path:polygon(3% 1%,97% 0%,100% 5%,99% 94%,96% 100%,4% 99%,0% 95%,1% 6%)}
+.s-seal:nth-child(3n){transform:rotate(-2.2deg)}
+.s-seal:nth-child(3n + 1){transform:rotate(1.6deg)}
+.s-seal-in{display:block}
+.s-drift{position:absolute;inset:0;
+  background-image:linear-gradient(rgba(66,55,41,.14) 2px,transparent 2px),linear-gradient(90deg,rgba(66,55,41,.14) 2px,transparent 2px);
+  background-size:64px 64px}
+.s-driftcap{position:absolute;left:92px;bottom:96px;font:700 26px/1 var(--pe-mono);letter-spacing:.2em;color:var(--pe-muted)}
+.s-well{position:absolute;left:154px;top:118px;width:1612px;height:907px;background:var(--pe-well);
+  display:grid;place-items:center;color:rgba(244,234,212,.3);font:900 54px/1 var(--pe-serif)}
+.s-well::after{content:"素材面"}
+/* slate-flight: the slate layout on the left, the header it lands in above it */
+.s-flight{position:absolute;left:150px;top:430px;display:flex;align-items:baseline;gap:26px}
+.s-fidx{font:900 150px/1 var(--pe-mono);color:var(--pe-red);display:block}
+.s-ftitle{font:900 104px/1 var(--pe-serif);letter-spacing:-.04em;color:var(--pe-ink);margin:0}
+.s-fhead{position:absolute;left:150px;top:300px;font:700 30px/1 var(--pe-mono);
+  letter-spacing:.12em;color:var(--pe-muted)}
+
+/* The lifted components were authored for a bare 1920x1080 scene. Scale the
+   whole stage down and anchor it to the bottom, so their own headers can never
+   collide with the reel's head chip, and re-state their boxes with reel-scoped
+   specificity (components.css ships them for a scene, not for a card). */
+.rv-card.full .rv-stage{transform:scale(.8);transform-origin:50% 100%}
+.rv-card.full .rv-head{z-index:30}
+.s-quote{position:absolute;left:240px;right:240px;top:330px}
+.s-chapter{position:absolute;left:154px;top:300px}
+.s-screening{position:absolute;inset:0}
+.s-compare{position:absolute;inset:0}
+.rv-card.full .s-quote{left:300px;right:300px;top:330px}
+.rv-card.full .s-chapter{left:200px;top:330px}
+/* components.css ships .pe-end for a bare scene and wins on some boxes; the
+   demo needs it centred, so state it unmistakably. */
+.rv-card.full .s-end{position:absolute !important;left:154px !important;right:154px !important;
+  top:330px !important;width:auto !important;text-align:center !important}
+.rv-card.full .s-end .pe-end-line,
+.rv-card.full .s-end .pe-end-note{text-align:center}
+.rv-card.full .handoff-frame{position:absolute;inset:0}
+.rv-card.full .s-flight{position:absolute;left:150px;top:600px}
+.rv-card.full .s-fhead{position:absolute;left:150px;top:300px;font:700 30px/1 var(--pe-mono);
+  letter-spacing:.12em;color:var(--pe-muted)}
+.rv-card.full .s-driftcap{left:92px;bottom:120px}
+.rv-stage.full .pe-screening-media{display:none}
+.s-screening .s-well{position:absolute;left:154px;top:118px;width:1612px;height:907px;
+  background:var(--pe-well);display:grid;place-items:center;
+  color:rgba(244,234,212,.3);font:900 54px/1 var(--pe-serif)}
+.s-screening .s-well::after{content:"素材面"}
+.rv-stage.full > .s-well{position:absolute;left:154px;top:118px;width:1612px;height:907px;
+  background:var(--pe-well);display:grid;place-items:center;
+  color:rgba(244,234,212,.3);font:900 54px/1 var(--pe-serif)}
+.rv-stage.full > .s-well::after{content:"素材面"}

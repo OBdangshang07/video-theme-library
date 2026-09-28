@@ -1,86 +1,604 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8"><meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>方块终端 · 主题展厅</title>
-  <link rel="stylesheet" href="../themes/voxel-harness/tokens.css"><link rel="stylesheet" href="../themes/voxel-harness/components.css">
-  <style>
-    *{box-sizing:border-box}html{scroll-behavior:smooth;background:#070a08}body{margin:0;background:var(--vh-bg);color:var(--vh-ink);font-family:var(--vh-sans);image-rendering:pixelated}button{font:inherit}.wrap{width:min(1320px,calc(100% - 56px));margin:auto}
-    nav{position:sticky;top:0;z-index:30;height:78px;background:rgba(14,20,16,.95);border-bottom:4px solid var(--vh-line);box-shadow:0 8px 0 rgba(0,0,0,.24)}nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:25px}.brand{display:flex;align-items:center;gap:14px;color:var(--vh-ink);text-decoration:none;font:700 18px/1 var(--vh-display)}.brand i{position:relative;width:34px;height:34px;background:var(--vh-accent);box-shadow:inset 7px 7px 0 rgba(255,255,255,.16),inset -7px -7px 0 rgba(0,0,0,.25),6px 6px 0 #263522}.links{display:flex;gap:22px;font:700 12px/1 var(--vh-mono)}.links a{color:inherit;text-decoration:none}.links a:hover{color:var(--vh-accent)}
-    .hero{position:relative;min-height:670px;overflow:hidden;border-bottom:4px solid var(--vh-line)}.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(123,209,75,.07) 1px,rgba(123,209,75,0) 1px),linear-gradient(90deg,rgba(123,209,75,.07) 1px,rgba(123,209,75,0) 1px);background-size:64px 64px}.hero::after{content:"";position:absolute;right:-80px;top:70px;width:520px;height:520px;background:#18251b;box-shadow:inset 48px 48px 0 rgba(123,209,75,.08),inset -48px -48px 0 rgba(0,0,0,.28);transform:rotate(8deg)}.hero .wrap{position:relative;z-index:2;min-height:670px;display:grid;grid-template-columns:1.3fr .7fr;gap:74px;align-items:end;padding:96px 0 74px}.eyebrow{font:700 14px/1 var(--vh-mono);letter-spacing:.08em;color:var(--vh-accent)}h1{margin:28px 0 0;font:700 clamp(68px,6.4vw,102px)/.9 var(--vh-display);letter-spacing:-.035em}.hero p{max-width:790px;margin:32px 0 0;font:400 22px/1.65 var(--vh-sans);color:var(--vh-muted)}.manifest{border:4px solid var(--vh-line);background:var(--vh-surface);box-shadow:12px 12px 0 rgba(0,0,0,.35)}.manifest div{display:flex;justify-content:space-between;align-items:center;padding:18px 22px;border-bottom:4px solid var(--vh-line)}.manifest div:last-child{border-bottom:0}.manifest span{font:700 12px/1 var(--vh-mono)}.manifest b{font:700 30px/1 var(--vh-display);color:var(--vh-accent)}
-    section{padding:88px 0;border-bottom:4px solid var(--vh-line);scroll-margin-top:78px}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:48px;align-items:end;margin-bottom:42px}.section-head h2{margin:0;font:700 54px/.95 var(--vh-display);letter-spacing:-.025em}.section-head p{max-width:580px;margin:0;justify-self:end;font:400 17px/1.65 var(--vh-sans);color:var(--vh-muted)}.palette{display:grid;grid-template-columns:2fr 1.2fr 1fr 1fr 1fr;gap:8px}.swatch{min-height:105px;padding:14px;border:4px solid var(--vh-line);display:flex;align-items:end;font:700 11px/1 var(--vh-mono)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:26px}.card{min-width:0;background:var(--vh-surface);border:4px solid var(--vh-line);box-shadow:10px 10px 0 rgba(0,0,0,.28)}.head{display:grid;grid-template-columns:1fr auto;gap:18px;align-items:start;padding:20px 22px;border-bottom:4px solid var(--vh-line);background:#111812}.id{font:700 15px/1 var(--vh-mono);color:var(--vh-accent)}.desc{margin:10px 0 0;font:400 14px/1.5 var(--vh-sans);color:var(--vh-muted)}.tag{padding:8px 10px;background:var(--vh-accent);color:var(--vh-bg);font:700 10px/1 var(--vh-mono)}.stage{position:relative;min-height:320px;padding:28px;overflow:hidden;background-color:var(--vh-bg);background-image:linear-gradient(rgba(123,209,75,.055) 1px,rgba(123,209,75,0) 1px),linear-gradient(90deg,rgba(123,209,75,.055) 1px,rgba(123,209,75,0) 1px);background-size:40px 40px}.stage .vh-title{font-size:50px}.stage .vh-body{font-size:16px}.stage .vh-label{font-size:11px}.stage .vh-panel{padding:27px}.stage .vh-command{font-size:16px;padding:20px}.stage .vh-slot{min-height:160px;padding:14px}.stage .vh-slot strong{font-size:22px;margin-top:44px}.stage .vh-pane{min-height:240px;padding:22px}.stage .vh-list-row{min-height:54px;font-size:12px;grid-template-columns:48px 1fr auto}.stage .vh-path-step{min-height:190px;padding:14px}.stage .vh-path-step b{font-size:34px}.stage .vh-key{font-size:12px}.stage .vh-game-meta{font-size:12px}.stage .vh-status{font-size:12px}.stage .vh-chunk{grid-template-columns:100px 1fr;gap:24px}.stage .vh-chunk-index{font-size:82px}.stage .vh-note{font-size:11px}.stage .vh-lockup{padding-top:26px}.fake-game{width:100%;height:100%;position:relative;overflow:hidden;background:#526b49}.fake-game .sky{position:absolute;inset:0 0 52%;background:#75969c}.fake-game .ground{position:absolute;inset:48% 0 0;background:#536f3e;box-shadow:inset 0 18px 0 #6b914d}.fake-game .blocks{position:absolute;left:12%;right:12%;bottom:18%;height:35%;background:repeating-linear-gradient(90deg,#6a5138 0 52px,#765d42 52px 104px);clip-path:polygon(0 45%,12% 45%,12% 20%,28% 20%,28% 42%,45% 42%,45% 0,62% 0,62% 50%,78% 50%,78% 26%,100% 26%,100% 100%,0 100%)}
-    .motion-card .stage{min-height:250px;display:grid;place-items:center}.motion-target{will-change:transform,opacity,clip-path}.motion-word{font:700 46px/.95 var(--vh-display);color:var(--vh-ink)}.motion-block{width:94px;height:94px;background:var(--vh-accent);box-shadow:inset 20px 20px 0 rgba(255,255,255,.12),inset -20px -20px 0 rgba(0,0,0,.25),10px 10px 0 #263522}.motion-slots{display:grid;grid-template-columns:repeat(5,64px);gap:8px}.motion-slots span{width:64px;height:64px;border:4px solid var(--vh-line);background:var(--vh-surface-2)}.motion-bar{width:78%;height:18px;padding:3px;background:#080b09;border:3px solid var(--vh-line)}.motion-bar span{display:block;width:100%;height:100%;background:var(--vh-accent);transform-origin:left}.replay{position:absolute;right:14px;bottom:14px;z-index:12;padding:10px 12px;background:var(--vh-surface);border:4px solid var(--vh-line);color:var(--vh-ink);font:700 10px/1 var(--vh-mono);cursor:pointer}.replay:hover{border-color:var(--vh-accent);color:var(--vh-accent)}
-    .transition-card .stage{min-height:0;padding:18px}.tx-stage{position:relative;aspect-ratio:16/9;overflow:hidden;border:4px solid var(--vh-line);perspective:1000px;background:#080b09}.tx-scene,.tx-overlay,.tx-parts,.tx-index{position:absolute;inset:0}.tx-scene{display:grid;align-content:space-between;padding:24px}.tx-old{z-index:2;background:#18211a;color:#ece8d6}.tx-new{z-index:1;background:#293629;color:#ece8d6}.tx-top{display:flex;justify-content:space-between;padding:10px 12px;border:4px solid #3b493d;background:#0e1410;font:700 9px/1 var(--vh-mono)}.tx-copy{font:700 32px/.95 var(--vh-display)}.tx-copy small{display:block;margin-top:13px;font:700 9px/1 var(--vh-mono);color:var(--vh-accent)}.tx-overlay{z-index:7;opacity:0}.tx-parts{z-index:6;display:grid;grid-template-columns:repeat(6,1fr);grid-template-rows:repeat(4,1fr);pointer-events:none}.tx-parts i{background:#1b271d;border:1px solid #354538;opacity:0}.tx-parts i:nth-child(3n){background:#7bd14b}.tx-index{z-index:8;display:grid;place-items:center;opacity:0;font:700 120px/1 var(--vh-display);color:var(--vh-accent)}.tx-time{position:absolute;left:15px;top:58px;z-index:10;padding:6px 8px;background:#080b09;color:var(--vh-accent);font:700 9px/1 var(--vh-mono)}
-    footer{padding:62px 0 76px;background:#080b09}footer .wrap{display:flex;justify-content:space-between;align-items:end;gap:40px}footer h2{margin:0;font:700 40px/1 var(--vh-display)}footer p{margin:15px 0 0;color:var(--vh-muted);font:400 15px/1.5 var(--vh-sans)}footer code{color:var(--vh-accent);font:700 13px/1 var(--vh-mono)}
-    @media(max-width:900px){.hero .wrap,.section-head,.grid{grid-template-columns:1fr}.hero::after{opacity:.35}.links{display:none}.palette{grid-template-columns:1fr 1fr}.section-head p{justify-self:start}.vh-slots,.vh-path{grid-template-columns:1fr 1fr}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>voxel-harness · 方块终端 — 组件 / 动效 / 转场展厅</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<link rel="stylesheet" href="../themes/voxel-harness/tokens.css">
+<link rel="stylesheet" href="../themes/voxel-harness/components.css">
+<style>
+  body{margin:0;background:var(--vh-bg);color:var(--vh-ink);font-family:var(--vh-sans)}
+  .wrap{max-width:1440px;margin:0 auto;padding:0 32px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(14,20,16,.94);border-bottom:4px solid var(--vh-line);box-shadow:0 8px 0 rgba(0,0,0,.22)}
+  nav .wrap{display:flex;align-items:center;gap:28px;height:68px}
+  nav .brand{display:flex;align-items:center;gap:12px;font:400 20px/1 var(--vh-display);text-transform:uppercase}
+  nav .brand i{width:22px;height:22px;background:var(--vh-accent);box-shadow:inset 5px 5px 0 rgba(255,255,255,.18),inset -5px -5px 0 rgba(0,0,0,.25),5px 5px 0 var(--vh-accent-deep)}
+  nav .counts{font:700 12px/1 var(--vh-mono);letter-spacing:.08em;color:var(--vh-muted)}
+  nav a{font:700 13px/1 var(--vh-mono);color:var(--vh-ink);text-decoration:none;letter-spacing:.06em}
+  nav a:hover{color:var(--vh-accent)}
+  nav .spacer{flex:1}
+  header.hero{position:relative;padding:84px 0 64px;border-bottom:4px solid var(--vh-line);overflow:hidden;background:var(--vh-bg)}
+  header.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(123,209,75,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(123,209,75,.07) 1px,transparent 1px);background-size:64px 64px}
+  .hero-ghost{position:absolute;right:-60px;top:90px;width:460px;height:460px;background:var(--vh-surface);box-shadow:inset 40px 40px 0 rgba(123,209,75,.09),inset -40px -40px 0 rgba(0,0,0,.3),24px 24px 0 var(--vh-accent-deep);transform:rotate(8deg);pointer-events:none}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:64px;align-items:start;position:relative;z-index:2}
+  .hero h1{margin:18px 0 0;font:400 78px/.95 var(--vh-display);letter-spacing:-.03em;text-transform:uppercase}
+  .hero .lede{margin-top:26px;font:400 21px/1.65 var(--vh-sans);color:var(--vh-muted);max-width:760px}
+  .hero .lede b{color:var(--vh-ink);font-weight:700}
+  .hero .panel{border:4px solid var(--vh-line);border-top:8px solid var(--vh-accent);background:var(--vh-surface);padding:30px;box-shadow:12px 12px 0 rgba(0,0,0,.34)}
+  .hero .panel h2{font:700 13px/1 var(--vh-mono);letter-spacing:.14em;color:var(--vh-muted)}
+  .hero .panel dl{margin:20px 0 0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px;font:700 14px/1.4 var(--vh-mono)}
+  .hero .panel dt{color:var(--vh-muted);white-space:nowrap}
+  .hero .panel dd{margin:0}
+  .hero .links{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .links a{border:4px solid var(--vh-line);padding:12px 18px;font:700 13px/1 var(--vh-mono);letter-spacing:.08em;color:var(--vh-ink);text-decoration:none;background:var(--vh-surface);box-shadow:6px 6px 0 rgba(0,0,0,.3)}
+  .hero .links a:hover{border-color:var(--vh-accent);color:var(--vh-accent)}
+  section{padding:72px 0 8px}
+  section>.wrap>h2{font:400 46px/1 var(--vh-display);letter-spacing:-.02em;text-transform:uppercase}
+  section>.wrap>.section-sub{margin-top:14px;font:400 16px/1.65 var(--vh-sans);color:var(--vh-muted);max-width:820px}
+  .swatches{display:grid;grid-template-columns:repeat(8,1fr);gap:12px;margin-top:36px}
+  .swatch{border:4px solid var(--vh-line);height:112px;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;background:var(--c)}
+  .swatch b{font:700 12px/1.2 var(--vh-mono)}
+  .swatch span{font:700 11px/1 var(--vh-mono);opacity:.75}
+  .type-rows{margin-top:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .type-rows>div{border:4px solid var(--vh-line);padding:22px;background:var(--vh-surface)}
+  .type-rows b{display:block;font:700 11px/1 var(--vh-mono);letter-spacing:.12em;color:var(--vh-muted);margin-bottom:14px}
+  .type-display{font:400 30px/1.2 var(--vh-display);text-transform:uppercase}
+  .type-body{font:400 19px/1.5 var(--vh-sans)}
+  .type-mono{font:700 18px/1.4 var(--vh-mono)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .card{border:4px solid var(--vh-line);background:var(--vh-surface);box-shadow:10px 10px 0 rgba(0,0,0,.28);display:flex;flex-direction:column}
+  .card>header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:4px solid var(--vh-line);background:#111812}
+  .card .id{font:700 13px/1 var(--vh-mono);letter-spacing:.04em;color:var(--vh-accent)}
+  .card .name{margin-top:7px;font:400 17px/1 var(--vh-display);text-transform:uppercase;letter-spacing:.02em}
+  .card .en{font:700 10px/1 var(--vh-mono);letter-spacing:.1em;color:var(--vh-muted)}
+  .card .mini{position:relative;overflow:hidden;border-bottom:4px solid var(--vh-line);background:var(--vh-bg)}
+  .card .mini-inner{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+  .card>footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px;margin-top:auto}
+  .card .use{font:700 11px/1.5 var(--vh-mono);color:var(--vh-muted)}
+  .replay{flex:none;border:3px solid var(--vh-line);background:var(--vh-bg);color:var(--vh-ink);font:700 11px/1 var(--vh-mono);padding:8px 12px;cursor:pointer}
+  .replay:hover{border-color:var(--vh-accent);color:var(--vh-accent)}
+  .duration{font:700 11px/1 var(--vh-mono);color:var(--vh-muted)}
+  .role-badge{font:700 10px/1 var(--vh-mono);letter-spacing:.1em;padding:5px 8px;border:2px solid var(--vh-muted);color:var(--vh-muted)}
+  .role-badge.primary{border-color:var(--vh-ink);color:var(--vh-ink)}
+  .role-badge.section{border-color:var(--vh-accent);color:var(--vh-accent)}
+  .role-badge.advanced{border-color:var(--vh-accent);background:var(--vh-accent);color:var(--vh-bg)}
+  .motion-stage{position:relative;height:170px;overflow:hidden;border-bottom:4px solid var(--vh-line);background-color:var(--vh-bg);background-image:linear-gradient(rgba(123,209,75,.055) 1px,transparent 1px),linear-gradient(90deg,rgba(123,209,75,.055) 1px,transparent 1px);background-size:40px 40px;display:flex;align-items:center;justify-content:center;gap:14px}
+  .sample-word{font:400 40px/1 var(--vh-display);text-transform:uppercase}
+  .sample-command{font:700 26px/1 var(--vh-mono);color:var(--vh-accent)}
+  .sample-title{font:400 46px/1 var(--vh-display);text-transform:uppercase}
+  .sample-block{width:88px;height:88px;background:var(--vh-accent);box-shadow:inset 18px 18px 0 rgba(255,255,255,.14),inset -18px -18px 0 rgba(0,0,0,.26),10px 10px 0 var(--vh-accent-deep)}
+  .sample-slots{display:grid;grid-template-columns:repeat(5,62px);gap:8px}
+  .sample-slot{width:62px;height:62px;border:4px solid var(--vh-line);background:var(--vh-surface-2);box-shadow:inset 4px 4px 0 rgba(0,0,0,.3)}
+  .sample-bar{width:74%}
+  .sample-pane{padding:24px 32px;background:var(--vh-surface);border:4px solid var(--vh-line);box-shadow:8px 8px 0 rgba(0,0,0,.3);font:400 30px/1 var(--vh-display);text-transform:uppercase}
+  .sample-number{font:400 74px/.9 var(--vh-display);color:var(--vh-accent);text-shadow:6px 6px 0 var(--vh-accent-deep)}
+  .fake-game{position:relative;width:100%;height:100%;overflow:hidden;background:#526b49}
+  .fake-game .sky{position:absolute;inset:0 0 52%;background:#75969c}
+  .fake-game .ground{position:absolute;inset:48% 0 0;background:#536f3e;box-shadow:inset 0 18px 0 #6b914d}
+  .fake-game .blocks{position:absolute;left:10%;right:10%;bottom:16%;height:38%;background:repeating-linear-gradient(90deg,rgba(59,73,61,.9) 0 46px,rgba(32,43,34,.9) 46px 92px),repeating-linear-gradient(0deg,rgba(123,209,75,.35) 0 8px,transparent 8px 46px)}
+  .tx-stage{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:4px solid var(--vh-line);background:var(--vh-deep)}
+  .tx-scene{position:absolute;inset:0;display:grid;place-items:center;font:400 34px/.95 var(--vh-display);text-transform:uppercase;text-align:center}
+  .tx-scene small{display:block;margin-top:14px;font:700 11px/1 var(--vh-mono);letter-spacing:.12em}
+  .tx-a{background:var(--vh-bg);color:var(--vh-ink)}
+  .tx-a::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(123,209,75,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(123,209,75,.07) 1px,transparent 1px);background-size:40px 40px}
+  .tx-b{background:var(--vh-surface-2);color:var(--vh-ink)}
+  .tx-b small{color:var(--vh-accent)}
+  .tx-part{position:absolute;pointer-events:none;opacity:0}
+  .tx-tile{width:16.6667%;height:25%;background:var(--vh-surface-2);border:2px solid var(--vh-line);box-shadow:inset 4px 4px 0 rgba(0,0,0,.25)}
+  .tx-tile.accent{background:var(--vh-accent)}
+  .tx-slot{top:44%;width:7%;height:12.4%;background:var(--vh-surface-2);border:3px solid var(--vh-line);box-shadow:inset 3px 3px 0 rgba(0,0,0,.3)}
+  .tx-column{top:0;bottom:0;width:12.5%;background:var(--vh-surface-2);box-shadow:inset 0 6px 0 var(--vh-accent)}
+  .tx-drop{top:0;bottom:0;width:12.5%;background:repeating-linear-gradient(0deg,var(--vh-surface-2) 0 30px,var(--vh-surface) 30px 34px);border-left:2px solid var(--vh-line)}
+  .tx-overlay{inset:0}
+  .tx-track{left:0;right:0;top:50%;height:18px;margin-top:-9px;background:var(--vh-deep);border:3px solid var(--vh-line)}
+  .tx-fill{left:0;right:0;top:50%;height:18px;margin-top:-9px;background:var(--vh-accent);box-shadow:inset 0 -5px 0 var(--vh-accent-dark)}
+  .tx-duration{position:absolute;right:10px;bottom:10px;font:700 11px/1 var(--vh-mono);color:var(--vh-muted);background:rgba(14,20,16,.85);padding:4px 7px;z-index:5}
+  .tx-gpu{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .tx-gpu-badge{position:absolute;left:10px;bottom:10px;font:700 10px/1 var(--vh-mono);letter-spacing:.1em;color:var(--vh-accent);background:rgba(14,20,16,.88);padding:4px 7px;z-index:5}
+  .transition-stage{position:absolute;inset:0}
+  footer.site{margin-top:88px;border-top:4px solid var(--vh-line);padding:34px 0 46px;background:var(--vh-deep)}
+  footer.site .wrap{display:flex;justify-content:space-between;font:700 12px/1.7 var(--vh-mono);color:var(--vh-muted)}
+</style>
 </head>
-<body>
-  <nav><div class="wrap"><a class="brand" href="#top"><i></i><span>方块终端</span></a><div class="links"><a href="#system">SYSTEM</a><a href="#components">COMPONENTS · 16</a><a href="#motions">MOTIONS · 10</a><a href="#transitions">TRANSITIONS · 12</a><a href="../index.html">主题库 ↗</a></div></div></nav>
-  <header class="hero" id="top"><div class="wrap"><div><div class="eyebrow">VOXEL HARNESS · THEME 03</div><h1>方块终端<br><span style="color:var(--vh-accent)">加载插件。</span></h1><p>面向游戏插件、模组和开发工具的发布主题。像素槽位、终端指令与真实界面录屏共享同一套视觉语言。</p></div><aside class="manifest"><div><span>COMPONENTS</span><b>16</b></div><div><span>MOTIONS</span><b>10</b></div><div><span>TRANSITIONS</span><b>12</b></div><div><span>FONT</span><b>MC AE</b></div></aside></div></header>
-  <main>
-<section id="system"><div class="wrap"><div class="section-head"><h2>视觉系统</h2><p>黑曜石深绿承载界面，草绿标出可用状态，红石橙只用于警告和构建变化。开放字体 Pixelify Sans 负责标题与短标签。</p></div><div class="palette"><div class="swatch" style="background:#0e1410">OBSIDIAN · #0E1410</div><div class="swatch" style="background:#172019">SURFACE</div><div class="swatch" style="background:#ece8d6;color:#0e1410">SAND</div><div class="swatch" style="background:#7bd14b;color:#0e1410">GRASS</div><div class="swatch" style="background:#e46f3a;color:#0e1410">REDSTONE</div></div></div></section>
-    <section id="components"><div class="wrap"><div class="section-head"><h2>组件展厅</h2><p>组件覆盖插件发布所需的标题、功能、指令、版本记录、实机画面、快捷键、安装进度与发布状态。</p></div><div class="grid" id="component-grid"></div></div></section>
-    <section id="motions"><div class="wrap"><div class="section-head"><h2>元素动效</h2><p>阶梯运动保留像素节奏；落块、槽位弹出和指令输入具有明确重量，不使用持续故障闪烁。</p></div><div class="grid" id="motion-grid"></div></div></section>
-    <section id="transitions"><div class="wrap"><div class="section-head"><h2>场景转场</h2><p>主转场负责实机画面和功能页衔接；合成格、地形和方块碎裂用于章节或关键功能揭晓。</p></div><div class="grid" id="transition-grid"></div></div></section>
-  </main>
-  <footer><div class="wrap"><div><h2>voxel-harness · 方块终端</h2><p>第三套主题已纳入个人视频主题与动效库。</p></div><code>$video-theme-library</code></div></footer>
-  <script>
-    const fakeGame=`<div class="fake-game"><div class="sky"></div><div class="ground"></div><div class="blocks"></div></div>`;
-    const components=[
-      ['voxel-title','插件名、版本和发布主张。','TITLE',`<div class="vh-label">PLUGIN RELEASE / 01</div><div class="vh-title" style="margin-top:62px">Minecraft UI<br><span style="color:var(--vh-accent)">Harness</span></div>`],
-      ['hud-header','章节、构建版本和运行状态。','META',`<div class="vh-hud-header"><span>BUILD / V1.0.0</span><span style="color:var(--vh-accent)">ONLINE</span></div><p class="vh-body" style="margin-top:110px">稳定的画面顶部状态区。</p>`],
-      ['voxel-panel','功能说明与普通信息。','PANEL',`<div class="vh-panel vh-corner"><div class="vh-label">FEATURE</div><h3 style="margin:24px 0 0;font:700 30px/1 var(--vh-display)">界面直接进入游戏</h3><p class="vh-body" style="margin:18px 0 0">承载简短说明和参数。</p></div>`],
-      ['command-block','命令、安装步骤和路径。','COMMAND',`<div class="vh-command"><b>&gt;</b><span>harness install minecraft-ui</span></div><div class="vh-note" style="margin-top:22px">STATUS / dependency resolved</div>`],
-      ['feature-slots','并列功能或能力列表。','FEATURE',`<div class="vh-slots"><div class="vh-slot"><div class="vh-label">01</div><strong>背包</strong></div><div class="vh-slot"><div class="vh-label">02</div><strong>状态</strong></div><div class="vh-slot"><div class="vh-label">03</div><strong>任务</strong></div><div class="vh-slot"><div class="vh-label">04</div><strong>地图</strong></div></div>`],
-      ['comparison-pane','前后版本或双方案对比。','COMPARE',`<div class="vh-panes"><div class="vh-pane"><div class="vh-label">DEFAULT</div><h3 style="margin-top:45px">基础界面</h3></div><div class="vh-pane"><div class="vh-label">PLUGIN</div><h3 style="margin-top:45px">Harness UI</h3></div></div>`],
-      ['patch-list','版本变化、功能或文件列表。','LIST',`<div class="vh-list"><div class="vh-list-row"><span>01</span><b>HUD OVERLAY</b><span>ADD</span></div><div class="vh-list-row"><span>02</span><b>INVENTORY</b><span>ADD</span></div><div class="vh-list-row"><span>03</span><b>KEYBINDS</b><span>FIX</span></div></div>`],
-      ['build-path','安装、构建和测试流程。','PROCESS',`<div class="vh-path"><div class="vh-path-step"><b>01</b><p>安装</p></div><div class="vh-path-step"><b>02</b><p>载入</p></div><div class="vh-path-step"><b>03</b><p>配置</p></div><div class="vh-path-step"><b>04</b><p>启动</p></div></div>`],
-      ['keybind-chip','快捷键和交互提示。','INPUT',`<div style="height:230px;display:grid;place-items:center"><span class="vh-key"><b>G</b><span>OPEN HARNESS UI</span></span></div>`],
-      ['gameplay-window','16:9 实机画面或项目录屏。','MEDIA',`<div class="vh-gameplay"><div class="vh-game-window">${fakeGame}</div><aside class="vh-game-meta"><div><div class="vh-label">LIVE CAPTURE</div><h3>游戏内界面</h3></div><span>1920 × 1080</span></aside></div>`],
-      ['inventory-strip','功能导航和页面进度。','NAV',`<div style="height:235px;display:flex;align-items:end"><div class="vh-inventory">${Array.from({length:9},(_,i)=>`<span class="${i===4?'active':''}"></span>`).join('')}</div></div>`],
-      ['plugin-status','兼容、构建和发布状态。','STATUS',`<div style="height:235px;display:grid;place-items:center"><span class="vh-status">READY TO INSTALL</span></div>`],
-      ['chunk-divider','大章节分隔。','SECTION',`<div class="vh-chunk"><div class="vh-chunk-index">03</div><div><div class="vh-label">CHUNK / FEATURES</div><div class="vh-title" style="font-size:39px;margin-top:18px">核心功能</div></div></div>`],
-      ['terminal-note','限制、依赖与技术说明。','NOTE',`<div style="height:230px;display:flex;align-items:end"><div class="vh-note">REQUIRES / Deepseek Harness runtime · compatible build listed in release notes</div></div>`],
-      ['xp-progress','安装、加载或视频进度。','PROGRESS',`<div style="height:235px;display:grid;align-content:center;gap:18px"><div class="vh-label">INSTALLING · 68%</div><div class="vh-xp"><span style="width:68%"></span></div></div>`],
-      ['release-lockup','结尾发布信息与获取方式。','OUTRO',`<div class="vh-lockup"><div><div class="vh-label">RELEASE READY</div><div class="vh-title" style="font-size:42px;margin-top:20px">开始使用</div></div><span class="vh-status">V1.0.0</span></div>`]
-    ];
-    const card=([id,desc,tag,body])=>`<article class="card"><header class="head"><div><div class="id">${id}</div><p class="desc">${desc}</p></div><span class="tag">${tag}</span></header><div class="stage">${body}</div></article>`;
-    document.querySelector('#component-grid').innerHTML=components.map(card).join('');
-    const motions=[['chunk-load','区块按阶梯加载。'],['block-drop','方块带重量落下。'],['slot-cascade','槽位依次弹出。'],['command-type','指令逐步输入。'],['cursor-snap','光标快速锁定。'],['bar-charge','经验条分段充能。'],['item-pop','图标弹入槽位。'],['pane-unfold','界面沿轴展开。'],['status-flash','构建状态确认。'],['logo-craft','主标题合成聚焦。']];
-    const motionBody=id=>id==='block-drop'||id==='item-pop'?`<div class="motion-target motion-block"></div>`:id==='slot-cascade'?`<div class="motion-slots">${'<span class="motion-target"></span>'.repeat(5)}</div>`:id==='bar-charge'?`<div class="motion-bar"><span class="motion-target"></span></div>`:id==='status-flash'?`<div class="motion-target vh-status">BUILD PASSED</div>`:`<div class="motion-target motion-word">${id==='command-type'?'harness install':id==='cursor-snap'?'> READY':id==='pane-unfold'?'PLUGIN UI':id==='logo-craft'?'MINECRAFT UI':'CHUNK 01'}</div>`;
-    document.querySelector('#motion-grid').innerHTML=motions.map(([id,desc])=>`<article class="card motion-card" data-motion="${id}"><header class="head"><div><div class="id">${id}</div><p class="desc">${desc}</p></div><span class="tag">MOTION</span></header><div class="stage">${motionBody(id)}<button class="replay">重播</button></div></article>`).join('');
-    const wa=(el,frames,options={})=>el.animate(frames,{duration:650,easing:'cubic-bezier(.16,1,.3,1)',fill:'both',...options});
-    const runMotion=card=>{card.querySelectorAll('.motion-target').forEach(el=>el.getAnimations().forEach(a=>a.cancel()));const id=card.dataset.motion,targets=[...card.querySelectorAll('.motion-target')];if(id==='slot-cascade'){targets.forEach((el,i)=>wa(el,[{transform:'scale(.4)',opacity:0},{transform:'scale(1)',opacity:1}],{duration:430,delay:i*65,easing:'cubic-bezier(.2,1.7,.4,1)'}));return}const map={
-      'chunk-load':[{clipPath:'inset(0 100% 100% 0)',opacity:1},{clipPath:'inset(0 0 0 0)',opacity:1}],
-      'block-drop':[{transform:'translateY(-96px) rotate(-2deg)',opacity:0},{transform:'translateY(0) rotate(0)',opacity:1}],
-      'command-type':[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0 0 0)'}],
-      'cursor-snap':[{transform:'translateX(-48px)',opacity:0},{transform:'translateX(0)',opacity:1}],
-      'bar-charge':[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],
-      'item-pop':[{transform:'scale(.2) rotate(-18deg)',opacity:0},{transform:'scale(1) rotate(0)',opacity:1}],
-      'pane-unfold':[{transform:'perspective(1000px) rotateY(-82deg)',opacity:0},{transform:'perspective(1000px) rotateY(0)',opacity:1}],
-      'status-flash':[{transform:'scale(1.12)',background:'#e46f3a',color:'#0e1410'},{transform:'scale(1)',background:'#172019',color:'#ece8d6'}],
-      'logo-craft':[{transform:'scale(1.45) rotate(3deg)',filter:'blur(9px)',opacity:0},{transform:'scale(1) rotate(0)',filter:'blur(0)',opacity:1}]
-    };wa(targets[0],map[id],{duration:id==='block-drop'?520:680,easing:['chunk-load','command-type','bar-charge'].includes(id)?'steps(10)':'cubic-bezier(.16,1,.3,1)'})};
-    document.querySelectorAll('.motion-card').forEach(el=>el.querySelector('.replay').addEventListener('click',()=>runMotion(el)));
-    const transitions=[['chunk-push','区块横推','primary',.56],['block-rise','地层上卷','primary',.60],['portal-cross','传送门穿越','primary',.78],['camera-step','相机分段推进','primary',.64],['craft-grid','合成格重组','section',.72],['inventory-swap','物品栏换页','section',.68],['terrain-wipe','地形生长','section',.72],['command-cut','指令裁切','section',.58],['ender-iris','末影光圈','accent',.76],['block-shatter','方块碎解','accent',.70],['redstone-pulse','红石脉冲','accent',.64],['voxel-fold','体素折页','accent',.72]];
-    document.querySelector('#transition-grid').innerHTML=transitions.map(([id,label,role,d])=>`<article class="card transition-card" data-transition="${id}" data-duration="${d}"><header class="head"><div><div class="id">${id}</div><p class="desc">${label}</p></div><span class="tag">${role.toUpperCase()}</span></header><div class="stage"><div class="tx-stage"><div class="tx-scene tx-new"><div class="tx-top"><span>PLUGIN VIEW</span><span>02 / 02</span></div><div class="tx-copy">功能界面<small>HARNESS UI READY</small></div></div><div class="tx-scene tx-old"><div class="tx-top"><span>GAME VIEW</span><span>01 / 02</span></div><div class="tx-copy">实机画面<small>LIVE CAPTURE</small></div></div><div class="tx-overlay"></div><div class="tx-parts">${'<i></i>'.repeat(24)}</div><div class="tx-index">02</div><span class="tx-time">${d}s</span></div><button class="replay">重播</button></div></article>`).join('');
-    const switchOld=(old,d)=>wa(old,[{opacity:1,offset:0},{opacity:1,offset:.49},{opacity:0,offset:.51},{opacity:0,offset:1}],{duration:d,easing:'linear'});
-    const runTx=card=>{card.querySelectorAll('.tx-stage *').forEach(el=>{el.getAnimations().forEach(a=>a.cancel());el.removeAttribute('style')});const id=card.dataset.transition,d=Number(card.dataset.duration)*1000,old=card.querySelector('.tx-old'),next=card.querySelector('.tx-new'),overlay=card.querySelector('.tx-overlay'),parts=[...card.querySelectorAll('.tx-parts i')],index=card.querySelector('.tx-index');next.style.zIndex='3';
-      if(id==='chunk-push'||id==='block-rise'){const axis=id==='chunk-push'?'X':'Y';wa(old,[{transform:`translate${axis}(0)`},{transform:`translate${axis}(-100%)`}],{duration:d,easing:'steps(8)'});wa(next,[{transform:`translate${axis}(100%)`},{transform:`translate${axis}(0)`}],{duration:d,easing:'steps(8)'});return}
-      if(id==='portal-cross'){wa(old,[{transform:'scale(1)',filter:'blur(0)'},{transform:'scale(1.12)',filter:'blur(9px)'}],{duration:d});wa(next,[{clipPath:'circle(0% at 50% 50%)',transform:'scale(.86)',filter:'blur(8px)'},{clipPath:'circle(145% at 50% 50%)',transform:'scale(1)',filter:'blur(0)'}],{duration:d});return}
-      if(id==='camera-step'){wa(old,[{transform:'scale(1) translateX(0)',opacity:1},{transform:'scale(1.34) translateX(-16%)',opacity:0}],{duration:d*.72,easing:'cubic-bezier(.76,0,.24,1)'});wa(next,[{transform:'scale(.72) translateX(13%)',opacity:0},{transform:'scale(1) translateX(0)',opacity:1}],{duration:d*.86,delay:d*.14,easing:'steps(8)'});return}
-      if(id==='craft-grid'){parts.forEach((el,i)=>{el.style.opacity='1';wa(el,[{transform:'scale(0)',offset:0},{transform:'scale(1)',offset:.46},{transform:'scale(1)',offset:.54},{transform:'scale(0)',offset:1}],{duration:d,delay:(i%6+Math.floor(i/6))*12,easing:'steps(4)'})});switchOld(old,d);return}
-      if(id==='inventory-swap'){parts.slice(0,9).forEach((el,i)=>{el.style.opacity='1';el.style.gridColumn=String((i%3)+2);wa(el,[{transform:'translateY(150%)',opacity:0,offset:0},{transform:'translateY(0)',opacity:1,offset:.48},{transform:'translateY(0)',opacity:1,offset:.55},{transform:'translateY(-150%)',opacity:0,offset:1}],{duration:d,delay:i*22})});switchOld(old,d);return}
-      if(id==='terrain-wipe'){parts.forEach((el,i)=>{el.style.opacity='1';wa(el,[{transform:'scaleY(0)'},{transform:'scaleY(1)'}],{duration:d,delay:(i%6)*30,easing:'steps(6)'})});switchOld(old,d);return}
-      if(id==='command-cut'){overlay.style.background='#7bd14b';wa(overlay,[{opacity:1,transform:'scaleX(0)',transformOrigin:'left center',offset:0},{opacity:1,transform:'scaleX(1)',offset:.48},{opacity:1,transform:'scaleX(1)',transformOrigin:'right center',offset:.52},{opacity:1,transform:'scaleX(0)',transformOrigin:'right center',offset:1}],{duration:d,easing:'steps(8)'});switchOld(old,d);return}
-      if(id==='ender-iris'){wa(old,[{transform:'scale(1) rotate(0)',filter:'blur(0)'},{transform:'scale(1.08) rotate(-.4deg)',filter:'blur(5px)'}],{duration:d});wa(next,[{clipPath:'polygon(50% 50%,50% 50%,50% 50%,50% 50%)',transform:'rotate(.6deg)'},{clipPath:'polygon(-15% -15%,115% -15%,115% 115%,-15% 115%)',transform:'rotate(0)'}],{duration:d});return}
-      if(id==='block-shatter'){parts.forEach((el,i)=>{el.style.opacity='1';el.style.background=i%3===0?'#7bd14b':'#18211a';wa(el,[{transform:'translate(0,0) rotate(0) scale(1)',opacity:1},{transform:`translate(${(i%6-2.5)*70}px,${(Math.floor(i/6)-1.5)*60}px) rotate(${i%2?18:-18}deg) scale(.45)`,opacity:0}],{duration:d,delay:i*8,easing:'cubic-bezier(.76,0,.24,1)'})});switchOld(old,d);return}
-      if(id==='redstone-pulse'){overlay.style.background='#e46f3a';wa(overlay,[{opacity:0,offset:0},{opacity:1,offset:.4},{opacity:1,offset:.46},{opacity:0,offset:1}],{duration:d,easing:'steps(5)'});switchOld(old,d);return}
-      if(id==='voxel-fold'){wa(old,[{transform:'perspective(1000px) rotateY(0)',opacity:1},{transform:'perspective(1000px) rotateY(-90deg)',opacity:0}],{duration:d,easing:'steps(8)'});wa(next,[{transform:'perspective(1000px) rotateY(90deg)',opacity:1},{transform:'perspective(1000px) rotateY(0)',opacity:1}],{duration:d,easing:'steps(8)'});return}
-    };
-    document.querySelectorAll('.transition-card').forEach(el=>el.querySelector('.replay').addEventListener('click',()=>runTx(el)));
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.dataset.played){entry.target.dataset.played='1';entry.target.matches('.motion-card')?runMotion(entry.target):runTx(entry.target)}}),{threshold:.45});document.querySelectorAll('.motion-card,.transition-card').forEach(el=>observer.observe(el));
-  </script>
-</body></html>
+<body class="vh-theme">
+<nav>
+  <div class="wrap">
+    <span class="brand"><i></i>方块终端</span>
+    <span class="counts">COMPONENTS / 20 | MOTIONS / 14 | TRANSITIONS / 21</span>
+    <span class="spacer"></span>
+    <a href="#components">组件</a><a href="#motions">动效</a><a href="#transitions">转场</a>
+    <a href="../index.html">宣纸编辑部</a>
+    <a href="./modern-minimal.html">现代秩序</a>
+    <a href="./signal-desk.html">信号台</a>
+    <a href="../timeline-demo/index.html">时序示例</a>
+  </div>
+</nav>
+
+<header class="hero">
+  <div class="hero-ghost"></div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="vh-label" style="font-size:14px;letter-spacing:.16em">VOXEL HARNESS / SHOWROOM / BUILD V2.0.0</div>
+      <h1>组件、动效与转场，<br>全部来自<span style="color:var(--vh-accent)">真实主题模块</span>。</h1>
+      <p class="lede">本页每个演示都由 <b>themes/voxel-harness/</b> 下的 tokens.css、components.css、motions.js、transitions.js 与 advanced-transitions.js 直接驱动。黑曜石深绿承载界面，草绿标出可用状态，红石橙只给警告与构建脉冲。展厅即契约：所见行为与生产合成一致。</p>
+      <div class="links">
+        <a href="#components">20 组件</a><a href="#motions">14 动效</a><a href="#transitions">16 + 5 转场</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <h2>THEME MANIFEST</h2>
+      <dl>
+        <dt>ID</dt><dd>voxel-harness</dd>
+        <dt>版本</dt><dd>2.0.0</dd>
+        <dt>画布</dt><dd>1920 x 1080 / 安全区 88 / 64</dd>
+        <dt>动效性格</dt><dd>blocky / stepped / tool-like / weighted</dd>
+        <dt>转场</dt><dd>4 主 / 4 章节 / 8 点缀 + 5 GPU 旗舰</dd>
+        <dt>文档</dt><dd>references/{motions,transitions,components}/voxel-harness.md</dd>
+      </dl>
+    </aside>
+  </div>
+</header>
+
+<section id="system">
+  <div class="wrap">
+    <h2>视觉系统</h2>
+    <p class="section-sub">黑曜石深绿信息骨架、沙色阅读层级、草绿状态信号，红石橙只用于警告与构建变化。64px 像素栅格与 4px 硬边来自 tokens.css；标题与短标签使用本机 Pixelify Sans 字体。</p>
+    <div class="swatches">
+      <div class="swatch" style="--c:#0e1410"><b>obsidian</b><span>#0E1410</span></div>
+      <div class="swatch" style="--c:#172019"><b>surface</b><span>#172019</span></div>
+      <div class="swatch" style="--c:#202b22"><b>surface-2</b><span>#202B22</span></div>
+      <div class="swatch" style="--c:#ece8d6;color:#0e1410"><b>sand</b><span>#ECE8D6</span></div>
+      <div class="swatch" style="--c:#a6ad9f;color:#0e1410"><b>muted</b><span>#A6AD9F</span></div>
+      <div class="swatch" style="--c:#3b493d"><b>line</b><span>#3B493D</span></div>
+      <div class="swatch" style="--c:#7bd14b;color:#0e1410"><b>grass</b><span>#7BD14B</span></div>
+      <div class="swatch" style="--c:#e46f3a;color:#0e1410"><b>redstone</b><span>#E46F3A</span></div>
+    </div>
+    <div class="type-rows">
+      <div><b>DISPLAY / MINECRAFT AE PIXEL</b><div class="type-display">方块终端标题 CHUNK 09</div></div>
+      <div><b>BODY / NOTO SANS JP</b><div class="type-body">正文用高可读性黑体承载说明、参数与并列条目，两行以上不用像素字体。</div></div>
+      <div><b>NUMERIC / MINECRAFT AE PIXEL</b><div class="type-mono">0123456789 / BUILD V1.0.0 / 00:52</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="components">
+  <div class="wrap">
+    <h2>组件 / 20</h2>
+    <p class="section-sub">内容是中性占位。每个缩略场景都是 1920×1080 真实组件等比缩小，类名即生产类名；16 个 canonical ID 的映射见 components.css 顶部 catalog 头。</p>
+    <div class="grid" id="component-grid">
+
+      <article class="card component-card"><header><span><span class="id">voxel-title</span><div class="name">体素标题</div></span><span class="en">TITLE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;left:180px;top:280px"><div class="vh-label">PLUGIN RELEASE / 01</div><div class="vh-title" style="margin-top:44px">MINECRAFT UI<br><span style="color:var(--vh-accent)">HARNESS</span></div><p class="vh-body" style="margin-top:40px;max-width:880px">副题补充版本主张与适用场景，两行以内收住。</p></div>
+        </div></div></div>
+        <footer><span class="use">vh-label + vh-title + vh-body / 映射 editorial-title</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">hud-header</span><div class="name">HUD 页眉</div></span><span class="en">HEADER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-hud-header" style="position:absolute;left:88px;right:88px;top:64px"><span>BUILD / V1.0.0</span><span style="color:var(--vh-accent)">ONLINE</span></div>
+          <div style="position:absolute;left:88px;top:300px;font:400 58px/1.15 var(--vh-display);text-transform:uppercase">页眉贯穿全片，<br>标注构建版本与运行状态。</div>
+        </div></div></div>
+        <footer><span class="use">vh-hud-header / 映射 folio-header</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">voxel-panel</span><div class="name">体素面板</div></span><span class="en">PANEL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;left:260px;right:260px;top:290px;display:grid;grid-template-columns:1fr 1fr;gap:30px">
+            <div class="vh-panel vh-corner"><div class="vh-label">FEATURE</div><h3 style="margin:26px 0 0;font:400 32px/1 var(--vh-display);text-transform:uppercase">界面直接进入游戏</h3><p class="vh-body" style="margin:22px 0 0;font-size:22px">承载简短说明和参数。</p></div>
+            <div class="vh-panel" style="border-color:var(--vh-accent)"><div class="vh-label">ACCENT</div><h3 style="margin:26px 0 0;font:400 32px/1 var(--vh-display);text-transform:uppercase">草绿描边只给重点面板</h3><p class="vh-body" style="margin:22px 0 0;font-size:22px">同一容器，一级强调。</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-panel（vh-corner / 草绿描边变体）· 映射 paper-panel</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">command-block</span><div class="name">指令块</div></span><span class="en">COMMAND</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;left:280px;right:280px;top:360px">
+            <div class="vh-command"><b>&gt;</b><span>harness install minecraft-ui</span></div>
+            <div class="vh-note" style="margin-top:26px">STATUS / dependency resolved / 3 packages</div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-command + vh-note / 配 command-type</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">feature-slots</span><div class="name">功能槽位</div></span><span class="en">SLOTS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-slots" style="position:absolute;left:220px;right:220px;top:330px">
+            <div class="vh-slot"><div class="vh-label">01</div><strong>背包</strong></div>
+            <div class="vh-slot"><div class="vh-label">02</div><strong>状态</strong></div>
+            <div class="vh-slot"><div class="vh-label">03</div><strong>任务</strong></div>
+            <div class="vh-slot"><div class="vh-label">04</div><strong>地图</strong></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-slots + vh-slot / 配 slot-cascade</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">comparison-pane</span><div class="name">对比窗格</div></span><span class="en">COMPARE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-panes" style="position:absolute;left:240px;right:240px;top:300px">
+            <div class="vh-pane"><div class="vh-label">DEFAULT</div><h3 style="margin:56px 0 0;font:400 40px/1 var(--vh-display);text-transform:uppercase">基础界面</h3><p class="vh-body" style="margin:26px 0 0;font-size:22px">原版菜单与 HUD。</p></div>
+            <div class="vh-pane"><div class="vh-label">PLUGIN</div><h3 style="margin:56px 0 0;font:400 40px/1 var(--vh-display);text-transform:uppercase">Harness UI</h3><p style="margin:26px 0 0;font:400 22px/1.55 var(--vh-sans)">像素面板进游戏。</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-panes + vh-pane / 映射 comparison-split</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">patch-list</span><div class="name">补丁清单</div></span><span class="en">LIST</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-list" style="position:absolute;left:300px;right:300px;top:270px">
+            <div class="vh-list-row"><span>01</span><b>HUD OVERLAY</b><span>ADD</span></div>
+            <div class="vh-list-row"><span>02</span><b>INVENTORY</b><span>ADD</span></div>
+            <div class="vh-list-row"><span>03</span><b>KEYBINDS</b><span>FIX</span></div>
+            <div class="vh-list-row"><span>04</span><b>PERFORMANCE</b><span>FIX</span></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-list + vh-list-row / 映射 ranked-list</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">build-path</span><div class="name">构建路径</div></span><span class="en">PROCESS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-path" style="position:absolute;left:200px;right:200px;top:360px">
+            <div class="vh-path-step"><b>01</b><p>安装</p></div>
+            <div class="vh-path-step"><b>02</b><p>载入</p></div>
+            <div class="vh-path-step"><b>03</b><p>配置</p></div>
+            <div class="vh-path-step"><b>04</b><p>启动</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-path + vh-path-step / 映射 timeline-steps</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">keybind-chip</span><div class="name">键位提示</div></span><span class="en">INPUT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center"><span class="vh-key" style="font-size:24px;padding:22px 28px"><b>G</b><span>OPEN HARNESS UI</span></span></div>
+        </div></div></div>
+        <footer><span class="use">vh-key / 配 item-pop / cursor-snap</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">gameplay-window</span><div class="name">实机窗口</div></span><span class="en">MEDIA</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-gameplay" style="position:absolute;left:180px;right:180px;top:270px">
+            <div class="vh-game-window"><div class="fake-game"><div class="sky"></div><div class="ground"></div><div class="blocks"></div></div></div>
+            <aside class="vh-game-meta"><div><div class="vh-label">LIVE CAPTURE</div><h3 style="margin:18px 0 0;font:400 30px/1 var(--vh-display);text-transform:uppercase">游戏内界面</h3></div><span class="vh-label" style="color:var(--vh-muted)">1920 x 1080</span></aside>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-gameplay + vh-game-window / 映射 artifact-frame</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">inventory-strip</span><div class="name">物品栏条</div></span><span class="en">NAV</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;left:340px;right:340px;top:50%;transform:translateY(-50%)"><div class="vh-inventory"><span></span><span></span><span></span><span></span><span class="active"></span><span></span><span></span><span></span><span></span></div></div>
+        </div></div></div>
+        <footer><span class="use">vh-inventory / 功能导航与页面进度</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">plugin-status</span><div class="name">插件状态印</div></span><span class="en">VERDICT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="text-align:center"><span class="vh-status" style="font-size:30px;padding:24px 32px">READY TO INSTALL</span><p class="vh-body" style="margin:48px 0 0;font-size:20px">状态章而非横幅；构建脉冲配 status-flash。</p></div></div>
+        </div></div></div>
+        <footer><span class="use">vh-status / 映射 verdict-stamp，配 status-flash</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">chunk-divider</span><div class="name">区块隔断</div></span><span class="en">CHAPTER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-chunk" style="position:absolute;left:180px;right:180px;top:50%;transform:translateY(-50%)"><div class="vh-chunk-index">03</div><div class="vh-chunk-body"><div class="vh-chunk-kicker">CHUNK / 章节</div><div class="vh-chunk-title">核心功能</div><div class="vh-chunk-rule"></div></div></div>
+        </div></div></div>
+        <footer><span class="use">vh-chunk 全家桶 / 映射 chapter-divider，配 chunk-mark</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">terminal-note</span><div class="name">终端注记</div></span><span class="en">NOTE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;left:340px;right:340px;top:400px"><div class="vh-note" style="font-size:22px">REQUIRES / Harness runtime / compatible build listed in release notes.<br>METHOD / same-version comparison, links preserved.</div></div>
+        </div></div></div>
+        <footer><span class="use">vh-note / 映射 source-note</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">xp-progress</span><div class="name">经验进度轨</div></span><span class="en">RAIL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font:400 46px/1 var(--vh-display);text-transform:uppercase">全宽进度轨贯穿整支视频</div>
+          <div class="vh-xp" style="position:absolute;left:0;right:0;bottom:0;height:22px"><span style="transform:scaleX(.42)"></span></div>
+        </div></div></div>
+        <footer><span class="use">vh-xp / 映射 progress-rail，配 bar-charge</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">release-lockup</span><div class="name">发布署名</div></span><span class="en">OUTRO</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-lockup" style="position:absolute;left:180px;right:180px;bottom:240px"><div><div class="vh-label">RELEASE READY</div><div class="vh-lockup-line" style="margin-top:24px">开始使用<span class="vh-lockup-mark">_</span></div><div class="vh-lockup-note">VOXEL HARNESS / VIDEO THEME LIBRARY / 2026</div></div><span class="vh-status">V1.0.0</span></div>
+        </div></div></div>
+        <footer><span class="use">vh-lockup 全家桶 / 映射 end-card，配 lockup-boot</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">xp-stat</span><div class="name">经验数字块</div></span><span class="en">STAT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-xp-stat" style="position:absolute;left:280px;top:260px"><div class="vh-xp-stat-label">COMPATIBLE BUILDS / 兼容构建</div><div class="vh-xp-stat-value">87</div><p class="vh-xp-stat-note">一个数字占据一页，配 xp-count 动效。</p></div>
+        </div></div></div>
+        <footer><span class="use">vh-xp-stat + vh-xp-stat-value / 映射 stat-block（新增）</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">stat-bench</span><div class="name">三联指标台</div></span><span class="en">TRIPTYCH</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-stat-bench" style="position:absolute;left:180px;right:180px;top:290px">
+            <article class="vh-bench-cell"><div class="vh-xp-stat-label">FPS / 帧率</div><h3>渲染开销</h3><div class="value">+12</div><div class="vh-bench-bar"><span style="transform:scaleX(.72)"></span></div></article>
+            <article class="vh-bench-cell"><div class="vh-xp-stat-label">SIZE / 体积</div><h3>资源占用</h3><div class="value">3.2</div><div class="vh-bench-bar"><span style="transform:scaleX(.34)"></span></div></article>
+            <article class="vh-bench-cell hot"><div class="vh-xp-stat-label">UPTIME / 稳定</div><h3>运行稳定</h3><div class="value">99.9</div><div class="vh-bench-bar"><span style="transform:scaleX(.99)"></span></div></article>
+          </div>
+        </div></div></div>
+        <footer><span class="use">vh-stat-bench + vh-bench-cell + vh-bench-bar / 映射 metric-triptych（新增）</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">lore-quote</span><div class="name">设定引文</div></span><span class="en">QUOTE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-lore-quote" style="position:absolute;left:280px;right:280px;top:340px"><blockquote>界面应该像物品栏一样，一眼知道每格放什么。</blockquote><cite>DESIGN NOTE / VOXEL HARNESS</cite></div>
+        </div></div></div>
+        <footer><span class="use">vh-lore-quote（blockquote + cite）· 映射 quote-pullout（新增）</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">gameplay-dossier</span><div class="name">实机档案</div></span><span class="en">DOSSIER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-dossier-media"><div class="fake-game"><div class="sky"></div><div class="ground"></div><div class="blocks"></div></div></div>
+          <section class="vh-dossier">
+            <header class="vh-dossier-head"><b class="vh-dossier-index">03</b><span class="vh-dossier-title"><strong>核心功能</strong><small><span class="vh-dossier-work">《实机演示片段》</span><em class="vh-dossier-label">LIVE CAPTURE</em></small></span><span class="vh-dossier-meta"><span>完整素材 / 1.0x</span><span class="vh-dossier-emphasis">推荐 #1</span></span></header>
+            <div class="vh-dossier-frame" data-frame-label="GAMEPLAY / UNTRIMMED"></div>
+            <div class="vh-dossier-spine">VOXEL HARNESS / GAMEPLAY DOSSIER</div>
+            <div class="vh-dossier-edition">VOL.01 / 2026</div>
+            <i class="vh-dossier-crop tl"></i><i class="vh-dossier-crop tr"></i><i class="vh-dossier-crop bl"></i><i class="vh-dossier-crop br"></i>
+            <footer class="vh-dossier-footer"><span>HARNESS / ORIGINAL MATERIAL</span><span>DURATION 00:52 / ENTRY 03/12</span></footer>
+            <div class="vh-dossier-progress"><span style="transform:scaleX(.35)"></span></div>
+          </section>
+        </div></div></div>
+        <footer><span class="use">vh-dossier 全家桶 / 映射 screening-dossier（新增），配 hud-unveil</span></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="motions">
+  <div class="wrap">
+    <h2>动效 / 14</h2>
+    <p class="section-sub">点击重播即调用 motions.js 里的真实预设（网页预览用时间线自动播放；生产合成用单一 paused timeline 定位到确定时间）。阶梯运动保留像素节奏，弹性只用于落点。</p>
+    <div class="grid" id="motion-grid">
+
+      <article class="card motion-card" data-motion="chunk-load" data-duration="0.62"><header><span><span class="id">chunk-load</span><div class="name">区块加载</div></span><span class="duration">.62s</span></header>
+        <div class="motion-stage"><div class="sample-word">CHUNK 01</div></div>
+        <footer><span class="use">对角阶梯式区块揭示</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="block-drop" data-duration="0.5"><header><span><span class="id">block-drop</span><div class="name">落块</div></span><span class="duration">.5s</span></header>
+        <div class="motion-stage"><div class="sample-block"></div></div>
+        <footer><span class="use">方块带重量落下弹稳</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="slot-cascade" data-duration="0.44"><header><span><span class="id">slot-cascade</span><div class="name">槽位级联</div></span><span class="duration">.44s+</span></header>
+        <div class="motion-stage"><div class="sample-slots"><span class="sample-slot"></span><span class="sample-slot"></span><span class="sample-slot"></span><span class="sample-slot"></span><span class="sample-slot"></span></div></div>
+        <footer><span class="use">槽位依次弹出，可级联</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="command-type" data-duration="0.72"><header><span><span class="id">command-type</span><div class="name">指令输入</div></span><span class="duration">.72s</span></header>
+        <div class="motion-stage"><div class="sample-command">&gt; harness install minecraft-ui</div></div>
+        <footer><span class="use">逐段步进输入的命令行揭示</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="cursor-snap" data-duration="0.38"><header><span><span class="id">cursor-snap</span><div class="name">光标锁定</div></span><span class="duration">.38s</span></header>
+        <div class="motion-stage"><div class="sample-word">&gt; READY</div></div>
+        <footer><span class="use">提示符快速锁定到位</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="bar-charge" data-duration="0.82"><header><span><span class="id">bar-charge</span><div class="name">经验充能</div></span><span class="duration">.82s</span></header>
+        <div class="motion-stage"><div class="vh-xp sample-bar"><span></span></div></div>
+        <footer><span class="use">XP 条分段充能 steps(16)</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="item-pop" data-duration="0.42"><header><span><span class="id">item-pop</span><div class="name">物品弹入</div></span><span class="duration">.42s</span></header>
+        <div class="motion-stage"><div class="sample-block"></div></div>
+        <footer><span class="use">图标旋转弹入槽位</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="pane-unfold" data-duration="0.66"><header><span><span class="id">pane-unfold</span><div class="name">界面展开</div></span><span class="duration">.66s</span></header>
+        <div class="motion-stage"><div class="sample-pane">PLUGIN UI</div></div>
+        <footer><span class="use">UI 面板沿左轴 3D 展开</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="status-flash" data-duration="0.54"><header><span><span class="id">status-flash</span><div class="name">状态确认</div></span><span class="duration">.54s</span></header>
+        <div class="motion-stage"><span class="vh-status sample-status">BUILD PASSED</span></div>
+        <footer><span class="use">红石脉冲闪过回到稳定态</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="logo-craft" data-duration="0.74"><header><span><span class="id">logo-craft</span><div class="name">主标合成</div></span><span class="duration">.74s</span></header>
+        <div class="motion-stage"><div class="sample-title">MINECRAFT UI</div></div>
+        <footer><span class="use">英雄标题合成聚焦</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="xp-count" data-duration="1.1"><header><span><span class="id">xp-count</span><div class="name">经验计数</div></span><span class="duration">1.1s</span></header>
+        <div class="motion-stage"><div class="sample-number" data-end="87">0</div></div>
+        <footer><span class="use">参数化步进滚动，支持自定义格式</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="hud-unveil" data-duration="1.0"><header><span><span class="id">hud-unveil</span><div class="name">HUD 揭幕</div></span><span class="duration">~1s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-dossier-media"></div>
+          <section class="vh-dossier" id="demo-dossier">
+            <header class="vh-dossier-head"><b class="vh-dossier-index">03</b><span class="vh-dossier-title"><strong>核心功能</strong><small><span class="vh-dossier-work">《实机演示》</span><em class="vh-dossier-label">LIVE</em></small></span><span class="vh-dossier-meta"><span>完整素材</span></span></header>
+            <div class="vh-dossier-frame" data-frame-label="UNTRIMMED"></div>
+            <div class="vh-dossier-spine">VOXEL HARNESS</div>
+            <div class="vh-dossier-edition">VOL.01</div>
+            <i class="vh-dossier-crop tl"></i><i class="vh-dossier-crop tr"></i><i class="vh-dossier-crop bl"></i><i class="vh-dossier-crop br"></i>
+            <footer class="vh-dossier-footer"><span>HARNESS</span><span>ENTRY 03/12</span></footer>
+            <div class="vh-dossier-progress"><span></span></div>
+          </section>
+        </div></div></div>
+        <footer><span class="use">头部 > 边框 > 裁切标记 > 页脚 > 进度轨</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="chunk-mark" data-duration="0.76"><header><span><span class="id">chunk-mark</span><div class="name">章节落块</div></span><span class="duration">.76s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-chunk" id="demo-chunk" style="position:absolute;left:180px;right:180px;top:50%;transform:translateY(-50%)"><div class="vh-chunk-index">03</div><div class="vh-chunk-body"><div class="vh-chunk-kicker">CHUNK / 章节</div><div class="vh-chunk-title">核心功能</div><div class="vh-chunk-rule"></div></div></div>
+        </div></div></div>
+        <footer><span class="use">序号定版 > 标题步进拭入 > 草绿规线充能</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="lockup-boot" data-duration="1.0"><header><span><span class="id">lockup-boot</span><div class="name">收尾启动</div></span><span class="duration">~1s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="vh-canvas"><div class="vh-grid"></div>
+          <div class="vh-lockup" id="demo-lockup" style="position:absolute;left:180px;right:180px;top:50%;transform:translateY(-50%)"><div><div class="vh-lockup-line">方块终端，</div><div class="vh-lockup-line">装进每个界面<span class="vh-lockup-mark">_</span></div><div class="vh-lockup-note">VOXEL HARNESS / 2026</div></div><span class="vh-status">V1.0.0</span></div>
+        </div></div></div>
+        <footer><span class="use">结语句步进升起 > 句读落印 > 落款淡入</span><button class="replay" type="button">重播</button></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="transitions">
+  <div class="wrap">
+    <h2>转场 / 16 基础 + 5 GPU</h2>
+    <p class="section-sub">基础转场按叙事角色分组（主 / 章节 / 点缀），全部调用 transitions.js 真实预设；GPU 旗舰由 advanced-transitions.js 的 WebGL 引擎逐像素渲染。一支视频选一个主转场 + 一两个点缀。</p>
+    <div class="grid" id="transition-grid">
+
+      <article class="card transition-card" data-role="primary" data-transition="chunk-push" data-duration="0.56"><header><span><span class="id">chunk-push</span><div class="name">区块横推</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.56s</span></div>
+        <footer><span class="use">相邻画面常规前推，新页步进压过旧页</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="block-rise" data-duration="0.6"><header><span><span class="id">block-rise</span><div class="name">地层升起</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.6s</span></div>
+        <footer><span class="use">新页升起后落块压实，旧页视差滞后变暗</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="portal-cross" data-duration="0.78"><header><span><span class="id">portal-cross</span><div class="name">传送门穿越</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.78s</span></div>
+        <footer><span class="use">维度或模式切换，旧场失焦、新场圈入</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="camera-step" data-duration="0.64"><header><span><span class="id">camera-step</span><div class="name">相机步进</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.64s</span></div>
+        <footer><span class="use">视角推进的步进跟拍交接</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="craft-grid" data-duration="0.72"><header><span><span class="id">craft-grid</span><div class="name">合成格重组</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">合成格拼满后拆解，适合功能组揭晓</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="inventory-swap" data-duration="0.68"><header><span><span class="id">inventory-swap</span><div class="name">物品栏换页</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.68s</span></div>
+        <footer><span class="use">热键栏飞过完成换页</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="terrain-wipe" data-duration="0.72"><header><span><span class="id">terrain-wipe</span><div class="name">地形生长</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">地形柱生长覆盖后沉降让位</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="command-cut" data-duration="0.58"><header><span><span class="id">command-cut</span><div class="name">指令裁切</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.58s</span></div>
+        <footer><span class="use">草绿指令带步进扫过的果断段落切</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="ender-iris" data-duration="0.76"><header><span><span class="id">ender-iris</span><div class="name">末影光圈</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.76s</span></div>
+        <footer><span class="use">方形光圈圈入英雄结果</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="block-shatter" data-duration="0.7"><header><span><span class="id">block-shatter</span><div class="name">方块碎解</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">旧场碎成方块散场，强对比重构</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="redstone-pulse" data-duration="0.64"><header><span><span class="id">redstone-pulse</span><div class="name">红石脉冲</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.64s</span></div>
+        <footer><span class="use">一次干净的红石电流脉冲交换</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="voxel-fold" data-duration="0.72"><header><span><span class="id">voxel-fold</span><div class="name">体素折页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">旧场 3D 折出、新场折入，版本更替</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="pixel-rain" data-duration="0.78"><header><span><span class="id">pixel-rain</span><div class="name">像素雨幕</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.78s</span></div>
+        <footer><span class="use">方块柱步进坠落覆盖再坠离</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="craft-flip" data-duration="0.76"><header><span><span class="id">craft-flip</span><div class="name">格阵翻板</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.76s</span></div>
+        <footer><span class="use">翻板合拢交换再翻开，配方更替</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="torch-flicker-cut" data-duration="0.62"><header><span><span class="id">torch-flicker-cut</span><div class="name">火把烁切</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.62s</span></div>
+        <footer><span class="use">火光不规则烁亮完成交换，洞穴感换场</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="xp-drain" data-duration="0.7"><header><span><span class="id">xp-drain</span><div class="name">经验槽抽换</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>实机画面<small>GAME VIEW / SCENE A</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>功能界面<small>PLUGIN UI / SCENE B</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">XP 槽充能、爆满覆盖、回流排空</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="block-dissolve-chunks" data-duration="1.1" data-label="方块崩解"><header><span><span class="id">block-dissolve-chunks</span><div class="name">方块崩解</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">核心 UI 亮相、作品揭晓 / 回退 block-shatter</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="portal-warp-swirl" data-duration="1.2" data-label="传送门旋涡"><header><span><span class="id">portal-warp-swirl</span><div class="name">传送门旋涡</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">片头、维度切换 / 回退 portal-cross</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="pixel-sort-cascade" data-duration="1.0" data-label="像素排序瀑布"><header><span><span class="id">pixel-sort-cascade</span><div class="name">像素排序瀑布</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">数据对比、版本差异 / 回退 command-cut</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="terrain-column-rise" data-duration="1.3" data-label="地形柱隆升"><header><span><span class="id">terrain-column-rise</span><div class="name">地形柱隆升</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">大章节、世界层级变化 / 回退 terrain-wipe</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="redstone-surge-pulse" data-duration="0.9" data-label="红石涌流"><header><span><span class="id">redstone-surge-pulse</span><div class="name">红石涌流</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">结论落点、状态确认 / 回退 redstone-pulse</span><button class="replay" type="button">重播</button></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>VIDEO THEME LIBRARY / voxel-harness 2.0.0</span>
+    <span>SHOWROOM DRIVEN BY REAL THEME MODULES / NO DRIFT</span>
+  </div>
+</footer>
+
+<script type="module">
+import {voxelHarnessMotions} from "../themes/voxel-harness/motions.js";
+import {voxelHarnessTransitions,voxelHarnessTransitionMeta} from "../themes/voxel-harness/transitions.js";
+import {voxelHarnessAdvancedTransitionMeta} from "../themes/voxel-harness/advanced-transitions.js";
+void voxelHarnessAdvancedTransitionMeta;
+
+const camel=(id)=>id.replace(/-([a-z0-9])/g,(_,letter)=>letter.toUpperCase());
+
+const fitMinis=()=>document.querySelectorAll(".mini").forEach((mini)=>{
+  const k=mini.clientWidth/1920;
+  mini.style.height=`${1080*k}px`;
+  mini.querySelector(".mini-inner").style.transform=`scale(${k})`;
+});
+fitMinis();
+addEventListener("resize",fitMinis);
+
+const motionTargets={
+  "chunk-load":(stage)=>[stage.querySelector(".sample-word")],
+  "block-drop":(stage)=>[stage.querySelector(".sample-block")],
+  "slot-cascade":(stage)=>[stage.querySelectorAll(".sample-slot")],
+  "command-type":(stage)=>[stage.querySelector(".sample-command")],
+  "cursor-snap":(stage)=>[stage.querySelector(".sample-word")],
+  "bar-charge":(stage)=>[stage.querySelector(".sample-bar>span")],
+  "item-pop":(stage)=>[stage.querySelector(".sample-block")],
+  "pane-unfold":(stage)=>[stage.querySelector(".sample-pane")],
+  "status-flash":(stage)=>[stage.querySelector(".sample-status")],
+  "logo-craft":(stage)=>[stage.querySelector(".sample-title")],
+  "xp-count":(stage)=>[stage.querySelector(".sample-number"),0,Number(stage.querySelector(".sample-number").dataset.end)],
+  "hud-unveil":()=>["#demo-dossier",0,2.2],
+  "chunk-mark":()=>["#demo-chunk"],
+  "lockup-boot":()=>["#demo-lockup"]
+};
+document.querySelectorAll(".motion-card").forEach((card)=>{
+  const id=card.dataset.motion;
+  const stage=card.querySelector(".motion-stage,.mini");
+  const play=()=>{
+    const tl=gsap.timeline();
+    const [target,...rest]=motionTargets[id](stage);
+    voxelHarnessMotions[camel(id)](tl,target,...rest);
+  };
+  card.querySelector(".replay").addEventListener("click",play);
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+const partSelectors={tiles:".tx-tile",slots:".tx-slot",columns:".tx-column",drops:".tx-drop",overlay:".tx-overlay",track:".tx-track",fill:".tx-fill"};
+const multiParts=["tiles","slots","columns","drops"];
+document.querySelectorAll('.transition-card[data-role]:not([data-role="advanced"])').forEach((card)=>{
+  const id=card.dataset.transition;
+  const preset=voxelHarnessTransitionMeta.presets[id];
+  if(!preset)return;
+  const stage=card.querySelector(".tx-stage");
+  const make=(cls)=>{const el=document.createElement("div");el.className=`tx-part ${cls}`;stage.appendChild(el);return el};
+  for(const part of preset.parts){
+    if(part==="outgoing"||part==="incoming")continue;
+    if(part==="tiles")for(let i=0;i<24;i++){const el=make("tx-tile");el.style.left=`${(i%6)*16.6667}%`;el.style.top=`${Math.floor(i/6)*25}%`;if(i%5===2)el.classList.add("accent")}
+    else if(part==="slots")for(let i=0;i<9;i++)make("tx-slot").style.left=`${12.5+i*8.5}%`;
+    else if(part==="columns")for(let i=0;i<8;i++)make("tx-column").style.left=`${i*12.5}%`;
+    else if(part==="drops")for(let i=0;i<8;i++)make("tx-drop").style.left=`${i*12.5}%`;
+    else make(partSelectors[part].slice(1));
+  }
+  const play=()=>{
+    const parts={outgoing:stage.querySelector(".tx-a"),incoming:stage.querySelector(".tx-b")};
+    for(const part of preset.parts){
+      if(part==="outgoing"||part==="incoming")continue;
+      parts[part]=multiParts.includes(part)?stage.querySelectorAll(partSelectors[part]):stage.querySelector(partSelectors[part]);
+    }
+    voxelHarnessTransitions[camel(id)](gsap.timeline(),parts,0,preset.duration);
+  };
+  card.querySelector(".replay").addEventListener("click",play);
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+const jump=new URLSearchParams(location.search);
+if(jump.get("jump")){
+  const section=document.getElementById(jump.get("jump"));
+  if(section)requestAnimationFrame(()=>section.scrollIntoView());
+}
+</script>
+</body>
+</html>

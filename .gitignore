@@ -5,3 +5,9 @@ output/
 *.log
 .DS_Store
 Thumbs.db
+themes/voxel-harness/fonts/minecraft-ae.ttf
+showcases/spec-sheet/assets/fonts/bahnschrift.ttf
+showcases/spec-sheet/assets/fonts/segoeui.ttf
+showcases/spec-sheet/assets/fonts/segoeuib.ttf
+scripts/tmp-debug.mjs
+**/.hyperframes/

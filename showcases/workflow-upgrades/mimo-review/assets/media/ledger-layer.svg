@@ -1,0 +1,23 @@
+<svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 800 620">
+  <g fill="none" stroke="#20262c">
+    <path stroke-width="5" d="M68 77H728M68 153H728M68 213H728M68 273H728M68 333H728M68 393H728M68 453H728M68 513H728"/>
+    <path stroke-width="2" d="M202 153V513M600 153V513"/>
+  </g>
+  <g fill="#20262c" font-family="Arial,sans-serif" font-weight="700">
+    <text x="70" y="119" font-size="34">CORE CHECKS</text>
+    <text x="670" y="119" font-size="38" text-anchor="end">9 / 11</text>
+    <text x="222" y="196" font-size="25">双重记账</text>
+    <text x="222" y="256" font-size="25">幂等与恢复</text>
+    <text x="222" y="316" font-size="25">发件箱</text>
+    <text x="222" y="376" font-size="25">租户隔离</text>
+    <text x="222" y="436" font-size="25">其余核心项</text>
+  </g>
+  <g fill="none" stroke="#20262c" stroke-width="6" stroke-linecap="round" stroke-linejoin="round">
+    <path d="m110 178 17 18 33-37m-50 79 17 18 33-37m-50 79 17 18 33-37m-50 79 17 18 33-37m-50 79 17 18 33-37"/>
+  </g>
+  <g fill="#b83b2f" font-family="Arial,sans-serif" font-size="22" font-weight="700">
+    <text x="658" y="196">PASS</text><text x="658" y="256">PASS</text>
+    <text x="658" y="316">PASS</text><text x="658" y="376">PASS</text>
+    <text x="658" y="436">PASS</text>
+  </g>
+</svg>

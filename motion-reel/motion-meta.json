@@ -1,0 +1,117 @@
+[
+  {
+    "id": "ink-slam",
+    "label": "墨定标题",
+    "duration": 0.58
+  },
+  {
+    "id": "paper-rise",
+    "label": "纸面升起",
+    "duration": 0.62
+  },
+  {
+    "id": "bar-draw",
+    "label": "证据绘条",
+    "duration": 0.95
+  },
+  {
+    "id": "cascade-list",
+    "label": "级联清单",
+    "duration": 0.5
+  },
+  {
+    "id": "editorial-wipe",
+    "label": "版面拭入",
+    "duration": 0.65
+  },
+  {
+    "id": "stamp-impact",
+    "label": "落印",
+    "duration": 0.48
+  },
+  {
+    "id": "underline-draw",
+    "label": "批注下划线",
+    "duration": 0.5
+  },
+  {
+    "id": "folio-swap",
+    "label": "页眉更替",
+    "duration": 0.32
+  },
+  {
+    "id": "red-result-emphasis",
+    "label": "朱砂点题",
+    "duration": 0.5
+  },
+  {
+    "id": "count-up",
+    "label": "数字滚动",
+    "duration": 1.1
+  },
+  {
+    "id": "ghost-settle",
+    "label": "背景水印落定",
+    "duration": 1.1
+  },
+  {
+    "id": "quote-reveal",
+    "label": "引文揭示",
+    "duration": 0.93
+  },
+  {
+    "id": "chapter-mark",
+    "label": "章节落版",
+    "duration": 1.05
+  },
+  {
+    "id": "end-lock",
+    "label": "收尾锁定",
+    "duration": 1.05
+  },
+  {
+    "id": "screening-unveil",
+    "label": "放映揭幕",
+    "duration": 1
+  },
+  {
+    "id": "line-set",
+    "label": "定行",
+    "duration": 0.68
+  },
+  {
+    "id": "slate-flight",
+    "label": "导语飞行",
+    "duration": 0.86
+  },
+  {
+    "id": "window-surface",
+    "label": "作品窗浮出",
+    "duration": 0.8
+  },
+  {
+    "id": "seal-press",
+    "label": "印面落定",
+    "duration": 0.69
+  },
+  {
+    "id": "seal-sheet",
+    "label": "印谱累积",
+    "duration": 0.34
+  },
+  {
+    "id": "compare-pair",
+    "label": "对照双栏",
+    "duration": 1.12
+  },
+  {
+    "id": "handoff-swap",
+    "label": "交接换版",
+    "duration": 3.9
+  },
+  {
+    "id": "paper-drift",
+    "label": "纸面漂移",
+    "duration": 0
+  }
+]

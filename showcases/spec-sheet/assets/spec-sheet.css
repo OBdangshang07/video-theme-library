@@ -1,0 +1,60 @@
+/* spec-sheet — the cool counterpart to paper-editorial.
+   Instrument-panel language: white ground, one navy, one electric blue, hairlines,
+   and scale contrast taken to the extreme (a 22px whisper above a 168px shout). */
+:root{
+  --ss-ground:#ffffff;
+  --ss-ground-alt:#f6f8fb;
+  --ss-ink:#0b1f3a;
+  --ss-ink-soft:#33415c;
+  --ss-muted:#6b7280;
+  --ss-rule:#d7dbe2;
+  --ss-accent:#2563eb;
+  --ss-accent-deep:#1d4ed8;
+  --ss-display:"SC Display","SC Grotesk","SC Sans",system-ui,sans-serif;
+  --ss-sans:"SC Sans",system-ui,sans-serif;
+  --ss-mono:"SC Mono","Cascadia Mono",ui-monospace,monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+body{background:var(--ss-ground)}
+
+.ss-scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;
+  background:var(--ss-ground);font-family:var(--ss-sans);color:var(--ss-ink)}
+
+/* ---- status chips: the whisper at the top right ---- */
+.ss-chips{position:absolute;right:88px;top:44px;display:flex;gap:10px;align-items:center}
+.ss-chip{display:inline-flex;align-items:center;gap:9px;height:34px;padding:0 15px;
+  border:1px solid var(--ss-rule);border-radius:999px;
+  font:600 13px/1 var(--ss-mono);letter-spacing:.06em;color:var(--ss-muted);background:#fff}
+.ss-chip i{width:6px;height:6px;border-radius:50%;background:var(--ss-accent);display:block}
+.ss-chip.is-plain{border-color:transparent;background:var(--ss-ground-alt)}
+
+/* ---- eyebrow + display ---- */
+.ss-eyebrow{position:absolute;left:120px;top:150px;
+  font:600 15px/1 var(--ss-mono);letter-spacing:.34em;color:var(--ss-muted);text-transform:uppercase}
+.ss-display{position:absolute;left:114px;top:276px;
+  font:700 148px/0.98 var(--ss-display);letter-spacing:-.035em;color:var(--ss-ink)}
+
+/* ---- hairline spec table ---- */
+.ss-spec{position:absolute;left:120px;top:566px;width:700px}
+.ss-spec-row{display:flex;align-items:baseline;justify-content:space-between;gap:24px;
+  padding:15px 0 16px;border-top:1px solid var(--ss-rule)}
+.ss-spec-row:last-child{border-bottom:1px solid var(--ss-rule)}
+.ss-spec-row dt{font:400 24px/1 var(--ss-sans);color:var(--ss-muted)}
+.ss-spec-row dd{font:700 27px/1 var(--ss-display);color:var(--ss-ink);letter-spacing:-.01em;text-align:right}
+.ss-spec-row dd.mono{font:600 24px/1 var(--ss-mono);letter-spacing:.01em}
+
+/* ---- ascii field ---- */
+.ss-art{position:absolute;right:88px;top:170px;width:680px}
+.ss-art svg{display:block;width:100%;height:auto}
+
+/* ---- the decisive bar ---- */
+.ss-banner{position:absolute;left:0;right:0;bottom:0;height:104px;background:var(--ss-accent);
+  display:flex;align-items:center;justify-content:space-between;padding:0 88px;
+  color:#fff;transform-origin:left center}
+.ss-banner b{font:700 32px/1 var(--ss-display);letter-spacing:-.01em}
+.ss-banner em{font:600 20px/1 var(--ss-mono);font-style:normal;letter-spacing:.18em;text-transform:uppercase}
+
+/* ---- running head ---- */
+.ss-rule-top{position:absolute;left:88px;right:88px;top:104px;height:1px;background:var(--ss-rule);transform-origin:left center}
+.ss-folio{position:absolute;left:88px;top:122px;font:600 13px/1 var(--ss-mono);
+  letter-spacing:.24em;color:var(--ss-muted);text-transform:uppercase}

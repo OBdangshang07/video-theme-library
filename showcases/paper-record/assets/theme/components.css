@@ -1,0 +1,864 @@
+/* catalog: editorial-title=pe-kicker+pe-title+pe-subtitle; folio-header=pe-folio; paper-panel=pe-panel; stat-block=pe-stat-label+pe-stat-value; metric-triptych=pe-triptych+pe-metric; comparison-split=pe-compare; ranked-list=pe-list; timeline-steps=pe-timeline+pe-step; quote-pullout=pe-quote; artifact-frame=pe-artifact+pe-artifact-frame; screening-dossier=pe-screening; verdict-stamp=pe-verdict; chapter-divider=pe-chapter; source-note=pe-note; progress-rail=pe-progress; end-card=pe-end; manifest-sheet=.md-lead+.md-flag+.md-name+.md-sub+.md-specs+.md-row+.md-seal+.md-seal-svg+.md-bleed+.md-banner; exhibit-index=.ix-title+.ix-item; compare-summary=.cm-kicker+.cm-title+.cm-grid+.cm-col+.cm-row; seal-sheet=.end-seals+.end-seal+.end-seal-in+.end-head+.end-note; handoff-card=.handoff-frame+.handoff-zone+.handoff-centre+.handoff-brush+.brush-body+.brush-tail+.handoff-seal+.handoff-model+.handoff-bloom+.handoff-splat+.handoff-caption+.handoff-foot+.handoff-kicker+.handoff-thesis; work-slate=.dk-index+.dk-title+.dk-work+.dk-model+.dk-question+.dk-rule; ledger-table=.pe-ledger+.pe-ledger-row; tick-rule=.pe-ticks; status-tabs=.pe-tabs+.pe-tab; vermilion-bar=.pe-bar; seal-mark=.pe-seal-mark; artifact-mount=.pe-artifact-mount+.pe-artifact-caption; ink-plate=.pe-plate+.pe-plate-forme+.pe-plate-caption */
+.pe-scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden}
+.pe-folio{position:absolute;left:var(--pe-safe-x);right:var(--pe-safe-x);top:58px;border-top:4px solid var(--pe-ink);padding-top:18px;display:flex;justify-content:space-between;font:700 20px/1 var(--pe-mono);letter-spacing:.1em}
+.pe-ghost{position:absolute;right:42px;top:120px;color:rgba(32,38,44,.08);font:800 172px/1 var(--pe-serif);white-space:nowrap}
+.pe-title{font:900 104px/1.03 var(--pe-serif);letter-spacing:-.055em}
+.pe-kicker{font:900 24px/1 var(--pe-sans);letter-spacing:.2em;color:var(--pe-red)}
+.pe-subtitle{font:700 30px/1.5 var(--pe-sans);color:var(--pe-ink-soft)}
+.pe-panel{border:4px solid var(--pe-ink);background:rgba(244,234,212,.78);padding:40px}
+.pe-panel.red{color:var(--pe-paper-light);background:var(--pe-red);border-color:var(--pe-red)}
+.pe-stat-label{font:700 17px/1 var(--pe-mono);letter-spacing:.12em;color:var(--pe-muted)}
+.pe-stat-value{font:900 74px/.9 var(--pe-mono);letter-spacing:-.05em}
+.pe-triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:28px}
+.pe-metric{position:relative;min-height:340px;border:4px solid var(--pe-ink);padding:34px;background:rgba(244,234,212,.8)}
+.pe-metric.red{color:var(--pe-paper-light);background:var(--pe-red);border-color:var(--pe-red)}
+.pe-metric h3{margin-top:28px;font:900 38px/1.1 var(--pe-serif)}
+.pe-metric .value{margin-top:48px;font:900 72px/.9 var(--pe-mono)}
+.pe-bar{position:absolute;left:34px;right:34px;bottom:38px;height:14px;background:var(--pe-rule);overflow:hidden}
+.pe-bar>span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left center}
+.pe-compare{display:grid;grid-template-columns:1fr 1fr;border:4px solid var(--pe-ink)}
+.pe-compare>article{padding:42px 48px;min-height:510px;background:rgba(244,234,212,.82)}
+.pe-compare>article+article{border-left:4px solid var(--pe-ink)}
+.pe-compare h3{font:900 54px/1 var(--pe-serif)}
+.pe-list{list-style:none;display:flex;flex-direction:column;gap:16px}
+.pe-list li{display:grid;grid-template-columns:80px 1fr auto;align-items:center;min-height:94px;padding:0 30px;border:2px solid var(--pe-ink);background:rgba(244,234,212,.82)}
+.pe-list .index{font:900 34px/1 var(--pe-mono);color:var(--pe-red)}
+.pe-list .name{font:900 28px/1 var(--pe-sans)}
+.pe-list .meta{font:700 22px/1 var(--pe-mono)}
+.pe-timeline{display:grid;grid-template-columns:repeat(4,1fr);gap:22px}
+.pe-step{position:relative;border-top:8px solid var(--pe-ink);padding:34px 20px 0 0}
+.pe-step::before{content:"";position:absolute;top:-17px;left:0;width:26px;height:26px;background:var(--pe-red)}
+.pe-step b{font:900 18px/1 var(--pe-mono);color:var(--pe-red)}
+.pe-step h3{margin-top:25px;font:900 34px/1.15 var(--pe-serif)}
+.pe-step p{margin-top:18px;font:700 21px/1.45 var(--pe-sans);color:var(--pe-muted)}
+.pe-quote{border-left:20px solid var(--pe-red);padding:48px 65px;background:rgba(244,234,212,.75)}
+.pe-quote blockquote{font:900 61px/1.35 var(--pe-serif)}
+.pe-quote cite{display:block;margin-top:32px;font:700 20px/1 var(--pe-mono);font-style:normal;color:var(--pe-muted)}
+.pe-artifact{display:grid;grid-template-columns:1.38fr .62fr;gap:42px}
+.pe-artifact-frame{position:relative;aspect-ratio:16/9;border:6px solid var(--pe-ink);background:var(--pe-paper-deep);overflow:hidden}
+.pe-artifact-frame::after{content:"作品 / 截图 / 视频";position:absolute;inset:0;display:grid;place-items:center;font:900 40px/1 var(--pe-serif);color:rgba(32,38,44,.36)}
+.pe-chapter{position:absolute;left:var(--pe-safe-x);right:var(--pe-safe-x);top:50%;transform:translateY(-50%);display:grid;grid-template-columns:auto 1fr;gap:56px;align-items:end}
+.pe-chapter-index{font:900 236px/.82 var(--pe-mono);letter-spacing:-.06em;color:var(--pe-red)}
+.pe-chapter-body{padding-bottom:18px}
+.pe-chapter-kicker{font:800 19px/1 var(--pe-mono);letter-spacing:.18em;color:var(--pe-muted)}
+.pe-chapter-title{margin-top:22px;font:900 78px/1.08 var(--pe-serif);letter-spacing:-.04em}
+.pe-chapter-rule{margin-top:30px;width:100%;height:6px;background:var(--pe-red);transform-origin:left center}
+.pe-end{position:absolute;inset:0;display:flex;flex-direction:column;justify-content:center;align-items:flex-start;padding-left:var(--pe-safe-x);padding-right:var(--pe-safe-x)}
+.pe-end-line{font:900 92px/1.12 var(--pe-serif);letter-spacing:-.045em}
+.pe-end-mark{color:var(--pe-red)}
+.pe-end-note{margin-top:44px;font:700 18px/1.6 var(--pe-mono);letter-spacing:.1em;color:var(--pe-muted)}
+.pe-screening-media{position:absolute;z-index:4;left:154px;top:118px;width:1612px;height:907px;object-fit:contain;background:var(--pe-well);border:1px solid var(--pe-ink);box-shadow:0 22px 52px rgba(42,31,18,.2)}
+.pe-screening{position:absolute;z-index:6;inset:0;width:1920px;height:1080px;overflow:hidden;pointer-events:none}
+.pe-screening-head{position:absolute;left:154px;right:154px;top:18px;display:grid;grid-template-columns:74px minmax(440px,1fr) auto;gap:22px;align-items:center}
+.pe-screening-index{font:900 48px/1.08 var(--pe-mono);color:var(--pe-red);padding:4px 0 7px}
+.pe-screening-title{min-width:0;letter-spacing:-.025em;overflow:visible}
+.pe-screening-title>strong{display:block;font:900 clamp(34px,2.2vw,42px)/1.12 var(--pe-serif);letter-spacing:-.035em;padding:3px 8px 4px 0;white-space:nowrap;overflow:visible}
+.pe-screening-title>small{display:flex;align-items:baseline;gap:14px;margin-top:0;white-space:nowrap;overflow:visible}
+.pe-screening-work{font:900 24px/1.15 var(--pe-serif);letter-spacing:-.02em;color:var(--pe-ink);padding:2px 5px 4px 0;overflow:visible}
+.pe-screening-label{font:800 10px/1 var(--pe-mono);letter-spacing:.12em;color:var(--pe-muted);font-style:normal}
+.pe-screening-meta{display:flex;gap:22px;align-items:center;font:800 12px/1.2 var(--pe-mono);letter-spacing:.08em;color:var(--pe-muted)}
+.pe-screening-emphasis{padding:8px 0 9px 18px;border-left:6px solid var(--pe-red);font:900 21px/1.05 var(--pe-serif);letter-spacing:-.015em;color:var(--pe-red);white-space:nowrap;overflow:visible}
+.pe-screening-frame{position:absolute;left:140px;top:104px;width:1640px;height:935px;border:2px solid var(--pe-ink);box-shadow:inset 0 0 0 8px rgba(244,234,212,.72)}
+.pe-screening-frame::before{content:"";position:absolute;left:18px;top:-2px;width:112px;height:6px;background:var(--pe-red)}
+.pe-screening-frame::after{content:attr(data-frame-label);position:absolute;right:16px;top:-26px;font:800 11px/1 var(--pe-mono);letter-spacing:.15em;color:var(--pe-muted)}
+.pe-screening-footer{position:absolute;left:154px;right:154px;bottom:27px;display:flex;justify-content:space-between;font:800 12px/1 var(--pe-mono);letter-spacing:.1em;color:var(--pe-ink)}
+.pe-screening-progress{position:absolute;left:0;right:0;bottom:0;height:9px;background:var(--pe-rule)}
+.pe-screening-progress>span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left center}
+.pe-screening-spine{position:absolute;left:29px;top:156px;writing-mode:vertical-rl;transform:rotate(180deg);font:700 12px/1 var(--pe-mono);letter-spacing:.24em;color:var(--pe-muted)}
+.pe-screening-spine::before{content:"";display:block;width:2px;height:96px;margin:0 auto 18px;background:var(--pe-red)}
+.pe-screening-edition{position:absolute;right:56px;bottom:17px;font:700 11px/1 var(--pe-mono);letter-spacing:.15em;color:var(--pe-muted)}
+.pe-screening-crop{position:absolute;width:26px;height:26px;border-color:rgba(32,38,44,.48)}
+.pe-screening-crop.tl{left:22px;top:22px;border-left:2px solid;border-top:2px solid}.pe-screening-crop.tr{right:22px;top:22px;border-right:2px solid;border-top:2px solid}.pe-screening-crop.bl{left:22px;bottom:22px;border-left:2px solid;border-bottom:2px solid}.pe-screening-crop.br{right:22px;bottom:22px;border-right:2px solid;border-bottom:2px solid}
+.pe-verdict{display:inline-block;padding:21px 30px;border:7px solid var(--pe-red);color:var(--pe-red);font:900 48px/1 var(--pe-serif);transform:rotate(-3deg)}
+.pe-note{font:700 17px/1.5 var(--pe-mono);color:var(--pe-muted)}
+.pe-progress{position:absolute;z-index:99;left:0;right:0;bottom:0;height:13px;background:var(--pe-rule)}
+.pe-progress>span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left center}
+
+/* ===== 本期展厅场景组件 (exhibition scenes) =====
+
+   这六个组件来自 GPT-6 ASTRA 前端作品展的实际场景：片头清单、展品总览、组间对照、
+   落款印谱、模型交接卡，以及作品页的引导/页眉排印。它们不是 16 个 canonical 组件的一员，
+   是本主题专属的场景词汇，类名保持项目里的原样，可以直接复制粘贴。
+   坐标全部按 1920×1080 场景空间书写。
+*/
+
+/* ---- 引导状态：显式坐标，也是飞行的起点 ----
+   z-index 8 是必需的：飞行的标题会横穿媒体窗（媒体 top 151），
+   而视频是不透明的，DOM 又排在文字之后 —— 不抬层就会被素材盖住。 */
+.dk-index,
+.dk-rule,
+.dk-title,
+.dk-work,
+.dk-model,
+.dk-question {
+  z-index: 8;
+}
+
+.dk-index {
+  position: absolute;
+  left: 154px;
+  top: 246px;
+  font: 900 196px/0.82 var(--pe-mono);
+  letter-spacing: -0.07em;
+  color: var(--pe-red);
+  transform-origin: 0 0;
+}
+
+.dk-rule {
+  position: absolute;
+  left: 154px;
+  top: 446px;
+  width: 660px;
+  height: 6px;
+  background: var(--pe-ink);
+  transform-origin: left center;
+}
+
+.dk-title {
+  position: absolute;
+  left: 154px;
+  top: 500px;
+  margin: 0;
+  font: 900 112px/1.04 var(--pe-serif);
+  letter-spacing: -0.05em;
+  color: var(--pe-ink);
+  transform-origin: 0 0;
+}
+
+.dk-work {
+  position: absolute;
+  left: 154px;
+  top: 656px;
+  margin: 0;
+  font: 700 40px/1.3 var(--pe-sans);
+  color: var(--pe-ink-soft);
+  transform-origin: 0 0;
+}
+
+.dk-model {
+  position: absolute;
+  left: 154px;
+  top: 748px;
+  margin: 0;
+  font: 800 23px/1 var(--pe-mono);
+  letter-spacing: 0.18em;
+  color: var(--pe-ink-soft);
+  transform-origin: 0 0;
+}
+
+.dk-question {
+  position: absolute;
+  left: 154px;
+  top: 830px;
+  margin: 0;
+  font: 700 22px/1.4 var(--pe-sans);
+  color: var(--pe-muted);
+}
+
+/* ---- 静止态 / resting state -------------------------------------------------
+   Everything a reveal tween brings in must already be hidden here. Those tweens
+   run with immediateRender:false, so without this the element renders in its
+   natural, fully visible state until its own tween starts — that is exactly what
+   made the work window appear BEFORE the title flew, animate a second time after
+   it landed, and stall the footage in between. It is also why every text line
+   "blinked on" instead of being set.
+   visibility:hidden (not opacity alone) keeps these nodes out of the layout
+   audit's occlusion checks while they wait. */
+.scene-work .dk-index, .scene-work .dk-title, .scene-work .dk-work,
+.scene-work .dk-model, .scene-work .dk-question,
+.scene-work .pe-screening-media, .scene-work .pe-screening-frame,
+.scene-work .pe-screening-crop, .scene-work .pe-screening-footer,
+.scene-work .pe-screening-spine, .scene-work .pe-screening-edition,
+.scene-work .pe-screening-meta, .scene-work .pe-screening-progress,
+.md-seal, .md-seal-svg,
+.handoff-zone.in .handoff-seal, .handoff-zone.in .handoff-model span,
+.handoff-caption,
+.ch-summary, .ch-entry, .ix-item, .cm-row,
+.end-seal, .end-head, .end-note {
+  opacity: 0;
+  visibility: hidden;
+}
+
+/* These two are flashes that fade OUT — they only need to start hidden. */
+.handoff-bloom, .handoff-splat {
+  opacity: 0;
+}
+
+/* ============================================================
+   模型档案卡 (manifest) —— 开场页
+   ============================================================ */
+.md-lead {
+  position: absolute;
+  left: 154px;
+  top: 188px;
+}
+
+.md-flag {
+  margin: 0 0 46px;
+  font: 900 26px/1 var(--pe-sans);
+  letter-spacing: 0.26em;
+  color: var(--pe-red);
+}
+
+.md-name {
+  margin: 0;
+  /* line-height 1.0, not 0.94: a tighter box lets the glyphs overflow upward */
+  font: 900 168px/1 var(--pe-serif);
+  letter-spacing: -0.06em;
+  color: var(--pe-ink);
+}
+
+.md-sub {
+  margin: 30px 0 0;
+  max-width: 940px;
+  font: 700 28px/1.5 var(--pe-sans);
+  color: var(--pe-ink-soft);
+}
+
+.md-specs {
+  position: absolute;
+  left: 154px;
+  top: 520px;
+  width: 900px;
+  border-top: 4px solid var(--pe-ink);
+}
+
+.md-row {
+  display: grid;
+  grid-template-columns: 260px 1fr;
+  align-items: baseline;
+  padding: 26px 0;
+  border-bottom: 2px solid var(--pe-rule);
+}
+
+.md-row dt {
+  font: 700 21px/1 var(--pe-mono);
+  letter-spacing: 0.14em;
+  color: var(--pe-muted);
+}
+
+.md-row dd {
+  margin: 0;
+  font: 900 40px/1.15 var(--pe-serif);
+  color: var(--pe-ink);
+}
+
+.md-row dd.mono {
+  font: 900 38px/1.15 var(--pe-mono);
+  letter-spacing: -0.02em;
+}
+
+.md-seal {
+  position: absolute;
+  left: 1236px;
+  top: 300px;
+  width: 530px;
+  height: 530px;
+  transform-origin: 50% 6%;
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.md-seal-svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+}
+
+.md-bleed {
+  position: absolute;
+  left: 50%;
+  top: 50%;
+  width: 900px;
+  height: 900px;
+  margin: -450px 0 0 -450px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.25);
+  background: radial-gradient(circle, rgba(184, 59, 47, 0.34) 0%, rgba(184, 59, 47, 0.14) 46%, rgba(184, 59, 47, 0) 70%);
+}
+
+.md-banner {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 116px;
+  background: var(--pe-red);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 0 154px;
+  transform-origin: left center;
+}
+
+.md-banner span {
+  font: 900 40px/1 var(--pe-serif);
+  letter-spacing: -0.02em;
+  color: var(--pe-paper-light);
+}
+
+.md-banner em {
+  font: 800 24px/1 var(--pe-mono);
+  letter-spacing: 0.2em;
+  font-style: normal;
+  color: var(--pe-paper-light);
+}
+
+/* ============================================================
+   对照交接卡 (handoff) —— 引导页切换到"其他模型的优秀作品"
+   ============================================================ */
+.handoff-frame {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+}
+
+.handoff-head {
+  position: absolute;
+  left: 154px;
+  right: 154px;
+  top: 132px;
+  text-align: center;
+}
+
+.handoff-kicker {
+  margin: 0 0 20px;
+  font: 900 26px/1 var(--pe-sans);
+  letter-spacing: 0.26em;
+  color: var(--pe-red);
+}
+
+.handoff-thesis {
+  margin: 0;
+  font: 900 84px/1.05 var(--pe-serif);
+  letter-spacing: -0.045em;
+  color: var(--pe-ink);
+}
+
+.handoff-deck {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 372px;
+  height: 432px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+}
+
+.handoff-zone {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+}
+
+.handoff-zone.out {
+  align-items: flex-end;
+  text-align: right;
+  padding-right: 84px;
+}
+
+.handoff-zone.in {
+  align-items: flex-start;
+  text-align: left;
+  padding-left: 84px;
+  position: relative;
+  z-index: 1;
+}
+
+.handoff-centre {
+  position: absolute;
+  left: 50%;
+  top: 372px;
+  width: 4px;
+  height: 432px;
+  margin-left: -2px;
+  background: var(--pe-red);
+  transform-origin: 50% 0%;
+}
+
+.handoff-role {
+  margin: 0 0 20px;
+  font: 800 19px/1 var(--pe-mono);
+  letter-spacing: 0.2em;
+  color: var(--pe-muted);
+}
+
+.handoff-model {
+  margin: 0;
+  font-family: var(--pe-serif);
+  font-weight: 900;
+  letter-spacing: -0.045em;
+  line-height: 1.02;
+}
+
+.handoff-model span {
+  display: inline-block;
+  white-space: pre;
+}
+
+.handoff-zone.out .handoff-model {
+  color: var(--pe-ink);
+}
+
+.handoff-zone.in .handoff-model {
+  color: var(--pe-paper-light);
+}
+
+.handoff-work {
+  margin: 22px 0 0;
+  font: 700 26px/1.35 var(--pe-sans);
+  max-width: 660px;
+}
+
+.handoff-zone.out .handoff-work {
+  color: var(--pe-muted);
+}
+
+.handoff-zone.in .handoff-work {
+  color: var(--pe-paper-light);
+}
+
+.handoff-zone.in .handoff-seal {
+  position: absolute;
+  z-index: 0;
+  inset: 0;
+  background: var(--pe-red);
+  transform-origin: 50% 0%;
+  opacity: 0;
+  transform: scaleY(0);
+}
+
+.handoff-zone.in .handoff-bloom {
+  position: absolute;
+  z-index: 0;
+  left: 50%;
+  top: 50%;
+  width: 1080px;
+  height: 1080px;
+  margin: -540px 0 0 -540px;
+  border-radius: 50%;
+  pointer-events: none;
+  opacity: 0;
+  transform: scale(0.2);
+  background: radial-gradient(circle, rgba(32, 38, 44, 0.34) 0%, rgba(32, 38, 44, 0.15) 44%, rgba(32, 38, 44, 0) 70%);
+}
+
+.handoff-zone.in > *:not(.handoff-seal):not(.handoff-bloom) {
+  position: relative;
+  z-index: 1;
+}
+
+.handoff-brush {
+  position: absolute;
+  z-index: 3;
+  left: -200px;
+  width: 2360px;
+  top: 472px;
+  height: 230px;
+  pointer-events: none;
+}
+
+.handoff-brush svg {
+  display: block;
+  width: 100%;
+  height: 100%;
+  overflow: visible;
+}
+
+.handoff-brush .brush-body {
+  fill: var(--pe-ink);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.handoff-brush .brush-tail {
+  fill: var(--pe-red);
+  transform-origin: left center;
+  transform: scaleX(0);
+}
+
+.handoff-caption {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 158px;
+  text-align: center;
+  font: 700 18px/1 var(--pe-mono);
+  letter-spacing: 0.22em;
+  color: var(--pe-muted);
+}
+
+.handoff-splat {
+  position: absolute;
+  z-index: 2;
+  border-radius: 50%;
+  background: var(--pe-ink);
+  opacity: 0;
+}
+
+.handoff-foot {
+  position: absolute;
+  left: 154px;
+  right: 154px;
+  bottom: 116px;
+  text-align: center;
+  font: 700 24px/1.4 var(--pe-sans);
+  color: var(--pe-muted);
+}
+
+/* the act's manifest: which entries this chapter opens */
+.ch-ledger {
+  position: absolute;
+  left: 154px;
+  right: 154px;
+  bottom: 168px;
+  display: flex;
+  gap: 18px;
+  flex-wrap: wrap;
+  border-top: 4px solid var(--pe-ink);
+  padding-top: 26px;
+}
+
+.ch-entry {
+  display: flex;
+  align-items: baseline;
+  gap: 12px;
+  padding: 10px 20px;
+  border: 2px solid var(--pe-ink);
+  background: rgba(244, 234, 212, 0.72);
+}
+
+.ch-entry b {
+  font: 900 22px/1 var(--pe-mono);
+  color: var(--pe-red);
+}
+
+.ch-entry span {
+  font: 700 21px/1 var(--pe-sans);
+  color: var(--pe-ink);
+}
+
+.ch-summary {
+  position: absolute;
+  left: 154px;
+  right: 154px;
+  top: 620px;
+  font: 700 28px/1.5 var(--pe-sans);
+  color: var(--pe-ink-soft);
+  max-width: 1180px;
+}
+
+/* ============================================================
+   总览页 index —— 全部展品索引
+   ============================================================ */
+.ix-stage {
+  position: absolute;
+  left: 154px;
+  right: 154px;
+  top: 176px;
+  bottom: 140px;
+}
+
+.ix-title {
+  margin: 0 0 40px;
+  font: 900 84px/1.05 var(--pe-serif);
+  letter-spacing: -0.04em;
+  color: var(--pe-ink);
+}
+
+.ix-grid {
+  display: grid;
+  grid-template-columns: repeat(2, 1fr);
+  gap: 0 54px;
+}
+
+.ix-item {
+  display: grid;
+  grid-template-columns: 74px 1fr auto;
+  align-items: baseline;
+  gap: 18px;
+  padding: 15px 0;
+  border-bottom: 2px solid var(--pe-rule);
+}
+
+.ix-item b {
+  font: 900 30px/1 var(--pe-mono);
+  color: var(--pe-red);
+}
+
+.ix-item span {
+  font: 900 29px/1.1 var(--pe-serif);
+  color: var(--pe-ink);
+}
+
+.ix-item em {
+  font: 700 17px/1 var(--pe-mono);
+  font-style: normal;
+  color: var(--pe-ink-soft);
+}
+
+/* ============================================================
+   组间对照小结 compare —— 只写可核事实，不打分
+   ============================================================ */
+.cm-stage {
+  position: absolute;
+  left: 96px;
+  right: 96px;
+  top: 172px;
+  bottom: 128px;
+  display: flex;
+  flex-direction: column;
+}
+
+.cm-kicker {
+  margin: 0 0 14px;
+  font: 900 24px/1 var(--pe-sans);
+  letter-spacing: 0.24em;
+  color: var(--pe-red);
+}
+
+.cm-title {
+  margin: 0 0 46px;
+  font: 900 72px/1.05 var(--pe-serif);
+  letter-spacing: -0.04em;
+  color: var(--pe-ink);
+}
+
+.cm-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  border: 4px solid var(--pe-ink);
+  flex: 1;
+}
+
+.cm-col {
+  padding: 40px 46px;
+  background: rgba(244, 234, 212, 0.82);
+}
+
+.cm-col + .cm-col {
+  border-left: 4px solid var(--pe-ink);
+}
+
+.cm-col.dark {
+  background: var(--pe-ink);
+}
+
+.cm-col .role {
+  margin: 0 0 22px;
+  font: 800 18px/1 var(--pe-mono);
+  letter-spacing: 0.18em;
+  color: var(--pe-ink-soft);
+}
+
+.cm-col.dark .role {
+  color: var(--pe-paper-light);
+}
+
+.cm-col h3 {
+  margin: 0 0 6px;
+  font: 900 50px/1.05 var(--pe-serif);
+  letter-spacing: -0.03em;
+  color: var(--pe-ink);
+}
+
+.cm-col.dark h3 {
+  color: var(--pe-paper-light);
+}
+
+.cm-col .work {
+  margin: 0;
+  font: 700 24px/1.3 var(--pe-sans);
+  color: var(--pe-ink-soft);
+}
+
+.cm-col.dark .work {
+  color: var(--pe-paper-light);
+}
+
+.cm-rows {
+  margin-top: 30px;
+  border-top: 3px solid var(--pe-ink);
+}
+
+.cm-col.dark .cm-rows {
+  border-top-color: var(--pe-paper-light);
+}
+
+.cm-row {
+  display: grid;
+  grid-template-columns: 156px 1fr;
+  align-items: baseline;
+  padding: 15px 0;
+  border-bottom: 2px solid rgba(32, 38, 44, 0.2);
+}
+
+.cm-col.dark .cm-row {
+  border-bottom-color: rgba(244, 234, 212, 0.24);
+}
+
+.cm-row dt {
+  font: 700 17px/1.3 var(--pe-mono);
+  letter-spacing: 0.1em;
+  color: var(--pe-ink-soft);
+}
+
+.cm-col.dark .cm-row dt {
+  color: var(--pe-paper-light);
+}
+
+.cm-row dd {
+  margin: 0;
+  font: 700 22px/1.35 var(--pe-sans);
+  color: var(--pe-ink);
+}
+
+.cm-col.dark .cm-row dd {
+  color: var(--pe-paper-light);
+}
+
+/* ============================================================
+   落款页 end —— 「印谱」：全部展品的朱砂小印排成一页，
+   最后落一方大印收束全片。
+   ============================================================ */
+.end-stage {
+  position: absolute;
+  inset: 0;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+}
+
+.end-seals {
+  display: grid;
+  grid-template-columns: repeat(7, 1fr);
+  gap: 20px;
+  width: 1260px;
+  margin-bottom: 72px;
+}
+
+/* Real seal impressions, not empty boxes: vermilion field, paper-coloured
+   numeral, a paper inner rule, a torn edge and a slight per-seal skew so the
+   sheet reads as hand-stamped. */
+.end-seal {
+  position: relative;
+  aspect-ratio: 1;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--pe-red);
+  font: 900 27px/1 var(--pe-mono);
+  color: var(--pe-paper-light);
+  opacity: 0;
+  clip-path: polygon(3% 1%, 97% 0%, 100% 5%, 99% 94%, 96% 100%, 4% 99%, 0% 95%, 1% 6%);
+  box-shadow: inset 0 0 0 5px rgba(244, 234, 212, 0.5);
+}
+
+/* The stamp-down scale animates this inner node, never .end-seal itself:
+   a transform written on the outer element replaces the CSS skew above. */
+.end-seal-in {
+  display: block;
+}
+
+.end-seal:nth-child(3n) {
+  transform: rotate(-2.2deg);
+}
+
+.end-seal:nth-child(3n + 1) {
+  transform: rotate(1.6deg);
+}
+
+.end-seal:nth-child(4n) {
+  transform: rotate(-0.9deg);
+}
+
+.end-head {
+  margin: 0;
+  font: 900 122px/1.05 var(--pe-serif);
+  letter-spacing: -0.05em;
+  color: var(--pe-ink);
+  text-align: center;
+}
+
+.end-head .red {
+  color: var(--pe-red);
+}
+
+.end-note {
+  margin: 32px 0 0;
+  font: 700 20px/1.6 var(--pe-mono);
+  letter-spacing: 0.06em;
+  color: var(--pe-ink-soft);
+  text-align: center;
+}
+
+
+/* Transition wrapper. The theme's transitions slide and scale this layer, never
+   the framework-timed clip, so framework-owned visibility stays untouched.
+   Every scene's content lives inside one of these. */
+.scene-inner {
+  position: absolute;
+  inset: 0;
+  width: 1920px;
+  height: 1080px;
+  overflow: hidden;
+}
+/* ===== 主体档案 record sheet =====
+   同一个"仪器面板"的克制感，用宣纸的语言重新表述：发丝线、宋体、等宽数字、
+   朱红只出现一次。不是把冷色调的表单搬过来，是把"精确"翻译成印刷的精确。
+   坐标按 1920×1080 场景空间书写；定版实样见 showcases/paper-spec/。 */
+
+/* 度支谱 — 发丝线账目：标签在左、值在右、数字等宽 */
+.pe-ledger{width:744px}
+.pe-ledger-row{display:flex;align-items:baseline;justify-content:space-between;gap:26px;
+  padding:14px 0 15px;border-top:1px solid var(--pe-rule);position:relative}
+.pe-ledger-row:last-child{border-bottom:1px solid var(--pe-rule)}
+.pe-ledger-row dt{font:400 23px/1 var(--pe-sans);color:var(--pe-muted);letter-spacing:.02em}
+.pe-ledger-row dd{font:900 27px/1 var(--pe-serif);color:var(--pe-ink);letter-spacing:-.01em;text-align:right}
+.pe-ledger-row dd.mono{font:700 23px/1 var(--pe-mono);letter-spacing:.02em}
+
+/* 刻度尺 — 账目旁边的细齿，给"精确"一个可见的凭据 */
+.pe-ticks{display:flex;justify-content:space-between;pointer-events:none}
+.pe-ticks i{width:1px;height:6px;background:var(--pe-rule);display:block;transform-origin:top center}
+.pe-ticks i.major{height:11px;background:var(--pe-ink-soft)}
+
+/* 状态签 — 朱红描边小签，比圆角药丸更印刷、更编辑部 */
+.pe-tabs{display:flex;gap:10px}
+.pe-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;
+  border:1px solid var(--pe-red);color:var(--pe-red-deep);
+  font:700 14px/1 var(--pe-mono);letter-spacing:.08em}
+.pe-tab.is-plain{border-color:var(--pe-rule);color:var(--pe-muted)}
+
+/* 朱红横带 — 全画面唯一一处饱和色，留到最后用一次 */
+.pe-bar{display:flex;align-items:center;justify-content:space-between;padding:0 92px;height:104px;
+  background:var(--pe-red);transform-origin:left center}
+.pe-bar b{font:900 33px/1 var(--pe-serif);letter-spacing:-.01em;color:var(--pe-paper-light)}
+.pe-bar em{font:700 19px/1 var(--pe-mono);font-style:normal;letter-spacing:.22em;color:rgba(244,234,212,.82)}
+
+/* 落印 — 小尺寸朱印：落款、确认、横带收尾共用一枚 */
+.pe-seal-mark{display:grid;place-items:center;width:52px;height:52px;background:var(--pe-paper-light);
+  color:var(--pe-red);font:900 26px/1 var(--pe-serif);transform:rotate(-3deg);flex:none}
+.pe-seal-mark.is-vermilion{background:var(--pe-red);color:var(--pe-paper-light)}
+/* 拉丁字标比汉字宽得多：多字符时换小号等宽，别把 52px 的印面挤爆 */
+.pe-seal-mark.is-word{font:700 13px/1 var(--pe-mono);letter-spacing:.06em;padding:0 4px}
+
+/* 界格装裱 — artifact-frame 的档案化变体：细线收边 + 朱红角标 + 图注 */
+.pe-artifact-mount{position:relative;border:1px solid var(--pe-ink)}
+.pe-artifact-mount::before{content:"";position:absolute;left:-1px;top:-1px;width:52px;height:4px;background:var(--pe-red)}
+.pe-artifact-mount::after{content:"";position:absolute;right:-1px;bottom:-1px;width:4px;height:52px;background:var(--pe-red)}
+.pe-artifact-caption{margin-top:14px;font:700 14px/1 var(--pe-mono);letter-spacing:.14em;color:var(--pe-muted)}
+
+/* 木刻谱 — 一张图被刻成平版：深墨 / 中墨 / 淡墨，可再套一块朱红。
+   生成器在 tools/ink-plate.mjs（矢量输出，无限缩放），输出顺序就是上版顺序：
+   淡墨先、中墨次、深墨最后、朱红压轴 —— 配 plate-strike 逐版套印。
+   这是本期唯一的主视觉组件，用的还是纸与墨，没有一格字符。 */
+.pe-plate{position:relative;border:1px solid var(--pe-ink)}
+.pe-plate::before{content:"";position:absolute;left:-1px;top:-1px;width:52px;height:4px;background:var(--pe-red)}
+.pe-plate::after{content:"";position:absolute;right:-1px;bottom:-1px;width:4px;height:52px;background:var(--pe-red)}
+.pe-plate-forme{display:block;width:100%;height:auto}
+.pe-plate-caption{margin-top:14px;font:700 14px/1 var(--pe-mono);letter-spacing:.14em;color:var(--pe-muted)}

@@ -1,148 +1,1025 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>视频主题库 · 宣纸编辑部</title>
-  <link rel="stylesheet" href="./themes/paper-editorial/tokens.css">
-  <script>if(new URLSearchParams(location.search).get('jump')==='transitions')document.documentElement.classList.add('focus-transitions')</script>
-  <style>
-    :root{--page:1260px;--shadow:0 18px 50px rgba(32,38,44,.1)}*{box-sizing:border-box}html{scroll-behavior:smooth;background:#d5cab3}body{margin:0;color:var(--pe-ink);font-family:var(--pe-sans);background:var(--pe-paper);background-image:radial-gradient(circle at 13% 4%,rgba(184,59,47,.09),transparent 25%),linear-gradient(rgba(66,55,41,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(66,55,41,.045) 1px,transparent 1px);background-size:auto,36px 36px,36px 36px}a{color:inherit;text-decoration:none}button{font:inherit}.container{width:min(var(--page),calc(100% - 48px));margin:auto}
-    .site-header{position:sticky;z-index:50;top:0;background:rgba(239,229,206,.94);backdrop-filter:blur(12px);border-bottom:3px solid var(--pe-ink)}.nav{width:min(var(--page),calc(100% - 48px));height:74px;margin:auto;display:flex;align-items:center;justify-content:space-between;gap:24px}.brand{display:flex;align-items:center;gap:15px;font:900 19px/1 var(--pe-serif)}.brand-mark{width:16px;height:32px;background:var(--pe-red)}.nav-links{display:flex;gap:28px;font:800 13px/1 var(--pe-mono);letter-spacing:.08em}.nav-links a:hover{color:var(--pe-red)}
-    .hero{padding:94px 0 76px;border-bottom:4px solid var(--pe-ink)}.hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:76px;align-items:end}.kicker{font:900 14px/1 var(--pe-mono);letter-spacing:.16em;color:var(--pe-red)}h1{margin:28px 0 0;font:900 clamp(58px,5.1vw,82px)/1 var(--pe-serif);letter-spacing:-.055em}.hero-copy{max-width:800px;margin:30px 0 0;font:700 22px/1.65 var(--pe-sans);color:var(--pe-muted)}.manifest{border:4px solid var(--pe-ink);background:rgba(244,234,212,.78);padding:30px;box-shadow:var(--shadow)}.manifest-row{display:flex;justify-content:space-between;align-items:baseline;padding:17px 0;border-top:2px solid var(--pe-ink)}.manifest-row:first-of-type{margin-top:24px}.manifest-row span{font:800 15px/1 var(--pe-mono)}.manifest-row b{font:900 31px/1 var(--pe-mono);color:var(--pe-red)}
-    main section{padding:86px 0;border-bottom:3px solid var(--pe-ink);scroll-margin-top:74px}.section-head{display:flex;justify-content:space-between;align-items:end;gap:40px;margin-bottom:42px}.section-head h2{margin:0;font:900 56px/1 var(--pe-serif);letter-spacing:-.04em}.section-head p{max-width:560px;margin:0;font:700 17px/1.55 var(--pe-sans);color:var(--pe-muted);text-align:right}.palette{display:grid;grid-template-columns:repeat(4,1fr);gap:12px}.swatch{height:80px;border:2px solid var(--pe-ink);padding:10px;display:flex;align-items:end;font:800 11px/1 var(--pe-mono)}
-    .filter-row{display:flex;flex-wrap:wrap;gap:10px;margin:-14px 0 32px}.filter{padding:9px 14px;border:2px solid var(--pe-ink);background:transparent;color:var(--pe-ink);font:800 12px/1 var(--pe-mono);cursor:pointer}.filter.active,.filter:hover{background:var(--pe-ink);color:var(--pe-paper)}.component-grid,.motion-grid,.transition-grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:28px}.catalog-card{display:flex;flex-direction:column;min-width:0;border:3px solid var(--pe-ink);background:rgba(244,234,212,.82);box-shadow:0 12px 30px rgba(32,38,44,.07)}.catalog-card.hidden{display:none}.card-head{display:grid;grid-template-columns:1fr auto;gap:18px;padding:21px 24px;border-bottom:2px solid var(--pe-ink)}.card-id{font:900 16px/1 var(--pe-mono);color:var(--pe-red)}.card-desc{margin:9px 0 0;font:700 14px/1.45 var(--pe-sans);color:var(--pe-muted)}.card-tag{align-self:start;padding:7px 9px;background:var(--pe-ink);color:var(--pe-paper);font:800 10px/1 var(--pe-mono);letter-spacing:.08em}
-    .specimen{position:relative;min-height:300px;padding:28px;overflow:hidden;background-color:var(--pe-paper);background-image:linear-gradient(rgba(66,55,41,.06) 1px,transparent 1px),linear-gradient(90deg,rgba(66,55,41,.045) 1px,transparent 1px);background-size:30px 30px}.spec-rule{border-top:4px solid var(--pe-ink);padding-top:13px;display:flex;justify-content:space-between;font:800 11px/1 var(--pe-mono);letter-spacing:.08em}.spec-title{font:900 45px/1.07 var(--pe-serif);letter-spacing:-.045em}.spec-small{font:700 13px/1.55 var(--pe-sans);color:var(--pe-muted)}.spec-panel{border:3px solid var(--pe-ink);padding:24px;background:rgba(244,234,212,.88)}.spec-label{font:800 11px/1 var(--pe-mono);letter-spacing:.09em;color:var(--pe-red)}.spec-stat{margin-top:20px;font:900 58px/.9 var(--pe-mono)}
-    .spec-triptych{display:grid;grid-template-columns:repeat(3,1fr);gap:10px}.spec-metric{min-height:190px;border:2px solid var(--pe-ink);padding:16px;background:rgba(244,234,212,.85)}.spec-metric strong{display:block;margin-top:42px;font:900 37px/1 var(--pe-mono)}.spec-compare{display:grid;grid-template-columns:1fr 1fr;border:3px solid var(--pe-ink)}.spec-compare>div{min-height:210px;padding:24px}.spec-compare>div+div{border-left:3px solid var(--pe-ink);background:var(--pe-ink);color:var(--pe-paper)}.spec-compare h4{margin:24px 0 18px;font:900 28px/1 var(--pe-serif)}
-    .spec-list{display:flex;flex-direction:column;gap:9px}.spec-list-row{display:grid;grid-template-columns:50px 1fr auto;align-items:center;min-height:49px;padding:0 14px;border:2px solid var(--pe-ink);background:rgba(244,234,212,.86);font:800 12px/1 var(--pe-mono)}.spec-list-row b{color:var(--pe-red)}.spec-steps{display:grid;grid-template-columns:repeat(4,1fr);gap:12px;padding-top:12px}.spec-step{position:relative;border-top:5px solid var(--pe-ink);padding-top:20px}.spec-step::before{content:"";position:absolute;left:0;top:-10px;width:15px;height:15px;background:var(--pe-red)}.spec-step h4{margin:15px 0 8px;font:900 17px/1 var(--pe-serif)}.spec-quote{border-left:12px solid var(--pe-red);padding:27px 30px;background:rgba(244,234,212,.82);font:900 30px/1.38 var(--pe-serif)}
-    .spec-artifact{display:grid;grid-template-columns:1.45fr .55fr;gap:18px}.spec-media{aspect-ratio:16/9;border:4px solid var(--pe-ink);display:grid;place-items:center;background:#d4cab5;font:900 22px/1 var(--pe-serif);color:#777164}.spec-side{display:flex;flex-direction:column;justify-content:space-between;border-top:4px solid var(--pe-ink);padding-top:16px}.spec-stamp{display:inline-block;padding:17px 20px;border:5px solid var(--pe-red);color:var(--pe-red);font:900 29px/1 var(--pe-serif);transform:rotate(-3deg)}.spec-chapter{display:grid;grid-template-columns:auto 1fr;gap:26px;align-items:center;height:230px}.spec-chapter b{font:900 72px/1 var(--pe-mono);color:var(--pe-red)}.spec-source{position:absolute;left:28px;right:28px;bottom:28px;border-top:2px solid var(--pe-ink);padding-top:14px;font:700 11px/1.45 var(--pe-mono);color:var(--pe-muted)}.spec-progress{position:absolute;left:0;right:0;bottom:0;height:12px;background:var(--pe-rule)}.spec-progress span{display:block;width:63%;height:100%;background:var(--pe-red)}.spec-end{height:240px;display:grid;grid-template-columns:1fr auto;align-items:center;gap:24px}
-    .motion-card .specimen{min-height:250px;display:grid;place-items:center}.motion-stage{width:100%;min-height:155px;display:grid;place-items:center}.motion-target{will-change:transform,opacity,clip-path,color}.motion-headline{font:900 46px/1 var(--pe-serif)}.motion-panel{width:74%;border:3px solid var(--pe-ink);padding:28px;background:var(--pe-paper-light);font:900 25px/1 var(--pe-serif)}.motion-number{font:900 72px/1 var(--pe-mono);color:var(--pe-red)}.motion-bar{width:78%;height:18px;background:var(--pe-rule);overflow:hidden}.motion-bar span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left}.motion-list{width:78%;display:flex;flex-direction:column;gap:8px}.motion-list span{padding:11px 14px;border:2px solid var(--pe-ink);background:var(--pe-paper-light);font:800 12px/1 var(--pe-mono)}.motion-wipe{width:76%;padding:30px;background:var(--pe-ink);color:var(--pe-paper);font:900 30px/1 var(--pe-serif)}.motion-underline{position:relative;font:900 35px/1 var(--pe-serif)}.motion-underline i{position:absolute;left:0;right:0;bottom:-12px;height:6px;background:var(--pe-red);transform-origin:left}.motion-folio{width:80%;border-top:4px solid var(--pe-ink);padding-top:14px;display:flex;justify-content:space-between;font:800 12px/1 var(--pe-mono)}.replay{position:absolute;right:16px;bottom:16px;padding:9px 12px;border:2px solid var(--pe-ink);background:var(--pe-paper);color:var(--pe-ink);font:800 11px/1 var(--pe-mono);cursor:pointer}.replay:hover{background:var(--pe-red);border-color:var(--pe-red);color:var(--pe-paper)}
-    #transitions{background:rgba(32,38,44,.035)}.focus-transitions .hero,.focus-transitions #theme,.focus-transitions #components,.focus-transitions #motions{display:none}.focus-transitions #transitions{padding-top:46px}.transition-card .specimen{padding:18px;min-height:0}.transition-stage{position:relative;width:100%;aspect-ratio:16/9;overflow:hidden;border:3px solid var(--pe-ink);perspective:1000px;background:#20262c}.tx-scene,.tx-overlay,.tx-parts{position:absolute;inset:0;overflow:hidden}.tx-scene{display:grid;align-content:space-between;padding:24px;transform-origin:center center}.tx-old{z-index:2;background:#efe5ce;color:#20262c;background-image:linear-gradient(rgba(66,55,41,.07) 1px,transparent 1px),linear-gradient(90deg,rgba(66,55,41,.05) 1px,transparent 1px);background-size:25px 25px}.tx-new{z-index:1;background:#20262c;color:#efe5ce}.tx-folio{border-top:4px solid currentColor;padding-top:9px;display:flex;justify-content:space-between;font:800 9px/1 var(--pe-mono)}.tx-copy b{display:block;font:900 32px/1 var(--pe-serif)}.tx-copy span{display:block;margin-top:10px;font:800 11px/1 var(--pe-mono);color:var(--pe-red)}.tx-new .tx-copy span{color:#e56a59}.tx-overlay{z-index:5;pointer-events:none;opacity:0;display:grid;place-items:center;background:#b83b2f;color:#efe5ce;font:900 92px/1 var(--pe-serif)}.tx-parts{z-index:5;pointer-events:none}.tx-part{position:absolute;display:block;opacity:0;background:#20262c}.transition-card[data-transition="archive-shutter"] .tx-part{left:0;width:100%;height:16.667%}.transition-card[data-transition="archive-shutter"] .tx-part:nth-child(1){top:0}.transition-card[data-transition="archive-shutter"] .tx-part:nth-child(2){top:16.667%;background:#b83b2f}.transition-card[data-transition="archive-shutter"] .tx-part:nth-child(3){top:33.334%}.transition-card[data-transition="archive-shutter"] .tx-part:nth-child(4){top:50%;background:#b83b2f}.transition-card[data-transition="archive-shutter"] .tx-part:nth-child(5){top:66.667%}.transition-card[data-transition="archive-shutter"] .tx-part:nth-child(6){top:83.334%;background:#b83b2f}.transition-card[data-transition="column-cascade"] .tx-part{top:0;height:100%;width:16.667%}.transition-card[data-transition="column-cascade"] .tx-part:nth-child(1){left:0}.transition-card[data-transition="column-cascade"] .tx-part:nth-child(2){left:16.667%;background:#b83b2f}.transition-card[data-transition="column-cascade"] .tx-part:nth-child(3){left:33.334%}.transition-card[data-transition="column-cascade"] .tx-part:nth-child(4){left:50%;background:#b83b2f}.transition-card[data-transition="column-cascade"] .tx-part:nth-child(5){left:66.667%}.transition-card[data-transition="column-cascade"] .tx-part:nth-child(6){left:83.334%;background:#b83b2f}.transition-card[data-transition="paper-stack"] .tx-part{inset:0;width:100%;height:100%;border:3px solid #20262c;background:#d2c5aa}.transition-card[data-transition="paper-stack"] .tx-part:nth-child(2){background:#efe5ce}.transition-card[data-transition="paper-stack"] .tx-part:nth-child(3){background:#b83b2f}.tx-duration{position:absolute;left:14px;top:48px;z-index:8;padding:7px 9px;background:rgba(32,38,44,.88);color:#efe5ce;font:800 9px/1 var(--pe-mono)}
-    .footer{padding:54px 0 70px;background:var(--pe-ink);color:var(--pe-paper)}.footer-grid{display:flex;justify-content:space-between;gap:40px;align-items:end}.footer h2{margin:0;font:900 38px/1 var(--pe-serif)}.footer p{margin:14px 0 0;color:#d2c4a8;font:700 14px/1.5 var(--pe-sans)}.footer code{font:700 13px/1 var(--pe-mono);color:#f0d8ca}@media(max-width:900px){.hero-grid,.component-grid,.motion-grid,.transition-grid{grid-template-columns:1fr}.section-head{align-items:start;flex-direction:column}.section-head p{text-align:left}.nav-links{display:none}.hero{padding-top:60px}}
-  </style>
-  <style>
-    .transition-card[data-role="advanced"]{grid-column:span 2;border-width:4px;box-shadow:0 22px 54px rgba(32,38,44,.16)}
-    .transition-card[data-role="advanced"] .card-head{background:#20262c;color:#efe5ce}.transition-card[data-role="advanced"] .card-id{font-size:18px;color:#e56a59}.transition-card[data-role="advanced"] .card-desc{color:#d8ccb3}.transition-card[data-role="advanced"] .card-tag{background:#b83b2f}.transition-card[data-role="advanced"] .specimen{padding:24px;background:#cfc2a7}
-    .tx-gpu{display:block;width:100%;height:100%}.tx-gpu-badge{position:absolute;right:14px;top:14px;z-index:9;padding:7px 9px;border:1px solid rgba(239,229,206,.72);background:rgba(32,38,44,.82);color:#efe5ce;font:800 9px/1 var(--pe-mono);letter-spacing:.1em}.transition-card[data-role="advanced"] .tx-duration{top:14px}.tx-fallback{background:linear-gradient(135deg,#efe5ce 0 49%,#b83b2f 49% 51%,#20262c 51%)}
-    @media(max-width:900px){.transition-card[data-role="advanced"]{grid-column:span 1}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>paper-editorial · 宣纸编辑部 — 组件 / 动效 / 转场展厅</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<link rel="stylesheet" href="./themes/paper-editorial/tokens.css">
+<link rel="stylesheet" href="./themes/paper-editorial/components.css">
+<style>
+  body{margin:0;background:#e7dcc4;color:var(--pe-ink);font-family:var(--pe-sans)}
+  .wrap{max-width:1440px;margin:0 auto;padding:0 32px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(239,229,206,.94);border-bottom:3px solid var(--pe-ink);backdrop-filter:blur(6px)}
+  nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+  nav .brand{font:900 20px/1 var(--pe-serif);letter-spacing:-.02em}
+  nav .counts{font:700 12px/1 var(--pe-mono);letter-spacing:.08em;color:var(--pe-muted)}
+  nav a{font:700 13px/1 var(--pe-mono);color:var(--pe-ink);text-decoration:none;letter-spacing:.06em}
+  nav a:hover{color:var(--pe-red)}
+  nav .spacer{flex:1}
+  header.hero{position:relative;padding:84px 0 64px;border-bottom:3px solid var(--pe-ink);overflow:hidden}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:64px;align-items:start;position:relative;z-index:2}
+  .hero h1{margin:18px 0 0;font:900 84px/1.04 var(--pe-serif);letter-spacing:-.05em}
+  .hero .lede{margin-top:26px;font:700 21px/1.6 var(--pe-sans);color:var(--pe-ink-soft);max-width:760px}
+  .hero .panel{border:4px solid var(--pe-ink);background:rgba(244,234,212,.8);padding:30px}
+  .hero .panel h2{font:800 13px/1 var(--pe-mono);letter-spacing:.14em;color:var(--pe-muted)}
+  .hero .panel dl{margin:20px 0 0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px;font:700 14px/1.4 var(--pe-mono)}
+  .hero .panel dt{color:var(--pe-muted)}
+  .hero .links{margin-top:34px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .links a{border:2px solid var(--pe-ink);padding:12px 18px;font:800 13px/1 var(--pe-mono);letter-spacing:.08em;color:var(--pe-ink);text-decoration:none;background:rgba(244,234,212,.7)}
+  .hero .links a:hover{border-color:var(--pe-red);color:var(--pe-red)}
+  section{padding:72px 0 8px}
+  section>.wrap>h2{font:900 46px/1 var(--pe-serif);letter-spacing:-.035em}
+  section>.wrap>.section-sub{margin-top:14px;font:700 16px/1.6 var(--pe-sans);color:var(--pe-muted);max-width:820px}
+  .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:16px;margin-top:36px}
+  .swatch{border:3px solid var(--pe-ink);height:120px;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;background:var(--c)}
+  .swatch b{font:800 12px/1.2 var(--pe-mono)}
+  .swatch span{font:700 11px/1 var(--pe-mono);opacity:.75}
+  .type-rows{margin-top:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .type-rows>div{border:3px solid var(--pe-ink);padding:22px;background:rgba(244,234,212,.7)}
+  .type-rows b{display:block;font:800 11px/1 var(--pe-mono);letter-spacing:.12em;color:var(--pe-muted);margin-bottom:14px}
+  .type-serif{font:900 30px/1.2 var(--pe-serif)}
+  .type-sans{font:700 20px/1.4 var(--pe-sans)}
+  .type-mono{font:700 18px/1.4 var(--pe-mono)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .card{border:3px solid var(--pe-ink);background:rgba(244,234,212,.72);display:flex;flex-direction:column}
+  .card>header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:2px solid var(--pe-ink)}
+  .card .id{font:800 13px/1 var(--pe-mono);letter-spacing:.04em;color:var(--pe-red)}
+  .card .name{font:900 17px/1 var(--pe-serif)}
+  .card .en{font:700 10px/1 var(--pe-mono);letter-spacing:.1em;color:var(--pe-muted)}
+  .card .mini{position:relative;overflow:hidden;border-bottom:2px solid var(--pe-ink);background:var(--pe-paper)}
+  .card .mini-inner{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+  .card footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:12px 18px;margin-top:auto}
+  .card .use{font:700 12px/1.4 var(--pe-sans);color:var(--pe-muted)}
+  .replay{border:2px solid var(--pe-ink);background:transparent;color:var(--pe-ink);font:800 12px/1 var(--pe-mono);padding:8px 14px;cursor:pointer;letter-spacing:.06em}
+  .replay:hover{border-color:var(--pe-red);color:var(--pe-red)}
+  .duration{font:700 11px/1 var(--pe-mono);color:var(--pe-muted)}
+  .role-badge{font:800 10px/1 var(--pe-mono);letter-spacing:.1em;padding:5px 8px;border:1.5px solid var(--pe-muted);color:var(--pe-muted)}
+  .role-badge.primary{border-color:var(--pe-ink);color:var(--pe-ink)}
+  .role-badge.section{border-color:var(--pe-red);color:var(--pe-red)}
+  .role-badge.advanced{border-color:var(--pe-red);background:var(--pe-red);color:var(--pe-paper-light)}
+  .motion-stage{position:relative;height:170px;overflow:hidden;border-bottom:2px solid var(--pe-ink);background:var(--pe-paper);background-image:linear-gradient(rgba(66,55,41,.05) 2px,transparent 2px);background-size:36px 36px;display:flex;align-items:center;justify-content:center;gap:14px}
+  .sample-title{font:900 52px/1 var(--pe-serif);letter-spacing:-.04em}
+  .sample-panel{width:118px;height:86px;border:3px solid var(--pe-ink);background:rgba(244,234,212,.9);padding:12px;font:800 12px/1.3 var(--pe-mono);color:var(--pe-muted)}
+  .sample-bar{width:70%;height:14px;background:var(--pe-rule)}
+  .sample-bar>span{display:block;width:100%;height:100%;background:var(--pe-red);transform-origin:left center}
+  .sample-rows{display:flex;flex-direction:column;gap:8px;width:78%}
+  .sample-row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;border:2px solid var(--pe-ink);background:rgba(244,234,212,.9);padding:8px 12px;font:800 13px/1 var(--pe-sans)}
+  .sample-row .idx{color:var(--pe-red);font:900 14px/1 var(--pe-mono)}
+  .sample-row .mta{font:700 10px/1 var(--pe-mono);color:var(--pe-muted)}
+  .sample-wipe{width:72%;height:104px;border:3px solid var(--pe-ink);background:var(--pe-ink);color:var(--pe-paper-light);display:grid;place-items:center;font:900 22px/1 var(--pe-serif)}
+  .sample-stamp{border:5px solid var(--pe-red);color:var(--pe-red);font:900 30px/1 var(--pe-serif);padding:10px 18px;transform:rotate(-3deg)}
+  .sample-phrase{font:900 30px/1 var(--pe-serif)}
+  .sample-uwrap{position:relative;display:inline-block}
+  .sample-underline{position:absolute;left:0;right:0;bottom:-8px;height:5px;background:var(--pe-red);transform-origin:left center}
+  .sample-folio{font:700 15px/1 var(--pe-mono);letter-spacing:.14em;border-top:3px solid var(--pe-ink);padding-top:10px}
+  .sample-number{font:900 64px/.9 var(--pe-mono);letter-spacing:-.04em}
+  .sample-ghost{font:800 92px/1 var(--pe-serif);color:rgba(32,38,44,.1);white-space:nowrap}
+.sample-lines{display:flex;flex-direction:column;gap:12px;text-align:left}
+.sample-line{font:900 34px/1.2 var(--pe-serif);letter-spacing:-.02em;color:var(--pe-ink)}
+.sample-surface{position:absolute;left:90px;right:90px;top:26px;bottom:26px;background:var(--pe-well)}
+.sample-flight{position:absolute;left:70px;top:60px;display:flex;align-items:baseline;gap:20px}
+.sample-flight-index{font:900 92px/1 var(--pe-mono);color:var(--pe-red)}
+.sample-flight-title{font:900 54px/1 var(--pe-serif);letter-spacing:-.03em;color:var(--pe-ink)}
+.sample-sheet{display:flex;gap:14px}
+.sample-seal{width:58px;aspect-ratio:1;display:grid;place-items:center;background:var(--pe-red);color:var(--pe-paper-light);font:900 19px/1 var(--pe-mono);clip-path:polygon(3% 1%,97% 0%,100% 5%,99% 94%,96% 100%,4% 99%,0% 95%,1% 6%)}
+.sample-seal:nth-child(3n){transform:rotate(-2.2deg)}
+.sample-seal:nth-child(3n+1){transform:rotate(1.6deg)}
+.sample-seal-in{display:block}
+.sample-press{position:relative;width:86px;height:86px;display:grid;place-items:center;background:var(--pe-red);color:var(--pe-paper-light);font:900 26px/1 var(--pe-mono);clip-path:polygon(3% 1%,97% 0%,100% 5%,99% 94%,96% 100%,4% 99%,0% 95%,1% 6%)}
+.sample-bleed{position:absolute;inset:-30px;border-radius:50%;background:radial-gradient(circle,rgba(184,59,47,.5),transparent 70%);opacity:0}
+.sample-drift{position:absolute;inset:0;background-image:linear-gradient(rgba(66,55,41,.12) 2px,transparent 2px),linear-gradient(90deg,rgba(66,55,41,.12) 2px,transparent 2px);background-size:36px 36px}
+.handoff-scale{position:absolute;left:50%;top:0;width:1920px;height:1080px;transform:translateX(-50%) scale(.16);transform-origin:top center}
+.handoff-frame{position:absolute;inset:0;border:2px solid var(--pe-ink)}
+.handoff-zone{position:absolute;top:300px;bottom:300px;width:700px;display:flex;align-items:center;justify-content:center;font:900 92px/1 var(--pe-serif);color:var(--pe-ink)}
+.handoff-zone.out{left:140px}
+.handoff-zone.in{left:1060px;flex-direction:column;gap:26px}
+.handoff-zone.in .handoff-seal{width:190px;height:190px;display:grid;place-items:center;background:var(--pe-red);color:var(--pe-paper-light);font:900 48px/1 var(--pe-mono);transform-origin:top center}
+.handoff-model span{display:block;font:900 44px/1 var(--pe-sans);text-align:center}
+.handoff-role,.handoff-work{font:800 26px/1 var(--pe-mono);letter-spacing:.14em;color:var(--pe-muted)}
+.handoff-centre{position:absolute;left:960px;top:300px;bottom:300px;width:2px;background:var(--pe-ink);transform-origin:top center}
+.handoff-brush{position:absolute;left:0;top:520px;width:1500px}
+.brush-body{height:22px;background:var(--pe-red);transform-origin:left center}
+.brush-tail{height:22px;width:420px;background:var(--pe-red);opacity:.55;transform-origin:left center}
+.handoff-bloom{position:absolute;left:1000px;top:290px;width:300px;height:300px;border-radius:50%;background:radial-gradient(circle,rgba(184,59,47,.55),transparent 70%)}
+.handoff-splat{position:absolute;left:1010px;top:320px;width:16px;height:16px;border-radius:50%;background:var(--pe-ink)}
+.handoff-kicker,.handoff-thesis,.handoff-caption,.handoff-foot{position:absolute;left:140px}
+.handoff-kicker{top:190px;font:800 28px/1 var(--pe-mono);letter-spacing:.22em;color:var(--pe-muted)}
+.handoff-thesis{top:250px;font:900 54px/1 var(--pe-serif);color:var(--pe-ink)}
+.handoff-caption{top:800px;font:800 26px/1 var(--pe-mono);letter-spacing:.18em;color:var(--pe-muted)}
+.handoff-foot{top:850px;font:800 26px/1 var(--pe-mono);letter-spacing:.18em;color:var(--pe-muted)}
+  .tx-stage{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:2px solid var(--pe-ink);background:var(--pe-well)}
+  .tx-scene{position:absolute;inset:0;display:grid;place-items:center;font:900 26px/1.3 var(--pe-serif);text-align:center}
+  .tx-scene small{display:block;margin-top:8px;font:700 11px/1 var(--pe-mono);letter-spacing:.12em}
+  .tx-a{background:var(--pe-paper);color:var(--pe-ink)}
+  .tx-a::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(66,55,41,.07) 2px,transparent 2px),linear-gradient(90deg,rgba(66,55,41,.05) 2px,transparent 2px);background-size:40px 40px}
+  .tx-b{background:var(--pe-ink);color:var(--pe-paper-light)}
+  .tx-part{position:absolute;pointer-events:none}
+  .tx-overlay{inset:0;opacity:0}
+  .tx-rule{left:0;right:0;top:50%;height:4px;margin-top:-2px;opacity:0}
+  .tx-flash{left:0;right:0;top:50%;height:3px;margin-top:-1.5px;opacity:0}
+  .tx-slash{left:50%;top:50%;width:2600px;height:5px;margin:-2.5px 0 0 -1300px;transform:rotate(-29.3deg);opacity:0}
+  .tx-slat{left:0;right:0;height:12.5%;background:var(--pe-ink);opacity:0}
+  .tx-column{top:0;bottom:0;width:12.5%;background:var(--pe-paper-deep);opacity:0}
+  .tx-sheet{inset:0;background:var(--pe-paper-light);border:2px solid var(--pe-rule);opacity:0}
+  .tx-duration{position:absolute;right:10px;bottom:10px;font:700 11px/1 var(--pe-mono);color:var(--pe-muted);background:rgba(239,229,206,.85);padding:4px 7px;z-index:5}
+  .tx-gpu{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .tx-gpu-badge{position:absolute;left:10px;bottom:10px;font:800 10px/1 var(--pe-mono);letter-spacing:.1em;color:var(--pe-red);background:rgba(239,229,206,.88);padding:4px 7px;z-index:5}
+  .transition-stage{position:absolute;inset:0}
+  .pilot-list{display:grid;gap:22px;margin-top:36px}
+  .pilot-pair{display:grid;grid-template-columns:1fr 1fr;border-bottom:2px solid var(--pe-ink)}
+  .pilot-pair figure{margin:0;position:relative;min-width:0}
+  .pilot-pair figure+figure{border-left:2px solid var(--pe-ink)}
+  .pilot-pair figcaption{position:absolute;left:10px;top:10px;z-index:6;font:800 10px/1 var(--pe-mono);letter-spacing:.12em;padding:5px 8px;background:rgba(239,229,206,.9);border:1.5px solid var(--pe-ink)}
+  .pilot-pair figure+figure figcaption{background:var(--pe-red);border-color:var(--pe-red);color:var(--pe-paper-light)}
+  .pilot-pair .mini{border-bottom:0}
+  .pilot-title-wrap{position:absolute;left:220px;top:330px}
+  .pilot-title-wrap .pe-title{margin-top:36px}
+  .pilot-scrub{flex:1;accent-color:var(--pe-red)}
+  .pilot-tx .pe-scene{position:absolute;inset:0}
+  .pilot-tx .tx-overlay{position:absolute;inset:0;opacity:0;pointer-events:none}
+  footer.site{margin-top:88px;border-top:3px solid var(--pe-ink);padding:34px 0 46px}
+  footer.site .wrap{display:flex;justify-content:space-between;font:700 12px/1.7 var(--pe-mono);color:var(--pe-muted)}
+</style>
 </head>
-<body>
-  <header class="site-header"><nav class="nav"><a class="brand" href="#top"><span class="brand-mark"></span><span>视频主题与动效库</span></a><div class="nav-links"><a href="#theme">THEME</a><a href="#components">COMPONENTS · 15</a><a href="#motions">MOTIONS · 10</a><a href="#transitions">TRANSITIONS · 21</a><a href="./showrooms/modern-minimal.html">现代秩序 ↗</a><a href="./showrooms/voxel-harness.html">方块终端 ↗</a><a href="./showrooms/signal-desk.html">信号台 ↗</a></div></nav></header>
-  <div id="top" class="hero"><div class="container hero-grid"><div><div class="kicker">PAPER EDITORIAL · 宣纸编辑部</div><h1>组件、动效、转场<br><span style="color:var(--pe-red)">逐项陈列。</span></h1><p class="hero-copy">覆盖标题、数据、对比、流程、作品展示与场景衔接。所有项目均可独立查看。</p></div><aside class="manifest"><div class="kicker">LIBRARY INDEX · V1.3</div><div class="manifest-row"><span>COMPONENTS</span><b>15</b></div><div class="manifest-row"><span>MOTIONS</span><b>10</b></div><div class="manifest-row"><span>TRANSITIONS</span><b>21</b></div><div class="manifest-row"><span>STATUS</span><b>STABLE</b></div></aside></div></div>
-  <main>
-    <section id="theme"><div class="container"><div class="section-head"><h2>主题规范</h2><p>暖米白宣纸、墨黑结构、朱砂批注。标题使用宋体气质，正文保持清晰，数字采用等宽字体。</p></div><div class="palette"><div class="swatch" style="background:#efe5ce">PAPER · #EFE5CE</div><div class="swatch" style="background:#20262c;color:#efe5ce">INK · #20262C</div><div class="swatch" style="background:#b83b2f;color:#efe5ce">RED · #B83B2F</div><div class="swatch" style="background:#c9bda5">RULE · #C9BDA5</div></div></div></section>
-    <section id="components"><div class="container"><div class="section-head"><h2>组件展厅</h2><p>每张卡片对应一个组件 ID。示例用于说明版式，制作时替换为项目内容。</p></div><div class="filter-row"><button class="filter active" data-filter="all">全部</button><button class="filter" data-filter="structure">结构</button><button class="filter" data-filter="editorial">编辑</button><button class="filter" data-filter="data">数据</button><button class="filter" data-filter="media">媒体</button></div><div class="component-grid">
-      <article class="catalog-card" data-category="editorial"><header class="card-head"><div><div class="card-id">editorial-title</div><p class="card-desc">开场标题、章节主旨、核心观点。</p></div><span class="card-tag">EDITORIAL</span></header><div class="specimen" style="display:grid;align-content:center"><div class="spec-label">专题观察</div><div class="spec-title" style="margin-top:20px">一次更新，<br><span style="color:var(--pe-red)">三项变化。</span></div><p class="spec-small" style="margin-top:18px">副标题补充范围与口径。</p></div></article>
-      <article class="catalog-card" data-category="structure"><header class="card-head"><div><div class="card-id">folio-header</div><p class="card-desc">页眉、章节编号和测试口径。</p></div><span class="card-tag">STRUCTURE</span></header><div class="specimen"><div class="spec-rule"><span>MODEL REVIEW · 2026</span><span>03 / 08</span></div><div class="spec-title" style="margin-top:75px;font-size:38px">页眉稳定，<br>信息位置固定。</div></div></article>
-      <article class="catalog-card" data-category="editorial"><header class="card-head"><div><div class="card-id">paper-panel</div><p class="card-desc">说明、参数、方法和补充信息。</p></div><span class="card-tag">EDITORIAL</span></header><div class="specimen" style="display:grid;place-items:center"><div class="spec-panel" style="width:82%"><div class="spec-label">测试口径</div><h4 style="margin:22px 0 14px;font:900 28px/1 var(--pe-serif)">同一环境 · 同一任务</h4><p class="spec-small">记录版本、工具、运行条件和必要说明。</p></div></div></article>
-      <article class="catalog-card" data-category="data"><header class="card-head"><div><div class="card-id">stat-block</div><p class="card-desc">突出一个关键数字或事实。</p></div><span class="card-tag">DATA</span></header><div class="specimen" style="display:grid;place-items:center"><div class="spec-panel" style="width:70%"><div class="spec-label">ELAPSED TIME</div><div class="spec-stat">07:18</div><div class="spec-small" style="margin-top:18px">本次任务用时</div></div></div></article>
-      <article class="catalog-card" data-category="data"><header class="card-head"><div><div class="card-id">metric-triptych</div><p class="card-desc">三项并列指标或三个观察维度。</p></div><span class="card-tag">DATA</span></header><div class="specimen"><div class="spec-triptych"><div class="spec-metric"><div class="spec-label">速度</div><strong>7.2</strong><span class="spec-small">MIN</span></div><div class="spec-metric"><div class="spec-label">成本</div><strong>¥18</strong><span class="spec-small">TOTAL</span></div><div class="spec-metric" style="background:var(--pe-red);color:var(--pe-paper);border-color:var(--pe-red)"><div class="spec-label" style="color:var(--pe-paper)">完成度</div><strong>92%</strong><span class="spec-small" style="color:#f0d8ca">RATE</span></div></div></div></article>
-      <article class="catalog-card" data-category="data"><header class="card-head"><div><div class="card-id">comparison-split</div><p class="card-desc">双方案、双模型或前后版本对比。</p></div><span class="card-tag">DATA</span></header><div class="specimen"><div class="spec-compare"><div><div class="spec-label">VERSION A</div><h4>旧版本</h4><p class="spec-small">价格较低，响应稳定。</p></div><div><div class="spec-label" style="color:#e6b2a8">VERSION B</div><h4>新版本</h4><p class="spec-small" style="color:#d5c9b0">能力提升，成本同步变化。</p></div></div></div></article>
-      <article class="catalog-card" data-category="data"><header class="card-head"><div><div class="card-id">ranked-list</div><p class="card-desc">排名、优先级、目录或结论清单。</p></div><span class="card-tag">DATA</span></header><div class="specimen"><div class="spec-list"><div class="spec-list-row"><b>01</b><span>核心结果</span><span>142</span></div><div class="spec-list-row"><b>02</b><span>次要结果</span><span>138</span></div><div class="spec-list-row"><b>03</b><span>参考结果</span><span>131</span></div><div class="spec-list-row"><b>04</b><span>补充样本</span><span>126</span></div></div></div></article>
-      <article class="catalog-card" data-category="data structure"><header class="card-head"><div><div class="card-id">timeline-steps</div><p class="card-desc">流程、方法、事件进展和历史节点。</p></div><span class="card-tag">STRUCTURE</span></header><div class="specimen"><div class="spec-steps"><div class="spec-step"><span class="spec-label">01</span><h4>准备</h4><p class="spec-small">统一环境</p></div><div class="spec-step"><span class="spec-label">02</span><h4>运行</h4><p class="spec-small">记录过程</p></div><div class="spec-step"><span class="spec-label">03</span><h4>复核</h4><p class="spec-small">检查结果</p></div><div class="spec-step"><span class="spec-label">04</span><h4>发布</h4><p class="spec-small">整理结论</p></div></div></div></article>
-      <article class="catalog-card" data-category="editorial"><header class="card-head"><div><div class="card-id">quote-pullout</div><p class="card-desc">引用、判断、争议焦点和章节中心句。</p></div><span class="card-tag">EDITORIAL</span></header><div class="specimen" style="display:grid;place-items:center"><blockquote class="spec-quote">速度领先明显，<br>质量差距有限。</blockquote></div></article>
-      <article class="catalog-card" data-category="media"><header class="card-head"><div><div class="card-id">artifact-frame</div><p class="card-desc">展示视频、截图、网页、图表或作品。</p></div><span class="card-tag">MEDIA</span></header><div class="specimen"><div class="spec-artifact"><div class="spec-media">16:9 主画面</div><aside class="spec-side"><div><div class="spec-label">作品展示</div><h4 style="margin:18px 0;font:900 22px/1.1 var(--pe-serif)">模型名称</h4></div><p class="spec-small">来源与观察说明</p></aside></div></div></article>
-      <article class="catalog-card" data-category="editorial"><header class="card-head"><div><div class="card-id">verdict-stamp</div><p class="card-desc">结论、状态和最终判断。</p></div><span class="card-tag">EDITORIAL</span></header><div class="specimen" style="display:grid;place-items:center"><div class="spec-stamp">推荐</div></div></article>
-      <article class="catalog-card" data-category="structure"><header class="card-head"><div><div class="card-id">chapter-divider</div><p class="card-desc">章节切换和内容分段。</p></div><span class="card-tag">STRUCTURE</span></header><div class="specimen"><div class="spec-chapter"><b>03</b><div><div class="spec-label">CHAPTER</div><div class="spec-title" style="margin-top:16px;font-size:39px">价格与效率</div><p class="spec-small" style="margin-top:14px">进入第三部分</p></div></div></div></article>
-      <article class="catalog-card" data-category="editorial structure"><header class="card-head"><div><div class="card-id">source-note</div><p class="card-desc">来源、方法、限制条件和脚注。</p></div><span class="card-tag">STRUCTURE</span></header><div class="specimen"><div class="spec-title" style="margin-top:42px;font-size:38px">数据需要注明口径。</div><div class="spec-source">SOURCE · 官方定价页，读取日期 2026-08-23<br>NOTE · 价格按公开输入与输出费率计算</div></div></article>
-      <article class="catalog-card" data-category="structure"><header class="card-head"><div><div class="card-id">progress-rail</div><p class="card-desc">全片进度，固定在画面底部。</p></div><span class="card-tag">STRUCTURE</span></header><div class="specimen"><div class="spec-title" style="margin-top:70px;font-size:40px">进度条覆盖整幅画面。</div><p class="spec-small" style="margin-top:18px">不挂在局部预览框下方。</p><div class="spec-progress"><span></span></div></div></article>
-      <article class="catalog-card" data-category="structure editorial"><header class="card-head"><div><div class="card-id">end-card</div><p class="card-desc">收束结论、状态与署名。</p></div><span class="card-tag">STRUCTURE</span></header><div class="specimen"><div class="spec-end"><div><div class="spec-label">FINAL NOTE</div><div class="spec-title" style="margin-top:18px;font-size:40px">结论已归档。</div><p class="spec-small" style="margin-top:14px">保留必要的限制条件。</p></div><div class="spec-stamp" style="font-size:23px">完成</div></div></div></article>
-    </div></div></section>
-    <section id="motions"><div class="container"><div class="section-head"><h2>动效展厅</h2><p>每项动效独立播放。点击“重播”可反复查看节奏和运动方向。</p></div><div class="motion-grid">
-      <article class="catalog-card motion-card" data-motion="ink-slam"><header class="card-head"><div><div class="card-id">ink-slam</div><p class="card-desc">标题快速压入画面，落点明确。</p></div><span class="card-tag">TITLE</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target motion-headline">结论公布</div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="paper-rise"><header class="card-head"><div><div class="card-id">paper-rise</div><p class="card-desc">卡片自下方进入，适合信息面板。</p></div><span class="card-tag">PANEL</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target motion-panel">运行条件已记录</div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="count-up"><header class="card-head"><div><div class="card-id">count-up</div><p class="card-desc">数字递增至目标值。</p></div><span class="card-tag">NUMBER</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target motion-number">0</div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="bar-draw"><header class="card-head"><div><div class="card-id">bar-draw</div><p class="card-desc">横向绘制进度或比例。</p></div><span class="card-tag">DATA</span></header><div class="specimen"><div class="motion-stage"><div class="motion-bar"><span class="motion-target"></span></div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="cascade-list"><header class="card-head"><div><div class="card-id">cascade-list</div><p class="card-desc">列表按顺序进入，层级清楚。</p></div><span class="card-tag">LIST</span></header><div class="specimen"><div class="motion-stage"><div class="motion-list"><span class="motion-target">01 · 主要结果</span><span class="motion-target">02 · 参考数据</span><span class="motion-target">03 · 限制条件</span></div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="editorial-wipe"><header class="card-head"><div><div class="card-id">editorial-wipe</div><p class="card-desc">横向揭示标题、章节或媒体。</p></div><span class="card-tag">REVEAL</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target motion-wipe">价格变化</div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="stamp-impact"><header class="card-head"><div><div class="card-id">stamp-impact</div><p class="card-desc">印章落下，用于状态与结论。</p></div><span class="card-tag">VERDICT</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target spec-stamp">通过</div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="underline-draw"><header class="card-head"><div><div class="card-id">underline-draw</div><p class="card-desc">朱砂下划线标出重点。</p></div><span class="card-tag">ANNOTATE</span></header><div class="specimen"><div class="motion-stage"><div class="motion-underline">关键差异<i class="motion-target"></i></div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="folio-swap"><header class="card-head"><div><div class="card-id">folio-swap</div><p class="card-desc">页眉信息轻量切换。</p></div><span class="card-tag">META</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target motion-folio"><span>SECTION 04</span><span>04 / 08</span></div></div><button class="replay">重播</button></div></article>
-      <article class="catalog-card motion-card" data-motion="red-result-emphasis"><header class="card-head"><div><div class="card-id">red-result-emphasis</div><p class="card-desc">数值转为朱砂色，完成重点收束。</p></div><span class="card-tag">RESULT</span></header><div class="specimen"><div class="motion-stage"><div class="motion-target motion-number">142</div></div><button class="replay">重播</button></div></article>
-    </div></div></section>
-    <section id="transitions"><div class="container"><div class="section-head"><h2>转场展厅</h2><p>主转场统一节奏，章节转场标记结构变化；旗舰转场用于少数关键交接。每项均可独立重播。</p></div><div class="filter-row"><button class="filter tx-filter active" data-tx-filter="all">全部</button><button class="filter tx-filter" data-tx-filter="primary">主转场</button><button class="filter tx-filter" data-tx-filter="section">章节</button><button class="filter tx-filter" data-tx-filter="accent">强调</button><button class="filter tx-filter" data-tx-filter="advanced">旗舰 · GPU</button></div><div class="transition-grid">
-      <article class="catalog-card transition-card" data-transition="paper-push" data-label="纸页横推" data-role="primary" data-duration="0.62" data-desc="相关内容的常规衔接。"></article>
-      <article class="catalog-card transition-card" data-transition="folio-rise" data-label="卷宗上卷" data-role="primary" data-duration="0.66" data-desc="流程和顺序内容向前推进。"></article>
-      <article class="catalog-card transition-card" data-transition="focus-press" data-label="焦点压合" data-role="primary" data-duration="0.72" data-desc="分析页面之间的平稳交接。"></article>
-      <article class="catalog-card transition-card" data-transition="margin-pull" data-label="墨边抽换" data-role="primary" data-duration="0.68" data-desc="清晰、克制的编辑切换。"></article>
-      <article class="catalog-card transition-card" data-transition="red-rule-cut" data-label="朱砂裁线" data-role="section" data-duration="0.56" data-desc="短促的章节分隔。"></article>
-      <article class="catalog-card transition-card" data-transition="column-cascade" data-label="分栏递进" data-role="section" data-duration="0.76" data-desc="新信息组按栏进入。"></article>
-      <article class="catalog-card transition-card" data-transition="archive-shutter" data-label="档案闸片" data-role="section" data-duration="0.72" data-desc="方法、证据和档案章节。"></article>
-      <article class="catalog-card transition-card" data-transition="chapter-bridge" data-label="章节桥页" data-role="section" data-duration="0.82" data-desc="大章节编号或标题切换。"></article>
-      <article class="catalog-card transition-card" data-transition="ink-sweep" data-label="墨迹横扫" data-role="accent" data-duration="0.78" data-desc="带纸面质感的重点揭示。"></article>
-      <article class="catalog-card transition-card" data-transition="tear-wipe" data-label="撕页切换" data-role="accent" data-duration="0.70" data-desc="用于修正、反转和强对比。"></article>
-      <article class="catalog-card transition-card" data-transition="diagonal-slice" data-label="斜版裁切" data-role="accent" data-duration="0.62" data-desc="速度较快的分析切换。"></article>
-      <article class="catalog-card transition-card" data-transition="ink-iris" data-label="墨池开孔" data-role="accent" data-duration="0.76" data-desc="主角、作品或结果揭晓。"></article>
-      <article class="catalog-card transition-card" data-transition="paper-fold" data-label="纸页折叠" data-role="accent" data-duration="0.72" data-desc="文档和版本变化。"></article>
-      <article class="catalog-card transition-card" data-transition="stamp-cover" data-label="印章覆场" data-role="accent" data-duration="0.66" data-desc="判断、通过和最终状态。"></article>
-      <article class="catalog-card transition-card" data-transition="paper-stack" data-label="叠页换档" data-role="accent" data-duration="0.78" data-desc="多来源汇总与材料切换。"></article>
-      <article class="catalog-card transition-card" data-transition="ink-dip" data-label="墨色沉场" data-role="accent" data-duration="0.72" data-desc="收束段落和节奏重置。"></article>
-      <article class="catalog-card transition-card" data-transition="ink-diffusion-field" data-label="墨场渗化" data-role="advanced" data-duration="1.18" data-desc="墨迹沿纸纤维逐像素扩散，完成主结论或作品揭晓。"></article>
-      <article class="catalog-card transition-card" data-transition="fiber-tear-displacement" data-label="纤维断页" data-role="advanced" data-duration="1.06" data-desc="断口毛刺、纸浆高光和局部位移共同推进强对比。"></article>
-      <article class="catalog-card transition-card" data-transition="editorial-depth-warp" data-label="纵深折版" data-role="advanced" data-duration="1.24" data-desc="两幅版面进入透视纵深并沿折脊压合。"></article>
-      <article class="catalog-card transition-card" data-transition="vermilion-pressure-wave" data-label="朱砂压力波" data-role="advanced" data-duration="0.94" data-desc="冲击环带动折射与局部色散，适合结论落点。"></article>
-      <article class="catalog-card transition-card" data-transition="calligraphy-stroke-morph" data-label="笔势流场" data-role="advanced" data-duration="1.14" data-desc="笔锋、飞白和湿墨形成流场，拖拽两幅场景完成交接。"></article>
-    </div></div></section>
-  </main>
-  <footer class="footer"><div class="container footer-grid"><div><h2>paper-editorial · 宣纸编辑部</h2><p>组件、元素动效、场景转场和 HyperFrames 合成演示均保存在当前库中。</p></div><code>$video-theme-library</code></div></footer>
-  <script>
-    const componentFilters=document.querySelectorAll('#components .filter');
-    componentFilters.forEach(button=>button.addEventListener('click',()=>{
-      componentFilters.forEach(item=>item.classList.remove('active'));button.classList.add('active');
-      const value=button.dataset.filter;
-      document.querySelectorAll('#components .catalog-card').forEach(card=>card.classList.toggle('hidden',value!=='all'&&!card.dataset.category.split(' ').includes(value)));
-    }));
+<body class="pe-theme">
+<nav>
+  <div class="wrap">
+    <span class="brand">宣纸编辑部</span>
+    <span class="counts">COMPONENTS · 16 + 14&nbsp;&nbsp;MOTIONS · 28&nbsp;&nbsp;TRANSITIONS · 16 + 5</span>
+    <span class="spacer"></span>
+    <a href="#pilot">样板</a><a href="#components">组件</a><a href="#motions">动效</a><a href="#transitions">转场</a>
+    <a href="./showrooms/modern-minimal.html">现代秩序</a>
+    <a href="./showrooms/voxel-harness.html">方块终端</a>
+    <a href="./showrooms/signal-desk.html">信号台</a>
+    <a href="./timeline-demo/index.html">时序示例</a>
+  </div>
+</nav>
 
-    const frames={'ink-slam':[{transform:'scale(1.18)',opacity:0},{transform:'scale(1)',opacity:1}],'paper-rise':[{transform:'translateY(46px)',opacity:0},{transform:'translateY(0)',opacity:1}],'bar-draw':[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],'editorial-wipe':[{clipPath:'inset(0 100% 0 0)'},{clipPath:'inset(0 0% 0 0)'}],'stamp-impact':[{transform:'scale(1.7) rotate(-8deg)',opacity:0},{transform:'scale(1) rotate(-3deg)',opacity:1}],'underline-draw':[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],'folio-swap':[{transform:'translateY(-20px)',opacity:0},{transform:'translateY(0)',opacity:1}],'red-result-emphasis':[{transform:'scale(.88)',color:'#20262c'},{transform:'scale(1)',color:'#b83b2f'}]};
-    const animateCard=card=>{card.querySelectorAll('.motion-target').forEach(target=>target.getAnimations().forEach(animation=>animation.cancel()));const id=card.dataset.motion;if(id==='count-up'){const target=card.querySelector('.motion-number');target.textContent='0';target.animate([{opacity:.25,transform:'translateY(12px)'},{opacity:1,transform:'translateY(0)'}],{duration:900,easing:'cubic-bezier(.22,1,.36,1)'});const start=performance.now();const tick=now=>{const p=Math.min(1,(now-start)/1050);target.textContent=String(Math.round(142*(1-Math.pow(1-p,3))));if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick);return}if(id==='cascade-list'){card.querySelectorAll('.motion-target').forEach((target,index)=>target.animate([{transform:'translateX(-70px)',opacity:0},{transform:'translateX(0)',opacity:1}],{duration:520,delay:index*110,easing:'cubic-bezier(.16,1,.3,1)',fill:'both'}));return}const target=card.querySelector('.motion-target');target.animate(frames[id],{duration:id==='stamp-impact'?430:680,easing:id==='stamp-impact'?'cubic-bezier(.2,1.6,.4,1)':'cubic-bezier(.16,1,.3,1)',fill:'both'})};
-    document.querySelectorAll('.motion-card').forEach(card=>card.querySelector('.replay').addEventListener('click',()=>animateCard(card)));
-    const motionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.dataset.played){entry.target.dataset.played='1';animateCard(entry.target)}}),{threshold:.45});
-    document.querySelectorAll('.motion-card').forEach(card=>motionObserver.observe(card));
+<header class="hero">
+  <div class="pe-ghost" style="top:8px">展 厅</div>
+  <div class="wrap hero-grid">
+    <div>
+      <div class="pe-kicker">PAPER EDITORIAL · SHOWROOM</div>
+      <h1>组件、动效与转场，<br>全部来自<span class="pe-red">真实主题模块</span>。</h1>
+      <p class="lede">本页每个演示都由 <span class="pe-mono">themes/paper-editorial/</span> 下的真实 CSS、motion、材料组件与转场模块直接驱动。展厅即契约：所见行为与生产合成一致。</p>
+      <div class="links">
+        <a href="#components">16 通用 + 17 专属组件</a><a href="#motions">31 动效</a><a href="#transitions">16 + 5 转场</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <h2>THEME MANIFEST</h2>
+      <dl>
+        <dt>ID</dt><dd>paper-editorial</dd>
+        <dt>版本</dt><dd>2.0.0</dd>
+        <dt>画布</dt><dd>1920 × 1080 · 安全区 92 / 72</dd>
+        <dt>动效性格</dt><dd>decisive · editorial · restrained · ink-like</dd>
+        <dt>转场</dt><dd>4 主 / 4 章节 / 8 点缀 + 5 GPU 旗舰</dd>
+        <dt>文档</dt><dd>references/{motions,transitions,components}/paper-editorial.md</dd>
+      </dl>
+    </aside>
+  </div>
+</header>
 
-    const roleLabels={primary:'PRIMARY',section:'SECTION',accent:'ACCENT',advanced:'ADVANCED · GPU'};
-    document.querySelectorAll('.transition-card').forEach(card=>{
-      const partCount=card.dataset.transition==='paper-stack'?3:6;
-      card.innerHTML=`<header class="card-head"><div><div class="card-id">${card.dataset.transition}</div><p class="card-desc">${card.dataset.label} · ${card.dataset.desc}</p></div><span class="card-tag">${roleLabels[card.dataset.role]}</span></header><div class="specimen"><div class="transition-stage"><div class="tx-scene tx-new"><div class="tx-folio"><span>NEW SECTION</span><span>02 / 02</span></div><div class="tx-copy"><b>结论页面</b><span>UPDATED VIEW</span></div></div><div class="tx-scene tx-old"><div class="tx-folio"><span>CURRENT SECTION</span><span>01 / 02</span></div><div class="tx-copy"><b>分析页面</b><span>EDITORIAL NOTE</span></div></div><div class="tx-overlay"></div><div class="tx-parts">${Array.from({length:partCount},()=>'<span class="tx-part"></span>').join('')}</div><span class="tx-duration">${card.dataset.duration}s</span></div><button class="replay">重播</button></div>`;
-    });
+<section id="pilot">
+  <div class="wrap">
+    <h2>样板对照 · classic / 新版</h2>
+    <p class="section-sub">3.0 升级样板：左为 v2.3 classic，右为新版默认。拖动进度条可任意跳帧，两侧同步定位，用于检查可寻帧性与材料细节。</p>
+    <div class="pilot-list">
+      <article class="card pilot-card" data-pilot="ink-slam"><header><span><span class="id">ink-slam</span><div class="name">墨定标题 · 墨吸入纸</div></span><span class="duration">.58s → .96s</span></header>
+        <div class="pilot-pair">
+          <figure><figcaption>CLASSIC</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+            <div class="pilot-title-wrap"><div class="pe-kicker">栏目 / KICKER</div><div class="pe-title pilot-slam">墨定标题，<span class="pe-red">一击落版。</span></div></div></div></div></div></figure>
+          <figure><figcaption>新版</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+            <div class="pilot-title-wrap"><div class="pe-kicker">栏目 / KICKER</div><div class="pe-title pilot-slam">墨定标题，<span class="pe-red">一击落版。</span></div></div></div></div></div></figure>
+        </div>
+        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><button class="replay" type="button">重播</button></footer></article>
 
-    const resetTransition=card=>{
-      card.querySelectorAll('.transition-stage *').forEach(node=>{node.getAnimations().forEach(animation=>animation.cancel());node.removeAttribute('style')});
-      const overlay=card.querySelector('.tx-overlay');
-      overlay.textContent=card.dataset.transition==='stamp-cover'?'批':card.dataset.transition==='chapter-bridge'?'02':'';
-    };
-    const playTx=(node,keyframes,options={})=>node.animate(keyframes,{duration:680,easing:'cubic-bezier(.16,1,.3,1)',fill:'both',...options});
-    const switchOld=(old,duration)=>playTx(old,[{opacity:1,offset:0},{opacity:1,offset:.48},{opacity:0,offset:.52},{opacity:0,offset:1}],{duration,easing:'linear'});
-    const runTransition=card=>{
-      if(card.dataset.role==='advanced')return;
-      resetTransition(card);
-      const id=card.dataset.transition,d=Number(card.dataset.duration)*1000;
-      const old=card.querySelector('.tx-old'),next=card.querySelector('.tx-new'),overlay=card.querySelector('.tx-overlay'),parts=[...card.querySelectorAll('.tx-part')];
-      if(['paper-push','folio-rise','ink-sweep','tear-wipe','diagonal-slice','ink-iris','focus-press'].includes(id))next.style.zIndex='3';
-      if(id==='paper-push'){playTx(old,[{transform:'translateX(0)'},{transform:'translateX(-100%)'}],{duration:d});playTx(next,[{transform:'translateX(100%)'},{transform:'translateX(0)'}],{duration:d});return}
-      if(id==='folio-rise'){playTx(old,[{transform:'translateY(0)'},{transform:'translateY(-100%)'}],{duration:d});playTx(next,[{transform:'translateY(100%)'},{transform:'translateY(0)'}],{duration:d});return}
-      if(id==='focus-press'){playTx(old,[{transform:'scale(1)',filter:'blur(0)',opacity:1},{transform:'scale(1.08)',filter:'blur(14px)',opacity:0}],{duration:d});playTx(next,[{transform:'scale(.94)',filter:'blur(16px)',opacity:0},{transform:'scale(1)',filter:'blur(0)',opacity:1}],{duration:d});return}
-      if(id==='ink-sweep'){playTx(old,[{transform:'translateX(0)'},{transform:'translateX(-5%) scale(.985)'}],{duration:d});playTx(next,[{clipPath:'polygon(0 0,0 0,4% 18%,0 38%,6% 58%,0 78%,3% 100%,0 100%)'},{clipPath:'polygon(0 0,100% 0,100% 18%,100% 38%,100% 58%,100% 78%,100% 100%,0 100%)'}],{duration:d});return}
-      if(id==='tear-wipe'){playTx(old,[{transform:'translateX(0) rotate(0)'},{transform:'translateX(-4%) rotate(-.4deg)'}],{duration:d});playTx(next,[{clipPath:'polygon(0 0,0 0,0 12%,3% 20%,0 30%,4% 40%,0 52%,3% 63%,0 75%,4% 86%,0 100%,0 100%)'},{clipPath:'polygon(0 0,100% 0,100% 12%,100% 20%,100% 30%,100% 40%,100% 52%,100% 63%,100% 75%,100% 86%,100% 100%,0 100%)'}],{duration:d});return}
-      if(id==='diagonal-slice'){playTx(old,[{transform:'translate(0,0)'},{transform:'translate(-6%,3%) scale(.98)'}],{duration:d});playTx(next,[{clipPath:'polygon(0 0,0 0,0 100%,0 100%)'},{clipPath:'polygon(0 0,100% 0,100% 100%,0 100%)'}],{duration:d});return}
-      if(id==='ink-iris'){playTx(old,[{transform:'scale(1)',filter:'blur(0)'},{transform:'scale(1.04)',filter:'blur(4px)'}],{duration:d});playTx(next,[{clipPath:'circle(0% at 52% 48%)'},{clipPath:'circle(145% at 52% 48%)'}],{duration:d});return}
-      if(id==='paper-fold'){old.style.zIndex='3';playTx(old,[{transform:'rotateY(0) translateX(0)',opacity:1},{transform:'rotateY(-88deg) translateX(-18%)',opacity:0}],{duration:d,easing:'cubic-bezier(.7,0,.3,1)'});playTx(next,[{transform:'scale(.96) translateX(7%)'},{transform:'scale(1) translateX(0)'}],{duration:d,delay:d*.16});return}
-      if(id==='red-rule-cut'||id==='margin-pull'){overlay.style.background=id==='red-rule-cut'?'#b83b2f':'#20262c';overlay.style.transformOrigin='left center';playTx(overlay,[{transform:'scaleX(0)',opacity:1,offset:0},{transform:'scaleX(1)',opacity:1,offset:.48},{transform:'scaleX(1)',transformOrigin:'right center',opacity:1,offset:.52},{transform:'scaleX(0)',transformOrigin:'right center',opacity:1,offset:1}],{duration:d,easing:'cubic-bezier(.65,0,.35,1)'});switchOld(old,d);return}
-      if(id==='ink-dip'){overlay.style.background='#20262c';playTx(overlay,[{opacity:0,offset:0},{opacity:1,offset:.48},{opacity:1,offset:.52},{opacity:0,offset:1}],{duration:d,easing:'cubic-bezier(.45,0,.55,1)'});switchOld(old,d);return}
-      if(id==='stamp-cover'){overlay.style.background='#b83b2f';playTx(overlay,[{transform:'scale(.02) rotate(-12deg)',opacity:1,offset:0},{transform:'scale(1.55) rotate(-3deg)',opacity:1,offset:.48},{transform:'scale(1.55) rotate(-3deg)',opacity:1,offset:.55},{transform:'scale(.02) rotate(5deg)',opacity:1,offset:1}],{duration:d,easing:'cubic-bezier(.76,0,.24,1)'});switchOld(old,d);return}
-      if(id==='chapter-bridge'){overlay.style.background='#20262c';playTx(overlay,[{transform:'translateX(-100%)',opacity:1,offset:0},{transform:'translateX(0)',opacity:1,offset:.46},{transform:'translateX(0)',opacity:1,offset:.54},{transform:'translateX(100%)',opacity:1,offset:1}],{duration:d,easing:'cubic-bezier(.65,0,.35,1)'});switchOld(old,d);return}
-      if(id==='archive-shutter'||id==='column-cascade'){const axis=id==='archive-shutter'?'scaleX':'scaleY';parts.forEach((part,index)=>{part.style.opacity='1';playTx(part,[{transform:`${axis}(0)`,offset:0},{transform:`${axis}(1)`,offset:.46},{transform:`${axis}(1)`,offset:.54},{transform:`${axis}(0)`,offset:1}],{duration:d,delay:index*28,easing:'cubic-bezier(.65,0,.35,1)'})});switchOld(old,d);return}
-      if(id==='paper-stack'){parts.forEach((part,index)=>{part.style.opacity='1';playTx(part,[{transform:'translate(110%,8%) rotate(3deg)',offset:0},{transform:'translate(0,0) rotate(0)',offset:.48},{transform:'translate(0,0) rotate(0)',offset:.55},{transform:'translate(-110%,-6%) rotate(-2deg)',offset:1}],{duration:d,delay:index*55,easing:'cubic-bezier(.65,0,.35,1)'})});switchOld(old,d);return}
-    };
+      <article class="card pilot-card" data-pilot="margin-pull"><header><span><span class="id">margin-pull</span><div class="name">墨边扯页 · 湿边墨版</div></span><span class="duration">.7s → 1.0s</span></header>
+        <div class="pilot-pair">
+          <figure><figcaption>CLASSIC</figcaption><div class="mini"><div class="mini-inner pilot-tx"></div></div></figure>
+          <figure><figcaption>新版</figcaption><div class="mini"><div class="mini-inner pilot-tx"></div></div></figure>
+        </div>
+        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><button class="replay" type="button">重播</button></footer></article>
 
-    document.querySelectorAll('.transition-card').forEach(card=>card.querySelector('.replay').addEventListener('click',()=>runTransition(card)));
-    const transitionFilters=document.querySelectorAll('.tx-filter');
-    transitionFilters.forEach(button=>button.addEventListener('click',()=>{transitionFilters.forEach(item=>item.classList.remove('active'));button.classList.add('active');const value=button.dataset.txFilter;document.querySelectorAll('.transition-card').forEach(card=>card.classList.toggle('hidden',value!=='all'&&card.dataset.role!==value))}));
-    const roleParam=new URLSearchParams(location.search).get('role');if(roleParam){transitionFilters.forEach(item=>item.classList.toggle('active',item.dataset.txFilter===roleParam));document.querySelectorAll('.transition-card').forEach(card=>card.classList.toggle('hidden',card.dataset.role!==roleParam))}
-    const transitionObserver=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.dataset.played){entry.target.dataset.played='1';runTransition(entry.target)}}),{threshold:.4});
-    document.querySelectorAll('.transition-card').forEach(card=>transitionObserver.observe(card));
-    const jump=new URLSearchParams(location.search).get('jump');if(jump)setTimeout(()=>document.querySelector(`#${jump}`)?.scrollIntoView({behavior:'auto'}),120);else if(location.hash)setTimeout(()=>document.querySelector(location.hash)?.scrollIntoView({behavior:'auto'}),120);
-  </script>
-  <script type="module" src="./themes/paper-editorial/advanced-transitions.js"></script>
+      <article class="card pilot-card" data-pilot="rubbing-reveal"><header><span><span class="id">rubbing-reveal</span><div class="name">拓印显影 · 覆纸扑拓</div></span><span class="duration">5.4s</span></header>
+        <div class="pilot-pair">
+          <figure><figcaption>CLASSIC</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+            <div class="pe-rubbing-reveal" style="position:absolute;inset:0"><canvas class="pilot-canvas"></canvas></div><div class="pe-folio"><span>RUBBING REVEAL</span><span>CLASSIC</span></div></div></div></div></figure>
+          <figure><figcaption>新版</figcaption><div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+            <div class="pe-rubbing-reveal" style="position:absolute;inset:0"><canvas class="pilot-canvas"></canvas></div><div class="pe-folio"><span>RUBBING REVEAL</span><span>覆纸 · 扑墨 · 收拓</span></div></div></div></div></figure>
+        </div>
+        <footer><input class="pilot-scrub" type="range" min="0" max="1000" value="0" aria-label="跳帧"><button class="replay" type="button">重播</button></footer></article>
+    </div>
+  </div>
+</section>
+
+<section id="system">
+  <div class="wrap">
+    <h2>视觉系统</h2>
+    <p class="section-sub">暖米白宣纸底、墨黑信息骨架、朱砂只做批注。54px 网格与纤维噪点来自 tokens.css。</p>
+    <div class="swatches">
+      <div class="swatch" style="--c:#efe5ce"><b>paper</b><span>#EFE5CE</span></div>
+      <div class="swatch" style="--c:#f4ead4"><b>paper-light</b><span>#F4EAD4</span></div>
+      <div class="swatch" style="--c:#e2d6bc"><b>paper-deep</b><span>#E2D6BC</span></div>
+      <div class="swatch" style="--c:#20262c;color:#efe5ce"><b>ink</b><span>#20262C</span></div>
+      <div class="swatch" style="--c:#b83b2f;color:#f4ead4"><b>vermilion</b><span>#B83B2F</span></div>
+      <div class="swatch" style="--c:#c9bda5"><b>rule</b><span>#C9BDA5</span></div>
+    </div>
+    <div class="type-rows">
+      <div><b>DISPLAY / SERIF</b><div class="type-serif">宣纸编辑部标题 九号字</div></div>
+      <div><b>BODY / SANS</b><div class="type-sans">正文用黑体骨架承载信息密度，解释、说明与并列条目。</div></div>
+      <div><b>NUMERIC / MONO</b><div class="type-mono">0123456789 · ENTRY 06/12 · 00:52</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="components">
+  <div class="wrap">
+    <h2>组件 · 16 通用 + 17 专属</h2>
+    <p class="section-sub">内容是中性占位。每个缩略场景都是 1920×1080 真实组件等比缩小，类名即生产类名。</p>
+    <div class="grid" id="component-grid">
+
+      <article class="card component-card"><header><span><span class="id">editorial-title</span><div class="name">编辑标题</div></span><span class="en">TITLE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div><div class="pe-ghost">标 题</div>
+          <div style="position:absolute;left:220px;top:300px"><div class="pe-kicker">栏目 / KICKER</div><div class="pe-title" style="margin-top:36px">主标题定版，<br><span class="pe-red">一行重点。</span></div><p class="pe-subtitle" style="margin-top:34px;max-width:900px">副题补充语境，两行以内收住。</p></div>
+        </div></div></div>
+        <footer><span class="use">pe-kicker + pe-title + pe-subtitle</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">folio-header</span><div class="name">页眉档案</div></span><span class="en">FOLIO</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-folio"><span>VIDEO THEME LIBRARY · 01</span><span>PAPER EDITORIAL</span></div>
+          <div style="position:absolute;left:92px;top:260px;font:900 60px/1.2 var(--pe-serif)">页眉贯穿全片，<br>标注栏目与页码。</div>
+        </div></div></div>
+        <footer><span class="use">pe-folio</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">paper-panel</span><div class="name">纸面板块</div></span><span class="en">PANEL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:300px;top:260px;width:1320px;display:grid;grid-template-columns:1fr 1fr;gap:36px">
+            <div class="pe-panel"><div class="pe-stat-label">PANEL / 常规</div><p style="margin-top:30px;font:700 28px/1.6 var(--pe-sans)">通用信息容器，硬边四像素描边。</p></div>
+            <div class="pe-panel red"><div class="pe-stat-label" style="color:#f3e8d1">PANEL / 朱砂</div><p style="margin-top:30px;font:700 28px/1.6 var(--pe-sans)">朱砂底只给一个重点面板。</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">pe-panel（.red 变体）</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">stat-block</span><div class="name">数字块</div></span><span class="en">STAT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:400px;top:330px"><div class="pe-stat-label">EFFICIENCY / 处理效率</div><div class="pe-stat-value" style="font-size:220px;margin-top:40px">72<span style="font-size:90px">%</span></div><p class="pe-note" style="margin-top:44px">一个数字占据一页，配 count-up 动效。</p></div>
+        </div></div></div>
+        <footer><span class="use">pe-stat-label + pe-stat-value</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">metric-triptych</span><div class="name">三联指标</div></span><span class="en">TRIPTYCH</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:180px;right:180px;top:280px" class="pe-triptych">
+            <article class="pe-metric"><div class="pe-stat-label">EFFICIENCY</div><h3>处理效率</h3><div class="value">72</div><div class="pe-bar"><span style="transform:scaleX(.72)"></span></div></article>
+            <article class="pe-metric"><div class="pe-stat-label">COVERAGE</div><h3>内容覆盖</h3><div class="value">94</div><div class="pe-bar"><span style="transform:scaleX(.94)"></span></div></article>
+            <article class="pe-metric red"><div class="pe-stat-label" style="color:#f3e8d1">DECISION</div><h3>结论强度</h3><div class="value">88</div><div class="pe-bar" style="background:#8e2d25"><span style="background:#f3e8d1;transform:scaleX(.88)"></span></div></article>
+          </div>
+        </div></div></div>
+        <footer><span class="use">pe-triptych + pe-metric + pe-bar</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">comparison-split</span><div class="name">双栏对比</div></span><span class="en">COMPARE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:240px;right:240px;top:250px" class="pe-compare">
+            <article><div class="pe-kicker">方案 A</div><h3 style="margin-top:30px">完整覆盖</h3><p style="margin-top:26px;font:700 22px/1.6 var(--pe-sans);color:var(--pe-muted)">保留全部材料，信息密度更高。</p></article>
+            <article style="background:var(--pe-ink);color:var(--pe-paper-light)"><div class="pe-kicker">方案 B</div><h3 style="margin-top:30px">重点推进</h3><p style="margin-top:26px;font:700 22px/1.6 var(--pe-sans);color:#d6c8ad">压缩次要信息，节奏更明确。</p></article>
+          </div>
+        </div></div></div>
+        <footer><span class="use">pe-compare</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">ranked-list</span><div class="name">排行清单</div></span><span class="en">LIST</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <ol class="pe-list" style="position:absolute;left:300px;right:300px;top:230px">
+            <li><span class="index">01</span><span class="name">核心结论</span><span class="meta">PRIMARY</span></li>
+            <li><span class="index">02</span><span class="name">关键证据</span><span class="meta">EVIDENCE</span></li>
+            <li><span class="index">03</span><span class="name">限制条件</span><span class="meta">BOUNDARY</span></li>
+            <li><span class="index">04</span><span class="name">补充观察</span><span class="meta">CONTEXT</span></li>
+          </ol>
+        </div></div></div>
+        <footer><span class="use">pe-list</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">timeline-steps</span><div class="name">流程时间线</div></span><span class="en">STEPS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-timeline" style="position:absolute;left:180px;right:180px;top:340px">
+            <article class="pe-step"><b>01 / DEFINE</b><h3>定义问题</h3><p>明确核心对象。</p></article>
+            <article class="pe-step"><b>02 / COLLECT</b><h3>整理证据</h3><p>标记来源边界。</p></article>
+            <article class="pe-step"><b>03 / COMPARE</b><h3>建立比较</h3><p>同一视觉标尺。</p></article>
+            <article class="pe-step"><b>04 / DECIDE</b><h3>给出判断</h3><p>结论明确。</p></article>
+          </div>
+        </div></div></div>
+        <footer><span class="use">pe-timeline + pe-step</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">quote-pullout</span><div class="name">引文拉出</div></span><span class="en">QUOTE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-quote" style="position:absolute;left:280px;right:280px;top:300px"><blockquote>信息设计的价值，<br>在于快速建立阅读重点。</blockquote><cite>EDITORIAL NOTE · GENERAL PURPOSE COPY</cite></div>
+        </div></div></div>
+        <footer><span class="use">pe-quote</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">artifact-frame</span><div class="name">作品画框</div></span><span class="en">ARTIFACT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-artifact" style="position:absolute;left:200px;right:200px;top:270px" class="pe-artifact"><div class="pe-artifact-frame"></div>
+            <aside style="display:flex;flex-direction:column;justify-content:space-between"><div><div class="pe-kicker">作品展示</div><h3 style="margin-top:26px;font:900 40px/1.15 var(--pe-serif)">主体放大，身份信息清楚。</h3></div><p class="pe-note">16:9 可替换为图片、网页、视频或图表。</p></aside>
+          </div>
+        </div></div></div>
+        <footer><span class="use">pe-artifact + pe-artifact-frame</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">verdict-stamp</span><div class="name">判定印章</div></span><span class="en">VERDICT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center"><div><div class="pe-verdict" style="font-size:96px;padding:34px 52px">值得推荐</div><p class="pe-note" style="margin-top:60px;text-align:center">配 stamp-impact 动效落印。</p></div></div>
+        </div></div></div>
+        <footer><span class="use">pe-verdict</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">chapter-divider</span><div class="name">章节隔断</div></span><span class="en">CHAPTER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-chapter"><div class="pe-chapter-index">02</div><div class="pe-chapter-body"><div class="pe-chapter-kicker">CHAPTER / 章节</div><div class="pe-chapter-title">证据与方法</div><div class="pe-chapter-rule"></div></div></div>
+        </div></div></div>
+        <footer><span class="use">pe-chapter（新增）+ chapter-mark 动效</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">source-note</span><div class="name">来源注记</div></span><span class="en">NOTE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:380px;right:380px;top:420px;border-left:4px solid var(--pe-rule);padding-left:34px"><p class="pe-note" style="font-size:24px">来源：官方文档与 2026 年 2 月版本更新日志。<br>方法：同口径对比，保留原始链接。</p></div>
+        </div></div></div>
+        <footer><span class="use">pe-note</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">progress-rail</span><div class="name">进度轨</div></span><span class="en">RAIL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font:900 54px/1 var(--pe-serif)">全宽进度轨贯穿整支视频</div>
+          <div class="pe-progress"><span style="transform:scaleX(.42)"></span></div>
+        </div></div></div>
+        <footer><span class="use">pe-progress</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">end-card</span><div class="name">结束卡</div></span><span class="en">END</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-end"><div class="pe-end-line">一套主题，</div><div class="pe-end-line">覆盖多类内容<span class="pe-end-mark">。</span></div><div class="pe-end-note">PAPER EDITORIAL · VIDEO THEME LIBRARY · 2026</div></div>
+        </div></div></div>
+        <footer><span class="use">pe-end（新增）+ end-lock 动效</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">screening-dossier</span><div class="name">放映档案</div></span><span class="en">DOSSIER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-screening-media" style="display:grid;place-items:center;color:rgba(239,229,206,.4);font:900 60px/1 var(--pe-serif)">16:9 素材窗口</div>
+          <section class="pe-screening">
+            <header class="pe-screening-head"><b class="pe-screening-index">06</b><span class="pe-screening-title"><strong>主体名称</strong><small><span class="pe-screening-work">《条目或作品名称》</span><em class="pe-screening-label">ORIGINAL WORK</em></small></span><span class="pe-screening-meta"><span>完整素材 / 1.0×</span><span class="pe-screening-emphasis">主观排名 #7</span></span></header>
+            <div class="pe-screening-frame" data-frame-label="ORIGINAL WORK / UNTRIMMED"></div>
+            <div class="pe-screening-spine">CURATED SCREENING · ARCHIVE DOSSIER</div>
+            <div class="pe-screening-edition">VOL.01 / 2026</div>
+            <i class="pe-screening-crop tl"></i><i class="pe-screening-crop tr"></i><i class="pe-screening-crop bl"></i><i class="pe-screening-crop br"></i>
+            <footer class="pe-screening-footer"><span>EXHIBITION · ORIGINAL MATERIAL</span><span>DURATION 00:52 · ENTRY 06/12</span></footer>
+            <div class="pe-screening-progress"><span style="transform:scaleX(.35)"></span></div>
+          </section>
+        </div></div></div>
+        <footer><span class="use">pe-screening 全家桶 + screening-unveil</span></footer></article>
+
+      <!-- 本期展厅专属组件：不在 canonical 16 之内，是 paper-editorial 的场景词汇 -->
+<article class="card component-card"><header><span><span class="id">manifest-sheet</span><div class="name">展品清单</div></span><span class="en">MANIFEST</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene" pe-theme scene-inner scene-manifest><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="md-lead">
+            <p class="md-flag">本期主角 · FRONTEND SHOWCASE</p>
+            <h1 class="md-name">GPT-6 ASTRA</h1>
+            <p class="md-sub">前端作品展示集 —— 前三项作品各附一件其他模型的优秀作品</p>
+            <dl class="md-specs"><div class="md-row"><dt>思考档位</dt><dd class="mono">effort = max</dd></div><div class="md-row"><dt>展品数量</dt><dd>十三件前端作品</dd></div></dl>
+            <div class="md-seal"><span class="md-bleed"></span></div>
+            <div class="md-banner"><span>本片不做评分</span><em>只做作品展示</em></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">md-lead 全家桶 + seal-press</span></footer></article>
+
+<article class="card component-card"><header><span><span class="id">exhibit-index</span><div class="name">展品总览</div></span><span class="en">INDEX</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene" pe-theme scene-inner scene-index><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="ix-stage">
+            <h2 class="ix-title">本期展品</h2>
+            <div class="ix-grid">
+              <div class="ix-item"><b>01</b><span>BETWEEN · 之间</span><em>66.0s</em></div>
+              <div class="ix-item"><b>02</b><span>SINGULARITY / 不可见之墙</span><em>32.9s</em></div>
+              <div class="ix-item"><b>03</b><span>VOXEL ATLAS 维多利亚港</span><em>70.0s</em></div>
+              <div class="ix-item"><b>04</b><span>USP MATCH · Polygon Archive</span><em>49.6s</em></div>
+            </div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">ix-stage + line-set 级联</span></footer></article>
+
+<article class="card component-card"><header><span><span class="id">compare-summary</span><div class="name">对照小结</div></span><span class="en">SUMMARY</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene" pe-theme scene-inner scene-compare><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="cm-stage">
+            <p class="cm-kicker">COMPARISON · 对照小结</p>
+            <h2 class="cm-title">同一命题下的两种前端审美</h2>
+            <div class="cm-grid">
+              <article class="cm-col"><h3>原作品 · ORIGINAL</h3><dl class="cm-rows"><div class="cm-row"><dt>命题</dt><dd>前端审美与自我介绍</dd></div><div class="cm-row"><dt>输出分辨率</dt><dd>1920×930</dd></div></dl></article>
+              <article class="cm-col dark"><h3>对照作品 · COMPARISON</h3><dl class="cm-rows"><div class="cm-row"><dt>命题</dt><dd>前端审美与自我介绍</dd></div><div class="cm-row"><dt>输出分辨率</dt><dd>2560×1242</dd></div></dl></article>
+            </div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">cm-stage + compare-pair</span></footer></article>
+
+<article class="card component-card"><header><span><span class="id">seal-sheet</span><div class="name">落款印谱</div></span><span class="en">SEALS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene" pe-theme scene-inner scene-end><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="end-stage">
+            <div class="end-seals"><i class="end-seal"><span class="end-seal-in">01</span></i><i class="end-seal"><span class="end-seal-in">02</span></i><i class="end-seal"><span class="end-seal-in">03</span></i><i class="end-seal"><span class="end-seal-in">04</span></i><i class="end-seal"><span class="end-seal-in">05</span></i><i class="end-seal"><span class="end-seal-in">06</span></i><i class="end-seal"><span class="end-seal-in">07</span></i></div>
+            <h2 class="end-head">十三件作品 · <span class="red">一纸收束</span></h2>
+            <p class="end-note">GPT-6 ASTRA · 十三件前端作品 · 全片不做评分</p>
+          </div>
+        </div></div></div>
+        <footer><span class="use">end-stage + seal-sheet 动效</span></footer></article>
+
+<article class="card component-card"><header><span><span class="id">work-slate</span><div class="name">引导页排印</div></span><span class="en">SLATE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene" pe-theme scene-inner scene-work><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <b class="dk-index"><span class="dk-index-inner">06</span></b>
+          <div class="dk-rule"></div>
+          <h2 class="dk-title">主体名称</h2>
+          <p class="dk-work">《条目或作品名称》</p>
+          <p class="dk-model">MODEL NAME · FRONTEND</p>
+          <p class="dk-question">命题 · 一句话说明</p>
+        </div></div></div>
+        <footer><span class="use">dk-* 排印 + line-set，飞行前的那一版</span></footer></article>
+
+<article class="card component-card"><header><span><span class="id">handoff-card</span><div class="name">交接换版</div></span><span class="en">HANDOFF</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene" pe-theme scene-inner scene-handoff><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="handoff-frame">
+            <p class="handoff-kicker">SAME BRIEF · DIFFERENT MODEL</p>
+            <p class="handoff-thesis">同一个命题，换一个模型</p>
+            <div class="handoff-zone out"><span class="handoff-model"><span>GPT-6 ASTRA</span></span><span class="handoff-role">ORIGINAL</span><span class="handoff-work">《原作品》</span></div>
+            <div class="handoff-zone in"><span class="handoff-seal">印</span><span class="handoff-model"><span>OPUS 5</span></span><span class="handoff-role">COMPARISON</span><span class="handoff-work">《同题作品》</span></div>
+            <div class="handoff-centre"></div>
+            <div class="handoff-brush"><div class="brush-body"></div><div class="brush-tail"></div></div>
+            <div class="handoff-bloom"></div>
+            <i class="handoff-splat" data-dx="180" data-dy="-120"></i><i class="handoff-splat" data-dx="240" data-dy="90"></i>
+            <p class="handoff-caption">SAME BRIEF · DIFFERENT MODEL</p>
+            <p class="handoff-foot">命题 · 一句话说明</p>
+          </div>
+        </div></div></div>
+        <footer><span class="use">handoff-* + handoff-swap</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">ink-form</span><div class="name">墨迹聚形</div></span><span class="en">INK FIELD</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-ink-form" style="position:absolute;inset:0"><canvas id="ink-form-static" class="pe-ink-form-canvas" aria-label="墨粒聚成墨字"></canvas></div>
+          <div class="pe-folio"><span>INK FORM / TEXT OR SHAPE</span><span>SEEK SAFE · CANVAS</span></div>
+        </div></div></div>
+        <footer><span class="use">pe-ink-form + createInkForm；文字 / SVG / 透明图片轮廓</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">movable-type</span><div class="name">活字归版</div></span><span class="en">WOOD TYPE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-movable-type" style="position:absolute;inset:0"><canvas id="movable-type-static" aria-label="活字压印后的文字"></canvas></div>
+          <div class="pe-folio"><span>MOVABLE TYPE / TEXT</span><span>SEEK SAFE · CANVAS</span></div>
+        </div></div></div>
+        <footer><span class="use">任意文案 → 木活字归位、压印、退场</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">rubbing-reveal</span><div class="name">拓印显影</div></span><span class="en">RUBBING</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-rubbing-reveal" style="position:absolute;inset:0"><canvas id="rubbing-reveal-static" aria-label="拓印后的铜镜纹样"></canvas></div>
+          <div class="pe-folio"><span>RUBBING REVEAL / IMAGE</span><span>SEEK SAFE · CANVAS</span></div>
+        </div></div></div>
+        <footer><span class="use">本地图片 / SVG → 压力路径显影</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">paper-cutaway</span><div class="name">纸层剖视</div></span><span class="en">PAPER LAYERS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-paper-cutaway" style="position:absolute;inset:0"><canvas id="paper-cutaway-static" aria-label="揭开的地质纸层"></canvas></div>
+          <div class="pe-folio"><span>PAPER CUTAWAY / LAYERS</span><span>SEEK SAFE · CANVAS</span></div>
+        </div></div></div>
+        <footer><span class="use">2–4 层对位内容 → 卷纸剖开</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">ledger-table</span><div class="name">度支谱</div></span><span class="en">LEDGER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:260px;top:400px;width:1400px"><div class="pe-ledger" style="width:100%">
+            <div class="pe-ledger-row"><dt>测试主体</dt><dd>GPT-6 Astra</dd></div>
+            <div class="pe-ledger-row"><dt>思考档位</dt><dd class="mono">effort = max</dd></div>
+            <div class="pe-ledger-row"><dt>展品数量</dt><dd>十三件前端作品</dd></div>
+            <div class="pe-ledger-row"><dt>播放规格</dt><dd class="mono">1920×1080 · 18:38</dd></div>
+          </div></div>
+        </div></div></div>
+        <footer><span class="use">pe-ledger + line-set 逐行入账</span></footer></article>
+      <article class="card component-card"><header><span><span class="id">tick-rule</span><div class="name">刻度尺</div></span><span class="en">TICKS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:260px;top:620px;width:1400px"><div class="pe-ticks"><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i></div></div>
+        </div></div></div>
+        <footer><span class="use">pe-ticks + 逐齿立起</span></footer></article>
+      <article class="card component-card"><header><span><span class="id">status-tabs</span><div class="name">状态签</div></span><span class="en">TABS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:260px;top:500px"><div class="pe-tabs"><span class="pe-tab">2026-09-21</span><span class="pe-tab is-plain">十三件展品</span><span class="pe-tab is-plain">全片零评分</span><span class="pe-tab is-plain">素材原速</span></div></div>
+        </div></div></div>
+        <footer><span class="use">pe-tabs + 依次落下</span></footer></article>
+      <article class="card component-card"><header><span><span class="id">vermilion-bar</span><div class="name">朱红横带</div></span><span class="en">BAR</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-bar" style="position:absolute;left:0;right:0;bottom:0"><b>本期主角 · 十三件前端作品原速放完</b><em>GPT-6 Astra</em></div>
+        </div></div></div>
+        <footer><span class="use">pe-bar 满宽拉开，全画面唯一饱和色</span></footer></article>
+      <article class="card component-card"><header><span><span class="id">seal-mark</span><div class="name">落印</div></span><span class="en">SEAL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:820px;top:480px;display:flex;gap:40px;align-items:center"><span class="pe-seal-mark">印</span><span class="pe-seal-mark is-word">ASTRA</span><span class="pe-seal-mark is-vermilion">展</span></div>
+        </div></div></div>
+        <footer><span class="use">pe-seal-mark，落款与确认共用一枚</span></footer></article>
+      <article class="card component-card"><header><span><span class="id">artifact-mount</span><div class="name">界格装裱</div></span><span class="en">MOUNT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:520px;top:300px;width:880px"><figure class="pe-artifact-mount" style="margin:0"><div style="height:480px;background:var(--pe-well)"></div></figure><p class="pe-artifact-caption">PLATE 01 · 木刻套版 · 源：02 SINGULARITY / 不可见之墙</p></div>
+        </div></div></div>
+        <footer><span class="use">pe-artifact-mount 细线收边 + 朱红角标 + pe-artifact-caption</span></footer></article>
+
+      <article class="card motion-card" data-motion="ledger-strike" data-duration="0.9"><header><span><span class="id">ledger-strike</span><div class="name">度支谱入账</div></span><span class="duration">0.9s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div id="demo-ledger" style="position:absolute;inset:0">
+            <div style="position:absolute;left:260px;top:330px;width:1400px"><div class="pe-ticks"><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i><i class=""></i><i class=""></i><i class=""></i><i class=""></i><i class="major"></i></div></div>
+            <div style="position:absolute;left:260px;top:400px;width:1400px"><div class="pe-ledger" style="width:100%">
+            <div class="pe-ledger-row"><dt>测试主体</dt><dd>GPT-6 Astra</dd></div>
+            <div class="pe-ledger-row"><dt>思考档位</dt><dd class="mono">effort = max</dd></div>
+            <div class="pe-ledger-row"><dt>展品数量</dt><dd>十三件前端作品</dd></div>
+            <div class="pe-ledger-row"><dt>播放规格</dt><dd class="mono">1920×1080 · 18:38</dd></div>
+            </div></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">刻度尺逐齿立起 → 账目逐行打出</span><button class="replay" type="button">重播</button></footer></article>
+      <article class="card motion-card" data-motion="bar-pull" data-duration="0.87"><header><span><span class="id">bar-pull</span><div class="name">朱红横带</div></span><span class="duration">0.87s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div id="demo-bar" style="position:absolute;inset:0"><div class="pe-bar" style="position:absolute;left:0;right:0;bottom:0"><b>本期主角 · 十三件前端作品原速放完</b><em>GPT-6 Astra</em></div></div>
+        </div></div></div>
+        <footer><span class="use">满宽一刀拉开，文字随后入</span><button class="replay" type="button">重播</button></footer></article>
+      <article class="card motion-card" data-motion="mount-seat" data-duration="0.8"><header><span><span class="id">mount-seat</span><div class="name">装裱落框</div></span><span class="duration">0.8s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div id="demo-mount" style="position:absolute;inset:0"><div style="position:absolute;left:520px;top:300px;width:880px"><figure class="pe-artifact-mount" style="margin:0"><div style="height:420px;background:var(--pe-well)"></div></figure><p class="pe-artifact-caption">PLATE 01 · 木刻套版</p></div></div>
+        </div></div></div>
+        <footer><span class="use">界格自左绘出 → 画面浮定 → 图注落款</span><button class="replay" type="button">重播</button></footer></article>
+      <article class="card motion-card" data-motion="plate-strike" data-duration="0.9"><header><span><span class="id">plate-strike</span><div class="name">分版套印</div></span><span class="duration">0.9s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div id="demo-plate" style="position:absolute;inset:0"><div style="position:absolute;left:560px;top:190px;width:800px"><div class="pe-plate"><svg class="pe-plate-forme" viewBox="0 0 1000 1000"><path fill="#b83b2f" d="M0.00 0.00h1000.00v17.86h-1000.00zM0.00 17.86h1000.00v17.86h-1000.00zM0.00 35.71h875.00v17.86h-875.00zM892.86 35.71h107.14v17.86h-107.14zM0.00 53.57h1000.00v17.86h-1000.00zM0.00 71.43h1000.00v17.86h-1000.00zM0.00 89.29h1000.00v17.86h-1000.00zM0.00 107.14h107.14v17.86h-107.14zM125.00 107.14h875.00v17.86h-875.00zM196.43 125.00h803.57v17.86h-803.57zM267.86 142.86h678.57v17.86h-678.57zM964.29 142.86h35.71v17.86h-35.71zM321.43 160.71h678.57v17.86h-678.57zM357.14 178.57h642.86v17.86h-642.86zM392.86 196.43h607.14v17.86h-607.14zM410.71 214.29h589.29v17.86h-589.29zM428.57 232.14h571.43v17.86h-571.43zM464.29 250.00h535.71v17.86h-535.71zM482.14 267.86h517.86v17.86h-517.86zM0.00 285.71h17.86v17.86h-17.86zM517.86 285.71h482.14v17.86h-482.14zM0.00 303.57h89.29v17.86h-89.29zM535.71 303.57h464.29v17.86h-464.29zM0.00 321.43h89.29v17.86h-89.29zM553.57 321.43h410.71v17.86h-410.71zM982.14 321.43h17.86v17.86h-17.86zM35.71 339.29h107.14v17.86h-107.14zM571.43 339.29h428.57v17.86h-428.57zM0.00 357.14h53.57v17.86h-53.57zM89.29 357.14h71.43v17.86h-71.43zM589.29 357.14h410.71v17.86h-410.71zM0.00 375.00h89.29v17.86h-89.29zM107.14 375.00h53.57v17.86h-53.57zM589.29 375.00h410.71v17.86h-410.71zM0.00 392.86h107.14v17.86h-107.14zM125.00 392.86h53.57v17.86h-53.57zM607.14 392.86h392.86v17.86h-392.86zM0.00 410.71h125.00v17.86h-125.00zM142.86 410.71h35.71v17.86h-35.71zM607.14 410.71h392.86v17.86h-392.86zM0.00 428.57h142.86v17.86h-142.86zM160.71 428.57h35.71v17.86h-35.71zM625.00 428.57h375.00v17.86h-375.00zM0.00 446.43h142.86v17.86h-142.86zM160.71 446.43h35.71v17.86h-35.71zM625.00 446.43h375.00v17.86h-375.00zM0.00 464.29h160.71v17.86h-160.71zM178.57 464.29h17.86v17.86h-17.86zM642.86 464.29h357.14v17.86h-357.14zM0.00 482.14h160.71v17.86h-160.71zM178.57 482.14h17.86v17.86h-17.86zM660.71 482.14h339.29v17.86h-339.29zM0.00 500.00h160.71v17.86h-160.71zM178.57 500.00h17.86v17.86h-17.86zM660.71 500.00h339.29v17.86h-339.29zM0.00 517.86h160.71v17.86h-160.71zM660.71 517.86h339.29v17.86h-339.29zM0.00 535.71h160.71v17.86h-160.71zM660.71 535.71h339.29v17.86h-339.29zM0.00 553.57h142.86v17.86h-142.86zM660.71 553.57h339.29v17.86h-339.29zM0.00 571.43h142.86v17.86h-142.86zM660.71 571.43h339.29v17.86h-339.29zM0.00 589.29h125.00v17.86h-125.00zM660.71 589.29h339.29v17.86h-339.29zM0.00 607.14h107.14v17.86h-107.14zM678.57 607.14h321.43v17.86h-321.43zM0.00 625.00h89.29v17.86h-89.29zM678.57 625.00h321.43v17.86h-321.43zM0.00 642.86h53.57v17.86h-53.57zM678.57 642.86h321.43v17.86h-321.43zM696.43 660.71h303.57v17.86h-303.57zM696.43 678.57h303.57v17.86h-303.57zM696.43 696.43h303.57v17.86h-303.57zM696.43 714.29h303.57v17.86h-303.57zM678.57 732.14h321.43v17.86h-321.43zM678.57 750.00h321.43v17.86h-321.43zM660.71 767.86h339.29v17.86h-339.29zM660.71 785.71h339.29v17.86h-339.29zM642.86 803.57h357.14v17.86h-357.14zM607.14 821.43h392.86v17.86h-392.86zM571.43 839.29h428.57v17.86h-428.57zM392.86 857.14h607.14v17.86h-607.14zM0.00 875.00h35.71v17.86h-35.71zM285.71 875.00h53.57v17.86h-53.57zM392.86 875.00h607.14v17.86h-607.14zM0.00 892.86h196.43v17.86h-196.43zM232.14 892.86h125.00v17.86h-125.00zM375.00 892.86h625.00v17.86h-625.00zM0.00 910.71h1000.00v17.86h-1000.00zM0.00 928.57h1000.00v17.86h-1000.00zM0.00 946.43h1000.00v17.86h-1000.00zM0.00 964.29h1000.00v17.86h-1000.00zM0.00 982.14h1000.00v17.86h-1000.00z"/><path fill="#6f7377" d="M107.14 107.14h17.86v17.86h-17.86zM0.00 125.00h196.43v17.86h-196.43zM0.00 142.86h267.86v17.86h-267.86zM946.43 142.86h17.86v17.86h-17.86zM0.00 160.71h17.86v17.86h-17.86zM35.71 160.71h285.71v17.86h-285.71zM178.57 178.57h178.57v17.86h-178.57zM285.71 196.43h107.14v17.86h-107.14zM357.14 214.29h53.57v17.86h-53.57zM410.71 232.14h17.86v17.86h-17.86zM428.57 250.00h35.71v17.86h-35.71zM446.43 267.86h35.71v17.86h-35.71zM17.86 285.71h35.71v17.86h-35.71zM482.14 285.71h35.71v17.86h-35.71zM482.14 303.57h53.57v17.86h-53.57zM89.29 321.43h35.71v17.86h-35.71zM500.00 321.43h53.57v17.86h-53.57zM964.29 321.43h17.86v17.86h-17.86zM0.00 339.29h35.71v17.86h-35.71zM517.86 339.29h53.57v17.86h-53.57zM53.57 357.14h35.71v17.86h-35.71zM535.71 357.14h53.57v17.86h-53.57zM89.29 375.00h17.86v17.86h-17.86zM160.71 375.00h17.86v17.86h-17.86zM553.57 375.00h35.71v17.86h-35.71zM107.14 392.86h17.86v17.86h-17.86zM178.57 392.86h17.86v17.86h-17.86zM553.57 392.86h53.57v17.86h-53.57zM125.00 410.71h17.86v17.86h-17.86zM178.57 410.71h17.86v17.86h-17.86zM571.43 410.71h35.71v17.86h-35.71zM142.86 428.57h17.86v17.86h-17.86zM589.29 428.57h35.71v17.86h-35.71zM142.86 446.43h17.86v17.86h-17.86zM196.43 446.43h17.86v17.86h-17.86zM589.29 446.43h35.71v17.86h-35.71zM160.71 464.29h17.86v17.86h-17.86zM196.43 464.29h17.86v17.86h-17.86zM607.14 464.29h35.71v17.86h-35.71zM196.43 482.14h17.86v17.86h-17.86zM607.14 482.14h53.57v17.86h-53.57zM196.43 500.00h17.86v17.86h-17.86zM607.14 500.00h53.57v17.86h-53.57zM178.57 517.86h35.71v17.86h-35.71zM625.00 517.86h35.71v17.86h-35.71zM178.57 535.71h17.86v17.86h-17.86zM625.00 535.71h35.71v17.86h-35.71zM142.86 553.57h17.86v17.86h-17.86zM178.57 553.57h17.86v17.86h-17.86zM625.00 553.57h35.71v17.86h-35.71zM642.86 571.43h17.86v17.86h-17.86zM125.00 589.29h17.86v17.86h-17.86zM642.86 589.29h17.86v17.86h-17.86zM107.14 607.14h17.86v17.86h-17.86zM660.71 607.14h17.86v17.86h-17.86zM89.29 625.00h17.86v17.86h-17.86zM660.71 625.00h17.86v17.86h-17.86zM53.57 642.86h17.86v17.86h-17.86zM660.71 642.86h17.86v17.86h-17.86zM678.57 660.71h17.86v17.86h-17.86zM660.71 678.57h35.71v17.86h-35.71zM660.71 696.43h35.71v17.86h-35.71zM642.86 714.29h53.57v17.86h-53.57zM642.86 732.14h35.71v17.86h-35.71zM607.14 750.00h71.43v17.86h-71.43zM571.43 767.86h89.29v17.86h-89.29zM553.57 785.71h107.14v17.86h-107.14zM339.29 803.57h17.86v17.86h-17.86zM500.00 803.57h142.86v17.86h-142.86zM303.57 821.43h71.43v17.86h-71.43zM446.43 821.43h17.86v17.86h-17.86zM482.14 821.43h125.00v17.86h-125.00zM0.00 839.29h571.43v17.86h-571.43zM0.00 857.14h392.86v17.86h-392.86zM35.71 875.00h250.00v17.86h-250.00zM339.29 875.00h53.57v17.86h-53.57zM196.43 892.86h35.71v17.86h-35.71zM357.14 892.86h17.86v17.86h-17.86z"/><path fill="#a9a396" d="M875.00 35.71h17.86v17.86h-17.86zM17.86 160.71h17.86v17.86h-17.86zM0.00 178.57h178.57v17.86h-178.57zM0.00 196.43h285.71v17.86h-285.71zM214.29 214.29h142.86v17.86h-142.86zM303.57 232.14h107.14v17.86h-107.14zM357.14 250.00h71.43v17.86h-71.43zM410.71 267.86h35.71v17.86h-35.71zM446.43 285.71h35.71v17.86h-35.71zM89.29 303.57h17.86v17.86h-17.86zM446.43 303.57h35.71v17.86h-35.71zM482.14 321.43h17.86v17.86h-17.86zM142.86 339.29h17.86v17.86h-17.86zM482.14 339.29h35.71v17.86h-35.71zM160.71 357.14h17.86v17.86h-17.86zM500.00 357.14h35.71v17.86h-35.71zM517.86 375.00h35.71v17.86h-35.71zM517.86 392.86h35.71v17.86h-35.71zM535.71 410.71h35.71v17.86h-35.71zM196.43 428.57h17.86v17.86h-17.86zM535.71 428.57h53.57v17.86h-53.57zM535.71 446.43h53.57v17.86h-53.57zM517.86 464.29h89.29v17.86h-89.29zM160.71 482.14h17.86v17.86h-17.86zM535.71 482.14h71.43v17.86h-71.43zM160.71 500.00h17.86v17.86h-17.86zM535.71 500.00h35.71v17.86h-35.71zM589.29 500.00h17.86v17.86h-17.86zM160.71 517.86h17.86v17.86h-17.86zM535.71 517.86h17.86v17.86h-17.86zM589.29 517.86h35.71v17.86h-35.71zM196.43 535.71h17.86v17.86h-17.86zM589.29 535.71h35.71v17.86h-35.71zM589.29 553.57h35.71v17.86h-35.71zM142.86 571.43h17.86v17.86h-17.86zM178.57 571.43h17.86v17.86h-17.86zM589.29 571.43h53.57v17.86h-53.57zM589.29 589.29h53.57v17.86h-53.57zM125.00 607.14h17.86v17.86h-17.86zM607.14 607.14h53.57v17.86h-53.57zM107.14 625.00h17.86v17.86h-17.86zM553.57 625.00h17.86v17.86h-17.86zM589.29 625.00h71.43v17.86h-71.43zM71.43 642.86h17.86v17.86h-17.86zM589.29 642.86h71.43v17.86h-71.43zM589.29 660.71h89.29v17.86h-89.29zM589.29 678.57h71.43v17.86h-71.43zM553.57 696.43h17.86v17.86h-17.86zM589.29 696.43h71.43v17.86h-71.43zM553.57 714.29h89.29v17.86h-89.29zM517.86 732.14h125.00v17.86h-125.00zM357.14 750.00h17.86v17.86h-17.86zM500.00 750.00h107.14v17.86h-107.14zM0.00 767.86h53.57v17.86h-53.57zM321.43 767.86h89.29v17.86h-89.29zM482.14 767.86h89.29v17.86h-89.29zM0.00 785.71h178.57v17.86h-178.57zM196.43 785.71h214.29v17.86h-214.29zM428.57 785.71h125.00v17.86h-125.00zM0.00 803.57h339.29v17.86h-339.29zM357.14 803.57h142.86v17.86h-142.86zM0.00 821.43h303.57v17.86h-303.57zM375.00 821.43h71.43v17.86h-71.43zM464.29 821.43h17.86v17.86h-17.86z"/></svg></div></div></div>
+        </div></div></div>
+        <footer><span class="use">淡墨 → 中墨 → 深墨 → 朱红，上版次序即绘制次序</span><button class="replay" type="button">重播</button></footer></article>
+      <article class="card component-card"><header><span><span class="id">ink-plate</span><div class="name">木刻谱</div></span><span class="en">PLATE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner scene-record"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div style="position:absolute;left:560px;top:190px;width:800px"><figure class="pe-plate" style="margin:0"><svg class="pe-plate-forme" viewBox="0 0 1000 1000"><path fill="#b83b2f" d="M0.00 0.00h1000.00v17.86h-1000.00zM0.00 17.86h1000.00v17.86h-1000.00zM0.00 35.71h875.00v17.86h-875.00zM892.86 35.71h107.14v17.86h-107.14zM0.00 53.57h1000.00v17.86h-1000.00zM0.00 71.43h1000.00v17.86h-1000.00zM0.00 89.29h1000.00v17.86h-1000.00zM0.00 107.14h107.14v17.86h-107.14zM125.00 107.14h875.00v17.86h-875.00zM196.43 125.00h803.57v17.86h-803.57zM267.86 142.86h678.57v17.86h-678.57zM964.29 142.86h35.71v17.86h-35.71zM321.43 160.71h678.57v17.86h-678.57zM357.14 178.57h642.86v17.86h-642.86zM392.86 196.43h607.14v17.86h-607.14zM410.71 214.29h589.29v17.86h-589.29zM428.57 232.14h571.43v17.86h-571.43zM464.29 250.00h535.71v17.86h-535.71zM482.14 267.86h517.86v17.86h-517.86zM0.00 285.71h17.86v17.86h-17.86zM517.86 285.71h482.14v17.86h-482.14zM0.00 303.57h89.29v17.86h-89.29zM535.71 303.57h464.29v17.86h-464.29zM0.00 321.43h89.29v17.86h-89.29zM553.57 321.43h410.71v17.86h-410.71zM982.14 321.43h17.86v17.86h-17.86zM35.71 339.29h107.14v17.86h-107.14zM571.43 339.29h428.57v17.86h-428.57zM0.00 357.14h53.57v17.86h-53.57zM89.29 357.14h71.43v17.86h-71.43zM589.29 357.14h410.71v17.86h-410.71zM0.00 375.00h89.29v17.86h-89.29zM107.14 375.00h53.57v17.86h-53.57zM589.29 375.00h410.71v17.86h-410.71zM0.00 392.86h107.14v17.86h-107.14zM125.00 392.86h53.57v17.86h-53.57zM607.14 392.86h392.86v17.86h-392.86zM0.00 410.71h125.00v17.86h-125.00zM142.86 410.71h35.71v17.86h-35.71zM607.14 410.71h392.86v17.86h-392.86zM0.00 428.57h142.86v17.86h-142.86zM160.71 428.57h35.71v17.86h-35.71zM625.00 428.57h375.00v17.86h-375.00zM0.00 446.43h142.86v17.86h-142.86zM160.71 446.43h35.71v17.86h-35.71zM625.00 446.43h375.00v17.86h-375.00zM0.00 464.29h160.71v17.86h-160.71zM178.57 464.29h17.86v17.86h-17.86zM642.86 464.29h357.14v17.86h-357.14zM0.00 482.14h160.71v17.86h-160.71zM178.57 482.14h17.86v17.86h-17.86zM660.71 482.14h339.29v17.86h-339.29zM0.00 500.00h160.71v17.86h-160.71zM178.57 500.00h17.86v17.86h-17.86zM660.71 500.00h339.29v17.86h-339.29zM0.00 517.86h160.71v17.86h-160.71zM660.71 517.86h339.29v17.86h-339.29zM0.00 535.71h160.71v17.86h-160.71zM660.71 535.71h339.29v17.86h-339.29zM0.00 553.57h142.86v17.86h-142.86zM660.71 553.57h339.29v17.86h-339.29zM0.00 571.43h142.86v17.86h-142.86zM660.71 571.43h339.29v17.86h-339.29zM0.00 589.29h125.00v17.86h-125.00zM660.71 589.29h339.29v17.86h-339.29zM0.00 607.14h107.14v17.86h-107.14zM678.57 607.14h321.43v17.86h-321.43zM0.00 625.00h89.29v17.86h-89.29zM678.57 625.00h321.43v17.86h-321.43zM0.00 642.86h53.57v17.86h-53.57zM678.57 642.86h321.43v17.86h-321.43zM696.43 660.71h303.57v17.86h-303.57zM696.43 678.57h303.57v17.86h-303.57zM696.43 696.43h303.57v17.86h-303.57zM696.43 714.29h303.57v17.86h-303.57zM678.57 732.14h321.43v17.86h-321.43zM678.57 750.00h321.43v17.86h-321.43zM660.71 767.86h339.29v17.86h-339.29zM660.71 785.71h339.29v17.86h-339.29zM642.86 803.57h357.14v17.86h-357.14zM607.14 821.43h392.86v17.86h-392.86zM571.43 839.29h428.57v17.86h-428.57zM392.86 857.14h607.14v17.86h-607.14zM0.00 875.00h35.71v17.86h-35.71zM285.71 875.00h53.57v17.86h-53.57zM392.86 875.00h607.14v17.86h-607.14zM0.00 892.86h196.43v17.86h-196.43zM232.14 892.86h125.00v17.86h-125.00zM375.00 892.86h625.00v17.86h-625.00zM0.00 910.71h1000.00v17.86h-1000.00zM0.00 928.57h1000.00v17.86h-1000.00zM0.00 946.43h1000.00v17.86h-1000.00zM0.00 964.29h1000.00v17.86h-1000.00zM0.00 982.14h1000.00v17.86h-1000.00z"/><path fill="#6f7377" d="M107.14 107.14h17.86v17.86h-17.86zM0.00 125.00h196.43v17.86h-196.43zM0.00 142.86h267.86v17.86h-267.86zM946.43 142.86h17.86v17.86h-17.86zM0.00 160.71h17.86v17.86h-17.86zM35.71 160.71h285.71v17.86h-285.71zM178.57 178.57h178.57v17.86h-178.57zM285.71 196.43h107.14v17.86h-107.14zM357.14 214.29h53.57v17.86h-53.57zM410.71 232.14h17.86v17.86h-17.86zM428.57 250.00h35.71v17.86h-35.71zM446.43 267.86h35.71v17.86h-35.71zM17.86 285.71h35.71v17.86h-35.71zM482.14 285.71h35.71v17.86h-35.71zM482.14 303.57h53.57v17.86h-53.57zM89.29 321.43h35.71v17.86h-35.71zM500.00 321.43h53.57v17.86h-53.57zM964.29 321.43h17.86v17.86h-17.86zM0.00 339.29h35.71v17.86h-35.71zM517.86 339.29h53.57v17.86h-53.57zM53.57 357.14h35.71v17.86h-35.71zM535.71 357.14h53.57v17.86h-53.57zM89.29 375.00h17.86v17.86h-17.86zM160.71 375.00h17.86v17.86h-17.86zM553.57 375.00h35.71v17.86h-35.71zM107.14 392.86h17.86v17.86h-17.86zM178.57 392.86h17.86v17.86h-17.86zM553.57 392.86h53.57v17.86h-53.57zM125.00 410.71h17.86v17.86h-17.86zM178.57 410.71h17.86v17.86h-17.86zM571.43 410.71h35.71v17.86h-35.71zM142.86 428.57h17.86v17.86h-17.86zM589.29 428.57h35.71v17.86h-35.71zM142.86 446.43h17.86v17.86h-17.86zM196.43 446.43h17.86v17.86h-17.86zM589.29 446.43h35.71v17.86h-35.71zM160.71 464.29h17.86v17.86h-17.86zM196.43 464.29h17.86v17.86h-17.86zM607.14 464.29h35.71v17.86h-35.71zM196.43 482.14h17.86v17.86h-17.86zM607.14 482.14h53.57v17.86h-53.57zM196.43 500.00h17.86v17.86h-17.86zM607.14 500.00h53.57v17.86h-53.57zM178.57 517.86h35.71v17.86h-35.71zM625.00 517.86h35.71v17.86h-35.71zM178.57 535.71h17.86v17.86h-17.86zM625.00 535.71h35.71v17.86h-35.71zM142.86 553.57h17.86v17.86h-17.86zM178.57 553.57h17.86v17.86h-17.86zM625.00 553.57h35.71v17.86h-35.71zM642.86 571.43h17.86v17.86h-17.86zM125.00 589.29h17.86v17.86h-17.86zM642.86 589.29h17.86v17.86h-17.86zM107.14 607.14h17.86v17.86h-17.86zM660.71 607.14h17.86v17.86h-17.86zM89.29 625.00h17.86v17.86h-17.86zM660.71 625.00h17.86v17.86h-17.86zM53.57 642.86h17.86v17.86h-17.86zM660.71 642.86h17.86v17.86h-17.86zM678.57 660.71h17.86v17.86h-17.86zM660.71 678.57h35.71v17.86h-35.71zM660.71 696.43h35.71v17.86h-35.71zM642.86 714.29h53.57v17.86h-53.57zM642.86 732.14h35.71v17.86h-35.71zM607.14 750.00h71.43v17.86h-71.43zM571.43 767.86h89.29v17.86h-89.29zM553.57 785.71h107.14v17.86h-107.14zM339.29 803.57h17.86v17.86h-17.86zM500.00 803.57h142.86v17.86h-142.86zM303.57 821.43h71.43v17.86h-71.43zM446.43 821.43h17.86v17.86h-17.86zM482.14 821.43h125.00v17.86h-125.00zM0.00 839.29h571.43v17.86h-571.43zM0.00 857.14h392.86v17.86h-392.86zM35.71 875.00h250.00v17.86h-250.00zM339.29 875.00h53.57v17.86h-53.57zM196.43 892.86h35.71v17.86h-35.71zM357.14 892.86h17.86v17.86h-17.86z"/><path fill="#a9a396" d="M875.00 35.71h17.86v17.86h-17.86zM17.86 160.71h17.86v17.86h-17.86zM0.00 178.57h178.57v17.86h-178.57zM0.00 196.43h285.71v17.86h-285.71zM214.29 214.29h142.86v17.86h-142.86zM303.57 232.14h107.14v17.86h-107.14zM357.14 250.00h71.43v17.86h-71.43zM410.71 267.86h35.71v17.86h-35.71zM446.43 285.71h35.71v17.86h-35.71zM89.29 303.57h17.86v17.86h-17.86zM446.43 303.57h35.71v17.86h-35.71zM482.14 321.43h17.86v17.86h-17.86zM142.86 339.29h17.86v17.86h-17.86zM482.14 339.29h35.71v17.86h-35.71zM160.71 357.14h17.86v17.86h-17.86zM500.00 357.14h35.71v17.86h-35.71zM517.86 375.00h35.71v17.86h-35.71zM517.86 392.86h35.71v17.86h-35.71zM535.71 410.71h35.71v17.86h-35.71zM196.43 428.57h17.86v17.86h-17.86zM535.71 428.57h53.57v17.86h-53.57zM535.71 446.43h53.57v17.86h-53.57zM517.86 464.29h89.29v17.86h-89.29zM160.71 482.14h17.86v17.86h-17.86zM535.71 482.14h71.43v17.86h-71.43zM160.71 500.00h17.86v17.86h-17.86zM535.71 500.00h35.71v17.86h-35.71zM589.29 500.00h17.86v17.86h-17.86zM160.71 517.86h17.86v17.86h-17.86zM535.71 517.86h17.86v17.86h-17.86zM589.29 517.86h35.71v17.86h-35.71zM196.43 535.71h17.86v17.86h-17.86zM589.29 535.71h35.71v17.86h-35.71zM589.29 553.57h35.71v17.86h-35.71zM142.86 571.43h17.86v17.86h-17.86zM178.57 571.43h17.86v17.86h-17.86zM589.29 571.43h53.57v17.86h-53.57zM589.29 589.29h53.57v17.86h-53.57zM125.00 607.14h17.86v17.86h-17.86zM607.14 607.14h53.57v17.86h-53.57zM107.14 625.00h17.86v17.86h-17.86zM553.57 625.00h17.86v17.86h-17.86zM589.29 625.00h71.43v17.86h-71.43zM71.43 642.86h17.86v17.86h-17.86zM589.29 642.86h71.43v17.86h-71.43zM589.29 660.71h89.29v17.86h-89.29zM589.29 678.57h71.43v17.86h-71.43zM553.57 696.43h17.86v17.86h-17.86zM589.29 696.43h71.43v17.86h-71.43zM553.57 714.29h89.29v17.86h-89.29zM517.86 732.14h125.00v17.86h-125.00zM357.14 750.00h17.86v17.86h-17.86zM500.00 750.00h107.14v17.86h-107.14zM0.00 767.86h53.57v17.86h-53.57zM321.43 767.86h89.29v17.86h-89.29zM482.14 767.86h89.29v17.86h-89.29zM0.00 785.71h178.57v17.86h-178.57zM196.43 785.71h214.29v17.86h-214.29zM428.57 785.71h125.00v17.86h-125.00zM0.00 803.57h339.29v17.86h-339.29zM357.14 803.57h142.86v17.86h-142.86zM0.00 821.43h303.57v17.86h-303.57zM375.00 821.43h71.43v17.86h-71.43zM464.29 821.43h17.86v17.86h-17.86z"/></svg></figure><p class="pe-plate-caption">PLATE 01 · 木刻套版 · 源：02 SINGULARITY / 不可见之墙</p></div>
+        </div></div></div>
+        <footer><span class="use">pe-plate + 生成器 tools/ink-plate.mjs（矢量分版套色）</span></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="motions">
+  <div class="wrap">
+    <h2>动效 · 31</h2>
+    <p class="section-sub">点击重播即调用 motions.js 里的真实预设（网页预览用时间线自动播放；生产合成用单一 paused timeline 定位到确定时间）。</p>
+    <div class="grid" id="motion-grid">
+
+      <article class="card motion-card" data-motion="ink-form" data-duration="4.8"><header><span><span class="id">ink-form</span><div class="name">墨迹聚形</div></span><span class="duration">4.8s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-ink-form" style="position:absolute;inset:0"><canvas id="ink-form-motion" class="pe-ink-form-canvas" aria-label="墨粒散开、聚环、成字的动画"></canvas></div>
+          <div class="pe-folio"><span>INK FORM / REPLAY</span><span>散 · 环 · 字</span></div>
+        </div></div></div>
+        <footer><span class="use">固定种子墨粒 → 聚环 → 任意目标轮廓</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="movable-type" data-duration="5.6"><header><span><span class="id">movable-type</span><div class="name">活字归版</div></span><span class="duration">5.6s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-movable-type" style="position:absolute;inset:0"><canvas id="movable-type-motion" aria-label="活字归版压印"></canvas></div>
+          <div class="pe-folio"><span>MOVABLE TYPE / REPLAY</span><span>字块 · 版框 · 墨印</span></div>
+        </div></div></div>
+        <footer><span class="use">文字参数 → 活字归位 → 压印留痕</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="rubbing-reveal" data-duration="5.4"><header><span><span class="id">rubbing-reveal</span><div class="name">拓印显影</div></span><span class="duration">5.4s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-rubbing-reveal" style="position:absolute;inset:0"><canvas id="rubbing-reveal-motion" aria-label="铜镜图案拓印显影"></canvas></div>
+          <div class="pe-folio"><span>RUBBING REVEAL / REPLAY</span><span>擦拓 · 纹样 · 显影</span></div>
+        </div></div></div>
+        <footer><span class="use">本地 SVG / 图片 → 四次压力擦拓</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="paper-cutaway" data-duration="6.6"><header><span><span class="id">paper-cutaway</span><div class="name">纸层剖视</div></span><span class="duration">6.6s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene pe-theme scene-inner"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+          <div class="pe-paper-cutaway" style="position:absolute;inset:0"><canvas id="paper-cutaway-motion" aria-label="对位纸层逐张卷开"></canvas></div>
+          <div class="pe-folio"><span>PAPER CUTAWAY / REPLAY</span><span>表层 · 地层 · 矿脉</span></div>
+        </div></div></div>
+        <footer><span class="use">2–4 层同位内容 → 纸页逐层剖开</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="ink-slam" data-duration="0.58"><header><span><span class="id">ink-slam</span><div class="name">墨定标题</div></span><span class="duration">.58s</span></header>
+        <div class="motion-stage"><div class="sample-title">墨定标题</div></div>
+        <footer><span class="use">主标题定版：缩放 + 聚焦 + 下沉</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="paper-rise" data-duration="0.62"><header><span><span class="id">paper-rise</span><div class="name">纸面升起</div></span><span class="duration">.62s</span></header>
+        <div class="motion-stage"><div class="sample-panel">PANEL A<br>依次</div><div class="sample-panel">PANEL B<br>升起</div><div class="sample-panel">PANEL C<br>落定</div></div>
+        <footer><span class="use">面板入场，底部微旋落定，可级联</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="bar-draw" data-duration="0.95"><header><span><span class="id">bar-draw</span><div class="name">证据绘条</div></span><span class="duration">.95s</span></header>
+        <div class="motion-stage"><div class="sample-bar"><span></span></div></div>
+        <footer><span class="use">条形与规则线自左绘出</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="cascade-list" data-duration="0.71"><header><span><span class="id">cascade-list</span><div class="name">级联清单</div></span><span class="duration">.5s+</span></header>
+        <div class="motion-stage"><div class="sample-rows"><div class="sample-row"><span class="idx">01</span>核心结论<span class="mta">PRIMARY</span></div><div class="sample-row"><span class="idx">02</span>关键证据<span class="mta">EVIDENCE</span></div><div class="sample-row"><span class="idx">03</span>限制条件<span class="mta">BOUNDARY</span></div></div></div>
+        <footer><span class="use">有序条目快速依次入场</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="editorial-wipe" data-duration="0.65"><header><span><span class="id">editorial-wipe</span><div class="name">版面拭入</div></span><span class="duration">.65s</span></header>
+        <div class="motion-stage"><div class="sample-wipe">印刷式揭示</div></div>
+        <footer><span class="use">clip-path 揭示，支持四个方向</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="stamp-impact" data-duration="0.48"><header><span><span class="id">stamp-impact</span><div class="name">落印</div></span><span class="duration">.48s</span></header>
+        <div class="motion-stage"><div class="sample-stamp">通过</div></div>
+        <footer><span class="use">加速砸落 + 压实回弹</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="underline-draw" data-duration="0.5"><header><span><span class="id">underline-draw</span><div class="name">批注下划线</div></span><span class="duration">.5s</span></header>
+        <div class="motion-stage"><div class="sample-phrase">这句是<span class="sample-uwrap">重点判断<span class="sample-underline"></span></span></div></div>
+        <footer><span class="use">朱砂批注自左绘出</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="folio-swap" data-duration="0.32"><header><span><span class="id">folio-swap</span><div class="name">页眉更替</div></span><span class="duration">.32s</span></header>
+        <div class="motion-stage"><div class="sample-folio">SECTION 02 / 方法 · 2026-02</div></div>
+        <footer><span class="use">元数据的克制切换</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="red-result-emphasis" data-duration="0.5"><header><span><span class="id">red-result-emphasis</span><div class="name">朱砂点题</div></span><span class="duration">.5s</span></header>
+        <div class="motion-stage"><div class="sample-number">92.4</div></div>
+        <footer><span class="use">最终值由墨转朱砂并回弹</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="count-up" data-duration="1.1"><header><span><span class="id">count-up</span><div class="name">数字滚动</div></span><span class="duration">1.1s</span></header>
+        <div class="motion-stage"><div class="sample-number" data-end="87">0</div></div>
+        <footer><span class="use">参数化滚动，支持自定义格式</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="ghost-settle" data-duration="1.1"><header><span><span class="id">ghost-settle</span><div class="name">背景水印落定</div></span><span class="duration">1.1s</span></header>
+        <div class="motion-stage"><div class="sample-ghost">编辑部</div></div>
+        <footer><span class="use">大号 ghost 排版安静落定</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="quote-reveal" data-duration="0.93"><header><span><span class="id">quote-reveal</span><div class="name">引文揭示</div></span><span class="duration">.93s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="pe-quote" id="demo-quote" style="position:absolute;left:280px;right:280px;top:290px"><blockquote>信息设计的价值，<br>在于快速建立阅读重点。</blockquote><cite>EDITORIAL NOTE</cite></div>
+        </div></div></div>
+        <footer><span class="use">引文滑入 → 正文升起 → 出处淡入</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="chapter-mark" data-duration="1.05"><header><span><span class="id">chapter-mark</span><div class="name">章节落版</div></span><span class="duration">1.05s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="pe-chapter" id="demo-chapter"><div class="pe-chapter-index">02</div><div class="pe-chapter-body"><div class="pe-chapter-kicker">CHAPTER</div><div class="pe-chapter-title">证据与方法</div><div class="pe-chapter-rule"></div></div></div>
+        </div></div></div>
+        <footer><span class="use">序号定版 → 标题拭入 → 朱线绘出</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="end-lock" data-duration="1.05"><header><span><span class="id">end-lock</span><div class="name">收尾锁定</div></span><span class="duration">1.05s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="pe-end" id="demo-end"><div class="pe-end-line">一套主题，</div><div class="pe-end-line">覆盖多类内容<span class="pe-end-mark">。</span></div><div class="pe-end-note">PAPER EDITORIAL · 2026</div></div>
+        </div></div></div>
+        <footer><span class="use">结语升起 → 句读落印 → 落款淡入</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="screening-unveil" data-duration="1.0"><header><span><span class="id">screening-unveil</span><div class="name">放映揭幕</div></span><span class="duration">~1s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="pe-screening-media" style="background:var(--pe-well)"></div>
+          <section class="pe-screening" id="demo-screening">
+            <header class="pe-screening-head"><b class="pe-screening-index">06</b><span class="pe-screening-title"><strong>主体名称</strong><small><span class="pe-screening-work">《条目名称》</span><em class="pe-screening-label">ORIGINAL</em></small></span><span class="pe-screening-meta"><span>完整素材</span></span></header>
+            <div class="pe-screening-frame" data-frame-label="UNTRIMMED"></div>
+            <div class="pe-screening-spine">CURATED SCREENING</div>
+            <div class="pe-screening-edition">VOL.01</div>
+            <i class="pe-screening-crop tl"></i><i class="pe-screening-crop tr"></i><i class="pe-screening-crop bl"></i><i class="pe-screening-crop br"></i>
+            <footer class="pe-screening-footer"><span>EXHIBITION</span><span>ENTRY 06/12</span></footer>
+            <div class="pe-screening-progress"><span></span></div>
+          </section>
+        </div></div></div>
+        <footer><span class="use">头部 → 边框 → 裁切标记 → 页脚 → 进度轨</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="line-set" data-duration="0.68"><header><span><span class="id">line-set</span><div class="name">定行</div></span><span class="duration">.68s</span></header>
+        <div class="motion-stage"><div class="sample-lines"><div class="sample-line">一行字，从基线印出来</div><div class="sample-line">第二行按同样的方式定版</div></div></div>
+        <footer><span class="use">行遮罩自基线打开 + 上浮 + 虚焦收束，可级联</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="slate-flight" data-duration="0.86"><header><span><span class="id">slate-flight</span><div class="name">导语飞行</div></span><span class="duration">.86s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="sample-flight" id="demo-flight"><span class="sample-flight-index">06</span><span class="sample-flight-title">主体名称</span></div>
+        </div></div></div>
+        <footer><span class="use">同一节点从引导页排版飞进作品页页眉</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="window-surface" data-duration="0.8"><header><span><span class="id">window-surface</span><div class="name">作品窗浮出</div></span><span class="duration">.8s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="sample-surface"></div>
+        </div></div></div>
+        <footer><span class="use">媒体面浮出：autoAlpha + 缩放 + 虚焦，绝不 clip</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="seal-press" data-duration="0.69"><header><span><span class="id">seal-press</span><div class="name">印面落定</div></span><span class="duration">.69s</span></header>
+        <div class="motion-stage"><div class="sample-press"><span class="sample-bleed"></span>印</div></div>
+        <footer><span class="use">纵向盖下 → 压实回弹 → 墨晕扩散</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="seal-sheet" data-duration="0.34"><header><span><span class="id">seal-sheet</span><div class="name">印谱累积</div></span><span class="duration">.34s</span></header>
+        <div class="motion-stage"><div class="sample-sheet"><i class="sample-seal"><span class="sample-seal-in">01</span></i><i class="sample-seal"><span class="sample-seal-in">02</span></i><i class="sample-seal"><span class="sample-seal-in">03</span></i><i class="sample-seal"><span class="sample-seal-in">04</span></i><i class="sample-seal"><span class="sample-seal-in">05</span></i></div></div>
+        <footer><span class="use">逐枚落下；缩放走内层，保住每枚的独立倾角</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="compare-pair" data-duration="1.12"><header><span><span class="id">compare-pair</span><div class="name">对照双栏</div></span><span class="duration">1.12s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="pe-scene"><div class="pe-paper-bg"></div>
+          <div class="pe-compare" id="demo-compare"><div class="cm-grid"><div class="cm-col"><h3>A 方案</h3><div class="cm-row">条目一</div><div class="cm-row">条目二</div><div class="cm-row">条目三</div></div><div class="cm-col"><h3>B 方案</h3><div class="cm-row">条目一</div><div class="cm-row">条目二</div><div class="cm-row">条目三</div></div></div></div>
+        </div></div></div>
+        <footer><span class="use">分栏格先绘出，两侧条目再级联</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="handoff-swap" data-duration="3.9"><header><span><span class="id">handoff-swap</span><div class="name">交接换版</div></span><span class="duration">~3.9s</span></header>
+        <div class="motion-stage"><div class="handoff-scale">
+          <div class="handoff-frame"></div>
+          <p class="handoff-kicker">SAME BRIEF</p>
+          <p class="handoff-thesis">同一个命题，换一个模型</p>
+          <div class="handoff-zone out"><span>GPT-6 ASTRA</span></div>
+          <div class="handoff-zone in"><span class="handoff-seal">印</span><span class="handoff-model"><span>OPUS 5</span></span><span class="handoff-role">COMPARISON</span><span class="handoff-work">同题作品</span></div>
+          <div class="handoff-centre"></div>
+          <div class="handoff-brush"><div class="brush-body"></div><div class="brush-tail"></div></div>
+          <div class="handoff-bloom"></div>
+          <i class="handoff-splat" data-dx="180" data-dy="-120"></i><i class="handoff-splat" data-dx="240" data-dy="90"></i><i class="handoff-splat" data-dx="-160" data-dy="140"></i>
+          <p class="handoff-caption">SAME BRIEF · DIFFERENT MODEL</p>
+          <p class="handoff-foot">命题 · 一句话说明</p>
+        </div></div>
+        <footer><span class="use">笔锋吃掉左半 → 朱印砸进右半 → 活字落下 → 整页吃冲击</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="paper-drift" data-duration="2.4"><header><span><span class="id">paper-drift</span><div class="name">纸面漂移</div></span><span class="duration">整场</span></header>
+        <div class="motion-stage"><div class="sample-drift"></div></div>
+        <footer><span class="use">由根时间轴驱动的底噪，去掉幻灯片感</span><button class="replay" type="button">重播</button></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="transitions">
+  <div class="wrap">
+    <h2>转场 · 16 基础 + 5 GPU</h2>
+    <p class="section-sub">基础转场按叙事角色分组（主 / 章节 / 点缀），全部调用 transitions.js 真实预设；GPU 旗舰由 advanced-transitions.js 的 WebGL 引擎逐像素渲染。一支视频选一个主转场 + 一两个点缀。</p>
+    <div class="grid" id="transition-grid">
+
+      <article class="card transition-card" data-role="primary" data-transition="paper-push" data-duration="0.62"><header><span><span class="id">paper-push</span><div class="name">纸页推进</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.62s</span></div>
+        <footer><span class="use">相邻观点常规前推，新页视差压过旧页</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="folio-rise" data-duration="0.66"><header><span><span class="id">folio-rise</span><div class="name">对开升起</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.66s</span></div>
+        <footer><span class="use">有序步骤、纵向推进</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="focus-press" data-duration="0.72"><header><span><span class="id">focus-press</span><div class="name">焦点压合</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">冷静分析、证据交接的景深交换</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="margin-pull" data-duration="0.7"><header><span><span class="id">margin-pull</span><div class="name">墨边扯页</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">果断的编辑切断，墨版带毛边纵向扯过</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="red-rule-cut" data-duration="0.66"><header><span><span class="id">red-rule-cut</span><div class="name">朱砂规切</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.66s</span></div>
+        <footer><span class="use">短促有力的章节切：朱线绘出、铺满、收拢</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="column-cascade" data-duration="0.76"><header><span><span class="id">column-cascade</span><div class="name">栏栅瀑布</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.76s</span></div>
+        <footer><span class="use">新信息组，栏片上下交错编织</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="archive-shutter" data-duration="0.72"><header><span><span class="id">archive-shutter</span><div class="name">档案百叶</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">方法、档案或证据段落，叶片左右交错合拢</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="chapter-bridge" data-duration="0.82"><header><span><span class="id">chapter-bridge</span><div class="name">章节墨桥</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.82s</span></div>
+        <footer><span class="use">大章节过门，墨版斜切扫过并带景深</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="ink-sweep" data-duration="0.78"><header><span><span class="id">ink-sweep</span><div class="name">墨扫</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.78s</span></div>
+        <footer><span class="use">有机编辑揭示，粗纤维前缘</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="tear-wipe" data-duration="0.7"><header><span><span class="id">tear-wipe</span><div class="name">撕页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">强对比或纠错，细纤维撕口</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="diagonal-slice" data-duration="0.62"><header><span><span class="id">diagonal-slice</span><div class="name">对角裁切</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.62s</span></div>
+        <footer><span class="use">更快的分析交接，带朱砂裁缝线</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="ink-iris" data-duration="0.76"><header><span><span class="id">ink-iris</span><div class="name">墨圈聚焦</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.76s</span></div>
+        <footer><span class="use">英雄结果或中心主体的圈入</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="paper-fold" data-duration="0.72"><header><span><span class="id">paper-fold</span><div class="name">纸页折合</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">文档或版本更替，折入时随折痕变暗</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="stamp-cover" data-duration="0.66"><header><span><span class="id">stamp-cover</span><div class="name">印章盖页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.66s</span></div>
+        <footer><span class="use">判定、通过/否决，盖下后揭起离场</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="paper-stack" data-duration="0.78"><header><span><span class="id">paper-stack</span><div class="name">纸叠飞页</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.78s</span></div>
+        <footer><span class="use">多源汇总，纸页自右飞入自左飞出</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="ink-dip" data-duration="0.74"><header><span><span class="id">ink-dip</span><div class="name">墨浸</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / EVIDENCE</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERDICT</small></div></div><span class="tx-duration">.74s</span></div>
+        <footer><span class="use">平静收束或调性重置，谷底带一线朱砂</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="ink-diffusion-field" data-duration="1.3" data-label="墨场渗化"><header><span><span class="id">ink-diffusion-field</span><div class="name">墨场渗化</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">主结论、作品揭晓 · 回退 focus-press</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="fiber-tear-displacement" data-duration="1.1" data-label="纤维断页"><header><span><span class="id">fiber-tear-displacement</span><div class="name">纤维断页</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">反转、纠错、强对比 · 回退 tear-wipe</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="editorial-depth-warp" data-duration="1.24" data-label="纵深折版"><header><span><span class="id">editorial-depth-warp</span><div class="name">纵深折版</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">大章节、时空层级变化 · 回退 chapter-bridge</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="vermilion-pressure-wave" data-duration="1" data-label="朱砂压力波"><header><span><span class="id">vermilion-pressure-wave</span><div class="name">朱砂压力波</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">结论落点、状态确认 · 回退 red-rule-cut</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="calligraphy-stroke-morph" data-duration="1.2" data-label="笔势流场"><header><span><span class="id">calligraphy-stroke-morph</span><div class="name">笔势流场</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">片头、主角登场、品牌切换 · 回退 ink-sweep</span><button class="replay" type="button">重播</button></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>VIDEO THEME LIBRARY · paper-editorial 2.3.0</span>
+    <span>SHOWROOM DRIVEN BY REAL THEME MODULES · NO DRIFT</span>
+  </div>
+</footer>
+
+<script type="module">
+import {paperEditorialMotions,paperEditorialMotionsClassic} from "./themes/paper-editorial/motions.js";
+import {paperEditorialTransitionsClassic} from "./themes/paper-editorial/transitions.js";
+import {createRubbingReveal as createRubbingRevealClassic} from "./themes/paper-editorial/classic/rubbing-reveal.js";
+import {createInkForm} from "./themes/paper-editorial/ink-form.js";
+import {createMovableType} from "./themes/paper-editorial/movable-type.js";
+import {createRubbingReveal} from "./themes/paper-editorial/rubbing-reveal.js";
+import {createPaperCutaway} from "./themes/paper-editorial/paper-cutaway.js";
+import {paperEditorialTransitions,paperEditorialTransitionMeta} from "./themes/paper-editorial/transitions.js";
+import {paperEditorialAdvancedTransitionMeta} from "./themes/paper-editorial/advanced-transitions.js";
+
+const camel=(id)=>id.replace(/-([a-z0-9])/g,(_,letter)=>letter.toUpperCase());
+
+const fitMinis=()=>document.querySelectorAll(".mini").forEach((mini)=>{
+  const k=mini.clientWidth/1920;
+  mini.style.height=`${1080*k}px`;
+  mini.querySelector(".mini-inner").style.transform=`scale(${k})`;
+});
+fitMinis();
+addEventListener("resize",fitMinis);
+createInkForm(document.querySelector("#ink-form-static"),{target:{kind:"text",value:"墨"},seed:31,duration:4.8,strokeWidth:2.3})
+  .then((ink)=>ink.render(4.8));
+createMovableType(document.querySelector("#movable-type-static"),{text:"见字如面",seed:71,duration:5.6})
+  .then((type)=>type.render(5.6));
+createRubbingReveal(document.querySelector("#rubbing-reveal-static"),{visual:{src:"./showcases/editorial-materials/assets/mirror.svg"},seed:83,duration:5.4,density:1.55})
+  .then((rubbing)=>rubbing.render(5.4));
+createPaperCutaway(document.querySelector("#paper-cutaway-static"),{seed:97,duration:6.6,layers:[
+  {src:"./showcases/editorial-materials/assets/surface.svg",label:"山体表象",caption:"SURFACE / 01"},
+  {src:"./showcases/editorial-materials/assets/strata.svg",label:"地下地层",caption:"STRATA / 02"},
+  {src:"./showcases/editorial-materials/assets/vein.svg",label:"深层矿脉",caption:"VEIN / 03"}
+]}).then((cutaway)=>cutaway.render(6.6));
+
+const motionTargets={
+  "ink-slam":(stage)=>[stage.querySelector(".sample-title")],
+  "paper-rise":(stage)=>[stage.querySelectorAll(".sample-panel"),0,.12],
+  "bar-draw":(stage)=>[stage.querySelector(".sample-bar>span")],
+  "cascade-list":(stage)=>[stage.querySelectorAll(".sample-row")],
+  "editorial-wipe":(stage)=>[stage.querySelector(".sample-wipe")],
+  "stamp-impact":(stage)=>[stage.querySelector(".sample-stamp")],
+  "underline-draw":(stage)=>[stage.querySelector(".sample-underline")],
+  "folio-swap":(stage)=>[stage.querySelector(".sample-folio")],
+  "red-result-emphasis":(stage)=>[stage.querySelector(".sample-number")],
+  "count-up":(stage)=>[stage.querySelector(".sample-number"),0,Number(stage.querySelector(".sample-number").dataset.end)],
+  "ghost-settle":(stage)=>[stage.querySelector(".sample-ghost")],
+  "quote-reveal":()=>["#demo-quote"],
+  "chapter-mark":()=>["#demo-chapter"],
+  "end-lock":()=>["#demo-end"],
+  "screening-unveil":()=>["#demo-screening",0,2.2],
+  "line-set":(stage)=>[stage.querySelectorAll(".sample-line"),0,{rise:22,stagger:.09}],
+  "slate-flight":()=>[[
+    ["#demo-flight .sample-flight-index",{from:{x:-24,y:150,scale:2.3},to:{x:0,y:0,scale:1}}],
+    ["#demo-flight .sample-flight-title",{from:{x:-24,y:250,scale:2.7},to:{x:0,y:0,scale:1}}]
+  ],0,.86],
+  "window-surface":(stage)=>[stage.querySelector(".sample-surface")],
+  "seal-press":(stage)=>[stage.querySelector(".sample-press"),0,{bloom:stage.querySelector(".sample-bleed")}],
+  "seal-sheet":(stage)=>[stage.querySelectorAll(".sample-seal"),0,{inner:stage.querySelectorAll(".sample-seal-in"),stagger:.1}],
+  "compare-pair":()=>["#demo-compare"],
+  "handoff-swap":()=>["#scene-handoff-demo"],
+  "paper-drift":(stage)=>[[[".sample-drift",0,2.4]]],
+  "ledger-strike":()=>["#demo-ledger"],
+  "bar-pull":()=>["#demo-bar"],
+  "mount-seat":()=>["#demo-mount",0,{art:"#demo-mount .pe-artifact-mount"}],
+  "plate-strike":()=>["#demo-plate"],
+  "ink-form":async(stage)=>{
+    const canvas=stage.querySelector("#ink-form-motion");
+    canvas.inkFormReady??=createInkForm(canvas,{target:{kind:"text",value:"形"},seed:41,duration:4.8,strokeWidth:2.3});
+    return [await canvas.inkFormReady];
+  },
+  "movable-type":async(stage)=>{
+    const canvas=stage.querySelector("#movable-type-motion");
+    canvas.materialReady??=createMovableType(canvas,{text:"见字如面",seed:71,duration:5.6});
+    return [await canvas.materialReady];
+  },
+  "rubbing-reveal":async(stage)=>{
+    const canvas=stage.querySelector("#rubbing-reveal-motion");
+    canvas.materialReady??=createRubbingReveal(canvas,{visual:{src:"./showcases/editorial-materials/assets/mirror.svg"},seed:83,duration:5.4,density:1.55});
+    return [await canvas.materialReady];
+  },
+  "paper-cutaway":async(stage)=>{
+    const canvas=stage.querySelector("#paper-cutaway-motion");
+    canvas.materialReady??=createPaperCutaway(canvas,{seed:97,duration:6.6,layers:[
+      {src:"./showcases/editorial-materials/assets/surface.svg",label:"山体表象",caption:"SURFACE / 01"},
+      {src:"./showcases/editorial-materials/assets/strata.svg",label:"地下地层",caption:"STRATA / 02"},
+      {src:"./showcases/editorial-materials/assets/vein.svg",label:"深层矿脉",caption:"VEIN / 03"}
+    ]});
+    return [await canvas.materialReady];
+  }
+};
+document.querySelectorAll(".motion-card").forEach((card)=>{
+  const id=card.dataset.motion;
+  const stage=card.querySelector(".motion-stage,.mini");
+  let current;
+  const play=async()=>{
+    const [target,...rest]=await motionTargets[id](stage);
+    current?.kill();
+    const tl=gsap.timeline();
+    current=tl;card.motionTl=tl;
+    if(["ink-form","movable-type","rubbing-reveal","paper-cutaway"].includes(id))target.render(0);
+    paperEditorialMotions[camel(id)](tl,target,...rest);
+  };
+  card.querySelector(".replay").addEventListener("click",play);
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+const roleName={primary:"主",section:"章节",accent:"点缀"};
+void roleName;
+const partSelectors={overlay:".tx-overlay",rule:".tx-rule",flash:".tx-flash",slash:".tx-slash",slats:".tx-slat",columns:".tx-column",sheets:".tx-sheet"};
+document.querySelectorAll('.transition-card[data-role]:not([data-role="advanced"])').forEach((card)=>{
+  const id=card.dataset.transition;
+  const preset=paperEditorialTransitionMeta.presets[id];
+  if(!preset)return;
+  const stage=card.querySelector(".tx-stage");
+  for(const part of preset.parts){
+    if(part==="outgoing"||part==="incoming")continue;
+    if(part==="slats")for(let i=0;i<8;i++){const el=document.createElement("div");el.className="tx-part tx-slat";el.style.top=`${i*12.5}%`;stage.appendChild(el)}
+    else if(part==="columns")for(let i=0;i<8;i++){const el=document.createElement("div");el.className="tx-part tx-column";el.style.left=`${i*12.5}%`;stage.appendChild(el)}
+    else if(part==="sheets")for(let i=0;i<3;i++){const el=document.createElement("div");el.className="tx-part tx-sheet";stage.appendChild(el)}
+    else{const el=document.createElement("div");el.className=`tx-part tx-${part}`;stage.appendChild(el)}
+  }
+  const play=()=>{
+    const parts={outgoing:stage.querySelector(".tx-a"),incoming:stage.querySelector(".tx-b")};
+    for(const part of preset.parts){
+      if(part==="outgoing"||part==="incoming")continue;
+      parts[part]=(part==="slats"||part==="columns"||part==="sheets")?stage.querySelectorAll(partSelectors[part]):stage.querySelector(partSelectors[part]);
+    }
+    card.motionTl?.kill();
+    gsap.set([parts.outgoing,parts.incoming],{clearProps:"transform,filter,clipPath,zIndex,boxShadow"});
+    parts.outgoing.style.opacity="1";parts.incoming.style.opacity="0";
+    const tl=gsap.timeline();card.motionTl=tl;
+    paperEditorialTransitions[camel(id)](tl,parts,0,preset.duration);
+  };
+  card.querySelector(".replay").addEventListener("click",play);
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+// 样板对照：每组两条 paused 时间线，重播/拖动同步定位。
+const txScenes=`<div class="pe-scene pe-theme tx-a-scene"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+  <div class="pe-folio"><span>SECTION 01 · 分析</span><span>PAPER EDITORIAL</span></div>
+  <div style="position:absolute;left:220px;top:330px"><div class="pe-kicker">EVIDENCE / 证据</div><div class="pe-title" style="margin-top:36px">三组样本，<br>同一把标尺。</div></div></div>
+<div class="pe-scene pe-theme tx-b-scene" style="opacity:0"><div class="pe-paper-bg"></div><div class="pe-grain"></div>
+  <div class="pe-folio"><span>SECTION 02 · 结论</span><span>PAPER EDITORIAL</span></div>
+  <div style="position:absolute;left:400px;top:300px"><div class="pe-stat-label">RESULT / 结论强度</div><div class="pe-stat-value" style="font-size:240px;margin-top:40px">88<span style="font-size:96px" class="pe-red">%</span></div></div></div>
+<div class="tx-overlay"></div>`;
+document.querySelectorAll(".pilot-tx").forEach((el)=>{el.innerHTML=txScenes});
+fitMinis();
+const pilotAsset={src:"./showcases/editorial-materials/assets/mirror.svg"};
+const pilotBuilders={
+  "ink-slam":async(card)=>{
+    const [a,b]=card.querySelectorAll(".pilot-slam");
+    const ta=gsap.timeline({paused:true}),tb=gsap.timeline({paused:true});
+    paperEditorialMotionsClassic.inkSlam(ta,a,.1);paperEditorialMotions.inkSlam(tb,b,.1);
+    ta.to({},{duration:.3},ta.duration());tb.to({},{duration:.3},tb.duration());
+    return [ta,tb];
+  },
+  "margin-pull":async(card)=>{
+    const [a,b]=card.querySelectorAll(".pilot-tx");
+    const parts=(root)=>({outgoing:root.querySelector(".tx-a-scene"),incoming:root.querySelector(".tx-b-scene"),overlay:root.querySelector(".tx-overlay")});
+    const ta=gsap.timeline({paused:true}),tb=gsap.timeline({paused:true});
+    paperEditorialTransitionsClassic.marginPull(ta,parts(a),.2,.7);
+    paperEditorialTransitions.marginPull(tb,parts(b),.2,1);
+    ta.to({},{duration:.4},ta.duration());tb.to({},{duration:.4},tb.duration());
+    return [ta,tb];
+  },
+  "rubbing-reveal":async(card)=>{
+    const [ca,cb]=card.querySelectorAll(".pilot-canvas");
+    const [ra,rb]=await Promise.all([
+      createRubbingRevealClassic(ca,{visual:pilotAsset,seed:83,duration:5.4,density:1.55}),
+      createRubbingReveal(cb,{visual:pilotAsset,seed:83,duration:5.4,density:1.4,mode:"intaglio"})]);
+    const ta=gsap.timeline({paused:true}),tb=gsap.timeline({paused:true});
+    paperEditorialMotions.rubbingReveal(ta,ra,0);paperEditorialMotions.rubbingReveal(tb,rb,0);
+    return [ta,tb];
+  }
+};
+document.querySelectorAll(".pilot-card").forEach(async(card)=>{
+  const tls=await pilotBuilders[card.dataset.pilot](card);
+  const scrub=card.querySelector(".pilot-scrub");
+  const span=Math.max(...tls.map((tl)=>tl.duration()));
+  const seek=(t)=>tls.forEach((tl)=>tl.pause().seek(Math.min(t,tl.duration()),false));
+  let raf=0;
+  const play=()=>{
+    cancelAnimationFrame(raf);const start=performance.now();
+    const tick=(now)=>{const t=(now-start)/1000;seek(t);scrub.value=String(Math.round(Math.min(1,t/span)*1000));if(t<span)raf=requestAnimationFrame(tick)};
+    raf=requestAnimationFrame(tick);
+  };
+  scrub.addEventListener("input",()=>{cancelAnimationFrame(raf);seek(Number(scrub.value)/1000*span)});
+  card.querySelector(".replay").addEventListener("click",play);
+  card.pilotSeek=(t)=>{cancelAnimationFrame(raf);seek(t)};card.pilotSpan=span;card.dataset.ready="1";
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+const jump=new URLSearchParams(location.search);
+if(jump.get("jump")){
+  const section=document.getElementById(jump.get("jump"));
+  if(section)requestAnimationFrame(()=>section.scrollIntoView());
+}
+</script>
 </body>
 </html>

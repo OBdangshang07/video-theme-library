@@ -1,0 +1,6 @@
+{
+  "projectId": "video-theme-library-motion-reel",
+  "entry": "index.html",
+  "compositionId": "main",
+  "output": "renders/paper-editorial-motion-reel.mp4"
+}

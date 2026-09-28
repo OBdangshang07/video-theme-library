@@ -1,0 +1,6 @@
+{
+  "projectId": "video-theme-library-paper-record",
+  "entry": "index.html",
+  "compositionId": "paper-record",
+  "output": "renders/paper-record.mp4"
+}

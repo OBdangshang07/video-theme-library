@@ -1,0 +1,88 @@
+<!--
+  paper-editorial · 引导页 → 作品页（slate-flight 模式）
+  ---------------------------------------------------------------------------
+  本期作品里返工最多的一个场景，把踩过的坑一起钉在这里。三条硬约束：
+
+  1. 静止态必须先写进 CSS。
+     下面所有被揭示的元素都带 data-rest，样式表里统一 opacity:0 + visibility:hidden。
+     凡是 immediateRender:false 的 fromTo，如果没有这条静止态，元素会先以自然可见态
+     渲染一次，等补间开始了才跳回起点 —— 画面上就是「先出现，再原地演一遍」。
+  2. 媒体面不要 clip。对 <video> 用 clip-path 会让 Chrome 停止合成视频画面，
+     整个补间期间素材是空白的，观感就是「素材卡了一下」。用 window-surface。
+  3. 先飞，再开窗。飞行期间作品窗的边框、素材、页脚、进度轨必须完全不可见。
+-->
+
+<style>
+  /* 静止态：所有待揭示元素的统一起点 */
+  [data-rest]{opacity:0;visibility:hidden}
+</style>
+
+<!-- 作品窗（框 + 素材 + 家具），飞行期间整组不可见 -->
+<div class="pe-scene">
+  <div class="pe-paper-bg"></div>
+
+  <!-- 引导页与作品页共用同一批节点：不跨场景堆叠，共用元素就是同一个 DOM -->
+  <b class="slate-index" data-rest><span class="slate-index-inner">06</span></b>
+  <h2 class="slate-title" data-rest>主体名称</h2>
+  <p class="slate-work" data-rest>《条目名称》</p>
+  <p class="slate-model" data-rest>MODEL NAME · FRONTEND</p>
+  <p class="slate-question" data-rest>命题 · 一句话说明</p>
+
+  <video class="pe-screening-media" data-rest src="assets/media/clip.mp4"
+         data-start="3.5" data-duration="52" muted playsinline preload="auto"
+         style="left:96px;top:151px;width:1728px;height:837px"></video>
+
+  <section class="pe-screening">
+    <div class="pe-screening-frame" data-rest></div>
+    <div class="pe-screening-spine" data-rest>MODEL NAME · FRONTEND</div>
+    <div class="pe-screening-edition" data-rest>06 / 13</div>
+    <i class="pe-screening-crop tl" data-rest></i><i class="pe-screening-crop tr" data-rest></i>
+    <i class="pe-screening-crop bl" data-rest></i><i class="pe-screening-crop br" data-rest></i>
+    <footer class="pe-screening-footer" data-rest><span>MODEL NAME</span><span>06 / 13 · 00:52</span></footer>
+    <div class="pe-screening-progress" data-rest><span></span></div>
+  </section>
+</div>
+
+<script>
+  (function () {
+    var M = window.paperEditorialMotions;
+    var tl = gsap.timeline({ paused: true });
+    var A = 3.5, DUR = 0.86, LAND = A + DUR;   // 引导页停留 3.5s，飞行 0.86s
+
+    // ---- 引导页：文字逐行"印"出来，不是淡入 ----
+    M.lineSet(tl, ".slate-index", 0.06, { rise: 0, blur: 5 });   // 参与飞行 → 不用 rise
+    M.lineSet(tl, ".slate-title", 0.48, { rise: 0, blur: 9 });
+    M.lineSet(tl, ".slate-work", 0.80, { rise: 0, blur: 6 });
+    M.lineSet(tl, ".slate-model", 0.96, { rise: 0, blur: 6 });
+    M.lineSet(tl, ".slate-question", 1.10, { rise: 22, blur: 6 }); // 不飞的可以上浮
+
+    // ---- 飞行：同一个节点从引导页排版落进页眉 ----
+    // transform-origin 必须是 0 0，否则缩放会围绕中心，落点会漂。
+    // 参与飞行的节点不要再写 y —— 飞行已经占用了 y，两个写入者会互相打架。
+    M.slateFlight(tl, [
+      [".slate-index", { from: { x: 0, y: 0, scale: 1 }, to: { x: -58, y: -210, scale: 0.2449 } }],
+      [".slate-title", { from: { x: 0, y: 0, scale: 1 }, to: { x: 40, y: -470, scale: 0.3571 } }],
+      [".slate-work",  { from: { x: 0, y: 0, scale: 1 }, to: { x: 40, y: -574, scale: 0.6 } }],
+      [".slate-model", { from: { x: 0, y: 0, scale: 1 }, to: { x: 40, y: -634, scale: 0.4348 } }]
+    ], A, DUR);
+
+    // 引导页专属家具同步清场。用 autoAlpha 而不是 opacity：淡到 0 的元素
+    // 在版面审计里仍算"遮挡了下面的文字"。
+    tl.to(".pe-folio, .slate-question, .pe-ghost", { autoAlpha: 0, duration: 0.44, ease: "power2.in" }, A);
+
+    // ---- 作品窗：标题落位之后才出场，且只演一次 ----
+    tl.fromTo(".pe-screening-frame", { clipPath: "inset(0 100% 0 0)" },
+      { clipPath: "inset(0 0% 0 0)", duration: 0.72, ease: "power3.inOut", immediateRender: false }, LAND + 0.06);
+    M.windowSurface(tl, ".pe-screening-media", LAND + 0.18);
+    tl.fromTo(".pe-screening-crop", { autoAlpha: 0, scale: 1.6 },
+      { autoAlpha: 1, scale: 1, duration: 0.34, stagger: 0.05, ease: "power2.out", immediateRender: false }, LAND + 0.46);
+    tl.fromTo(".pe-screening-footer", { y: -12, autoAlpha: 0 },
+      { y: 0, autoAlpha: 1, duration: 0.36, ease: "power2.out", immediateRender: false }, LAND + 0.54);
+    tl.fromTo(".pe-screening-spine, .pe-screening-edition, .pe-screening-progress", { autoAlpha: 0 },
+      { autoAlpha: 1, duration: 0.4, ease: "power2.out", immediateRender: false }, LAND + 0.60);
+
+    window.__timelines = window.__timelines || {};
+    window.__timelines["scene-id"] = tl;
+    tl.seek(0);
+  })();
+</script>

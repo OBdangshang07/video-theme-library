@@ -1,0 +1,72 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>纸墨材料动效 · 宣纸编辑部</title>
+  <script src="./assets/gsap.min.js"></script>
+  <link rel="stylesheet" href="./assets/theme/tokens.css">
+  <link rel="stylesheet" href="./assets/theme/components.css">
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#efe5ce}
+    #root{position:relative;width:100%;height:100%;overflow:hidden}
+    .scene{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+    .material{position:absolute;inset:0}
+    .material canvas{width:100%;height:100%}
+    .note{position:absolute;left:92px;bottom:78px;color:var(--pe-muted);font:700 22px/1.45 var(--pe-sans);letter-spacing:.08em}
+    .stage-index{position:absolute;right:92px;bottom:72px;color:var(--pe-red);font:900 46px/1 var(--pe-mono)}
+  </style>
+</head>
+<body>
+  <main data-hf-id="hf-qc3u" id="root" class="pe-theme" data-composition-id="main" data-start="0" data-duration="19" data-width="1920" data-height="1080">
+    <section data-hf-id="hf-hjzx" id="material-type" class="scene clip" data-start="0" data-duration="6" data-track-index="1">
+      <div data-hf-id="hf-jenk" class="pe-paper-bg"></div><div data-hf-id="hf-7umz" class="pe-grain"></div>
+      <div data-hf-id="hf-kt6a" class="material pe-movable-type"><canvas data-hf-id="hf-5lo7" id="type-canvas" data-layout-allow-overflow="" aria-label="活字归版并压印成标题"></canvas></div>
+      <div data-hf-id="hf-p66x" class="pe-folio"><span data-hf-id="hf-9ez7">宣纸编辑部 / 材料动效</span><span data-hf-id="hf-3jrf">01 · MOVABLE TYPE</span></div>
+      <p data-hf-id="hf-xarz" class="note">文字先成版，再留下墨迹。</p><span data-hf-id="hf-5mv5" class="stage-index">01 / 03</span>
+    </section>
+    <section data-hf-id="hf-pb43" id="material-rubbing" class="scene clip" data-start="6" data-duration="6" data-track-index="2">
+      <div data-hf-id="hf-jsug" class="pe-paper-bg"></div><div data-hf-id="hf-6g4b" class="pe-grain"></div>
+      <div data-hf-id="hf-er40" class="material pe-rubbing-reveal"><canvas data-hf-id="hf-jdxq" id="rubbing-canvas" data-layout-allow-overflow="" aria-label="铜镜纹样沿拓印路径显影"></canvas></div>
+      <div data-hf-id="hf-1gfh" class="pe-folio"><span data-hf-id="hf-gr5f">宣纸编辑部 / 材料动效</span><span data-hf-id="hf-rbua">02 · RUBBING REVEAL</span></div>
+      <p data-hf-id="hf-exna" class="note">真实的图像轮廓，随擦拓逐渐显出。</p><span data-hf-id="hf-j87a" class="stage-index">02 / 03</span>
+    </section>
+    <section data-hf-id="hf-db5n" id="material-cutaway" class="scene clip" data-start="12" data-duration="7" data-track-index="3">
+      <div data-hf-id="hf-ilxd" class="pe-paper-bg"></div><div data-hf-id="hf-61ta" class="pe-grain"></div>
+      <div data-hf-id="hf-2rto" class="material pe-paper-cutaway"><canvas data-hf-id="hf-d6b3" id="cutaway-canvas" data-layout-allow-overflow="" aria-label="纸层揭开山体表象与地层矿脉"></canvas></div>
+      <div data-hf-id="hf-2nck" class="pe-folio"><span data-hf-id="hf-gcue">宣纸编辑部 / 材料动效</span><span data-hf-id="hf-zec9">03 · PAPER CUTAWAY</span></div>
+      <p data-hf-id="hf-x8p5" class="note">同一位置，逐层读出不同证据。</p><span data-hf-id="hf-3ow7" class="stage-index">03 / 03</span>
+    </section>
+  </main>
+  <script type="module">
+    import { createMovableType } from "./assets/theme/movable-type.js";
+    import { createRubbingReveal } from "./assets/theme/rubbing-reveal.js";
+    import { createPaperCutaway } from "./assets/theme/paper-cutaway.js";
+    import { paperEditorialMotions as M } from "./assets/theme/motions.js";
+
+    const [type, rubbing, cutaway] = await Promise.all([
+      createMovableType(document.getElementById("type-canvas"), {
+        width: 1920, height: 1080, duration: 6, text: "见字如面", seed: 71,
+      }),
+      createRubbingReveal(document.getElementById("rubbing-canvas"), {
+        width: 1920, height: 1080, duration: 6, seed: 83, density: 1.55,
+        visual: { src: "./assets/mirror.svg" },
+      }),
+      createPaperCutaway(document.getElementById("cutaway-canvas"), {
+        width: 1920, height: 1080, duration: 7, seed: 97,
+        layers: [
+          { src: "./assets/surface.svg", label: "山体表象", caption: "SURFACE / 01" },
+          { src: "./assets/strata.svg", label: "地下地层", caption: "STRATA / 02" },
+          { src: "./assets/vein.svg", label: "深层矿脉", caption: "VEIN / 03" },
+        ],
+      }),
+    ]);
+    const tl = gsap.timeline({ paused: true });
+    M.movableType(tl, type, 0);
+    M.rubbingReveal(tl, rubbing, 6);
+    M.paperCutaway(tl, cutaway, 12);
+    window.__timelines.main = tl;
+    window.__hfForceTimelineRebind?.();
+  </script>
+</body>
+</html>

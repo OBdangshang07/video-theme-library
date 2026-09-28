@@ -1,0 +1,61 @@
+<!--
+  screening-dossier / 1920×1080
+  Keep the media and overlay as direct children of the HyperFrames composition root.
+  Replace timing, paths, copy, and optional emphasis metadata for the production project.
+-->
+<video
+  id="entry-media"
+  class="clip pe-screening-media"
+  src="assets/media/example.mp4"
+  data-start="3"
+  data-duration="52"
+  data-track-index="0"
+  muted
+  playsinline
+></video>
+
+<section
+  id="screening-overlay"
+  class="clip pe-screening"
+  data-start="3"
+  data-duration="52"
+  data-track-index="2"
+>
+  <header class="pe-screening-head">
+    <b class="pe-screening-index">06</b>
+    <span class="pe-screening-title">
+      <strong>主体名称</strong>
+      <small>
+        <span class="pe-screening-work">《条目或作品名称》</span>
+        <em class="pe-screening-label">ORIGINAL WORK</em>
+      </small>
+    </span>
+    <span class="pe-screening-meta">
+      <span>完整素材 / 1.0×</span>
+      <span>原声静音</span>
+      <!-- Optional: remove when the project has no rank, status, or review emphasis. -->
+      <span class="pe-screening-emphasis">主观排名 #7</span>
+    </span>
+  </header>
+
+  <div class="pe-screening-frame" data-frame-label="ORIGINAL WORK / UNTRIMMED"></div>
+  <div class="pe-screening-spine">CURATED SCREENING · ARCHIVE DOSSIER</div>
+  <div class="pe-screening-edition">VOL.01 / 2026</div>
+  <i class="pe-screening-crop tl"></i><i class="pe-screening-crop tr"></i>
+  <i class="pe-screening-crop bl"></i><i class="pe-screening-crop br"></i>
+
+  <footer class="pe-screening-footer">
+    <span>EXHIBITION · ORIGINAL MATERIAL PRESERVED IN FULL</span>
+    <span>DURATION 00:52 · ENTRY 06 / 12</span>
+  </footer>
+  <div class="pe-screening-progress"><span></span></div>
+</section>
+
+<script type="module">
+  import { paperEditorialMotions } from "../motions.js";
+
+  const tl = gsap.timeline({ paused: true });
+  paperEditorialMotions.screeningUnveil(tl, "#screening-overlay", 3, 52);
+  window.__timelines = window.__timelines || {};
+  window.__timelines.main = tl;
+</script>

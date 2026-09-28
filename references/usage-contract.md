@@ -14,6 +14,7 @@ Use 2–4 motion families per scene. Repetition creates identity; adding every m
 - Preserve the selected theme's type roles and accent-color limits.
 - Preserve a minimum 16:9 ratio for main footage/artifact frames unless the source format requires otherwise.
 - The progress rail spans the entire composition, not an inner preview frame.
+- In `screening-dossier`, keep the subject name and item title as separate hierarchy levels. Optional rank, status, or review metadata must not force the item title smaller.
 
 ## Theme-specific constraints
 
@@ -27,8 +28,11 @@ Use 2–4 motion families per scene. Repetition creates identity; adding every m
 - Every visual clip is a direct child of the composition root.
 - Use a single paused GSAP timeline registered as `window.__timelines.main`.
 - Motion must be seek-safe and deterministic.
-- Avoid `setTimeout`, random values, infinite CSS animations, and playback event state.
+- Avoid `setTimeout`, random values, infinite CSS animations, and playback-event state.
 - Scene timing lives in `data-start` and `data-duration` attributes.
+- Import motion presets from the selected theme's own `motions.js`, and scene transitions from its `transitions.js`; never mix transition systems across themes in one video.
+- Transitions that need prebuilt DOM (overlays, slats, columns, sheets, rails, and similar parts) document the exact contract in `references/transitions/<theme>.md` — build those parts before calling the preset.
+- GPU flagship transitions (`advanced-transitions.js`) are driven by `render(progress)` from the same paused timeline; if WebGL is unavailable, fall back to the base transition named in that effect's metadata, never to a CSS imitation.
 
 ## Adaptation
 

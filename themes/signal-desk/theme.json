@@ -1,12 +1,54 @@
 {
-  "id":"signal-desk","name":"信号台","version":"1.0.0",
-  "description":"面向科技快讯、模型发布、产品更新、政策、融资与行业事件的新闻编辑台视觉系统。",
-  "files":{"tokens":"tokens.css","components":"components.css","motions":"motions.js","transitions":"transitions.js"},
-  "palette":{"background":"#0B1320","surface":"#141F2E","surface2":"#1C2A3A","ink":"#F3EFE4","muted":"#AAB2BC","line":"#344254","accent":"#FFB000","alert":"#EF4B3F"},
-  "type":{"display":"Inter, Noto Sans SC, system-ui, sans-serif","body":"Inter, Noto Sans SC, system-ui, sans-serif","numeric":"JetBrains Mono, ui-monospace, monospace"},
-  "safeArea":{"x":96,"top":72,"bottom":72},
-  "motionCharacter":["editorial","timecoded","layered","urgent-but-controlled"],
-  "components":["signal-title","broadcast-header","headline-stack","breaking-banner","story-card","source-card","timeline-feed","market-strip","model-release-card","quote-clip","evidence-window","comparison-board","data-pulse","timestamp-marker","news-ticker","signal-lockup"],
-  "motions":["headline-split","ticker-roll","timecode-roll","source-pin","signal-pulse","story-stack","bar-surge","quote-cut","alert-hit","desk-lock"],
-  "transitions":["ribbon-handoff","headline-push","desk-cross","feed-rise","timecode-jump","bulletin-shutter","source-stack","signal-cut","breaking-flash","headline-crush","map-aperture","data-collapse"]
+  "id": "signal-desk",
+  "name": "信号台",
+  "version": "2.0.0",
+  "description": "面向科技快讯、模型发布、产品更新、政策、融资与行业事件的新闻编辑台视觉系统。深海军蓝底、骨白层级、琥珀信号，红色只给突发与风险。",
+  "files": {
+    "tokens": "tokens.css",
+    "components": "components.css",
+    "motions": "motions.js",
+    "transitions": "transitions.js",
+    "advancedTransitions": "advanced-transitions.js"
+  },
+  "palette": {
+    "background": "#0B1320",
+    "surface": "#141F2E",
+    "surface2": "#1C2A3A",
+    "ink": "#F3EFE4",
+    "muted": "#AAB2BC",
+    "line": "#344254",
+    "accent": "#FFB000",
+    "alert": "#EF4B3F"
+  },
+  "type": {
+    "display": "Oswald, Microsoft YaHei, sans-serif",
+    "body": "Noto Sans JP, Microsoft YaHei, sans-serif",
+    "numeric": "IBM Plex Mono, Cascadia Mono, monospace"
+  },
+  "safeArea": { "x": 96, "top": 72, "bottom": 72 },
+  "motionCharacter": ["editorial", "timecoded", "layered", "urgent-but-controlled"],
+  "components": [
+    "signal-title", "broadcast-header", "headline-stack", "breaking-banner",
+    "story-card", "source-card", "timeline-feed", "market-strip",
+    "model-release-card", "quote-clip", "evidence-window", "comparison-board",
+    "data-pulse", "timestamp-marker", "news-ticker", "signal-lockup",
+    "metric-deck", "desk-verdict", "segment-divider", "signal-rail",
+    "bulletin-dossier"
+  ],
+  "motions": [
+    "headline-split", "ticker-roll", "timecode-roll", "source-pin",
+    "signal-pulse", "story-stack", "bar-surge", "quote-cut",
+    "alert-hit", "desk-lock", "signal-count", "bulletin-unveil",
+    "chapter-signal", "evidence-reveal"
+  ],
+  "transitions": [
+    "ribbon-handoff", "headline-push", "desk-cross", "feed-rise",
+    "timecode-jump", "bulletin-shutter", "source-stack", "signal-cut",
+    "breaking-flash", "headline-crush", "map-aperture", "data-collapse",
+    "static-wipe", "amber-rule-cut", "teletype-roll", "channel-zap"
+  ],
+  "advancedTransitions": [
+    "signal-static-interference", "broadcast-roll-band", "radar-sweep-reveal",
+    "data-stream-collapse", "spectrum-dispersion-split"
+  ]
 }

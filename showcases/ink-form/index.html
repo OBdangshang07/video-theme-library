@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width,initial-scale=1">
+  <title>墨迹聚形 · 宣纸编辑部</title>
+  <script src="./assets/gsap.min.js"></script>
+  <link rel="stylesheet" href="./assets/theme/tokens.css">
+  <link rel="stylesheet" href="./assets/theme/components.css">
+  <style>
+    html,body{margin:0;width:100%;height:100%;overflow:hidden;background:#efe5ce}
+    #root{position:relative;width:100%;height:100%;overflow:hidden}
+    .scene{position:absolute;inset:0;width:100%;height:100%;overflow:hidden}
+    .ink-layer{position:absolute;inset:0}
+    .note{position:absolute;left:92px;bottom:78px;color:var(--pe-muted);font:700 22px/1.45 var(--pe-sans);letter-spacing:.08em}
+    .stage-index{position:absolute;right:92px;bottom:72px;color:var(--pe-red);font:900 46px/1 var(--pe-mono)}
+  </style>
+</head>
+<body>
+  <main data-hf-id="hf-eeye" id="root" class="pe-theme" data-composition-id="main" data-start="0" data-duration="15" data-width="1920" data-height="1080">
+    <section data-hf-id="hf-rzlm" id="ink-scene-glyph" class="scene clip" data-start="0" data-duration="5" data-track-index="1">
+      <div data-hf-id="hf-jenk" class="pe-paper-bg"></div><div data-hf-id="hf-7umz" class="pe-grain"></div>
+      <div data-hf-id="hf-57b9" class="ink-layer pe-ink-form"><canvas data-hf-id="hf-0gzj" id="ink-glyph" class="pe-ink-form-canvas" data-layout-allow-overflow="" aria-label="墨粒聚成墨字"></canvas></div>
+      <div data-hf-id="hf-p66x" class="pe-folio"><span data-hf-id="hf-2cjf">宣纸编辑部 / 墨迹聚形</span><span data-hf-id="hf-2gjs">01 · CHARACTER</span></div>
+      <p data-hf-id="hf-3wqb" class="note">一片墨，聚成一个字。</p><span data-hf-id="hf-5mv5" class="stage-index">01 / 03</span>
+    </section>
+    <section data-hf-id="hf-du7z" id="ink-scene-phrase" class="scene clip" data-start="5" data-duration="5" data-track-index="2">
+      <div data-hf-id="hf-jsug" class="pe-paper-bg"></div><div data-hf-id="hf-6g4b" class="pe-grain"></div>
+      <div data-hf-id="hf-7c0p" class="ink-layer pe-ink-form"><canvas data-hf-id="hf-zqwr" id="ink-phrase" class="pe-ink-form-canvas" data-layout-allow-overflow="" aria-label="墨粒聚成短句"></canvas></div>
+      <div data-hf-id="hf-1gfh" class="pe-folio"><span data-hf-id="hf-ae9n">宣纸编辑部 / 墨迹聚形</span><span data-hf-id="hf-7vyz">02 · PHRASE</span></div>
+      <p data-hf-id="hf-8ar1" class="note">同一个组件，接收任意文案。</p><span data-hf-id="hf-j87a" class="stage-index">02 / 03</span>
+    </section>
+    <section data-hf-id="hf-a4k0" id="ink-scene-shape" class="scene clip" data-start="10" data-duration="5" data-track-index="3">
+      <div data-hf-id="hf-ilxd" class="pe-paper-bg"></div><div data-hf-id="hf-61ta" class="pe-grain"></div>
+      <div data-hf-id="hf-8ixs" class="ink-layer pe-ink-form"><canvas data-hf-id="hf-845a" id="ink-shape" class="pe-ink-form-canvas" data-layout-allow-overflow="" aria-label="墨粒聚成山水图形"></canvas></div>
+      <div data-hf-id="hf-2nck" class="pe-folio"><span data-hf-id="hf-9zym">宣纸编辑部 / 墨迹聚形</span><span data-hf-id="hf-4no0">03 · SHAPE MASK</span></div>
+      <p data-hf-id="hf-fja4" class="note">本地 SVG 或透明图片，可作为目标轮廓。</p><span data-hf-id="hf-3ow7" class="stage-index">03 / 03</span>
+    </section>
+  </main>
+  <script type="module">
+    import { createInkForm } from "./assets/theme/ink-form.js";
+    import { paperEditorialMotions as M } from "./assets/theme/motions.js";
+
+    const scenes = [
+      ["ink-glyph", { kind: "text", value: "墨" }, 101],
+      ["ink-phrase", { kind: "text", value: "无形有意" }, 202],
+      ["ink-shape", { kind: "image", src: "./assets/mountain.svg" }, 303],
+    ];
+    const controllers = await Promise.all(scenes.map(([id, target, seed]) =>
+      createInkForm(document.getElementById(id), {
+        width: 1920, height: 1080, duration: 5, seed, target,
+      })));
+    const tl = gsap.timeline({ paused: true });
+    controllers.forEach((controller, index) => M.inkForm(tl, controller, index * 5));
+    window.__timelines.main = tl;
+    window.__hfForceTimelineRebind?.();
+  </script>
+</body>
+</html>

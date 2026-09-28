@@ -1,0 +1,72 @@
+/* 主体档案 — the paper-editorial answer to an instrument-panel spec sheet.
+   Same five craft moves as a cool spec sheet — extreme scale contrast, hairline
+   ledger, status tabs, one hero image, one decisive bar — but struck in the
+   theme's own language: 宣纸, 宋体, ink, a single vermilion. Nothing here needs
+   a terminal or a monospace grid to feel precise. */
+:root{
+  --ps-paper:#efe5ce; --ps-paper-light:#f4ead4; --ps-paper-deep:#e2d6bc;
+  --ps-ink:#20262c; --ps-ink-soft:#4f504c; --ps-muted:#68645b;
+  --ps-rule:#c9bda5; --ps-red:#b83b2f; --ps-red-deep:#9c2f24;
+  --ps-serif:"PS Serif",serif; --ps-sans:"PS Sans",sans-serif; --ps-mono:"PS Mono",monospace;
+}
+*{margin:0;padding:0;box-sizing:border-box}
+.ps-scene{position:absolute;inset:0;width:1920px;height:1080px;overflow:hidden;
+  background:var(--ps-paper);font-family:var(--ps-sans);color:var(--ps-ink)}
+/* 宣纸：极淡的方格，只是让底子有纸的经纬，不抢任何东西 */
+.ps-grid{position:absolute;inset:0;
+  background-image:
+    repeating-linear-gradient(to right, rgba(201,189,165,.30) 0 1px, transparent 1px 40px),
+    repeating-linear-gradient(to bottom, rgba(201,189,165,.30) 0 1px, transparent 1px 40px)}
+
+/* ---- 页眉 ---- */
+.ps-folio{position:absolute;left:92px;right:92px;top:48px;display:flex;justify-content:space-between;
+  font:700 19px/1 var(--ps-mono);letter-spacing:.16em;color:var(--ps-muted)}
+.ps-folio-rule{position:absolute;left:92px;right:92px;top:92px;height:2px;background:var(--ps-ink);
+  transform-origin:left center}
+
+/* ---- 眉题：一句话的重量只给到 16px，剩下全留给标题 ---- */
+.ps-eyebrow{position:absolute;left:120px;top:170px;
+  font:700 16px/1 var(--ps-mono);letter-spacing:.36em;color:var(--ps-muted)}
+
+/* ---- 正文标题：宋体特粗，收紧字距，全画面最大 ---- */
+.ps-display{position:absolute;left:114px;top:252px;
+  font:900 156px/1 var(--ps-serif);letter-spacing:-.045em;color:var(--ps-ink)}
+
+/* ---- 度支谱：发丝线账目，标签在左、值在右、数字等宽 ---- */
+.ps-ledger{position:absolute;left:120px;top:474px;width:744px}
+.ps-ledger-row{display:flex;align-items:baseline;justify-content:space-between;gap:26px;
+  padding:14px 0 15px;border-top:1px solid var(--ps-rule);position:relative}
+.ps-ledger-row:last-child{border-bottom:1px solid var(--ps-rule)}
+.ps-ledger-row dt{font:400 23px/1 var(--ps-sans);color:var(--ps-muted);letter-spacing:.02em}
+.ps-ledger-row dd{font:900 27px/1 var(--ps-serif);color:var(--ps-ink);letter-spacing:-.01em;text-align:right}
+.ps-ledger-row dd.mono{font:700 23px/1 var(--ps-mono);letter-spacing:.02em}
+/* 刻度尺：账目左侧的细齿，给"精确"一个可见的凭据 */
+.ps-ticks{position:absolute;left:120px;top:474px;width:744px;height:100%;
+  display:flex;justify-content:space-between;pointer-events:none}
+.ps-ticks i{width:1px;height:6px;background:var(--ps-rule);display:block}
+.ps-ticks i.major{height:11px;background:var(--ps-ink-soft)}
+
+/* ---- 状态签：朱红边框的小签，比药丸更印刷 ---- */
+.ps-tabs{position:absolute;right:92px;top:124px;display:flex;gap:10px}
+.ps-tab{display:inline-flex;align-items:center;gap:8px;height:32px;padding:0 14px;
+  border:1px solid var(--ps-red);color:var(--ps-red-deep);
+  font:700 14px/1 var(--ps-mono);letter-spacing:.08em}
+.ps-tab.is-plain{border-color:var(--ps-rule);color:var(--ps-muted)}
+
+/* ---- 木刻谱：本期唯一的主视觉。装裱在纸上，界格细线收边 ---- */
+.ps-plate{position:absolute;right:80px;top:150px;width:636px}
+.ps-field{position:relative;border:1px solid var(--ps-ink)}
+.ps-field svg{display:block;width:100%;height:auto}
+.ps-plate::before{content:"";position:absolute;left:-1px;top:-1px;width:52px;height:4px;background:var(--ps-red)}
+.ps-plate::after{content:"";position:absolute;right:-1px;bottom:44px;width:4px;height:52px;background:var(--ps-red)}
+.ps-plate figcaption{margin-top:14px;font:700 14px/1 var(--ps-mono);letter-spacing:.14em;color:var(--ps-muted)}
+
+/* ---- 朱红横带：全画面唯一一处饱和色，用在一击 ---- */
+.ps-bar{position:absolute;left:0;right:0;bottom:0;height:104px;background:var(--ps-red);
+  display:flex;align-items:center;justify-content:space-between;padding:0 92px;
+  transform-origin:left center}
+.ps-bar b{font:900 33px/1 var(--ps-serif);letter-spacing:-.01em;color:var(--ps-paper-light)}
+.ps-bar em{font:700 19px/1 var(--ps-mono);font-style:normal;letter-spacing:.22em;color:rgba(244,234,212,.82)}
+.ps-seal{position:absolute;right:250px;bottom:26px;width:52px;height:52px;background:var(--ps-paper-light);
+  color:var(--ps-red);display:grid;place-items:center;font:900 26px/1 var(--ps-serif);
+  transform:rotate(-3deg)}

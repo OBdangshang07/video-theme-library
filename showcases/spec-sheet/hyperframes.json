@@ -1,0 +1,6 @@
+{
+  "projectId": "video-theme-library-spec-sheet",
+  "entry": "index.html",
+  "compositionId": "spec-sheet",
+  "output": "renders/spec-sheet.mp4"
+}

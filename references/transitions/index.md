@@ -1,59 +1,14 @@
-# Paper Editorial Transitions
+# 转场参考
 
-The `paper-editorial` theme includes 16 base scene transitions and 5 GPU flagship transitions. Base transitions are grouped by narrative role so a production can stay consistent.
+转场是独立的一层：基础转场按叙事角色（主 / 章节 / 点缀）分组，GPU 旗舰转场用于罕见的英雄交接。签名统一为 `(tl, parts, at, duration)`；一支视频选一个主转场承担大部分切换，加一两个点缀。
 
-For per-pixel deformation, paper-fiber edges, or spatial warping on a rare hero handoff, read [advanced.md](advanced.md). Do not replace the primary transition system with a different flagship effect at every cut.
+按主题阅读：
 
-## Primary transitions
+- [paper-editorial](paper-editorial.md) — 16 基础转场（4 主 / 4 章节 / 8 点缀）+ parts 契约
+- [modern-minimal](modern-minimal.md) — 16 基础转场（4 主 / 4 章节 / 8 点缀）+ 完整 parts 契约（引导规线、柱列、索引、翻牌格、量规等 11 类预建 DOM）
+- [voxel-harness](voxel-harness.md) — 16 基础转场（4 主 / 4 章节 / 8 点缀）+ 完整 parts 契约（合成格、热键栏、地形柱、方块柱、XP 槽轨等 7 类预建 DOM）
+- [signal-desk](signal-desk.md) — 16 基础转场（4 主 / 4 章节 / 8 点缀）+ 完整 parts 契约（快讯带、规线、竖条、来源卡、静噪带等 21 类预建 DOM）
 
-Use one of these for roughly 60–70% of scene changes.
+GPU 旗舰转场见 [advanced.md](advanced.md)。
 
-| ID | Use | Typical duration |
-|---|---|---|
-| `paper-push` | Related points, normal forward motion | 0.55–0.7s |
-| `folio-rise` | Ordered steps, vertical progression | 0.6–0.75s |
-| `focus-press` | Calm analysis, evidence handoff | 0.65–0.8s |
-| `margin-pull` | Firm editorial cut | 0.6–0.75s |
-
-## Section transitions
-
-Use these to mark a topic or chapter change.
-
-| ID | Use | Typical duration |
-|---|---|---|
-| `red-rule-cut` | Short emphatic section cut | 0.5–0.65s |
-| `column-cascade` | New information group | 0.7–0.85s |
-| `archive-shutter` | Method, archive, or evidence section | 0.65–0.8s |
-| `chapter-bridge` | Major chapter number or title | 0.75–0.95s |
-
-## Accent transitions
-
-Reserve these for openings, key reveals, or one-off emphasis.
-
-| ID | Use | Typical duration |
-|---|---|---|
-| `ink-sweep` | Organic editorial reveal | 0.7–0.85s |
-| `tear-wipe` | Strong comparison or correction | 0.65–0.8s |
-| `diagonal-slice` | Faster analytical handoff | 0.55–0.7s |
-| `ink-iris` | Hero result or central subject | 0.7–0.9s |
-| `paper-fold` | Document or version change | 0.65–0.8s |
-| `stamp-cover` | Verdict, pass/fail, final status | 0.55–0.7s |
-| `paper-stack` | Multi-source synthesis | 0.7–0.9s |
-| `ink-dip` | Calm close or tonal reset | 0.65–0.85s |
-
-## HyperFrames integration
-
-Import `themes/paper-editorial/transitions.js`. Every preset receives the project's single paused GSAP timeline, the relevant selectors or elements, an absolute timeline position, and an optional duration.
-
-```js
-import { paperEditorialTransitions } from "./themes/paper-editorial/transitions.js";
-
-paperEditorialTransitions.paperPush(tl, {
-  outgoing: "#scene-a .scene-inner",
-  incoming: "#scene-b .scene-inner"
-}, 5.4, 0.62);
-```
-
-For HyperFrames clip-based projects, overlap the outgoing and incoming clips for the transition duration on separate tracks. Animate `.scene-inner` wrappers and dedicated overlay elements; the framework continues to own clip visibility. Cover transitions require a full-frame overlay. `archive-shutter`, `column-cascade`, and `paper-stack` require prebuilt overlay children supplied through `slats`, `columns`, or `sheets`.
-
-Choose one primary transition and one or two accents for a video. `chapter-bridge` or `stamp-cover` should remain rare so their impact is preserved.
+HyperFrames 通用接入：让前后两个 clip 在转场时长内于不同轨道上重叠，动画作用于 `.scene-inner` 包装层，clip 可见性由框架托管。需要预建 DOM（overlay / slats / columns 等）的转场，在各主题文档的 parts 契约里逐项写明。

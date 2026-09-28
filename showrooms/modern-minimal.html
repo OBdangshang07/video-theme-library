@@ -1,94 +1,593 @@
 <!doctype html>
 <html lang="zh-CN">
 <head>
-  <meta charset="UTF-8">
-  <meta name="viewport" content="width=device-width,initial-scale=1">
-  <title>现代秩序 · 主题展厅</title>
-  <link rel="stylesheet" href="../themes/modern-minimal/tokens.css">
-  <link rel="stylesheet" href="../themes/modern-minimal/components.css">
-  <style>
-    *{box-sizing:border-box}html{scroll-behavior:smooth;background:#e6e8e5}body{margin:0;background:var(--mm-bg);color:var(--mm-ink);font-family:var(--mm-sans)}button{font:inherit}.wrap{width:min(1320px,calc(100% - 56px));margin:auto}
-    nav{position:sticky;top:0;z-index:30;height:76px;border-bottom:2px solid var(--mm-ink);background:rgba(244,245,242,.94);backdrop-filter:blur(14px)}nav .wrap{height:100%;display:flex;align-items:center;justify-content:space-between;gap:28px}.brand{display:flex;align-items:center;gap:16px;font:900 18px/1 var(--mm-display);letter-spacing:-.02em}.brand i{width:34px;height:12px;background:var(--mm-accent)}.links{display:flex;gap:25px;align-items:center;font:700 12px/1 var(--mm-mono);letter-spacing:.08em}.links a{color:inherit;text-decoration:none}.links a:hover{color:var(--mm-accent)}
-    .hero{position:relative;min-height:650px;border-bottom:2px solid var(--mm-ink);overflow:hidden}.hero-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(17,19,23,.05) 1px,rgba(17,19,23,0) 1px),linear-gradient(90deg,rgba(17,19,23,.05) 1px,rgba(17,19,23,0) 1px);background-size:88px 88px}.hero .wrap{position:relative;z-index:2;min-height:650px;display:grid;grid-template-columns:1.35fr .65fr;align-items:end;gap:80px;padding:100px 0 72px}.eyebrow{font:700 13px/1 var(--mm-mono);letter-spacing:.13em;text-transform:uppercase;color:var(--mm-accent)}h1{margin:28px 0 0;font:900 clamp(70px,7vw,108px)/.92 var(--mm-display);letter-spacing:-.065em}.hero p{max-width:820px;margin:32px 0 0;font:400 22px/1.55 var(--mm-sans);color:var(--mm-muted)}.manifest{border-top:5px solid var(--mm-ink)}.manifest div{display:flex;justify-content:space-between;align-items:end;padding:19px 0;border-bottom:2px solid var(--mm-line)}.manifest span{font:700 12px/1 var(--mm-mono);letter-spacing:.08em}.manifest b{font:900 34px/1 var(--mm-display);color:var(--mm-accent)}
-    section{padding:92px 0;border-bottom:2px solid var(--mm-ink);scroll-margin-top:76px}.section-head{display:grid;grid-template-columns:1fr 1fr;gap:50px;align-items:end;margin-bottom:46px}.section-head h2{margin:0;font:900 58px/.96 var(--mm-display);letter-spacing:-.05em}.section-head p{margin:0;max-width:560px;justify-self:end;font:400 17px/1.6 var(--mm-sans);color:var(--mm-muted)}
-    .palette{display:grid;grid-template-columns:2fr 1fr 1fr 1fr 1fr;gap:8px}.swatch{min-height:105px;padding:14px;border:2px solid var(--mm-ink);display:flex;align-items:end;font:700 11px/1 var(--mm-mono)}
-    .grid{display:grid;grid-template-columns:repeat(2,minmax(0,1fr));gap:24px}.card{min-width:0;background:#fff;border:2px solid var(--mm-ink);box-shadow:0 18px 46px rgba(20,27,42,.07)}.head{display:grid;grid-template-columns:1fr auto;gap:20px;align-items:start;padding:21px 24px;border-bottom:2px solid var(--mm-line)}.id{font:700 14px/1 var(--mm-mono);color:var(--mm-accent)}.desc{margin:9px 0 0;font:400 14px/1.45 var(--mm-sans);color:var(--mm-muted)}.tag{padding:7px 9px;background:var(--mm-ink);color:var(--mm-bg);font:700 10px/1 var(--mm-mono);letter-spacing:.08em}.stage{position:relative;min-height:310px;padding:28px;overflow:hidden;background-color:var(--mm-bg);background-image:linear-gradient(rgba(17,19,23,.045) 1px,rgba(17,19,23,0) 1px),linear-gradient(90deg,rgba(17,19,23,.045) 1px,rgba(17,19,23,0) 1px);background-size:44px 44px}.stage .mm-title{font-size:52px}.stage .mm-body{font-size:16px}.stage .mm-number{font-size:72px}.stage .mm-label{font-size:10px}.stage .mm-panel{padding:27px}.stage .mm-metric{min-height:180px;padding:18px}.stage .mm-metric strong{margin-top:52px;font-size:34px}.stage .mm-split{min-height:230px}.stage .mm-split>div{padding:26px}.stage .mm-table-row{min-height:52px;font-size:12px;grid-template-columns:48px 1fr auto}.stage .mm-table-row b{font-size:18px}.stage .mm-process{grid-template-columns:repeat(4,1fr)}.stage .mm-step{min-height:190px;padding:18px 12px}.stage .mm-step b{font-size:34px}.stage .mm-quote{font-size:34px;gap:22px}.stage .mm-chapter{grid-template-columns:100px 1fr}.stage .mm-chapter-index{font-size:92px}.stage .mm-note{font-size:11px}.stage .mm-status{font-size:11px}.stage .mm-lockup{padding-top:26px}.stage .mm-media-meta{font-size:12px}.media-fill{width:100%;height:100%;display:grid;place-items:center;background:#dfe2e8;font:900 20px/1 var(--mm-display)}
-    .motion-card .stage{min-height:250px;display:grid;place-items:center}.motion-target{will-change:transform,opacity,clip-path,color}.motion-word{font:900 50px/.95 var(--mm-display);letter-spacing:-.05em}.motion-number{font:900 78px/1 var(--mm-display);color:var(--mm-accent)}.motion-rule{width:78%;height:8px;background:var(--mm-accent);transform-origin:left}.motion-list{width:80%;display:grid;gap:8px}.motion-list span{padding:12px 14px;border-bottom:2px solid var(--mm-line);font:700 12px/1 var(--mm-mono)}.replay{position:absolute;right:14px;bottom:14px;z-index:10;padding:9px 12px;border:2px solid var(--mm-ink);background:var(--mm-bg);font:700 10px/1 var(--mm-mono);cursor:pointer}.replay:hover{background:var(--mm-accent);border-color:var(--mm-accent);color:#fff}
-    .transition-card .stage{min-height:0;padding:18px}.tx-stage{position:relative;aspect-ratio:16/9;overflow:hidden;border:2px solid var(--mm-ink);perspective:1000px;background:var(--mm-ink)}.tx-scene,.tx-overlay,.tx-columns,.tx-index{position:absolute;inset:0}.tx-scene{display:grid;align-content:space-between;padding:24px}.tx-old{z-index:2;background:#f4f5f2;color:#111317}.tx-new{z-index:1;background:#111317;color:#f4f5f2}.tx-top{border-top:4px solid currentColor;padding-top:10px;display:flex;justify-content:space-between;font:700 9px/1 var(--mm-mono)}.tx-copy{font:900 34px/.95 var(--mm-display);letter-spacing:-.04em}.tx-copy small{display:block;margin-top:11px;font:700 9px/1 var(--mm-mono);color:#2455ff}.tx-new .tx-copy small{color:#7593ff}.tx-overlay{z-index:6;opacity:0;background:#2455ff}.tx-columns{z-index:6;display:grid;grid-template-columns:repeat(6,1fr);pointer-events:none}.tx-columns i{background:#2455ff;opacity:0}.tx-columns i:nth-child(even){background:#111317}.tx-index{z-index:7;display:grid;place-items:center;color:#fff;font:900 160px/1 var(--mm-display);opacity:0}.tx-time{position:absolute;left:12px;top:48px;z-index:9;padding:6px 8px;background:#111317;color:#fff;font:700 9px/1 var(--mm-mono)}
-    footer{padding:62px 0 74px;background:var(--mm-ink);color:var(--mm-bg)}footer .wrap{display:flex;justify-content:space-between;align-items:end;gap:40px}footer h2{margin:0;font:900 42px/1 var(--mm-display);letter-spacing:-.04em}footer p{margin:15px 0 0;color:#aeb3bb;font:400 15px/1.5 var(--mm-sans)}footer code{color:#7593ff;font:700 13px/1 var(--mm-mono)}
-    @media(max-width:900px){.hero .wrap,.section-head,.grid{grid-template-columns:1fr}.hero .wrap{align-items:center}.manifest{margin-top:20px}.palette{grid-template-columns:1fr 1fr}.links{display:none}.section-head p{justify-self:start}.mm-process{grid-template-columns:1fr 1fr}}
-  </style>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1">
+<title>modern-minimal · 现代秩序 — 组件 / 动效 / 转场展厅</title>
+<script src="https://cdn.jsdelivr.net/npm/gsap@3.14.2/dist/gsap.min.js"></script>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Montserrat:wght@400;700;900&family=IBM+Plex+Mono:wght@400;700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="../themes/modern-minimal/tokens.css">
+<link rel="stylesheet" href="../themes/modern-minimal/components.css">
+<style>
+  body{margin:0;background:#e9eae6;color:var(--mm-ink);font-family:var(--mm-sans)}
+  .wrap{max-width:1440px;margin:0 auto;padding:0 32px}
+  nav{position:sticky;top:0;z-index:50;background:rgba(244,245,242,.94);border-bottom:2px solid var(--mm-ink);backdrop-filter:blur(8px)}
+  nav .wrap{display:flex;align-items:center;gap:28px;height:64px}
+  nav .brand{display:flex;align-items:center;gap:12px;font:900 20px/1 var(--mm-display);letter-spacing:-.02em}
+  nav .brand i{width:14px;height:14px;background:var(--mm-accent)}
+  nav .counts{font:700 12px/1 var(--mm-mono);letter-spacing:.08em;color:var(--mm-muted)}
+  nav a{font:700 13px/1 var(--mm-mono);color:var(--mm-ink);text-decoration:none;letter-spacing:.06em}
+  nav a:hover{color:var(--mm-accent)}
+  nav .spacer{flex:1}
+  header.hero{position:relative;padding:88px 0 72px;border-bottom:2px solid var(--mm-ink);overflow:hidden;background:var(--mm-bg)}
+  header.hero::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(17,19,23,.045) 1px,transparent 1px),linear-gradient(90deg,rgba(17,19,23,.045) 1px,transparent 1px);background-size:120px 120px}
+  .hero-grid{display:grid;grid-template-columns:1.25fr .75fr;gap:64px;align-items:start;position:relative;z-index:2}
+  .hero .kicker{display:flex;align-items:center;gap:14px;font:700 14px/1 var(--mm-mono);letter-spacing:.16em;color:var(--mm-accent)}
+  .hero .kicker::before{content:"";width:34px;height:10px;background:var(--mm-accent)}
+  .hero h1{margin:26px 0 0;font:900 80px/.96 var(--mm-display);letter-spacing:-.055em}
+  .hero .lede{margin-top:28px;font:400 21px/1.6 var(--mm-sans);color:var(--mm-muted);max-width:760px}
+  .hero .panel{border:2px solid var(--mm-ink);border-top:6px solid var(--mm-accent);background:var(--mm-surface);padding:30px}
+  .hero .panel h2{font:700 13px/1 var(--mm-mono);letter-spacing:.14em;color:var(--mm-muted)}
+  .hero .panel dl{margin:20px 0 0;display:grid;grid-template-columns:auto 1fr;gap:12px 22px;font:700 14px/1.4 var(--mm-mono)}
+  .hero .panel dt{color:var(--mm-muted)}
+  .hero .panel dd{margin:0}
+  .hero .links{margin-top:36px;display:flex;gap:14px;flex-wrap:wrap}
+  .hero .links a{border:2px solid var(--mm-ink);padding:12px 18px;font:700 13px/1 var(--mm-mono);letter-spacing:.08em;color:var(--mm-ink);text-decoration:none;background:var(--mm-surface)}
+  .hero .links a:hover{border-color:var(--mm-accent);color:var(--mm-accent)}
+  section{padding:72px 0 8px}
+  section>.wrap>h2{font:900 46px/1 var(--mm-display);letter-spacing:-.045em}
+  section>.wrap>.section-sub{margin-top:14px;font:400 16px/1.6 var(--mm-sans);color:var(--mm-muted);max-width:820px}
+  .swatches{display:grid;grid-template-columns:repeat(6,1fr);gap:14px;margin-top:36px}
+  .swatch{border:2px solid var(--mm-ink);height:112px;display:flex;flex-direction:column;justify-content:flex-end;padding:12px;background:var(--c)}
+  .swatch b{font:700 12px/1.2 var(--mm-mono)}
+  .swatch span{font:700 11px/1 var(--mm-mono);opacity:.75}
+  .type-rows{margin-top:28px;display:grid;grid-template-columns:1fr 1fr 1fr;gap:16px}
+  .type-rows>div{border:2px solid var(--mm-ink);padding:22px;background:var(--mm-surface)}
+  .type-rows b{display:block;font:700 11px/1 var(--mm-mono);letter-spacing:.12em;color:var(--mm-muted);margin-bottom:14px}
+  .type-display{font:900 30px/1.15 var(--mm-display);letter-spacing:-.02em}
+  .type-body{font:400 19px/1.5 var(--mm-sans)}
+  .type-mono{font:700 18px/1.4 var(--mm-mono)}
+  .grid{display:grid;grid-template-columns:repeat(3,1fr);gap:22px;margin-top:36px}
+  .card{border:2px solid var(--mm-ink);background:var(--mm-surface);box-shadow:var(--mm-shadow-soft);display:flex;flex-direction:column}
+  .card>header{display:flex;align-items:baseline;justify-content:space-between;gap:12px;padding:16px 18px 12px;border-bottom:2px solid var(--mm-line)}
+  .card .id{font:700 13px/1 var(--mm-mono);letter-spacing:.04em;color:var(--mm-accent)}
+  .card .name{margin-top:7px;font:900 17px/1 var(--mm-display);letter-spacing:-.01em}
+  .card .en{font:700 10px/1 var(--mm-mono);letter-spacing:.1em;color:var(--mm-muted)}
+  .card .mini{position:relative;overflow:hidden;border-bottom:2px solid var(--mm-line);background:var(--mm-bg)}
+  .card .mini-inner{position:absolute;left:0;top:0;width:1920px;height:1080px;transform-origin:0 0}
+  .card>footer{display:flex;align-items:center;justify-content:space-between;gap:12px;padding:13px 18px;margin-top:auto}
+  .card .use{font:700 11px/1.5 var(--mm-mono);color:var(--mm-muted)}
+  .replay{flex:none;border:2px solid var(--mm-ink);background:transparent;color:var(--mm-ink);font:700 11px/1 var(--mm-mono);padding:8px 12px;cursor:pointer;letter-spacing:.06em}
+  .replay:hover{border-color:var(--mm-accent);color:var(--mm-accent)}
+  .duration{font:700 11px/1 var(--mm-mono);color:var(--mm-muted)}
+  .role-badge{font:700 10px/1 var(--mm-mono);letter-spacing:.1em;padding:5px 8px;border:1.5px solid var(--mm-muted);color:var(--mm-muted)}
+  .role-badge.primary{border-color:var(--mm-ink);color:var(--mm-ink)}
+  .role-badge.section{border-color:var(--mm-accent);color:var(--mm-accent)}
+  .role-badge.advanced{border-color:var(--mm-accent);background:var(--mm-accent);color:#fff}
+  .motion-stage{position:relative;height:170px;overflow:hidden;border-bottom:2px solid var(--mm-line);background:var(--mm-bg);display:flex;align-items:center;justify-content:center;gap:14px}
+  .sample-title{font:900 52px/1 var(--mm-display);letter-spacing:-.045em}
+  .sample-panel{width:118px;height:86px;border:2px solid var(--mm-ink);border-top:5px solid var(--mm-accent);background:var(--mm-surface);padding:12px;font:700 12px/1.3 var(--mm-mono);color:var(--mm-muted)}
+  .sample-number{font:900 64px/.9 var(--mm-display);letter-spacing:-.04em}
+  .sample-rule{width:70%;height:8px;background:var(--mm-accent);transform-origin:left center}
+  .sample-rows{display:flex;flex-direction:column;gap:8px;width:78%}
+  .sample-row{display:grid;grid-template-columns:44px 1fr auto;align-items:center;border-bottom:2px solid var(--mm-line);background:var(--mm-surface);padding:8px 12px;font:700 13px/1 var(--mm-sans)}
+  .sample-row .idx{color:var(--mm-accent);font:700 14px/1 var(--mm-mono)}
+  .sample-row .mta{font:700 10px/1 var(--mm-mono);color:var(--mm-muted)}
+  .sample-mask{width:72%;height:104px;background:var(--mm-ink);color:var(--mm-bg);display:grid;place-items:center;font:900 22px/1 var(--mm-display);letter-spacing:-.02em}
+  .sample-focus{padding:18px 24px;border:2px solid var(--mm-ink);background:var(--mm-surface);font:900 30px/1 var(--mm-display);letter-spacing:-.02em}
+  .sample-emphasis{font:900 46px/1 var(--mm-display);letter-spacing:-.03em}
+  .sample-index{font:900 110px/.85 var(--mm-display);color:var(--mm-accent);letter-spacing:-.07em}
+  .sample-lockup{font:900 34px/1 var(--mm-display);letter-spacing:-.02em;border-top:5px solid var(--mm-ink);padding-top:14px}
+  .sample-grid{position:absolute;inset:0;pointer-events:none;background-image:linear-gradient(rgba(17,19,23,.09) 1px,transparent 1px),linear-gradient(90deg,rgba(17,19,23,.09) 1px,transparent 1px);background-size:36px 36px}
+  .tx-stage{position:relative;aspect-ratio:16/9;overflow:hidden;border-bottom:2px solid var(--mm-line);background:var(--mm-ink);perspective:900px}
+  .tx-scene{position:absolute;inset:0;display:grid;place-items:center;font:900 26px/1.3 var(--mm-display);letter-spacing:-.03em;text-align:center}
+  .tx-scene small{display:block;margin-top:8px;font:700 11px/1 var(--mm-mono);letter-spacing:.12em;color:var(--mm-accent)}
+  .tx-a{background:var(--mm-bg);color:var(--mm-ink)}
+  .tx-a::before{content:"";position:absolute;inset:0;background-image:linear-gradient(rgba(17,19,23,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(17,19,23,.05) 1px,transparent 1px);background-size:40px 40px}
+  .tx-b{background:var(--mm-ink);color:var(--mm-bg)}
+  .tx-b small{color:var(--mm-accent-soft)}
+  .tx-part{position:absolute;pointer-events:none;opacity:0}
+  .tx-overlay{inset:0}
+  .tx-column{top:0;bottom:0;width:12.5%;background:var(--mm-accent)}
+  .tx-index{inset:0;display:grid;place-items:center;font:900 180px/1 var(--mm-display);letter-spacing:-.06em;color:var(--mm-accent)}
+  .tx-rule{left:0;right:0;top:0;height:6px}
+  .tx-rule-v{top:0;bottom:0;left:0;width:5px}
+  .tx-rule-h{left:0;right:0;top:0;height:5px}
+  .tx-cross{left:50%;top:50%;width:26px;height:26px;margin:-13px 0 0 -13px}
+  .tx-cell{background:var(--mm-ink)}
+  .tx-caliper-l{top:0;bottom:0;left:0;width:6px}
+  .tx-caliper-r{top:0;bottom:0;right:0;width:6px}
+  .tx-edge{top:0;bottom:0;left:100%;width:6px}
+  .tx-duration{position:absolute;right:10px;bottom:10px;font:700 11px/1 var(--mm-mono);color:var(--mm-muted);background:rgba(244,245,242,.88);padding:4px 7px;z-index:5}
+  .tx-gpu{position:absolute;inset:0;width:100%;height:100%;object-fit:cover}
+  .tx-gpu-badge{position:absolute;left:10px;bottom:10px;font:700 10px/1 var(--mm-mono);letter-spacing:.1em;color:var(--mm-accent);background:rgba(244,245,242,.9);padding:4px 7px;z-index:5}
+  .transition-stage{position:absolute;inset:0}
+  footer.site{margin-top:88px;border-top:2px solid var(--mm-ink);padding:34px 0 46px}
+  footer.site .wrap{display:flex;justify-content:space-between;font:700 12px/1.7 var(--mm-mono);color:var(--mm-muted)}
+</style>
 </head>
-<body>
-  <nav><div class="wrap"><a class="brand" href="#top"><i></i><span>现代秩序</span></a><div class="links"><a href="#system">SYSTEM</a><a href="#components">COMPONENTS · 15</a><a href="#motions">MOTIONS · 10</a><a href="#transitions">TRANSITIONS · 12</a><a href="../index.html">宣纸编辑部 ↗</a></div></div></nav>
-  <header id="top" class="hero"><div class="hero-grid"></div><div class="wrap"><div><div class="eyebrow">MODERN MINIMAL · THEME 02</div><h1>现代秩序<br><span style="color:var(--mm-accent)">少而准确。</span></h1><p>为产品、科技、品牌和界面内容建立清晰的视觉秩序。信息靠比例、网格和时序进入画面。</p></div><aside class="manifest"><div><span>COMPONENTS</span><b>15</b></div><div><span>MOTIONS</span><b>10</b></div><div><span>TRANSITIONS</span><b>12</b></div><div><span>STATUS</span><b>V1.0</b></div></aside></div></header>
-  <main>
-    <section id="system"><div class="wrap"><div class="section-head"><h2>视觉系统</h2><p>暖灰白减少屏幕刺眼感，炭黑建立结构，钴蓝只负责焦点与状态。圆角、阴影和装饰均保持低频。</p></div><div class="palette"><div class="swatch" style="background:#f4f5f2">BG · #F4F5F2</div><div class="swatch" style="background:#fff">SURFACE</div><div class="swatch" style="background:#111317;color:#fff">INK</div><div class="swatch" style="background:#666c75;color:#fff">MUTED</div><div class="swatch" style="background:#2455ff;color:#fff">ACCENT</div></div></div></section>
-    <section id="components"><div class="wrap"><div class="section-head"><h2>组件展厅</h2><p>同一套组件可以承载产品信息、解释内容、作品展示、时间线或比较数据。</p></div><div class="grid" id="component-grid"></div></div></section>
-    <section id="motions"><div class="wrap"><div class="section-head"><h2>元素动效</h2><p>运动短促、方向明确。进入后迅速静止，让观众把注意力放在内容上。</p></div><div class="grid" id="motion-grid"></div></div></section>
-    <section id="transitions"><div class="wrap"><div class="section-head"><h2>场景转场</h2><p>四个主转场负责常规节奏，章节与强调转场只在结构变化或关键揭晓时出现。</p></div><div class="grid" id="transition-grid"></div></div></section>
-  </main>
-  <footer><div class="wrap"><div><h2>modern-minimal · 现代秩序</h2><p>第二套主题已纳入个人视频主题与动效库。</p></div><code>$video-theme-library</code></div></footer>
-  <script>
-    const components=[
-      ['modern-title','开场标题或主要观点。','TITLE',`<div class="mm-frame-header"><span>PROJECT / 01</span><span>2026</span></div><div style="margin-top:80px" class="mm-label">MAIN STATEMENT</div><div style="margin-top:18px" class="mm-title">清晰呈现<br><span style="color:var(--mm-accent)">核心信息</span></div>`],
-      ['grid-header','页眉、章节和画面编号。','META',`<div class="mm-frame-header"><span>SECTION 02 · METHOD</span><span>02 / 08</span></div><div style="margin-top:130px" class="mm-body">稳定的顶部信息区不会争夺主内容。</div>`],
-      ['surface-panel','通用信息容器。','PANEL',`<div class="mm-panel"><div class="mm-label">SUMMARY</div><div style="margin-top:24px;font:900 34px/1.1 var(--mm-display)">运行条件已记录</div><p class="mm-body" style="margin:18px 0 0">用于说明、结论或参数。</p></div>`],
-      ['number-focus','单个关键数字。','DATA',`<div class="mm-stat"><div><div class="mm-label">TOTAL TIME</div><p class="mm-body" style="margin:18px 0 0">完整流程耗时</p></div><div class="mm-number">7:24</div></div>`],
-      ['metric-row','三个并列维度。','DATA',`<div class="mm-metric-row"><div class="mm-metric"><div class="mm-label">SPEED</div><strong>8.4</strong></div><div class="mm-metric"><div class="mm-label">COST</div><strong>6.8</strong></div><div class="mm-metric"><div class="mm-label">QUALITY</div><strong style="color:var(--mm-accent)">9.1</strong></div></div>`],
-      ['split-compare','双对象比较。','COMPARE',`<div class="mm-split"><div><div class="mm-label">OPTION A</div><h3 style="margin:42px 0 0;font:900 32px/1 var(--mm-display)">响应更快</h3></div><div><div class="mm-label">OPTION B</div><h3 style="margin:42px 0 0;font:900 32px/1 var(--mm-display)">细节更多</h3></div></div>`],
-      ['ranked-table','排序、选项或结果。','LIST',`<div class="mm-table"><div class="mm-table-row"><span>01</span><b>方案 Alpha</b><span>92.0</span></div><div class="mm-table-row"><span>02</span><b>方案 Beta</b><span>88.5</span></div><div class="mm-table-row"><span>03</span><b>方案 Gamma</b><span>81.0</span></div></div>`],
-      ['process-line','流程与时间顺序。','PROCESS',`<div class="mm-process"><div class="mm-step"><b>01</b><p>输入</p></div><div class="mm-step"><b>02</b><p>分析</p></div><div class="mm-step"><b>03</b><p>执行</p></div><div class="mm-step"><b>04</b><p>检查</p></div></div>`],
-      ['quote-block','引用或核心判断。','QUOTE',`<div class="mm-quote">稳定的结构，让复杂内容更容易理解。</div>`],
-      ['media-window','视频、网页、截图或作品。','MEDIA',`<div class="mm-media"><div class="mm-media-window"><div class="media-fill">16:9 主画面</div></div><aside class="mm-media-meta"><div><div class="mm-label">ARTIFACT</div><h3>作品名称</h3></div><span>来源说明</span></aside></div>`],
-      ['status-pill','状态、标签与简短判断。','STATUS',`<div style="display:grid;place-items:center;height:240px"><span class="mm-status">验证完成</span></div>`],
-      ['section-index','大章节分隔。','SECTION',`<div class="mm-chapter"><div class="mm-chapter-index">03</div><div><div class="mm-label">CHAPTER</div><div class="mm-title" style="margin-top:18px;font-size:44px">效率与成本</div></div></div>`],
-      ['footnote','来源、限制与方法说明。','NOTE',`<div style="height:230px;display:flex;align-items:end"><div class="mm-note">SOURCE / 数据来自同一测试环境；计时取完整任务区间。</div></div>`],
-      ['progress-line','全画面进度线。','PROGRESS',`<div style="height:235px;position:relative"><div class="mm-label">CURRENT PROGRESS</div><div class="mm-progress"><span style="width:64%"></span></div></div>`],
-      ['closing-lockup','结尾观点和主题署名。','OUTRO',`<div class="mm-lockup"><div><div class="mm-label">FINAL NOTE</div><div class="mm-title" style="margin-top:18px;font-size:48px">结论已经明确</div></div><div class="mm-status">END</div></div>`]
-    ];
-    const componentGrid=document.querySelector('#component-grid');
-    componentGrid.innerHTML=components.map(([id,desc,tag,body])=>`<article class="card"><header class="head"><div><div class="id">${id}</div><p class="desc">${desc}</p></div><span class="tag">${tag}</span></header><div class="stage">${body}</div></article>`).join('');
+<body class="mm-theme">
+<nav>
+  <div class="wrap">
+    <span class="brand"><i></i>现代秩序</span>
+    <span class="counts">COMPONENTS · 17&nbsp;&nbsp;MOTIONS · 14&nbsp;&nbsp;TRANSITIONS · 21</span>
+    <span class="spacer"></span>
+    <a href="#components">组件</a><a href="#motions">动效</a><a href="#transitions">转场</a>
+    <a href="../index.html">宣纸编辑部</a>
+    <a href="./voxel-harness.html">方块终端</a>
+    <a href="./signal-desk.html">信号台</a>
+    <a href="../timeline-demo/index.html">时序示例</a>
+  </div>
+</nav>
 
-    const motions=[['grid-reveal','标题沿网格揭示。'],['precision-rise','面板短距离上移。'],['number-roll','数字递增至目标值。'],['rule-expand','结构线快速展开。'],['list-stagger','列表按顺序进入。'],['mask-slide','内容沿方向遮罩进入。'],['focus-snap','画面由轻微虚焦锁定。'],['soft-emphasis','关键词切换为钴蓝。'],['index-shift','章节编号贴合网格。'],['closing-compress','结尾锁定横向比例。']];
-    const motionMarkup=id=>id==='number-roll'?`<div class="motion-target motion-number">0</div>`:id==='rule-expand'?`<div class="motion-target motion-rule"></div>`:id==='list-stagger'?`<div class="motion-list"><span class="motion-target">01 · PRIMARY</span><span class="motion-target">02 · CONTEXT</span><span class="motion-target">03 · RESULT</span></div>`:`<div class="motion-target motion-word">${id==='soft-emphasis'?'关键差异':id==='index-shift'?'04':id==='closing-compress'?'FINAL / NOTE':'现代秩序'}</div>`;
-    document.querySelector('#motion-grid').innerHTML=motions.map(([id,desc])=>`<article class="card motion-card" data-motion="${id}"><header class="head"><div><div class="id">${id}</div><p class="desc">${desc}</p></div><span class="tag">MOTION</span></header><div class="stage">${motionMarkup(id)}<button class="replay">重播</button></div></article>`).join('');
-    const play=(el,frames,options={})=>el.animate(frames,{duration:650,easing:'cubic-bezier(.16,1,.3,1)',fill:'both',...options});
-    const runMotion=card=>{card.querySelectorAll('.motion-target').forEach(el=>el.getAnimations().forEach(a=>a.cancel()));const id=card.dataset.motion,targets=[...card.querySelectorAll('.motion-target')];if(id==='number-roll'){const el=targets[0],start=performance.now();play(el,[{opacity:.2,transform:'translateY(22px)'},{opacity:1,transform:'translateY(0)'}]);const tick=now=>{const p=Math.min(1,(now-start)/900);el.textContent=(94.5*(1-Math.pow(1-p,3))).toFixed(1);if(p<1)requestAnimationFrame(tick)};requestAnimationFrame(tick);return}if(id==='list-stagger'){targets.forEach((el,i)=>play(el,[{opacity:0,transform:'translateX(-38px)'},{opacity:1,transform:'translateX(0)'}],{delay:i*90,duration:520}));return}const map={
-      'grid-reveal':[{opacity:0,clipPath:'inset(0 100% 0 0)'},{opacity:1,clipPath:'inset(0 0 0 0)'}],
-      'precision-rise':[{opacity:0,transform:'translateY(48px)'},{opacity:1,transform:'translateY(0)'}],
-      'rule-expand':[{transform:'scaleX(0)'},{transform:'scaleX(1)'}],
-      'mask-slide':[{opacity:1,transform:'translateX(-70px)',clipPath:'inset(0 100% 0 0)'},{opacity:1,transform:'translateX(0)',clipPath:'inset(0 0 0 0)'}],
-      'focus-snap':[{opacity:0,transform:'scale(1.08)',filter:'blur(12px)'},{opacity:1,transform:'scale(1)',filter:'blur(0)'}],
-      'soft-emphasis':[{transform:'scale(.94)',color:'#111317'},{transform:'scale(1)',color:'#2455ff'}],
-      'index-shift':[{opacity:0,transform:'translateX(-86px)',letterSpacing:'.08em'},{opacity:1,transform:'translateX(0)',letterSpacing:'-.08em'}],
-      'closing-compress':[{opacity:0,transform:'scaleX(1.14)'},{opacity:1,transform:'scaleX(1)'}]
-    };play(targets[0],map[id])};
-    document.querySelectorAll('.motion-card').forEach(card=>{card.querySelector('.replay').addEventListener('click',()=>runMotion(card))});
+<header class="hero">
+  <div class="wrap hero-grid">
+    <div>
+      <div class="kicker">MODERN MINIMAL · SHOWROOM</div>
+      <h1>组件、动效与转场，<br>全部来自<span class="mm-accent">真实主题模块</span>。</h1>
+      <p class="lede">本页每个演示都由 <span class="mm-mono">themes/modern-minimal/</span> 下的 tokens.css、components.css、motions.js、transitions.js 与 advanced-transitions.js 直接驱动。暖灰白承担画布，炭黑建立结构，钴蓝只负责焦点与状态。展厅即契约：所见行为与生产合成一致。</p>
+      <div class="links">
+        <a href="#components">17 组件</a><a href="#motions">14 动效</a><a href="#transitions">16 + 5 转场</a>
+      </div>
+    </div>
+    <aside class="panel">
+      <h2>THEME MANIFEST</h2>
+      <dl>
+        <dt>ID</dt><dd>modern-minimal</dd>
+        <dt>版本</dt><dd>2.0.0</dd>
+        <dt>画布</dt><dd>1920 × 1080 · 安全区 96 / 72</dd>
+        <dt>动效性格</dt><dd>precise · grid-locked · restrained · directional</dd>
+        <dt>转场</dt><dd>4 主 / 4 章节 / 8 点缀 + 5 GPU 旗舰</dd>
+        <dt>文档</dt><dd>references/{motions,transitions,components}/modern-minimal.md</dd>
+      </dl>
+    </aside>
+  </div>
+</header>
 
-    const transitions=[
-      ['split-slide','横向分屏推进','primary',.58],['axis-rise','纵轴上卷','primary',.62],['clean-cross','干净叠化','primary',.68],['frame-pull','画框抽换','primary',.64],
-      ['blue-line-cut','钴蓝裁线','section',.52],['grid-shift','网格错位','section',.70],['panel-lock','面板锁合','section',.66],['section-index-swap','章节编号换页','section',.76],
-      ['aperture-box','矩形光圈','accent',.68],['precision-zoom','精密变焦','accent',.62],['axis-fold','轴线折叠','accent',.72],['dot-expand','焦点扩张','accent',.70]
-    ];
-    document.querySelector('#transition-grid').innerHTML=transitions.map(([id,label,role,d])=>`<article class="card transition-card" data-transition="${id}" data-duration="${d}"><header class="head"><div><div class="id">${id}</div><p class="desc">${label}</p></div><span class="tag">${role.toUpperCase()}</span></header><div class="stage"><div class="tx-stage"><div class="tx-scene tx-new"><div class="tx-top"><span>NEW VIEW</span><span>02 / 02</span></div><div class="tx-copy">结论页面<small>VERIFIED RESULT</small></div></div><div class="tx-scene tx-old"><div class="tx-top"><span>CURRENT VIEW</span><span>01 / 02</span></div><div class="tx-copy">分析页面<small>IN REVIEW</small></div></div><div class="tx-overlay"></div><div class="tx-columns">${'<i></i>'.repeat(6)}</div><div class="tx-index">02</div><span class="tx-time">${d}s</span></div><button class="replay">重播</button></div></article>`).join('');
-    const runTx=card=>{card.querySelectorAll('.tx-stage *').forEach(el=>{el.getAnimations().forEach(a=>a.cancel());el.removeAttribute('style')});const id=card.dataset.transition,d=Number(card.dataset.duration)*1000,old=card.querySelector('.tx-old'),next=card.querySelector('.tx-new'),overlay=card.querySelector('.tx-overlay'),cols=[...card.querySelectorAll('.tx-columns i')],index=card.querySelector('.tx-index');next.style.zIndex='3';
-      if(id==='split-slide'){play(old,[{transform:'translateX(0)',opacity:1},{transform:'translateX(-19%)',opacity:.35}],{duration:d});play(next,[{transform:'translateX(100%)'},{transform:'translateX(0)'}],{duration:d});return}
-      if(id==='axis-rise'){play(old,[{transform:'translateY(0)',opacity:1},{transform:'translateY(-17%)',opacity:.28}],{duration:d});play(next,[{transform:'translateY(100%)'},{transform:'translateY(0)'}],{duration:d});return}
-      if(id==='clean-cross'){play(old,[{opacity:1,transform:'scale(1)'},{opacity:0,transform:'scale(1.015)'}],{duration:d});play(next,[{opacity:0,transform:'scale(.985)'},{opacity:1,transform:'scale(1)'}],{duration:d});return}
-      if(id==='frame-pull'){play(old,[{transform:'translateX(0)',opacity:1},{transform:'translateX(-8%)',opacity:.45}],{duration:d});play(next,[{clipPath:'inset(7% 7% 7% 93%)',transform:'scale(.97)'},{clipPath:'inset(0 0 0 0)',transform:'scale(1)'}],{duration:d});return}
-      if(id==='blue-line-cut'){overlay.style.background='#2455ff';play(overlay,[{opacity:1,transform:'scaleX(0)',transformOrigin:'left center',offset:0},{opacity:1,transform:'scaleX(1)',offset:.48},{opacity:1,transform:'scaleX(1)',transformOrigin:'right center',offset:.52},{opacity:1,transform:'scaleX(0)',transformOrigin:'right center',offset:1}],{duration:d});play(old,[{opacity:1,offset:0},{opacity:1,offset:.49},{opacity:0,offset:.51},{opacity:0,offset:1}],{duration:d,easing:'linear'});return}
-      if(id==='grid-shift'){cols.forEach((col,i)=>{col.style.opacity='1';play(col,[{transform:'translateY(100%)'},{transform:'translateY(-100%)'}],{duration:d,delay:i*26})});play(old,[{opacity:1,offset:0},{opacity:1,offset:.46},{opacity:0,offset:.54},{opacity:0,offset:1}],{duration:d,easing:'linear'});return}
-      if(id==='panel-lock'){overlay.style.background='#111317';play(overlay,[{opacity:1,transform:'scale(.82)',borderRadius:'120px',offset:0},{opacity:1,transform:'scale(1)',borderRadius:'0',offset:.48},{opacity:1,transform:'scale(1)',borderRadius:'0',offset:.52},{opacity:0,transform:'scale(.82)',borderRadius:'120px',offset:1}],{duration:d});play(old,[{opacity:1,offset:0},{opacity:1,offset:.49},{opacity:0,offset:.51},{opacity:0,offset:1}],{duration:d,easing:'linear'});return}
-      if(id==='section-index-swap'){index.style.opacity='1';play(index,[{transform:'translateX(100%)'},{transform:'translateX(-100%)'}],{duration:d});play(old,[{opacity:1,offset:0},{opacity:1,offset:.46},{opacity:0,offset:.54},{opacity:0,offset:1}],{duration:d,easing:'linear'});return}
-      if(id==='aperture-box'){play(old,[{transform:'scale(1)',filter:'blur(0)'},{transform:'scale(1.045)',filter:'blur(4px)'}],{duration:d});play(next,[{clipPath:'inset(48% 48% 48% 48%)'},{clipPath:'inset(0 0 0 0)'}],{duration:d});return}
-      if(id==='precision-zoom'){play(old,[{transform:'scale(1)',opacity:1,filter:'blur(0)'},{transform:'scale(1.32)',opacity:0,filter:'blur(8px)'}],{duration:d*.7,easing:'cubic-bezier(.76,0,.24,1)'});play(next,[{transform:'scale(.72)',opacity:0,filter:'blur(10px)'},{transform:'scale(1)',opacity:1,filter:'blur(0)'}],{duration:d*.82,delay:d*.18});return}
-      if(id==='axis-fold'){play(old,[{transform:'rotateX(0)',opacity:1},{transform:'rotateX(-86deg)',opacity:0}],{duration:d,transformOrigin:'center top'});play(next,[{transform:'rotateX(84deg)',opacity:1},{transform:'rotateX(0)',opacity:1}],{duration:d*.8,delay:d*.2});return}
-      if(id==='dot-expand'){play(old,[{transform:'translate(0,0) scale(1)'},{transform:'translate(-4%,3%) scale(.985)'}],{duration:d});play(next,[{clipPath:'circle(0% at 78% 22%)'},{clipPath:'circle(140% at 78% 22%)'}],{duration:d})}
-    };
-    document.querySelectorAll('.transition-card').forEach(card=>card.querySelector('.replay').addEventListener('click',()=>runTx(card)));
-    const observer=new IntersectionObserver(entries=>entries.forEach(entry=>{if(entry.isIntersecting&&!entry.target.dataset.played){entry.target.dataset.played='1';entry.target.matches('.motion-card')?runMotion(entry.target):runTx(entry.target)}}),{threshold:.45});
-    document.querySelectorAll('.motion-card,.transition-card').forEach(card=>observer.observe(card));
-  </script>
+<section id="system">
+  <div class="wrap">
+    <h2>视觉系统</h2>
+    <p class="section-sub">暖灰白减少屏幕刺眼感，炭黑建立信息结构，钴蓝只负责焦点与状态。120px 瑞士网格与 96/72 安全区来自 tokens.css。</p>
+    <div class="swatches">
+      <div class="swatch" style="--c:#f4f5f2"><b>bg</b><span>#F4F5F2</span></div>
+      <div class="swatch" style="--c:#ffffff"><b>surface</b><span>#FFFFFF</span></div>
+      <div class="swatch" style="--c:#111317;color:#f4f5f2"><b>ink</b><span>#111317</span></div>
+      <div class="swatch" style="--c:#666c75;color:#fff"><b>muted</b><span>#666C75</span></div>
+      <div class="swatch" style="--c:#d8dbe0"><b>line</b><span>#D8DBE0</span></div>
+      <div class="swatch" style="--c:#2455ff;color:#fff"><b>accent</b><span>#2455FF</span></div>
+    </div>
+    <div class="type-rows">
+      <div><b>DISPLAY / MONTSERRAT</b><div class="type-display">现代秩序标题 Modern 02</div></div>
+      <div><b>BODY / HELVETICA NEUE</b><div class="type-body">正文用无衬线骨架承载信息密度，说明、参数与并列条目。</div></div>
+      <div><b>NUMERIC / IBM PLEX MONO</b><div class="type-mono">0123456789 · ENTRY 05/12 · 7:24</div></div>
+    </div>
+  </div>
+</section>
+
+<section id="components">
+  <div class="wrap">
+    <h2>组件 · 17</h2>
+    <p class="section-sub">内容是中性占位。每个缩略场景都是 1920×1080 真实组件等比缩小，类名即生产类名；16 个 canonical ID 的映射见 components.css 顶部 catalog 头。</p>
+    <div class="grid" id="component-grid">
+
+      <article class="card component-card"><header><span><span class="id">modern-title</span><div class="name">现代标题</div></span><span class="en">TITLE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-frame-header" style="position:absolute;left:96px;right:96px;top:64px"><span>PROJECT / 01</span><span>MODERN MINIMAL</span></div>
+          <div style="position:absolute;left:220px;top:280px"><div class="mm-kicker">MAIN STATEMENT / 主题</div><div class="mm-title" style="margin-top:34px">清晰呈现<br><span class="mm-accent">核心信息</span></div><p class="mm-subtitle" style="margin-top:36px;max-width:900px">副题补充语境，两行以内收住。</p></div>
+        </div></div></div>
+        <footer><span class="use">mm-kicker + mm-title + mm-subtitle · 映射 editorial-title</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">grid-header</span><div class="name">网格页眉</div></span><span class="en">HEADER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-frame-header" style="position:absolute;left:96px;right:96px;top:64px"><span>SECTION 02 · METHOD</span><span>02 / 08</span></div>
+          <div style="position:absolute;left:96px;top:290px;font:900 58px/1.15 var(--mm-display);letter-spacing:-.04em">页眉贯穿全片，<br>标注章节与页码。</div>
+        </div></div></div>
+        <footer><span class="use">mm-frame-header · 映射 folio-header</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">surface-panel</span><div class="name">表面板块</div></span><span class="en">PANEL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div style="position:absolute;left:280px;right:280px;top:290px;display:grid;grid-template-columns:1fr 1fr;gap:36px">
+            <div class="mm-panel"><div class="mm-label" style="color:var(--mm-muted)">PANEL / 常规</div><p style="margin:28px 0 0;font:400 27px/1.55 var(--mm-sans)">通用信息容器，顶部炭线收口。</p></div>
+            <div class="mm-panel accent"><div class="mm-label" style="color:var(--mm-accent)">PANEL / 强调</div><p style="margin:28px 0 0;font:400 27px/1.55 var(--mm-sans)">钴蓝顶边只给一个重点面板。</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">mm-panel（.accent 变体）· 映射 paper-panel</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">number-focus</span><div class="name">数字焦点</div></span><span class="en">STAT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-stat" style="position:absolute;left:340px;right:340px;top:350px"><div><div class="mm-label" style="color:var(--mm-muted)">TOTAL TIME / 总耗时</div><p class="mm-body" style="margin:20px 0 0;font-size:24px">一个数字占据一页，配 number-roll 动效。</p></div><div class="mm-number">7:24</div></div>
+        </div></div></div>
+        <footer><span class="use">mm-stat + mm-number · 映射 stat-block</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">metric-row</span><div class="name">指标横列</div></span><span class="en">METRICS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-metric-row" style="position:absolute;left:220px;right:220px;top:340px">
+            <div class="mm-metric"><div class="mm-label" style="color:var(--mm-muted)">SPEED</div><strong>8.4</strong></div>
+            <div class="mm-metric"><div class="mm-label" style="color:var(--mm-muted)">COST</div><strong>6.8</strong></div>
+            <div class="mm-metric"><div class="mm-label" style="color:var(--mm-accent)">QUALITY</div><strong style="color:var(--mm-accent)">9.1</strong></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">mm-metric-row + mm-metric · 映射 metric-triptych，配 metric-sweep</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">split-compare</span><div class="name">分栏对比</div></span><span class="en">COMPARE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-split" style="position:absolute;left:260px;right:260px;top:290px">
+            <div><div class="mm-label" style="color:var(--mm-muted)">OPTION A</div><h3 style="margin:44px 0 0;font:900 44px/1.1 var(--mm-display);letter-spacing:-.03em">响应更快</h3><p class="mm-body" style="margin:22px 0 0;font-size:23px">保留全部材料，信息密度更高。</p></div>
+            <div><div class="mm-label" style="color:var(--mm-accent-soft)">OPTION B</div><h3 style="margin:44px 0 0;font:900 44px/1.1 var(--mm-display);letter-spacing:-.03em">细节更多</h3><p style="margin:22px 0 0;font:400 23px/1.55 var(--mm-sans);color:#9aa1ab">压缩次要信息，节奏更明确。</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">mm-split · 映射 comparison-split</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">ranked-table</span><div class="name">排行表</div></span><span class="en">LIST</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-table" style="position:absolute;left:300px;right:300px;top:280px">
+            <div class="mm-table-row"><span class="idx">01</span><b>方案 Alpha</b><span class="val">92.0</span></div>
+            <div class="mm-table-row"><span class="idx">02</span><b>方案 Beta</b><span class="val">88.5</span></div>
+            <div class="mm-table-row"><span class="idx">03</span><b>方案 Gamma</b><span class="val">81.0</span></div>
+            <div class="mm-table-row"><span class="idx">04</span><b>方案 Delta</b><span class="val">77.4</span></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">mm-table + mm-table-row · 映射 ranked-list，配 list-stagger</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">process-line</span><div class="name">流程线</div></span><span class="en">PROCESS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-process" style="position:absolute;left:200px;right:200px;top:340px">
+            <div class="mm-step"><b>01</b><div class="mm-label" style="margin-top:26px;font-size:16px">DEFINE</div><p class="mm-body" style="margin:16px 0 0;font-size:21px">明确核心对象。</p></div>
+            <div class="mm-step"><b>02</b><div class="mm-label" style="margin-top:26px;font-size:16px">COLLECT</div><p class="mm-body" style="margin:16px 0 0;font-size:21px">整理输入材料。</p></div>
+            <div class="mm-step"><b>03</b><div class="mm-label" style="margin-top:26px;font-size:16px">EXECUTE</div><p class="mm-body" style="margin:16px 0 0;font-size:21px">按网格执行。</p></div>
+            <div class="mm-step"><b>04</b><div class="mm-label" style="margin-top:26px;font-size:16px">VERIFY</div><p class="mm-body" style="margin:16px 0 0;font-size:21px">核对结论。</p></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">mm-process + mm-step · 映射 timeline-steps</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">quote-block</span><div class="name">引文块</div></span><span class="en">QUOTE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-quote" style="position:absolute;left:300px;right:300px;top:310px">稳定的结构，<br>让复杂内容更容易理解。<cite>DESIGN NOTE · MODERN MINIMAL</cite></div>
+        </div></div></div>
+        <footer><span class="use">mm-quote（含 cite）· 映射 quote-pullout</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">media-window</span><div class="name">媒体窗口</div></span><span class="en">MEDIA</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-media" style="position:absolute;left:220px;right:220px;top:290px">
+            <div class="mm-media-window" style="display:grid;place-items:center;font:900 34px/1 var(--mm-display);color:var(--mm-muted)">16:9 主画面</div>
+            <aside class="mm-media-meta"><div><div class="mm-label" style="color:var(--mm-accent)">ARTIFACT</div><h3 style="margin:20px 0 0;font:900 38px/1.1 var(--mm-display);letter-spacing:-.02em">作品名称</h3></div><span class="mm-note" style="border-top:0;padding-top:0">16:9 可替换为图片、网页或视频。</span></aside>
+          </div>
+        </div></div></div>
+        <footer><span class="use">mm-media + mm-media-window · 映射 artifact-frame</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">status-pill</span><div class="name">状态丸</div></span><span class="en">STATUS</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="text-align:center"><span class="mm-status" style="font-size:24px;padding:20px 30px">验证完成</span><p class="mm-note" style="margin-top:52px;border-top:0">状态与短标签，蓝点即状态点（主题特色组件）。</p></div></div>
+        </div></div></div>
+        <footer><span class="use">mm-status · 主题特色（轻量状态）</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">verdict-slab</span><div class="name">结论色板</div></span><span class="en">VERDICT</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center"><div style="text-align:center"><div class="mm-verdict">值得推荐</div><p class="mm-note" style="margin-top:56px;border-top:0">判定色板而非印章；炭黑板面 + 钴蓝锚边，配 focus-snap 落定。</p></div></div>
+        </div></div></div>
+        <footer><span class="use">mm-verdict · 映射 verdict-stamp</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">section-index</span><div class="name">章节索引</div></span><span class="en">CHAPTER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-chapter"><div class="mm-chapter-index">02</div><div class="mm-chapter-body"><div class="mm-chapter-kicker">CHAPTER / 章节</div><div class="mm-chapter-title">效率与成本</div><div class="mm-chapter-rule"></div></div></div>
+        </div></div></div>
+        <footer><span class="use">mm-chapter 全家桶 · 映射 chapter-divider，配 section-mark</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">footnote</span><div class="name">脚注</div></span><span class="en">NOTE</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div style="position:absolute;left:380px;right:380px;top:430px"><div class="mm-note" style="font-size:22px">SOURCE / 数据来自同一测试环境；计时取完整任务区间。<br>METHOD / 同口径对比，保留原始链接。</div></div>
+        </div></div></div>
+        <footer><span class="use">mm-note · 映射 source-note</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">progress-line</span><div class="name">进度线</div></span><span class="en">RAIL</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div style="position:absolute;inset:0;display:grid;place-items:center;font:900 50px/1 var(--mm-display);letter-spacing:-.04em">全宽进度轨贯穿整支视频</div>
+          <div class="mm-progress"><span style="transform:scaleX(.42)"></span></div>
+        </div></div></div>
+        <footer><span class="use">mm-progress · 映射 progress-rail（全合成宽度）</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">closing-lockup</span><div class="name">收尾署名</div></span><span class="en">OUTRO</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-lockup" style="position:absolute;left:160px;right:160px;bottom:180px"><div><div class="mm-label" style="color:var(--mm-accent)">FINAL NOTE</div><div style="margin-top:24px;font:900 72px/1.02 var(--mm-display);letter-spacing:-.05em">结论已经明确</div></div><span class="mm-status">END / 2026</span></div>
+        </div></div></div>
+        <footer><span class="use">mm-lockup · 映射 end-card，配 closing-compress</span></footer></article>
+
+      <article class="card component-card"><header><span><span class="id">showcase-dossier</span><div class="name">展映档案</div></span><span class="en">DOSSIER</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-dossier-media" style="display:grid;place-items:center;color:rgba(244,245,242,.4);font:900 56px/1 var(--mm-display)">16:9 素材窗口</div>
+          <section class="mm-dossier">
+            <header class="mm-dossier-head"><b class="mm-dossier-index">05</b><span class="mm-dossier-title"><strong>主体名称</strong><small><span>《条目或作品名称》</span><em style="font-style:normal">ORIGINAL WORK</em></small></span><span class="mm-dossier-meta"><span>完整素材 / 1.0×</span><span class="mm-dossier-emphasis">主观排名 #4</span></span></header>
+            <div class="mm-dossier-frame" data-frame-label="ORIGINAL WORK / UNTRIMMED"></div>
+            <div class="mm-dossier-spine">CURATED SHOWCASE · MODERN MINIMAL</div>
+            <div class="mm-dossier-edition">VOL.01 / 2026</div>
+            <i class="mm-dossier-crop tl"></i><i class="mm-dossier-crop tr"></i><i class="mm-dossier-crop bl"></i><i class="mm-dossier-crop br"></i>
+            <footer class="mm-dossier-footer"><span>EXHIBITION · ORIGINAL MATERIAL</span><span>DURATION 00:52 · ENTRY 05/12</span></footer>
+            <div class="mm-dossier-progress"><span style="transform:scaleX(.35)"></span></div>
+          </section>
+        </div></div></div>
+        <footer><span class="use">mm-dossier 全家桶 · 映射 screening-dossier，配 showcase-unveil</span></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="motions">
+  <div class="wrap">
+    <h2>动效 · 14</h2>
+    <p class="section-sub">点击重播即调用 motions.js 里的真实预设（网页预览用时间线自动播放；生产合成用单一 paused timeline 定位到确定时间）。</p>
+    <div class="grid" id="motion-grid">
+
+      <article class="card motion-card" data-motion="grid-reveal" data-duration="0.72"><header><span><span class="id">grid-reveal</span><div class="name">网格揭示</div></span><span class="duration">.72s</span></header>
+        <div class="motion-stage"><div class="sample-title">网格揭示</div></div>
+        <footer><span class="use">主标题沿网格 clip-path 揭示</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="precision-rise" data-duration="0.78"><header><span><span class="id">precision-rise</span><div class="name">精准升起</div></span><span class="duration">.54s+</span></header>
+        <div class="motion-stage"><div class="sample-panel">PANEL A<br>依次</div><div class="sample-panel">PANEL B<br>升起</div><div class="sample-panel">PANEL C<br>落定</div></div>
+        <footer><span class="use">面板短距离上移入场，可级联</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="number-roll" data-duration="0.9"><header><span><span class="id">number-roll</span><div class="name">数字递读</div></span><span class="duration">.9s</span></header>
+        <div class="motion-stage"><div class="sample-number" data-end="87">0</div></div>
+        <footer><span class="use">参数化滚动，支持自定义格式</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="rule-expand" data-duration="0.5"><header><span><span class="id">rule-expand</span><div class="name">规线展开</div></span><span class="duration">.5s</span></header>
+        <div class="motion-stage"><div class="sample-rule"></div></div>
+        <footer><span class="use">结构线自左快速展开</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="list-stagger" data-duration="0.66"><header><span><span class="id">list-stagger</span><div class="name">列表级联</div></span><span class="duration">.5s+</span></header>
+        <div class="motion-stage"><div class="sample-rows"><div class="sample-row"><span class="idx">01</span>核心结论<span class="mta">PRIMARY</span></div><div class="sample-row"><span class="idx">02</span>关键证据<span class="mta">EVIDENCE</span></div><div class="sample-row"><span class="idx">03</span>限制条件<span class="mta">BOUNDARY</span></div></div></div>
+        <footer><span class="use">有序条目依次入场</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="mask-slide" data-duration="0.68"><header><span><span class="id">mask-slide</span><div class="name">遮罩滑入</div></span><span class="duration">.68s</span></header>
+        <div class="motion-stage"><div class="sample-mask">遮罩滑入</div></div>
+        <footer><span class="use">内容沿方向的遮罩式进入</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="focus-snap" data-duration="0.48"><header><span><span class="id">focus-snap</span><div class="name">焦点锁定</div></span><span class="duration">.48s</span></header>
+        <div class="motion-stage"><div class="sample-focus">焦点锁定</div></div>
+        <footer><span class="use">由轻微虚焦锁定到网格</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="soft-emphasis" data-duration="0.72"><header><span><span class="id">soft-emphasis</span><div class="name">钴蓝点题</div></span><span class="duration">.72s</span></header>
+        <div class="motion-stage"><div class="sample-emphasis">关键差异</div></div>
+        <footer><span class="use">关键词由炭黑转钴蓝</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="index-shift" data-duration="0.62"><header><span><span class="id">index-shift</span><div class="name">索引贴合</div></span><span class="duration">.62s</span></header>
+        <div class="motion-stage"><div class="sample-index">04</div></div>
+        <footer><span class="use">大号编号收紧字距贴合网格</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="closing-compress" data-duration="0.66"><header><span><span class="id">closing-compress</span><div class="name">收尾压合</div></span><span class="duration">.66s</span></header>
+        <div class="motion-stage"><div class="sample-lockup">FINAL / NOTE</div></div>
+        <footer><span class="use">结尾署名自横向张力落定</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="grid-settle" data-duration="1.1"><header><span><span class="id">grid-settle</span><div class="name">网格落定</div></span><span class="duration">1.1s</span></header>
+        <div class="motion-stage"><div class="sample-grid"></div><div class="sample-title" style="position:relative;font-size:34px">背景网格</div></div>
+        <footer><span class="use">背景网格淡入并自 1.05× 落定</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="metric-sweep" data-duration="0.75"><header><span><span class="id">metric-sweep</span><div class="name">指标横扫</div></span><span class="duration">.75s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-metric-row" id="demo-metrics" style="position:absolute;left:220px;right:220px;top:340px">
+            <div class="mm-metric"><div class="mm-label" style="color:var(--mm-muted)">SPEED</div><strong>8.4</strong></div>
+            <div class="mm-metric"><div class="mm-label" style="color:var(--mm-muted)">COST</div><strong>6.8</strong></div>
+            <div class="mm-metric"><div class="mm-label" style="color:var(--mm-accent)">QUALITY</div><strong style="color:var(--mm-accent)">9.1</strong></div>
+          </div>
+        </div></div></div>
+        <footer><span class="use">单元格级联升起 → 数值逐行落位</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="section-mark" data-duration="1.05"><header><span><span class="id">section-mark</span><div class="name">章节定版</div></span><span class="duration">1.05s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-chapter" id="demo-chapter"><div class="mm-chapter-index">02</div><div class="mm-chapter-body"><div class="mm-chapter-kicker">CHAPTER</div><div class="mm-chapter-title">效率与成本</div><div class="mm-chapter-rule"></div></div></div>
+        </div></div></div>
+        <footer><span class="use">kicker → 序号定版 → 标题拭入 → 蓝线绘出</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card motion-card" data-motion="showcase-unveil" data-duration="1.0"><header><span><span class="id">showcase-unveil</span><div class="name">展档揭幕</div></span><span class="duration">~1s</span></header>
+        <div class="mini"><div class="mini-inner"><div class="mm-scene"><div class="mm-grid"></div>
+          <div class="mm-dossier-media"></div>
+          <section class="mm-dossier" id="demo-dossier">
+            <header class="mm-dossier-head"><b class="mm-dossier-index">05</b><span class="mm-dossier-title"><strong>主体名称</strong><small><span>《条目名称》</span><em style="font-style:normal">ORIGINAL</em></small></span><span class="mm-dossier-meta"><span>完整素材</span></span></header>
+            <div class="mm-dossier-frame" data-frame-label="UNTRIMMED"></div>
+            <div class="mm-dossier-spine">CURATED SHOWCASE</div>
+            <div class="mm-dossier-edition">VOL.01</div>
+            <i class="mm-dossier-crop tl"></i><i class="mm-dossier-crop tr"></i><i class="mm-dossier-crop bl"></i><i class="mm-dossier-crop br"></i>
+            <footer class="mm-dossier-footer"><span>EXHIBITION</span><span>ENTRY 05/12</span></footer>
+            <div class="mm-dossier-progress"><span></span></div>
+          </section>
+        </div></div></div>
+        <footer><span class="use">头部 → 边框 → 裁切标记 → 页脚 → 进度轨</span><button class="replay" type="button">重播</button></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<section id="transitions">
+  <div class="wrap">
+    <h2>转场 · 16 基础 + 5 GPU</h2>
+    <p class="section-sub">基础转场按叙事角色分组（主 / 章节 / 点缀），全部调用 transitions.js 真实预设；GPU 旗舰由 advanced-transitions.js 的 WebGL 引擎逐像素渲染。一支视频选一个主转场 + 一两个点缀。</p>
+    <div class="grid" id="transition-grid">
+
+      <article class="card transition-card" data-role="primary" data-transition="split-slide" data-duration="0.58"><header><span><span class="id">split-slide</span><div class="name">分屏推进</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.58s</span></div>
+        <footer><span class="use">相邻内容常规前推，新页压过旧页</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="axis-rise" data-duration="0.66"><header><span><span class="id">axis-rise</span><div class="name">纵轴规线上卷</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.66s</span></div>
+        <footer><span class="use">钴蓝引导规线贴新页上缘行走</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="clean-cross" data-duration="0.68"><header><span><span class="id">clean-cross</span><div class="name">净交叉</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.68s</span></div>
+        <footer><span class="use">低干扰的冷静叠化，双方微缩呼吸</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="primary" data-transition="frame-pull" data-duration="0.64"><header><span><span class="id">frame-pull</span><div class="name">画框抽换</div></span><span class="role-badge primary">主</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.64s</span></div>
+        <footer><span class="use">新页自右侧开口拉满画框</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="blue-line-cut" data-duration="0.52"><header><span><span class="id">blue-line-cut</span><div class="name">钴蓝裁线</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.52s</span></div>
+        <footer><span class="use">短促章节切：蓝线绘出、铺满、收拢</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="grid-shift" data-duration="0.7"><header><span><span class="id">grid-shift</span><div class="name">网格柱列飞越</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">8 根柱列错位飞越完成交换</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="panel-lock" data-duration="0.66"><header><span><span class="id">panel-lock</span><div class="name">面板锁合</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.66s</span></div>
+        <footer><span class="use">炭黑面板由圆角锁合到全帧再释放</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="section" data-transition="section-index-swap" data-duration="0.76"><header><span><span class="id">section-index-swap</span><div class="name">章节索引换页</div></span><span class="role-badge section">章节</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.76s</span></div>
+        <footer><span class="use">巨号索引横穿画面，新页微缩落定</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="aperture-box" data-duration="0.68"><header><span><span class="id">aperture-box</span><div class="name">矩形光圈</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.68s</span></div>
+        <footer><span class="use">中心矩形光圈打开揭示新页</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="precision-zoom" data-duration="0.62"><header><span><span class="id">precision-zoom</span><div class="name">精密变焦</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.62s</span></div>
+        <footer><span class="use">旧页前推放大失焦，新页自景深收回</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="axis-fold" data-duration="0.72"><header><span><span class="id">axis-fold</span><div class="name">轴线折叠</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.72s</span></div>
+        <footer><span class="use">旧页绕水平轴折出，新页自底缘展开</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="dot-expand" data-duration="0.7"><header><span><span class="id">dot-expand</span><div class="name">焦点扩张</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">焦点圆自 (78%,22%) 扩开圈入新页</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="swiss-cross-cut" data-duration="0.66"><header><span><span class="id">swiss-cross-cut</span><div class="name">十字规切</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.66s</span></div>
+        <footer><span class="use">纵横规线同步扫过并在中心相交</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="grid-dissolve" data-duration="0.78"><header><span><span class="id">grid-dissolve</span><div class="name">网格翻牌</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.78s</span></div>
+        <footer><span class="use">24 格按阅读顺序翻牌覆盖再翻开</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="measure-cut" data-duration="0.7"><header><span><span class="id">measure-cut</span><div class="name">量规裁切</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.7s</span></div>
+        <footer><span class="use">量规自两侧夹紧，咬合瞬间交换</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="accent" data-transition="panel-slide-over" data-duration="0.74"><header><span><span class="id">panel-slide-over</span><div class="name">面板覆盖</div></span><span class="role-badge accent">点缀</span></header>
+        <div class="tx-stage"><div class="tx-scene tx-a"><div>分析页面<small>SCENE A / ANALYSIS</small></div></div><div class="tx-scene tx-b" style="opacity:0"><div>结论页面<small>SCENE B / VERIFIED</small></div></div><span class="tx-duration">.74s</span></div>
+        <footer><span class="use">新面板带钴蓝边缘滑覆，旧页滞留后离场</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="grid-warp-field" data-duration="1.2" data-label="网格翘曲场"><header><span><span class="id">grid-warp-field</span><div class="name">网格翘曲场</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">大章节、结构变化 · 回退 grid-shift</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="cobalt-scan-sweep" data-duration="1.0" data-label="钴蓝扫描"><header><span><span class="id">cobalt-scan-sweep</span><div class="name">钴蓝扫描</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">片头、品牌性切换 · 回退 blue-line-cut</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="axis-mirror-split" data-duration="0.9" data-label="轴镜分裂"><header><span><span class="id">axis-mirror-split</span><div class="name">轴镜分裂</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">反转、强对比 · 回退 split-slide</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="focus-rack-depth" data-duration="1.1" data-label="景深焦移"><header><span><span class="id">focus-rack-depth</span><div class="name">景深焦移</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">主结论、作品揭晓 · 回退 clean-cross</span><button class="replay" type="button">重播</button></footer></article>
+
+      <article class="card transition-card" data-role="advanced" data-transition="threshold-resolve" data-duration="0.8" data-label="阈值解析"><header><span><span class="id">threshold-resolve</span><div class="name">阈值解析</div></span><span class="role-badge advanced">GPU</span></header>
+        <div class="tx-stage"><div class="transition-stage"></div></div>
+        <footer><span class="use">结论落点、状态确认 · 回退 precision-zoom</span><button class="replay" type="button">重播</button></footer></article>
+
+    </div>
+  </div>
+</section>
+
+<footer class="site">
+  <div class="wrap">
+    <span>VIDEO THEME LIBRARY · modern-minimal 2.0.0</span>
+    <span>SHOWROOM DRIVEN BY REAL THEME MODULES · NO DRIFT</span>
+  </div>
+</footer>
+
+<script type="module">
+import {modernMinimalMotions} from "../themes/modern-minimal/motions.js";
+import {modernMinimalTransitions,modernMinimalTransitionMeta} from "../themes/modern-minimal/transitions.js";
+import {modernMinimalAdvancedTransitionMeta} from "../themes/modern-minimal/advanced-transitions.js";
+void modernMinimalAdvancedTransitionMeta;
+
+const camel=(id)=>id.replace(/-([a-z0-9])/g,(_,letter)=>letter.toUpperCase());
+
+if(document.fonts&&document.fonts.load){
+  for(const weight of ["400","700","900"]){
+    document.fonts.load(`${weight} 18px Montserrat`);
+    document.fonts.load(`${weight} 18px "IBM Plex Mono"`);
+  }
+}
+
+const fitMinis=()=>document.querySelectorAll(".mini").forEach((mini)=>{
+  const k=mini.clientWidth/1920;
+  mini.style.height=`${1080*k}px`;
+  mini.querySelector(".mini-inner").style.transform=`scale(${k})`;
+});
+fitMinis();
+addEventListener("resize",fitMinis);
+
+const motionTargets={
+  "grid-reveal":(stage)=>[stage.querySelector(".sample-title")],
+  "precision-rise":(stage)=>[stage.querySelectorAll(".sample-panel"),0,.12],
+  "number-roll":(stage)=>[stage.querySelector(".sample-number"),0,Number(stage.querySelector(".sample-number").dataset.end)],
+  "rule-expand":(stage)=>[stage.querySelector(".sample-rule")],
+  "list-stagger":(stage)=>[stage.querySelectorAll(".sample-row")],
+  "mask-slide":(stage)=>[stage.querySelector(".sample-mask")],
+  "focus-snap":(stage)=>[stage.querySelector(".sample-focus")],
+  "soft-emphasis":(stage)=>[stage.querySelector(".sample-emphasis")],
+  "index-shift":(stage)=>[stage.querySelector(".sample-index")],
+  "closing-compress":(stage)=>[stage.querySelector(".sample-lockup")],
+  "grid-settle":(stage)=>[stage.querySelector(".sample-grid")],
+  "metric-sweep":()=>["#demo-metrics"],
+  "section-mark":()=>["#demo-chapter"],
+  "showcase-unveil":()=>["#demo-dossier",0,2.2]
+};
+document.querySelectorAll(".motion-card").forEach((card)=>{
+  const id=card.dataset.motion;
+  const stage=card.querySelector(".motion-stage,.mini");
+  const play=()=>{
+    const tl=gsap.timeline();
+    const [target,...rest]=motionTargets[id](stage);
+    modernMinimalMotions[camel(id)](tl,target,...rest);
+  };
+  card.querySelector(".replay").addEventListener("click",play);
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+const partSelectors={overlay:".tx-overlay",columns:".tx-column",index:".tx-index",rule:".tx-rule",ruleV:".tx-rule-v",ruleH:".tx-rule-h",cross:".tx-cross",cells:".tx-cell",caliperL:".tx-caliper-l",caliperR:".tx-caliper-r",edge:".tx-edge"};
+const multiParts=["columns","cells"];
+document.querySelectorAll('.transition-card[data-role]:not([data-role="advanced"])').forEach((card)=>{
+  const id=card.dataset.transition;
+  const preset=modernMinimalTransitionMeta.presets[id];
+  if(!preset)return;
+  const stage=card.querySelector(".tx-stage");
+  const make=(cls)=>{const el=document.createElement("div");el.className=`tx-part ${cls}`;stage.appendChild(el);return el};
+  for(const part of preset.parts){
+    if(part==="outgoing"||part==="incoming")continue;
+    if(part==="columns")for(let i=0;i<8;i++){const el=make("tx-column");el.style.left=`${i*12.5}%`;el.style.background=i%2?"var(--mm-ink)":"var(--mm-accent)"}
+    else if(part==="cells")for(let r=0;r<4;r++)for(let c=0;c<6;c++){const el=make("tx-cell");el.style.left=`${c*16.6667}%`;el.style.top=`${r*25}%`;el.style.width="16.9%";el.style.height="25.4%";if((r*6+c)%5===2)el.style.background="var(--mm-accent)"}
+    else if(part==="index"){const el=make("tx-index");el.textContent="02"}
+    else make(partSelectors[part].slice(1));
+  }
+  const play=()=>{
+    const parts={outgoing:stage.querySelector(".tx-a"),incoming:stage.querySelector(".tx-b")};
+    for(const part of preset.parts){
+      if(part==="outgoing"||part==="incoming")continue;
+      parts[part]=multiParts.includes(part)?stage.querySelectorAll(partSelectors[part]):stage.querySelector(partSelectors[part]);
+    }
+    modernMinimalTransitions[camel(id)](gsap.timeline(),parts,0,preset.duration);
+  };
+  card.querySelector(".replay").addEventListener("click",play);
+  const observer=new IntersectionObserver((entries)=>entries.forEach((entry)=>{
+    if(entry.isIntersecting&&!card.dataset.played){card.dataset.played="1";play()}
+  }),{threshold:.45});
+  observer.observe(card);
+});
+
+const jump=new URLSearchParams(location.search);
+if(jump.get("jump")){
+  const section=document.getElementById(jump.get("jump"));
+  if(section)requestAnimationFrame(()=>section.scrollIntoView());
+}
+</script>
 </body>
 </html>

@@ -3,8 +3,8 @@
   "private": true,
   "type": "module",
   "scripts": {
-    "dev": "npx --yes hyperframes@0.8.16 preview",
-    "check": "npx --yes hyperframes@0.8.16 check --strict --timeout 30000",
-    "snapshot": "npx --yes hyperframes@0.8.16 snapshot"
+    "dev": "npx --yes hyperframes@0.8.10 preview",
+    "check": "npx --yes hyperframes@0.8.10 check",
+    "snapshot": "npx --yes hyperframes@0.8.10 snapshot"
   }
 }

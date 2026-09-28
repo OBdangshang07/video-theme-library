@@ -10,10 +10,10 @@
 - 主状态：草绿 `#7BD14B`
 - 警告与构建变化：红石橙 `#E46F3A`
 - 结构线：`#3B493D`
-- 标题与短标签：仓库内置的开放字体 `Pixelify Sans`
-- 正文：Inter / Noto Sans SC / 系统无衬线回退
+- 标题与短标签：本地 `Pixelify Sans`
+- 正文：Noto Sans JP / 中文无衬线回退
 
-Pixelify Sans 字体及其 OFL 1.1 许可证已冻结到 `themes/voxel-harness/fonts/`。标题、数字、状态和短标签使用像素字体；两行以上的解释正文使用高可读性无衬线字体。
+字体文件已冻结到 `themes/voxel-harness/fonts/PixelifySans-VariableFont_wght.ttf`。标题、数字、状态和短标签使用像素字体；两行以上的解释正文使用高可读性无衬线字体。
 
 ## 设计边界
 
@@ -22,24 +22,31 @@ Pixelify Sans 字体及其 OFL 1.1 许可证已冻结到 `themes/voxel-harness/f
 - 草绿代表可用、已连接和完成；红石橙只代表警告、变化或构建脉冲。
 - 不复制 Minecraft 原版菜单、贴图和商标构图。方块几何与工具界面保持原创。
 - 16:9 实机画面保持清晰，并通过 `gameplay-window` 与元信息区进入主题结构。
+- 像素字体上下文只用 ASCII 分隔符（`/`、`:`、`>`）；`·`、`×`、`→` 等字符在该字体里会落到错误字形。
 
 ## 组件
 
-`voxel-title`、`hud-header`、`voxel-panel`、`command-block`、`feature-slots`、`comparison-pane`、`patch-list`、`build-path`、`keybind-chip`、`gameplay-window`、`inventory-strip`、`plugin-status`、`chunk-divider`、`terminal-note`、`xp-progress`、`release-lockup`。
+20 个主题组件覆盖全部 16 个 canonical ID（映射见 `themes/voxel-harness/components.css` 顶部 catalog 头与 `../components/voxel-harness.md`）：
+
+`voxel-title`、`hud-header`、`voxel-panel`、`command-block`、`feature-slots`、`comparison-pane`、`patch-list`、`build-path`、`keybind-chip`、`gameplay-window`、`inventory-strip`、`plugin-status`、`chunk-divider`、`terminal-note`、`xp-progress`、`release-lockup`、`xp-stat`、`stat-bench`、`lore-quote`、`gameplay-dossier`。
 
 ## 动效
 
-`chunk-load`、`block-drop`、`slot-cascade`、`command-type`、`cursor-snap`、`bar-charge`、`item-pop`、`pane-unfold`、`status-flash`、`logo-craft`。
+14 个动效：阶梯（steps）缓动承担区块揭示（`chunk-load`）、指令输入（`command-type`）与 XP 充能（`bar-charge`）；弹性只用于方块与物品落点（`block-drop` / `item-pop` / `slot-cascade`）；界面沿轴展开（`pane-unfold`）；状态由红石脉冲回到稳定（`status-flash`）；数值步进滚动（`xp-count`）。快速果断，然后完全静止。逐动效表格见 `../motions/voxel-harness.md`。
 
-阶梯运动用于栅格揭示、指令输入和进度；弹性运动只用于物品或方块落点。每个场景使用 2–4 个动效家族。
+组合动效协同整个组件：`hud-unveil`（gameplay-dossier 的分层揭幕：头部、边框、裁切标记、页脚、书脊依次落位，进度轨持续线性推进）、`chunk-mark`（chunk-divider：序号定版、标题步进拭入、草绿规线充能）、`lockup-boot`（release-lockup：结语句升起、光标句读落印、落款淡入）。
 
 ## 转场
 
+16 个基础转场（parts 契约见 `../transitions/voxel-harness.md`）：
+
 - Primary：`chunk-push`、`block-rise`、`portal-cross`、`camera-step`
 - Section：`craft-grid`、`inventory-swap`、`terrain-wipe`、`command-cut`
-- Accent：`ender-iris`、`block-shatter`、`redstone-pulse`、`voxel-fold`
+- Accent：`ender-iris`、`block-shatter`、`redstone-pulse`、`voxel-fold`、`pixel-rain`、`craft-flip`、`torch-flicker-cut`、`xp-drain`
 
-插件发布视频建议以 `chunk-push` 作为主转场，功能章节使用 `craft-grid`，核心 UI 首次亮相使用一次 `portal-cross` 或 `block-shatter`。
+5 个 GPU 旗舰转场（见 `../transitions/advanced-voxel-harness.md`）：`block-dissolve-chunks`、`portal-warp-swirl`、`pixel-sort-cascade`、`terrain-column-rise`、`redstone-surge-pulse`。
+
+插件发布视频建议以 `chunk-push` 作为主转场，功能章节使用 `craft-grid`，核心 UI 首次亮相使用一次 `portal-cross` 或 `block-shatter`；英雄时刻从 GPU 旗舰里选一个签名动作。
 
 ## 文件
 
@@ -47,6 +54,8 @@ Pixelify Sans 字体及其 OFL 1.1 许可证已冻结到 `themes/voxel-harness/f
 - Components：`themes/voxel-harness/components.css`
 - Motions：`themes/voxel-harness/motions.js`
 - Transitions：`themes/voxel-harness/transitions.js`
+- Advanced transitions（GPU）：`themes/voxel-harness/advanced-transitions.js`
 - Font：`themes/voxel-harness/fonts/PixelifySans-VariableFont_wght.ttf`
-- Font license：`themes/voxel-harness/fonts/OFL-PixelifySans.txt`
+- Manifest：`themes/voxel-harness/theme.json`
 - Showroom：`showrooms/voxel-harness.html`
+- 组件 / 动效 / 转场 / GPU 转场文档：`references/{components,motions,transitions}/voxel-harness.md`、`references/transitions/advanced-voxel-harness.md`

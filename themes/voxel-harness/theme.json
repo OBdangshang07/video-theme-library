@@ -1,14 +1,15 @@
 {
   "id":"voxel-harness",
   "name":"方块终端",
-  "version":"1.0.0",
+  "version":"2.0.0",
   "description":"黑曜石深绿、荧光草绿、沙色文字与红石状态信号组成的像素工具界面。适合游戏插件、模组、开发工具和交互项目发布。",
-  "files":{"tokens":"tokens.css","components":"components.css","motions":"motions.js","transitions":"transitions.js","font":"fonts/PixelifySans-VariableFont_wght.ttf","fontLicense":"fonts/OFL-PixelifySans.txt"},
+  "files":{"tokens":"tokens.css","components":"components.css","motions":"motions.js","transitions":"transitions.js","advancedTransitions":"advanced-transitions.js","font":"fonts/PixelifySans-VariableFont_wght.ttf"},
   "palette":{"background":"#0E1410","surface":"#172019","surface2":"#202B22","ink":"#ECE8D6","muted":"#A6AD9F","line":"#3B493D","accent":"#7BD14B","alert":"#E46F3A"},
-  "type":{"display":"Pixelify Sans, Noto Sans SC, system-ui, sans-serif","body":"Inter, Noto Sans SC, system-ui, sans-serif","mono":"Pixelify Sans, JetBrains Mono, ui-monospace, monospace"},
+  "type":{"display":"Pixelify Sans, Archivo Black, Noto Sans JP, sans-serif","body":"Noto Sans JP, Microsoft YaHei, sans-serif","mono":"Pixelify Sans, IBM Plex Mono, JetBrains Mono, monospace"},
   "safeArea":{"x":88,"top":64,"bottom":64},
   "motionCharacter":["blocky","responsive","tool-like","stepped","weighted"],
-  "components":["voxel-title","hud-header","voxel-panel","command-block","feature-slots","comparison-pane","patch-list","build-path","keybind-chip","gameplay-window","inventory-strip","plugin-status","chunk-divider","terminal-note","xp-progress","release-lockup"],
-  "motions":["chunk-load","block-drop","slot-cascade","command-type","cursor-snap","bar-charge","item-pop","pane-unfold","status-flash","logo-craft"],
-  "transitions":["chunk-push","block-rise","portal-cross","camera-step","craft-grid","inventory-swap","terrain-wipe","command-cut","ender-iris","block-shatter","redstone-pulse","voxel-fold"]
+  "components":["voxel-title","hud-header","voxel-panel","command-block","feature-slots","comparison-pane","patch-list","build-path","keybind-chip","gameplay-window","inventory-strip","plugin-status","chunk-divider","terminal-note","xp-progress","release-lockup","xp-stat","stat-bench","lore-quote","gameplay-dossier"],
+  "motions":["chunk-load","block-drop","slot-cascade","command-type","cursor-snap","bar-charge","item-pop","pane-unfold","status-flash","logo-craft","xp-count","hud-unveil","chunk-mark","lockup-boot"],
+  "transitions":["chunk-push","block-rise","portal-cross","camera-step","craft-grid","inventory-swap","terrain-wipe","command-cut","ender-iris","block-shatter","redstone-pulse","voxel-fold","pixel-rain","craft-flip","torch-flicker-cut","xp-drain"],
+  "advancedTransitions":["block-dissolve-chunks","portal-warp-swirl","pixel-sort-cascade","terrain-column-rise","redstone-surge-pulse"]
 }

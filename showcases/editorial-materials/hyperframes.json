@@ -1,0 +1,6 @@
+{
+  "projectId": "video-theme-library-editorial-materials",
+  "entry": "index.html",
+  "compositionId": "main",
+  "output": "renders/editorial-materials-showcase.mp4"
+}

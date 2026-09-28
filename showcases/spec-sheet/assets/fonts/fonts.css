@@ -1,0 +1,7 @@
+/* Vendored by URL, never by local(): a local() face resolves against whatever
+   the machine happens to have installed, which is exactly what breaks a
+   headless render on a different box. */
+@font-face{font-family:"SC Display";src:url("segoeuib.ttf") format("truetype");font-weight:400 900;font-style:normal;font-display:block}
+@font-face{font-family:"SC Sans";src:url("segoeui.ttf") format("truetype");font-weight:400 900;font-style:normal;font-display:block}
+@font-face{font-family:"SC Mono";src:url("CascadiaMono.ttf") format("truetype");font-weight:400 900;font-style:normal;font-display:block}
+@font-face{font-family:"SC Grotesk";src:url("bahnschrift.ttf") format("truetype");font-weight:100 900;font-style:normal;font-display:block}

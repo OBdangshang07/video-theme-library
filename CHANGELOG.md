@@ -2,6 +2,13 @@
 
 All notable changes to this project are documented here.
 
+## 5.2.0 - 2026-09-28
+
+- Expands the four theme catalogs to 16 canonical components, 73 motions, 64 base transitions, and 20 advanced transitions.
+- Adds paper-editorial 3.0 materials, classic implementations, workflow showcases, motion reel, and visual verification snapshots.
+- Includes source projects and rendered previews for the showcase examples.
+- Documents and licenses bundled open-source fonts; keeps private and system fonts out of the public repository.
+
 ## 4.0.0 - 2026-08-28
 
 - Open-source release of four stable HyperFrames themes.
